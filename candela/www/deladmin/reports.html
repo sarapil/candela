@@ -1,0 +1,164 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+{%- set ts = today_stats -%}
+
+<style>
+.rpt { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1.5rem) 0 3rem; }
+.rpt *{ color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+.rpt__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.6rem; margin-bottom:1.5rem; }
+
+/* Stats row */
+.rpt__stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:2rem; }
+.rpt-stat { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.25rem; }
+.rpt-stat__icon { font-size:1.5rem; margin-bottom:.4rem; }
+.rpt-stat__val { font-family:var(--font-serif,'Playfair Display',serif); font-size:2rem; color:var(--c-gold,#C9A96E)!important; line-height:1; margin-bottom:.2rem; }
+.rpt-stat__label { font-size:.72rem; color:rgba(255,255,255,.4)!important; letter-spacing:.08em; text-transform:uppercase; }
+
+/* Charts section */
+.rpt__grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:2rem; }
+.rpt__card { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.25rem; }
+.rpt__card-title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.1rem; margin-bottom:1rem; }
+
+/* Bar chart */
+.rpt-bar { display:flex; align-items:flex-end; gap:4px; height:150px; padding-top:.5rem; }
+.rpt-bar__col { flex:1; display:flex; flex-direction:column; align-items:center; gap:2px; }
+.rpt-bar__fill { width:100%; border-radius:4px 4px 0 0; transition:height .5s; min-height:2px; }
+.rpt-bar__fill--pos { background:var(--c-gold,#C9A96E); }
+.rpt-bar__fill--online { background:#3B82F6; }
+.rpt-bar__label { font-size:.6rem; color:rgba(255,255,255,.4)!important; margin-top:4px; }
+.rpt-bar__value { font-size:.6rem; color:rgba(255,255,255,.5)!important; }
+
+/* Horizontal bar chart for top items */
+.rpt-hbar { display:flex; flex-direction:column; gap:.4rem; }
+.rpt-hbar__row { display:flex; align-items:center; gap:.5rem; }
+.rpt-hbar__rank { font-size:.7rem; color:rgba(255,255,255,.3)!important; width:16px; text-align:center; }
+.rpt-hbar__name { font-size:.8rem; width:120px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rpt-hbar__track { flex:1; height:18px; background:rgba(255,255,255,.04); border-radius:4px; overflow:hidden; position:relative; }
+.rpt-hbar__fill { height:100%; background:linear-gradient(90deg,var(--c-gold,#C9A96E),rgba(201,169,110,.5)); border-radius:4px; transition:width .5s; }
+.rpt-hbar__qty { font-size:.7rem; color:var(--c-gold,#C9A96E)!important; min-width:30px; text-align:end; }
+
+/* Hourly chart */
+.rpt-hours { display:flex; align-items:flex-end; gap:2px; height:80px; }
+.rpt-hours__bar { flex:1; background:var(--c-gold,#C9A96E); border-radius:2px 2px 0 0; min-height:1px; transition:height .5s; opacity:.6; }
+.rpt-hours__bar:hover { opacity:1; }
+.rpt-hours__labels { display:flex; gap:2px; }
+.rpt-hours__lbl { flex:1; font-size:.5rem; color:rgba(255,255,255,.3)!important; text-align:center; }
+
+/* Legend */
+.rpt__legend { display:flex; gap:1rem; margin-bottom:.75rem; }
+.rpt__legend-item { display:flex; align-items:center; gap:.3rem; font-size:.7rem; color:rgba(255,255,255,.5)!important; }
+.rpt__legend-dot { width:8px; height:8px; border-radius:2px; }
+
+/* Full width card */
+.rpt__full { grid-column:1/-1; }
+
+@media(max-width:900px){
+	.rpt__stats { grid-template-columns:1fr 1fr; }
+	.rpt__grid { grid-template-columns:1fr; }
+}
+</style>
+
+<div class="rpt">
+	<div class="c-container">
+		<h1 class="rpt__title">📊 {{ _('التقارير والإحصائيات') if lang == 'ar' else 'Reports & Analytics' }}</h1>
+
+		{# ═══ Today's Stats ═══ #}
+		<div class="rpt__stats">
+			<div class="rpt-stat">
+				<div class="rpt-stat__icon">💰</div>
+				<div class="rpt-stat__val">{{ '{:,.0f}'.format(ts.total_revenue) }}</div>
+				<div class="rpt-stat__label">{{ _('إيرادات اليوم') if lang == 'ar' else "Today's Revenue" }} ({{ _('ج.م') if lang == 'ar' else 'EGP' }})</div>
+			</div>
+			<div class="rpt-stat">
+				<div class="rpt-stat__icon">🧾</div>
+				<div class="rpt-stat__val">{{ ts.total_orders }}</div>
+				<div class="rpt-stat__label">{{ _('طلبات اليوم') if lang == 'ar' else "Today's Orders" }}</div>
+			</div>
+			<div class="rpt-stat">
+				<div class="rpt-stat__icon">📅</div>
+				<div class="rpt-stat__val">{{ ts.reservations }}</div>
+				<div class="rpt-stat__label">{{ _('حجوزات اليوم') if lang == 'ar' else "Today's Reservations" }}</div>
+			</div>
+			<div class="rpt-stat">
+				<div class="rpt-stat__icon">👥</div>
+				<div class="rpt-stat__val">{{ ts.guests }}</div>
+				<div class="rpt-stat__label">{{ _('ضيوف اليوم') if lang == 'ar' else "Today's Guests" }}</div>
+			</div>
+		</div>
+
+		<div class="rpt__grid">
+			{# ═══ Weekly Revenue Chart ═══ #}
+			<div class="rpt__card">
+				<div class="rpt__card-title">📈 {{ _('إيرادات الأسبوع') if lang == 'ar' else 'Weekly Revenue' }}</div>
+				<div class="rpt__legend">
+					<div class="rpt__legend-item"><div class="rpt__legend-dot" style="background:var(--c-gold,#C9A96E);"></div>POS</div>
+					<div class="rpt__legend-item"><div class="rpt__legend-dot" style="background:#3B82F6;"></div>Online</div>
+				</div>
+				{% set max_rev = [1] %}
+				{% for d in weekly_data %}{% if d.total > max_rev[0] %}{% if max_rev.append(d.total) %}{% endif %}{% endif %}{% endfor %}
+				<div class="rpt-bar">
+					{% for d in weekly_data %}
+					<div class="rpt-bar__col">
+						<div class="rpt-bar__value">{{ '{:,.0f}'.format(d.total) }}</div>
+						<div style="display:flex;align-items:flex-end;width:100%;gap:2px;height:120px;">
+							<div class="rpt-bar__fill rpt-bar__fill--pos" style="height:{{ (d.pos / max_rev[-1] * 100) if max_rev[-1] > 0 else 0 }}%;flex:1;"></div>
+							<div class="rpt-bar__fill rpt-bar__fill--online" style="height:{{ (d.online / max_rev[-1] * 100) if max_rev[-1] > 0 else 0 }}%;flex:1;"></div>
+						</div>
+						<div class="rpt-bar__label">{{ d.day }}</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+
+			{# ═══ Top Items ═══ #}
+			<div class="rpt__card">
+				<div class="rpt__card-title">🏆 {{ _('الأطباق الأكثر طلباً (30 يوم)') if lang == 'ar' else 'Top Items (30 days)' }}</div>
+				{% set max_qty = [1] %}
+				{% for item in top_items %}{% if item.qty > max_qty[0] %}{% if max_qty.append(item.qty) %}{% endif %}{% endif %}{% endfor %}
+				<div class="rpt-hbar">
+					{% for item in top_items %}
+					<div class="rpt-hbar__row">
+						<span class="rpt-hbar__rank">{{ loop.index }}</span>
+						<span class="rpt-hbar__name" title="{{ item.item_name }}">{{ item.item_name }}</span>
+						<div class="rpt-hbar__track">
+							<div class="rpt-hbar__fill" style="width:{{ (item.qty / max_qty[-1] * 100) if max_qty[-1] > 0 else 0 }}%;"></div>
+						</div>
+						<span class="rpt-hbar__qty">{{ item.qty }}</span>
+					</div>
+					{% endfor %}
+					{% if not top_items %}
+					<div style="text-align:center;padding:1rem;color:rgba(255,255,255,.3)!important;font-style:italic;">{{ _('لا توجد بيانات') if lang == 'ar' else 'No data yet' }}</div>
+					{% endif %}
+				</div>
+			</div>
+
+			{# ═══ Hourly Distribution ═══ #}
+			<div class="rpt__card rpt__full">
+				<div class="rpt__card-title">🕐 {{ _('توزيع الطلبات بالساعة (اليوم)') if lang == 'ar' else 'Hourly Order Distribution (Today)' }}</div>
+				{% set max_hour = [1] %}
+				{% for h in hourly_data %}{% if h.count > max_hour[0] %}{% if max_hour.append(h.count) %}{% endif %}{% endif %}{% endfor %}
+				<div class="rpt-hours">
+					{% for h in hourly_data %}
+					<div class="rpt-hours__bar" style="height:{{ (h.count / max_hour[-1] * 100) if max_hour[-1] > 0 else 0 }}%;" title="{{ h.label }}: {{ h.count }}"></div>
+					{% endfor %}
+				</div>
+				<div class="rpt-hours__labels">
+					{% for h in hourly_data %}
+					<span class="rpt-hours__lbl">{% if h.hour % 3 == 0 %}{{ h.hour }}{% endif %}</span>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+		{# ═══ Quick Links ═══ #}
+		<div style="display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-top:1rem;">
+			<a href="/app/query-report/Daily Orders Summary" style="padding:.5rem 1rem;border:1px solid rgba(255,255,255,.15);border-radius:50px;font-size:.8rem;text-decoration:none;color:var(--c-cream,#F5F0E8)!important;">📋 {{ _('تقرير الطلبات اليومي') if lang == 'ar' else 'Daily Orders Report' }}</a>
+			<a href="/app/query-report/Menu Item Popularity" style="padding:.5rem 1rem;border:1px solid rgba(255,255,255,.15);border-radius:50px;font-size:.8rem;text-decoration:none;color:var(--c-cream,#F5F0E8)!important;">🍕 {{ _('شعبية الأطباق') if lang == 'ar' else 'Item Popularity' }}</a>
+			<a href="/app/query-report/Reservation Analytics" style="padding:.5rem 1rem;border:1px solid rgba(255,255,255,.15);border-radius:50px;font-size:.8rem;text-decoration:none;color:var(--c-cream,#F5F0E8)!important;">📊 {{ _('تحليل الحجوزات') if lang == 'ar' else 'Reservation Analytics' }}</a>
+		</div>
+	</div>
+</div>
+
+{%- endblock -%}

@@ -1,0 +1,137 @@
+{
+  "actions": [],
+  "autoname": "field:category_name_en",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "category_name_ar",
+    "category_name_en",
+    "category_name_it",
+    "slug",
+    "cb_137854788928576",
+    "icon_emoji",
+    "image",
+    "description_ar",
+    "description_en",
+    "sort_order",
+    "is_active",
+    "show_on_homepage",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "category_name_ar",
+      "fieldtype": "Data",
+      "label": "Category Name (Arabic)",
+      "reqd": 1
+    },
+    {
+      "fieldname": "category_name_en",
+      "fieldtype": "Data",
+      "label": "Category Name (English)",
+      "reqd": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "category_name_it",
+      "fieldtype": "Data",
+      "label": "Category Name (Italian)"
+    },
+    {
+      "fieldname": "slug",
+      "fieldtype": "Data",
+      "label": "Slug",
+      "unique": 1
+    },
+    {
+      "fieldname": "cb_137854788928576",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "icon_emoji",
+      "fieldtype": "Data",
+      "label": "Icon Emoji"
+    },
+    {
+      "fieldname": "image",
+      "fieldtype": "Attach Image",
+      "label": "Image"
+    },
+    {
+      "fieldname": "description_ar",
+      "fieldtype": "Small Text",
+      "label": "Description (Arabic)"
+    },
+    {
+      "fieldname": "description_en",
+      "fieldtype": "Small Text",
+      "label": "Description (English)"
+    },
+    {
+      "fieldname": "sort_order",
+      "fieldtype": "Int",
+      "label": "Sort Order",
+      "default": "0"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Active",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_on_homepage",
+      "fieldtype": "Check",
+      "label": "Show on Homepage",
+      "default": "0"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Menu Category",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "sort_order",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

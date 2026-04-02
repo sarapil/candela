@@ -1,0 +1,132 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+{# ═══════ PAGE HEADER ═══════ #}
+<section class="c-page-header"
+	{% if candela.menu_cover_image %}style="background-image:url('{{ candela.menu_cover_image }}')"{% endif %}>
+	<div class="c-page-header__overlay"></div>
+	<div class="c-page-header__content">
+		<span class="c-section-header__label">{{ _('اكتشف نكهاتنا') if lang == 'ar' else 'Discover Our Flavors' }}</span>
+		<h1>{{ _('المنيو') if lang == 'ar' else 'Our Menu' }}</h1>
+	</div>
+</section>
+
+{# ═══════ FILTERS ═══════ #}
+<section class="c-section c-section--ivory">
+	<div class="c-container">
+		<div class="c-filters c-reveal">
+			<button class="c-filter-btn c-filter-btn--active" data-category="all">
+				{{ _('الكل') if lang == 'ar' else 'All' }}
+			</button>
+			{% for cat in categories %}
+			<button class="c-filter-btn" data-category="{{ cat.name }}">
+				{{ cat.category_name_ar if lang == 'ar' else cat.category_name_en }}
+			</button>
+			{% endfor %}
+		</div>
+
+		{# ═══════ MENU ITEMS ═══════ #}
+		<div class="c-grid c-grid--3 c-stagger" id="menu-grid">
+			{% for item in items %}
+			<div class="c-menu-card c-reveal" data-category="{{ item.category }}">
+				{% if item.image %}
+				<div class="c-menu-card__img-wrap">
+					<img src="{{ item.image }}" alt="{{ item.image_alt_text or item.item_name_en }}" class="c-menu-card__img" loading="lazy">
+					<div class="c-menu-card__badges">
+						{% if item.is_new %}<span class="c-badge c-badge--new">{{ _('جديد') if lang == 'ar' else 'New' }}</span>{% endif %}
+						{% if item.is_bestseller %}<span class="c-badge c-badge--best">{{ _('الأكثر طلباً') if lang == 'ar' else 'Popular' }}</span>{% endif %}
+						{% if item.is_spicy %}<span class="c-badge" style="background:#c0392b;">🌶️</span>{% endif %}
+						{% if item.is_vegetarian %}<span class="c-badge" style="background:#27ae60;">🌱</span>{% endif %}
+					</div>
+				</div>
+				{% endif %}
+				<div class="c-menu-card__body">
+					<span class="c-menu-card__cat">{{ item.category }}</span>
+					<h3 class="c-menu-card__name">
+						{{ item.item_name_ar if lang == 'ar' else item.item_name_en }}
+					</h3>
+					{% if item.item_name_it %}
+					<p class="c-menu-card__it">{{ item.item_name_it }}</p>
+					{% endif %}
+					{% if item.description_ar or item.description_en %}
+					<p class="c-menu-card__desc">
+						{{ item.description_ar if lang == 'ar' else item.description_en }}
+					</p>
+					{% endif %}
+					<div class="c-menu-card__footer">
+						<span class="c-price">
+							{% if item.discounted_price %}
+							<span class="c-price--old">{{ item.price }}</span>
+							{{ item.discounted_price }}
+							{% else %}
+							{{ item.price }}
+							{% endif %}
+							<span class="c-price__currency">{{ _('ج.م') }}</span>
+						</span>
+						{% if item.preparation_time %}
+						<span class="c-menu-card__time">🕐 {{ item.preparation_time }} {{ _('د') if lang == 'ar' else 'min' }}</span>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+		{# ═══════ EMPTY STATE ═══════ #}
+		<div id="menu-empty" class="c-text-center" style="display:none;padding:var(--s-4xl) 0;">
+			<p style="font-size:1.1rem;color:var(--c-text-light);">
+				{{ _('لا توجد أطباق في هذا التصنيف حالياً') if lang == 'ar' else 'No dishes found in this category' }}
+			</p>
+		</div>
+	</div>
+</section>
+
+{# ═══════ RESERVATION CTA ═══════ #}
+{% if candela.enable_reservations %}
+<section class="c-section c-section--dark">
+	<div class="c-container c-text-center c-reveal">
+		<h3 style="color:var(--c-cream);margin-bottom:var(--s-md);">
+			{{ _('أعجبك المنيو؟') if lang == 'ar' else 'Like What You See?' }}
+		</h3>
+		<p style="color:var(--c-text-muted);margin-bottom:var(--s-xl);">
+			{{ _('احجز طاولتك الآن واستمتع بتجربة طعام لا تُنسى') if lang == 'ar' else 'Reserve your table now and enjoy an unforgettable dining experience' }}
+		</p>
+		<a href="/dela/reservation" class="c-btn c-btn--gold c-btn--lg">
+			{{ _('احجز طاولتك') if lang == 'ar' else 'Reserve a Table' }}
+		</a>
+	</div>
+</section>
+{% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var btns = document.querySelectorAll('.c-filter-btn');
+	var cards = document.querySelectorAll('.c-menu-card[data-category]');
+	var empty = document.getElementById('menu-empty');
+
+	btns.forEach(function(btn) {
+		btn.addEventListener('click', function() {
+			btns.forEach(function(b) { b.classList.remove('c-filter-btn--active'); });
+			btn.classList.add('c-filter-btn--active');
+			var cat = btn.getAttribute('data-category');
+			var visible = 0;
+
+			cards.forEach(function(card) {
+				if (cat === 'all' || card.getAttribute('data-category') === cat) {
+					card.style.display = '';
+					visible++;
+				} else {
+					card.style.display = 'none';
+				}
+			});
+
+			empty.style.display = visible === 0 ? 'block' : 'none';
+		});
+	});
+});
+</script>
+
+{%- endblock -%}

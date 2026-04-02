@@ -1,0 +1,166 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "influencer_name",
+    "platform",
+    "handle",
+    "followers_count",
+    "cb_inf1",
+    "category",
+    "contact_phone",
+    "contact_email",
+    "sb_campaigns",
+    "invitations",
+    "sb_metrics",
+    "total_reach",
+    "total_cost",
+    "cb_inf2",
+    "roi_score",
+    "rating",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "influencer_name",
+      "fieldtype": "Data",
+      "label": "Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "platform",
+      "fieldtype": "Select",
+      "label": "Platform",
+      "options": "Instagram\nTikTok\nYouTube\nFacebook\nBlog",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "handle",
+      "fieldtype": "Data",
+      "label": "@Handle",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "followers_count",
+      "fieldtype": "Int",
+      "label": "Followers",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cb_inf1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Category",
+      "options": "Food\nLifestyle\nLocal\nCelebrity",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "contact_phone",
+      "fieldtype": "Data",
+      "label": "Phone"
+    },
+    {
+      "fieldname": "contact_email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "sb_campaigns",
+      "fieldtype": "Section Break",
+      "label": "Visits & Campaigns"
+    },
+    {
+      "fieldname": "invitations",
+      "fieldtype": "Table",
+      "label": "Visits",
+      "options": "Influencer Visit"
+    },
+    {
+      "fieldname": "sb_metrics",
+      "fieldtype": "Section Break",
+      "label": "Metrics"
+    },
+    {
+      "fieldname": "total_reach",
+      "fieldtype": "Int",
+      "label": "Total Reach",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_cost",
+      "fieldtype": "Currency",
+      "label": "Total Cost",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_inf2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "roi_score",
+      "fieldtype": "Float",
+      "label": "ROI (Reach per EGP)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "rating",
+      "fieldtype": "Rating",
+      "label": "Rating"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Influencer",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "autoname": "field:influencer_name",
+  "naming_rule": "By fieldname"
+}

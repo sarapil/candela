@@ -1,0 +1,11 @@
+{% extends "templates/web.html" %}
+{% block page_content %}
+<div id="candela-users-app" style="min-height:80vh;background:#1C1917"></div>
+<script>
+frappe.ready(function(){
+	frappe.require(["/assets/candela/js/candela_users.js"], function(){
+		window.candela.users.init("#candela-users-app");
+	});
+});
+</script>
+{% endblock %}

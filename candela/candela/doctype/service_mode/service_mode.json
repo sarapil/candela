@@ -1,0 +1,154 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "mode_name_ar",
+    "mode_name_en",
+    "mode_code",
+    "cb_sm1",
+    "active_hours_start",
+    "active_hours_end",
+    "active_days",
+    "sb_config",
+    "target_persona",
+    "featured_categories",
+    "staff_requirements",
+    "cb_sm2",
+    "ambiance_settings",
+    "background_music_playlist",
+    "lighting_preset",
+    "is_active"
+  ],
+  "fields": [
+    {
+      "fieldname": "mode_name_ar",
+      "fieldtype": "Data",
+      "label": "Mode Name (Arabic)",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "mode_name_en",
+      "fieldtype": "Data",
+      "label": "Mode Name (English)",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "mode_code",
+      "fieldtype": "Data",
+      "label": "Code",
+      "unique": 1,
+      "reqd": 1
+    },
+    {
+      "fieldname": "cb_sm1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "active_hours_start",
+      "fieldtype": "Time",
+      "label": "Start Time"
+    },
+    {
+      "fieldname": "active_hours_end",
+      "fieldtype": "Time",
+      "label": "End Time"
+    },
+    {
+      "fieldname": "active_days",
+      "fieldtype": "Small Text",
+      "label": "Active Days"
+    },
+    {
+      "fieldname": "sb_config",
+      "fieldtype": "Section Break",
+      "label": "Configuration"
+    },
+    {
+      "fieldname": "target_persona",
+      "fieldtype": "Link",
+      "label": "Target Persona",
+      "options": "Customer Persona"
+    },
+    {
+      "fieldname": "featured_categories",
+      "fieldtype": "Small Text",
+      "label": "Featured Categories"
+    },
+    {
+      "fieldname": "staff_requirements",
+      "fieldtype": "Small Text",
+      "label": "Staff Requirements"
+    },
+    {
+      "fieldname": "cb_sm2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "ambiance_settings",
+      "fieldtype": "Small Text",
+      "label": "Ambiance Settings"
+    },
+    {
+      "fieldname": "background_music_playlist",
+      "fieldtype": "Data",
+      "label": "Music Playlist URL"
+    },
+    {
+      "fieldname": "lighting_preset",
+      "fieldtype": "Select",
+      "label": "Lighting",
+      "options": "Bright\nWarm\nDim\nCandle"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Active",
+      "default": "1"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Service Mode",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "autoname": "field:mode_code",
+  "naming_rule": "By fieldname"
+}

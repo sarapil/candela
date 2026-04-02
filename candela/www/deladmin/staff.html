@@ -1,0 +1,98 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+.stf { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1.5rem) 0 3rem; }
+.stf * { color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+.stf__top { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:.75rem; }
+.stf__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.6rem; }
+
+.stf__stats { display:flex; gap:1rem; margin-bottom:1.5rem; }
+.stf-stat { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:1rem 1.25rem; display:flex; align-items:center; gap:.75rem; }
+.stf-stat__val { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.8rem; color:var(--c-gold,#C9A96E)!important; }
+.stf-stat__lbl { font-size:.72rem; color:rgba(255,255,255,.4)!important; letter-spacing:.08em; text-transform:uppercase; }
+
+.stf__section { margin-bottom:1.5rem; }
+.stf__section-title { font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; margin-bottom:.75rem; padding-bottom:.4rem; border-bottom:1px solid rgba(255,255,255,.06); }
+
+.stf__grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem; }
+.stf-card { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:1rem; transition:all .2s; }
+.stf-card:hover { border-color:rgba(255,255,255,.15); }
+.stf-card__header { display:flex; justify-content:space-between; align-items:center; margin-bottom:.5rem; }
+.stf-card__name { font-weight:600; font-size:.95rem; }
+.stf-card__badge { font-size:.65rem; padding:2px 8px; border-radius:50px; font-weight:600; }
+.stf-card__badge--active { background:rgba(91,179,105,.15); color:#5BB369!important; }
+.stf-card__badge--scheduled { background:rgba(201,169,110,.15); color:var(--c-gold,#C9A96E)!important; }
+.stf-card__badge--completed { background:rgba(255,255,255,.08); color:rgba(255,255,255,.4)!important; }
+.stf-card__badge--absent { background:rgba(212,83,75,.12); color:#D4534B!important; }
+.stf-card__info { font-size:.78rem; color:rgba(255,255,255,.45)!important; display:flex; gap:.75rem; flex-wrap:wrap; margin-top:.3rem; }
+
+.stf__empty { text-align:center; padding:3rem; color:rgba(255,255,255,.3)!important; font-style:italic; }
+
+.stf__btn { padding:.5rem 1rem; border-radius:8px; font-size:.82rem; text-decoration:none; background:var(--c-gold,#C9A96E); color:var(--c-charcoal,#1A1A1A)!important; border:none; cursor:pointer; }
+</style>
+
+<div class="stf">
+	<div class="c-container">
+		<div class="stf__top">
+			<h1 class="stf__title">👥 {{ _('إدارة الموظفين') if lang == 'ar' else 'Staff Management' }}</h1>
+			<a href="/app/staff-shift/new" class="stf__btn">+ {{ _('وردية جديدة') if lang == 'ar' else 'New Shift' }}</a>
+		</div>
+
+		<div class="stf__stats">
+			<div class="stf-stat">
+				<div class="stf-stat__val">{{ active_count }}</div>
+				<div class="stf-stat__lbl">{{ _('نشط الآن') if lang == 'ar' else 'Active Now' }}</div>
+			</div>
+			<div class="stf-stat">
+				<div class="stf-stat__val">{{ scheduled_count }}</div>
+				<div class="stf-stat__lbl">{{ _('مجدول') if lang == 'ar' else 'Scheduled' }}</div>
+			</div>
+			<div class="stf-stat">
+				<div class="stf-stat__val">{{ today_shifts|length }}</div>
+				<div class="stf-stat__lbl">{{ _('إجمالي اليوم') if lang == 'ar' else 'Total Today' }}</div>
+			</div>
+		</div>
+
+		{% if shift_roles %}
+		{% for role_name, shifts in shift_roles.items() %}
+		<div class="stf__section">
+			<h3 class="stf__section-title">
+				{% if role_name == 'Waiter' %}🤵 {{ _('ويتر') if lang == 'ar' else 'Waiters' }}
+				{% elif role_name == 'Chef' %}👨‍🍳 {{ _('شيف') if lang == 'ar' else 'Chefs' }}
+				{% elif role_name == 'Cashier' %}💰 {{ _('كاشير') if lang == 'ar' else 'Cashiers' }}
+				{% elif role_name == 'Host' %}🙋 {{ _('مضيف') if lang == 'ar' else 'Hosts' }}
+				{% elif role_name == 'Manager' %}📋 {{ _('مدير') if lang == 'ar' else 'Managers' }}
+				{% elif role_name == 'Barista' %}☕ {{ _('باريستا') if lang == 'ar' else 'Baristas' }}
+				{% else %}{{ role_name }}{% endif %}
+			</h3>
+			<div class="stf__grid">
+				{% for s in shifts %}
+				<div class="stf-card">
+					<div class="stf-card__header">
+						<span class="stf-card__name">{{ s.staff_name }}</span>
+						<span class="stf-card__badge stf-card__badge--{{ s.status|lower }}">{{ s.status }}</span>
+					</div>
+					<div class="stf-card__info">
+						<span>🕐 {{ s.start_time }} – {{ s.end_time }}</span>
+						{% if s.section %}<span>📍 {{ s.section }}</span>{% endif %}
+						{% if s.assigned_tables %}<span>🪑 {{ s.assigned_tables }}</span>{% endif %}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endfor %}
+		{% else %}
+		<div class="stf__empty">
+			{{ _('لا توجد ورديات مجدولة اليوم') if lang == 'ar' else 'No shifts scheduled for today' }}
+			<br/><br/>
+			<a href="/app/staff-shift/new" class="stf__btn">+ {{ _('إضافة وردية') if lang == 'ar' else 'Add Shift' }}</a>
+		</div>
+		{% endif %}
+	</div>
+</div>
+
+{%- endblock -%}

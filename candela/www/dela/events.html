@@ -1,0 +1,79 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+{# ═══════ PAGE HEADER ═══════ #}
+<section class="c-page-header"
+	{% if candela.events_cover_image %}style="background-image:url('{{ candela.events_cover_image }}')"{% endif %}>
+	<div class="c-page-header__overlay"></div>
+	<div class="c-page-header__content">
+		<span class="c-section-header__label">{{ 'Eventi' }}</span>
+		<h1>{{ _('الفعاليات') if lang == 'ar' else 'Events' }}</h1>
+	</div>
+</section>
+
+{# ═══════ EVENTS LIST ═══════ #}
+<section class="c-section c-section--ivory">
+	<div class="c-container" style="max-width:900px;">
+		{% if events %}
+		<div style="display:flex;flex-direction:column;gap:var(--s-xl);" class="c-stagger">
+			{% for event in events %}
+			<div class="c-event-card c-reveal" style="padding:var(--s-xl);">
+				<div class="c-event-card__date" style="min-width:80px;">
+					<span class="c-event-card__day">{{ event.event_date.day }}</span>
+					<span class="c-event-card__month">{{ event.event_date.strftime('%b') }}</span>
+					<span style="font-size:0.7rem;color:var(--c-text-muted);margin-top:2px;">{{ event.event_date.year }}</span>
+				</div>
+				<div class="c-event-card__body" style="flex:1;">
+					<h3 class="c-event-card__title" style="font-size:1.3rem;">
+						{{ event.event_name_ar if lang == 'ar' else event.event_name_en }}
+					</h3>
+					<div class="c-event-card__meta" style="margin-bottom:var(--s-sm);">
+						<span>🕐 {{ event.event_time }}{% if event.end_time %} – {{ event.end_time }}{% endif %}</span>
+						{% if event.price %}<span class="c-gold">{{ event.price }} {{ _('ج.م') }}</span>{% endif %}
+						{% if event.max_attendees %}<span>👥 {{ _('الحد الأقصى:') if lang == 'ar' else 'Max:' }} {{ event.max_attendees }}</span>{% endif %}
+					</div>
+					{% if event.description_ar or event.description_en %}
+					<p style="color:var(--c-text-light);line-height:1.8;font-size:0.95rem;">
+						{{ event.description_ar if lang == 'ar' else event.description_en }}
+					</p>
+					{% endif %}
+				</div>
+				{% if event.image %}
+				<div style="width:160px;min-height:120px;flex-shrink:0;border-radius:var(--r-md);overflow:hidden;">
+					<img src="{{ event.image }}" alt="{{ event.event_name_en }}" style="width:100%;height:100%;object-fit:cover;">
+				</div>
+				{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+		{% else %}
+		<div class="c-text-center" style="padding:var(--s-4xl) 0;">
+			<div style="font-size:3rem;margin-bottom:var(--s-md);opacity:0.4;">📅</div>
+			<p style="color:var(--c-text-light);font-size:1.1rem;">
+				{{ _('لا توجد فعاليات قادمة حالياً') if lang == 'ar' else 'No upcoming events at the moment' }}
+			</p>
+		</div>
+		{% endif %}
+	</div>
+</section>
+
+{# ═══════ PRIVATE EVENTS CTA ═══════ #}
+<section class="c-section c-section--dark">
+	<div class="c-container c-text-center c-reveal">
+		<span class="c-section-header__label">{{ _('مناسباتكم الخاصة') if lang == 'ar' else 'Private Events' }}</span>
+		<h3 style="color:var(--c-cream);margin:var(--s-md) 0 var(--s-md);">
+			{{ _('احتفل معنا بمناسباتك') if lang == 'ar' else 'Celebrate With Us' }}
+		</h3>
+		<p style="color:var(--c-text-muted);max-width:500px;margin:0 auto var(--s-xl);line-height:1.8;">
+			{{ _('نوفر أجواءً مثالية لأعياد الميلاد والمناسبات الخاصة وفعاليات الشركات') if lang == 'ar' else 'We provide the perfect setting for birthdays, special occasions, and corporate events' }}
+		</p>
+		<a href="/dela/contact" class="c-btn c-btn--gold c-btn--lg">
+			{{ _('تواصل معنا') if lang == 'ar' else 'Contact Us' }}
+		</a>
+	</div>
+</section>
+
+{%- endblock -%}

@@ -1,0 +1,738 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"cd_hero\",\"type\":\"header\",\"data\":{\"text\":\"<span class='h4'>🕯️ <b>Candela Restaurant</b></span>\",\"col\":12}},{\"id\":\"cd_s1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Candela Settings\",\"col\":3}},{\"id\":\"cd_s2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Table Reservation\",\"col\":3}},{\"id\":\"cd_s3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Online Order\",\"col\":3}},{\"id\":\"cd_s4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"POS Invoice\",\"col\":3}},{\"id\":\"cd_s5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Menu Item\",\"col\":3}},{\"id\":\"cd_s6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Daily Closing\",\"col\":3}},{\"id\":\"cd_s7\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Stock Entry\",\"col\":3}},{\"id\":\"cd_s8\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Kitchen Station\",\"col\":3}}]",
+ "creation": "2024-01-01 00:00:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "quality",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "Candela",
+ "type": "Workspace",
+ "app": "candela",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Menu & Dining",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break",
+   "icon": "book"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Menu Item",
+   "link_count": 0,
+   "link_to": "Menu Item",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link",
+   "icon": "tools-kitchen-2"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Menu Category",
+   "link_count": 0,
+   "link_to": "Menu Category",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link",
+   "icon": "category"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ingredient",
+   "link_count": 0,
+   "link_to": "Ingredient",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "leaf"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Promo Code",
+   "link_count": 0,
+   "link_to": "Promo Code",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "ticket"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Delivery Zone",
+   "link_count": 0,
+   "link_to": "Delivery Zone",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "map-pin"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Service Mode",
+   "link_count": 0,
+   "link_to": "Service Mode",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "layout-grid"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Operations",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break",
+   "icon": "settings"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Table Reservation",
+   "link_count": 0,
+   "link_to": "Table Reservation",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link",
+   "icon": "calendar-event"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Online Order",
+   "link_count": 0,
+   "link_to": "Online Order",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link",
+   "icon": "device-mobile"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "POS Invoice",
+   "link_count": 0,
+   "link_to": "POS Invoice",
+   "link_type": "DocType",
+   "onboard": 1,
+   "type": "Link",
+   "icon": "receipt"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "POS Shift",
+   "link_count": 0,
+   "link_to": "POS Shift",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "clock"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Restaurant Table",
+   "link_count": 0,
+   "link_to": "Restaurant Table",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "armchair"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Daily Closing",
+   "link_count": 0,
+   "link_to": "Daily Closing",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "report-money"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Daily Expense",
+   "link_count": 0,
+   "link_to": "Daily Expense",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "cash"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Kitchen & Production",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break",
+   "icon": "chef-hat"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Kitchen Station",
+   "link_count": 0,
+   "link_to": "Kitchen Station",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "grill"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Log",
+   "link_count": 0,
+   "link_to": "Production Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "clipboard-list"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Production Waste",
+   "link_count": 0,
+   "link_to": "Production Waste",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "trash"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Procurement & Stock",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break",
+   "icon": "package"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Candela Supplier",
+   "link_count": 0,
+   "link_to": "Candela Supplier",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "building-store"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Request",
+   "link_count": 0,
+   "link_to": "Purchase Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "file-text"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Purchase Order",
+   "link_count": 0,
+   "link_to": "Purchase Order",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "shopping-cart"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Goods Receipt Note",
+   "link_count": 0,
+   "link_to": "Goods Receipt Note",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "package-import"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Candela Warehouse",
+   "link_count": 0,
+   "link_to": "Candela Warehouse",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "building-warehouse"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Entry",
+   "link_count": 0,
+   "link_to": "Stock Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "arrows-exchange"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Transfer",
+   "link_count": 0,
+   "link_to": "Stock Transfer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "transfer"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Stock Reconciliation",
+   "link_count": 0,
+   "link_to": "Stock Reconciliation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "checklist"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Price Change Log",
+   "link_count": 0,
+   "link_to": "Price Change Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "chart-line"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Marketing & CRM",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break",
+   "icon": "speakerphone"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Marketing Campaign",
+   "link_count": 0,
+   "link_to": "Marketing Campaign",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "ad-2"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Campaign Activity",
+   "link_count": 0,
+   "link_to": "Campaign Activity",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "list-check"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Content Calendar Entry",
+   "link_count": 0,
+   "link_to": "Content Calendar Entry",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "calendar"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Persona",
+   "link_count": 0,
+   "link_to": "Customer Persona",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "user-heart"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Corporate Account",
+   "link_count": 0,
+   "link_to": "Corporate Account",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "building"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Corporate Lunch Package",
+   "link_count": 0,
+   "link_to": "Corporate Lunch Package",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "lunch"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Influencer",
+   "link_count": 0,
+   "link_to": "Influencer",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "brand-instagram"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Influencer Visit",
+   "link_count": 0,
+   "link_to": "Influencer Visit",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "camera"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Online Review",
+   "link_count": 0,
+   "link_to": "Online Review",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "message-circle"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Competitor",
+   "link_count": 0,
+   "link_to": "Competitor",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "chart-bar"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Guest Engagement",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break",
+   "icon": "heart"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customer Review",
+   "link_count": 0,
+   "link_to": "Customer Review",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "star"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Newsletter Subscriber",
+   "link_count": 0,
+   "link_to": "Newsletter Subscriber",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "mail"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Gallery Image",
+   "link_count": 0,
+   "link_to": "Gallery Image",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "photo"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Restaurant Event",
+   "link_count": 0,
+   "link_to": "Restaurant Event",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "confetti"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Gift Card",
+   "link_count": 0,
+   "link_to": "Gift Card",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "gift"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Private Dining Package",
+   "link_count": 0,
+   "link_to": "Private Dining Package",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "diamond"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Cafe Amenity",
+   "link_count": 0,
+   "link_to": "Cafe Amenity",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "coffee"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Assets & Maintenance",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break",
+   "icon": "home-cog"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Restaurant Asset",
+   "link_count": 0,
+   "link_to": "Restaurant Asset",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "device-desktop"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Maintenance Request",
+   "link_count": 0,
+   "link_to": "Maintenance Request",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "tool"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Staff & HR",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break",
+   "icon": "users"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Chef Profile",
+   "link_count": 0,
+   "link_to": "Chef Profile",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "chef-hat"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Staff Member",
+   "link_count": 0,
+   "link_to": "Staff Member",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "user"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Restaurant Section",
+   "link_count": 0,
+   "link_to": "Restaurant Section",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link",
+   "icon": "layout-board"
+  }
+ ],
+ "modified": "2024-01-01 00:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Candela",
+ "name": "Candela",
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "restrict_to_domain": "",
+ "roles": [],
+ "sequence_id": 1,
+ "shortcuts": [
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "label": "Candela Settings",
+   "link_to": "Candela Settings",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "label": "Table Reservation",
+   "link_to": "Table Reservation",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "label": "Online Order",
+   "link_to": "Online Order",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "label": "POS Invoice",
+   "link_to": "POS Invoice",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "label": "Menu Item",
+   "link_to": "Menu Item",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "label": "Daily Closing",
+   "link_to": "Daily Closing",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "label": "Stock Entry",
+   "link_to": "Stock Entry",
+   "type": "DocType"
+  },
+  {
+   "color": "Yellow",
+   "doc_view": "List",
+   "label": "Kitchen Station",
+   "link_to": "Kitchen Station",
+   "type": "DocType"
+  },
+  {
+   "label": "Homepage",
+   "link_to": "/dela",
+   "type": "URL",
+   "color": "Orange"
+  },
+  {
+   "label": "Admin Dashboard",
+   "link_to": "/deladmin",
+   "type": "URL",
+   "color": "Orange"
+  },
+  {
+   "label": "POS Terminal",
+   "link_to": "/deladmin/pos",
+   "type": "URL",
+   "color": "Orange"
+  },
+  {
+   "label": "Kitchen Display",
+   "link_to": "/deladmin/kitchen",
+   "type": "URL",
+   "color": "Orange"
+  },
+  {
+   "label": "Table Map",
+   "link_to": "/deladmin/tables",
+   "type": "URL",
+   "color": "Orange"
+  },
+  {
+   "color": "#F59E0B",
+   "format": "{} ✨",
+   "icon": "info",
+   "label": "About Candela",
+   "type": "URL",
+   "url": "/candela-about"
+  },
+  {
+   "color": "#F59E0B",
+   "format": "{} 📚",
+   "icon": "book",
+   "label": "Onboarding",
+   "type": "URL",
+   "url": "/candela-onboarding"
+  },
+  {
+   "color": "#F59E0B",
+   "format": "{} 🛡️",
+   "icon": "users",
+   "label": "User Management",
+   "type": "URL",
+   "url": "/deladmin/users"
+  }
+ ],
+ "title": "🕯️ Candela Restaurant"
+}

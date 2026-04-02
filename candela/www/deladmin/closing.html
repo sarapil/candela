@@ -1,0 +1,139 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+.cls { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1.5rem) 0 3rem; }
+.cls, .cls * { color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+.cls__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.6rem; margin-bottom:1.5rem; }
+.cls__top { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:.75rem; }
+.cls__btns { display:flex; gap:.5rem; }
+.cls__btn { padding:.5rem 1rem; border-radius:8px; font-size:.82rem; text-decoration:none; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--c-cream,#F5F0E8)!important; cursor:pointer; transition:all .2s; }
+.cls__btn:hover { border-color:var(--c-gold,#C9A96E); }
+.cls__btn--primary { background:var(--c-gold,#C9A96E); color:var(--c-charcoal,#1A1A1A)!important; border-color:var(--c-gold,#C9A96E); }
+
+.cls__stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.cls__stat { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.2rem; text-align:center; }
+.cls__stat-val { font-family:var(--font-serif); font-size:1.8rem; color:var(--c-gold,#C9A96E)!important; }
+.cls__stat-lbl { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; margin-top:.3rem; }
+
+.cls__today { background:linear-gradient(135deg,rgba(201,169,110,.06),transparent); border:1px solid rgba(201,169,110,.15); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem; }
+.cls__today h3 { font-family:var(--font-serif); font-size:1.15rem; margin:0 0 .5rem; }
+.cls__today-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-top:.75rem; }
+.cls__today-item { text-align:center; }
+.cls__today-val { font-family:var(--font-serif); font-size:1.4rem; color:var(--c-gold,#C9A96E)!important; }
+.cls__today-lbl { font-size:.68rem; color:rgba(255,255,255,.4)!important; text-transform:uppercase; letter-spacing:.06em; }
+
+.cls__card { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; overflow:hidden; margin-bottom:1.25rem; }
+.cls__card-title { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; padding:.75rem 1rem; border-bottom:1px solid rgba(255,255,255,.06); }
+.cls-tbl { width:100%; border-collapse:collapse; }
+.cls-tbl th { text-align:start; padding:.5rem .75rem; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35)!important; border-bottom:1px solid rgba(255,255,255,.06); }
+.cls-tbl td { padding:.6rem .75rem; border-bottom:1px solid rgba(255,255,255,.03); font-size:.85rem; }
+.cls-tbl tr:hover td { background:rgba(255,255,255,.02); }
+.cls-tbl a { color:var(--c-gold,#C9A96E)!important; text-decoration:none; }
+.cls__badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:.68rem; font-weight:600; }
+.cls__badge--draft { background:rgba(255,255,255,.06); color:rgba(255,255,255,.4)!important; }
+.cls__badge--closed { background:rgba(91,179,105,.12); color:#5BB369!important; }
+.cls__pct { font-weight:700; }
+.cls__pct--ok { color:#5BB369!important; }
+.cls__pct--warn { color:var(--c-gold,#C9A96E)!important; }
+.cls__pct--bad { color:#D4534B!important; }
+.cls__empty { padding:2rem; text-align:center; color:rgba(255,255,255,.3)!important; font-style:italic; }
+@media(max-width:768px){ .cls__stats,.cls__today-grid { grid-template-columns:repeat(2,1fr); } }
+</style>
+
+<div class="cls">
+	<div class="c-container">
+		<div class="cls__top">
+			<h1 class="cls__title">📊 {{ _('الإقفال اليومي') if lang == 'ar' else 'Daily Financial Closing' }}</h1>
+			<div class="cls__btns">
+				<a href="/app/daily-closing/new" class="cls__btn cls__btn--primary">+ {{ _('إقفال جديد') if lang == 'ar' else 'New Closing' }}</a>
+			</div>
+		</div>
+
+		<div class="cls__stats">
+			<div class="cls__stat">
+				<div class="cls__stat-val">{{ "{:,.0f}".format(stats.month_revenue) }}</div>
+				<div class="cls__stat-lbl">{{ _('إيرادات الشهر') if lang == 'ar' else 'Month Revenue' }}</div>
+			</div>
+			<div class="cls__stat">
+				<div class="cls__stat-val">{{ "{:,.0f}".format(stats.month_expenses) }}</div>
+				<div class="cls__stat-lbl">{{ _('مصاريف الشهر') if lang == 'ar' else 'Month Expenses' }}</div>
+			</div>
+			<div class="cls__stat">
+				<div class="cls__stat-val">{{ "{:,.0f}".format(stats.month_net) }}</div>
+				<div class="cls__stat-lbl">{{ _('صافي الشهر') if lang == 'ar' else 'Month Net' }}</div>
+			</div>
+			<div class="cls__stat">
+				<div class="cls__stat-val cls__pct {{ 'cls__pct--ok' if stats.avg_food_cost_pct <= 30 else ('cls__pct--warn' if stats.avg_food_cost_pct <= 35 else 'cls__pct--bad') }}">{{ "{:.1f}%".format(stats.avg_food_cost_pct) }}</div>
+				<div class="cls__stat-lbl">{{ _('متوسط تكلفة الطعام') if lang == 'ar' else 'Avg Food Cost %' }}</div>
+			</div>
+		</div>
+
+		{# Today's Closing #}
+		{% if today_closing %}
+		<div class="cls__today">
+			<h3>📅 {{ _('إقفال اليوم') if lang == 'ar' else "Today's Closing" }} — <a href="/app/daily-closing/{{ today_closing.name }}" style="color:var(--c-gold)!important;">{{ today_closing.name }}</a></h3>
+			<div class="cls__today-grid">
+				<div class="cls__today-item">
+					<div class="cls__today-val">{{ "{:,.0f}".format(today_closing.gross_revenue or 0) }}</div>
+					<div class="cls__today-lbl">{{ _('الإيرادات') if lang == 'ar' else 'Revenue' }}</div>
+				</div>
+				<div class="cls__today-item">
+					<div class="cls__today-val">{{ "{:,.0f}".format(today_closing.net_cash_position or 0) }}</div>
+					<div class="cls__today-lbl">{{ _('الصافي') if lang == 'ar' else 'Net' }}</div>
+				</div>
+				<div class="cls__today-item">
+					<div class="cls__today-val cls__pct {{ 'cls__pct--ok' if (today_closing.food_cost_percentage or 0) <= 30 else 'cls__pct--bad' }}">{{ "{:.1f}%".format(today_closing.food_cost_percentage or 0) }}</div>
+					<div class="cls__today-lbl">{{ _('تكلفة الطعام') if lang == 'ar' else 'Food Cost' }}</div>
+				</div>
+				<div class="cls__today-item">
+					<div class="cls__today-val"><span class="cls__badge cls__badge--{{ (today_closing.status or 'draft')|lower }}">{{ today_closing.status }}</span></div>
+					<div class="cls__today-lbl">{{ _('الحالة') if lang == 'ar' else 'Status' }}</div>
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
+		{# Closings History #}
+		<div class="cls__card">
+			<div class="cls__card-title">📋 {{ _('سجل الإقفالات') if lang == 'ar' else 'Closing History' }}</div>
+			{% if closings %}
+			<table class="cls-tbl">
+				<thead><tr>
+					<th>#</th>
+					<th>{{ _('التاريخ') if lang == 'ar' else 'Date' }}</th>
+					<th>{{ _('إيرادات') if lang == 'ar' else 'Revenue' }}</th>
+					<th>{{ _('كاش') if lang == 'ar' else 'Cash' }}</th>
+					<th>{{ _('بطاقة') if lang == 'ar' else 'Card' }}</th>
+					<th>{{ _('مصاريف') if lang == 'ar' else 'Expenses' }}</th>
+					<th>{{ _('صافي') if lang == 'ar' else 'Net' }}</th>
+					<th>{{ _('تكلفة %') if lang == 'ar' else 'Food %' }}</th>
+					<th>{{ _('متوسط فاتورة') if lang == 'ar' else 'Avg Ticket' }}</th>
+					<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+				</tr></thead>
+				<tbody>
+				{% for c in closings %}
+				<tr>
+					<td><a href="/app/daily-closing/{{ c.name }}">{{ c.name }}</a></td>
+					<td>{{ c.closing_date }}</td>
+					<td>{{ "{:,.0f}".format(c.gross_revenue or 0) }}</td>
+					<td>{{ "{:,.0f}".format(c.cash_collected or 0) }}</td>
+					<td>{{ "{:,.0f}".format(c.card_collected or 0) }}</td>
+					<td>{{ "{:,.0f}".format(c.total_expenses or 0) }}</td>
+					<td>{{ "{:,.0f}".format(c.net_cash_position or 0) }}</td>
+					<td><span class="cls__pct {{ 'cls__pct--ok' if (c.food_cost_percentage or 0) <= 30 else ('cls__pct--warn' if (c.food_cost_percentage or 0) <= 35 else 'cls__pct--bad') }}">{{ "{:.1f}%".format(c.food_cost_percentage or 0) }}</span></td>
+					<td>{{ "{:,.0f}".format(c.average_order_value or 0) }}</td>
+					<td><span class="cls__badge cls__badge--{{ (c.status or 'draft')|lower }}">{{ c.status }}</span></td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<div class="cls__empty">{{ _('لا توجد إقفالات') if lang == 'ar' else 'No closings yet' }}</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{%- endblock -%}

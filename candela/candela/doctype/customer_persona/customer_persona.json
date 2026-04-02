@@ -1,0 +1,210 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "persona_name_ar",
+    "persona_name_en",
+    "persona_code",
+    "avatar_image",
+    "sb_demo",
+    "age_range",
+    "occupation",
+    "income_level",
+    "cb_cp1",
+    "location_notes",
+    "price_sensitivity",
+    "sb_behavior",
+    "visit_pattern",
+    "preferred_channels",
+    "preferred_payment",
+    "decision_factors",
+    "sb_marketing",
+    "marketing_channels",
+    "content_tone",
+    "offer_types",
+    "sb_menu",
+    "preferred_categories",
+    "must_have_features",
+    "pain_points",
+    "is_active"
+  ],
+  "fields": [
+    {
+      "fieldname": "persona_name_ar",
+      "fieldtype": "Data",
+      "label": "Persona Name (Arabic)",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "persona_name_en",
+      "fieldtype": "Data",
+      "label": "Persona Name (English)",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "persona_code",
+      "fieldtype": "Data",
+      "label": "Code",
+      "unique": 1,
+      "reqd": 1
+    },
+    {
+      "fieldname": "avatar_image",
+      "fieldtype": "Attach Image",
+      "label": "Avatar"
+    },
+    {
+      "fieldname": "sb_demo",
+      "fieldtype": "Section Break",
+      "label": "Demographics"
+    },
+    {
+      "fieldname": "age_range",
+      "fieldtype": "Data",
+      "label": "Age Range"
+    },
+    {
+      "fieldname": "occupation",
+      "fieldtype": "Data",
+      "label": "Occupation"
+    },
+    {
+      "fieldname": "income_level",
+      "fieldtype": "Select",
+      "label": "Income Level",
+      "options": "Low\nMedium\nMedium-High\nHigh",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cb_cp1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "location_notes",
+      "fieldtype": "Data",
+      "label": "Location Notes"
+    },
+    {
+      "fieldname": "price_sensitivity",
+      "fieldtype": "Select",
+      "label": "Price Sensitivity",
+      "options": "Low\nMedium\nHigh"
+    },
+    {
+      "fieldname": "sb_behavior",
+      "fieldtype": "Section Break",
+      "label": "Behavior"
+    },
+    {
+      "fieldname": "visit_pattern",
+      "fieldtype": "Data",
+      "label": "Visit Pattern"
+    },
+    {
+      "fieldname": "preferred_channels",
+      "fieldtype": "Small Text",
+      "label": "Preferred Channels"
+    },
+    {
+      "fieldname": "preferred_payment",
+      "fieldtype": "Small Text",
+      "label": "Preferred Payment"
+    },
+    {
+      "fieldname": "decision_factors",
+      "fieldtype": "Small Text",
+      "label": "Decision Factors"
+    },
+    {
+      "fieldname": "sb_marketing",
+      "fieldtype": "Section Break",
+      "label": "Marketing"
+    },
+    {
+      "fieldname": "marketing_channels",
+      "fieldtype": "Small Text",
+      "label": "Marketing Channels"
+    },
+    {
+      "fieldname": "content_tone",
+      "fieldtype": "Data",
+      "label": "Content Tone"
+    },
+    {
+      "fieldname": "offer_types",
+      "fieldtype": "Small Text",
+      "label": "Offer Types"
+    },
+    {
+      "fieldname": "sb_menu",
+      "fieldtype": "Section Break",
+      "label": "Menu Preferences"
+    },
+    {
+      "fieldname": "preferred_categories",
+      "fieldtype": "Small Text",
+      "label": "Preferred Categories"
+    },
+    {
+      "fieldname": "must_have_features",
+      "fieldtype": "Small Text",
+      "label": "Must-Have Features"
+    },
+    {
+      "fieldname": "pain_points",
+      "fieldtype": "Small Text",
+      "label": "Pain Points"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Active",
+      "default": "1"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Customer Persona",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "autoname": "field:persona_code",
+  "naming_rule": "By fieldname"
+}

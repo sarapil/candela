@@ -1,0 +1,157 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+{# ═══════ PAGE HEADER ═══════ #}
+<section class="c-page-header"
+	{% if candela.contact_cover_image %}style="background-image:url('{{ candela.contact_cover_image }}')"{% endif %}>
+	<div class="c-page-header__overlay"></div>
+	<div class="c-page-header__content">
+		<span class="c-section-header__label">{{ 'Contattaci' }}</span>
+		<h1>{{ _('تواصل معنا') if lang == 'ar' else 'Contact Us' }}</h1>
+	</div>
+</section>
+
+{# ═══════ CONTACT INFO + FORM ═══════ #}
+<section class="c-section c-section--ivory">
+	<div class="c-container">
+		<div class="c-split">
+			{# ── INFO SIDE ── #}
+			<div class="c-reveal c-reveal--left">
+				<span class="c-section-header__label">{{ _('معلومات التواصل') if lang == 'ar' else 'Get in Touch' }}</span>
+				<h2 style="margin-bottom:var(--s-xl);color:var(--c-dark);">
+					{{ _('نحن هنا لخدمتكم') if lang == 'ar' else "We're Here For You" }}
+				</h2>
+
+				<div style="display:flex;flex-direction:column;gap:var(--s-lg);">
+					{% if candela.address_ar or candela.address_en %}
+					<div style="display:flex;gap:var(--s-md);align-items:flex-start;">
+						<span style="font-size:1.5rem;">📍</span>
+						<div>
+							<strong style="display:block;margin-bottom:4px;color:var(--c-dark);">{{ _('العنوان') if lang == 'ar' else 'Address' }}</strong>
+							<span style="color:var(--c-text-light);line-height:1.7;">
+								{{ candela.address_ar if lang == 'ar' else candela.address_en }}
+							</span>
+						</div>
+					</div>
+					{% endif %}
+
+					{% if candela.phone %}
+					<div style="display:flex;gap:var(--s-md);align-items:flex-start;">
+						<span style="font-size:1.5rem;">📞</span>
+						<div>
+							<strong style="display:block;margin-bottom:4px;color:var(--c-dark);">{{ _('الهاتف') if lang == 'ar' else 'Phone' }}</strong>
+							<a href="tel:{{ candela.phone }}" style="color:var(--c-gold);text-decoration:none;">{{ candela.phone }}</a>
+						</div>
+					</div>
+					{% endif %}
+
+					{% if candela.email %}
+					<div style="display:flex;gap:var(--s-md);align-items:flex-start;">
+						<span style="font-size:1.5rem;">✉️</span>
+						<div>
+							<strong style="display:block;margin-bottom:4px;color:var(--c-dark);">{{ _('البريد') if lang == 'ar' else 'Email' }}</strong>
+							<a href="mailto:{{ candela.email }}" style="color:var(--c-gold);text-decoration:none;">{{ candela.email }}</a>
+						</div>
+					</div>
+					{% endif %}
+
+					{# Social links #}
+					<div style="display:flex;gap:var(--s-sm);margin-top:var(--s-md);">
+						{% if candela.facebook_url %}<a href="{{ candela.facebook_url }}" target="_blank" class="c-btn c-btn--outline" style="padding:0.5rem 1rem;">Facebook</a>{% endif %}
+						{% if candela.instagram_url %}<a href="{{ candela.instagram_url }}" target="_blank" class="c-btn c-btn--outline" style="padding:0.5rem 1rem;">Instagram</a>{% endif %}
+						{% if candela.tiktok_url %}<a href="{{ candela.tiktok_url }}" target="_blank" class="c-btn c-btn--outline" style="padding:0.5rem 1rem;">TikTok</a>{% endif %}
+					</div>
+				</div>
+			</div>
+
+			{# ── FORM SIDE ── #}
+			<div class="c-reveal c-reveal--right">
+				<form class="c-form" id="contact-form" onsubmit="return false;">
+					<div class="c-form-group">
+						<label class="c-form-label">{{ _('الاسم') if lang == 'ar' else 'Name' }} *</label>
+						<input type="text" class="c-form-input" name="sender_name" required>
+					</div>
+					<div class="c-form-group">
+						<label class="c-form-label">{{ _('البريد الإلكتروني') if lang == 'ar' else 'Email' }} *</label>
+						<input type="email" class="c-form-input" name="sender_email" required>
+					</div>
+					<div class="c-form-group">
+						<label class="c-form-label">{{ _('الموضوع') if lang == 'ar' else 'Subject' }}</label>
+						<input type="text" class="c-form-input" name="subject">
+					</div>
+					<div class="c-form-group">
+						<label class="c-form-label">{{ _('رسالتك') if lang == 'ar' else 'Message' }} *</label>
+						<textarea class="c-form-input" name="message" rows="5" required></textarea>
+					</div>
+					<button type="submit" class="c-btn c-btn--gold c-btn--block" id="contact-submit">
+						{{ _('إرسال الرسالة') if lang == 'ar' else 'Send Message' }}
+					</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+
+{# ═══════ MAP ═══════ #}
+{% if candela.google_maps_embed %}
+<section style="width:100%;height:400px;">
+	<iframe src="{{ candela.google_maps_embed }}" width="100%" height="400" style="border:0;filter:grayscale(0.8) contrast(1.1);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>
+{% endif %}
+
+{# ═══════ HOURS ═══════ #}
+<section class="c-section c-section--cream">
+	<div class="c-container" style="max-width:600px;">
+		<div class="c-section-header c-reveal">
+			<span class="c-section-header__label">{{ _('ساعات العمل') if lang == 'ar' else 'Opening Hours' }}</span>
+			<h2 class="c-section-header__title">{{ _('متى نستقبلكم') if lang == 'ar' else 'When to Visit' }}</h2>
+			<div class="c-section-header__line"></div>
+		</div>
+		<div class="c-hours c-reveal">
+			{% for row in hours %}
+			<div class="c-hours__row">
+				<span class="c-hours__day">{{ row.day_ar if lang == 'ar' else row.day }}</span>
+				<span class="c-hours__dots"></span>
+				<span class="c-hours__time">
+					{% if row.is_closed %}
+						{{ _('مغلق') if lang == 'ar' else 'Closed' }}
+					{% else %}
+						{{ row.open_time }} – {{ row.close_time }}
+					{% endif %}
+				</span>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	var form = document.getElementById('contact-form');
+	var btn = document.getElementById('contact-submit');
+
+	form.addEventListener('submit', function(e) {
+		e.preventDefault();
+		btn.disabled = true;
+
+		var data = {};
+		new FormData(form).forEach(function(v, k) { data[k] = v; });
+
+		// Use Frappe's built-in contact form or custom endpoint
+		candela.api('frappe.www.contact.send_message', {
+			sender: data.sender_email,
+			subject: data.subject || 'Contact from Candela Website',
+			message: 'From: ' + data.sender_name + '\n\n' + data.message
+		}).then(function() {
+			form.innerHTML = '<div style="text-align:center;padding:var(--s-2xl) 0;"><div style="font-size:3rem;margin-bottom:var(--s-md);">✅</div><h3 style="color:var(--c-gold);">{{ _("تم إرسال رسالتك بنجاح!") if lang == "ar" else "Message Sent!" }}</h3></div>';
+		}).catch(function() {
+			btn.disabled = false;
+		});
+	});
+});
+</script>
+
+{%- endblock -%}

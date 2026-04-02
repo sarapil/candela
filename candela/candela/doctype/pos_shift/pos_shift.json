@@ -1,0 +1,261 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "shift_date",
+    "shift_type",
+    "cashier",
+    "cb_sh1",
+    "status",
+    "sb_opening",
+    "opening_cash",
+    "opening_time",
+    "sb_trans",
+    "total_cash_sales",
+    "total_card_sales",
+    "total_wallet_sales",
+    "cb_sh2",
+    "total_sales",
+    "total_refunds",
+    "total_discounts",
+    "orders_count",
+    "sb_closing",
+    "closing_cash",
+    "closing_time",
+    "cb_sh3",
+    "expected_cash",
+    "cash_variance",
+    "variance_reason",
+    "sb_audit",
+    "audited_by",
+    "audit_notes",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CSHIFT-.YYYY.-.#####",
+      "default": "CSHIFT-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "shift_date",
+      "fieldtype": "Date",
+      "label": "Date",
+      "reqd": 1,
+      "default": "Today",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "shift_type",
+      "fieldtype": "Select",
+      "label": "Shift",
+      "options": "Morning\nEvening\nFull Day",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "cashier",
+      "fieldtype": "Link",
+      "label": "Cashier",
+      "options": "User",
+      "reqd": 1,
+      "default": "__user",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cb_sh1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Open\nClosing\nClosed\nAudited",
+      "default": "Open",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "sb_opening",
+      "fieldtype": "Section Break",
+      "label": "Opening"
+    },
+    {
+      "fieldname": "opening_cash",
+      "fieldtype": "Currency",
+      "label": "Opening Cash"
+    },
+    {
+      "fieldname": "opening_time",
+      "fieldtype": "Datetime",
+      "label": "Opening Time",
+      "default": "Now"
+    },
+    {
+      "fieldname": "sb_trans",
+      "fieldtype": "Section Break",
+      "label": "Transactions"
+    },
+    {
+      "fieldname": "total_cash_sales",
+      "fieldtype": "Currency",
+      "label": "Total Cash Sales",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_card_sales",
+      "fieldtype": "Currency",
+      "label": "Total Card Sales",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_wallet_sales",
+      "fieldtype": "Currency",
+      "label": "Total Wallet Sales",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_sh2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "total_sales",
+      "fieldtype": "Currency",
+      "label": "Total Sales",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "total_refunds",
+      "fieldtype": "Currency",
+      "label": "Total Refunds",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_discounts",
+      "fieldtype": "Currency",
+      "label": "Total Discounts",
+      "read_only": 1
+    },
+    {
+      "fieldname": "orders_count",
+      "fieldtype": "Int",
+      "label": "Orders Count",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sb_closing",
+      "fieldtype": "Section Break",
+      "label": "Closing"
+    },
+    {
+      "fieldname": "closing_cash",
+      "fieldtype": "Currency",
+      "label": "Closing Cash"
+    },
+    {
+      "fieldname": "closing_time",
+      "fieldtype": "Datetime",
+      "label": "Closing Time"
+    },
+    {
+      "fieldname": "cb_sh3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "expected_cash",
+      "fieldtype": "Currency",
+      "label": "Expected Cash",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cash_variance",
+      "fieldtype": "Currency",
+      "label": "Cash Variance",
+      "read_only": 1
+    },
+    {
+      "fieldname": "variance_reason",
+      "fieldtype": "Small Text",
+      "label": "Variance Reason",
+      "depends_on": "eval:doc.cash_variance != 0"
+    },
+    {
+      "fieldname": "sb_audit",
+      "fieldtype": "Section Break",
+      "label": "Audit"
+    },
+    {
+      "fieldname": "audited_by",
+      "fieldtype": "Link",
+      "label": "Audited By",
+      "options": "User"
+    },
+    {
+      "fieldname": "audit_notes",
+      "fieldtype": "Small Text",
+      "label": "Audit Notes"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "POS Shift",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Candela Staff"
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "autoname": "naming_series:",
+  "naming_rule": "By \"Naming Series\" field"
+}

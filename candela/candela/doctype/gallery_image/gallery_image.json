@@ -1,0 +1,102 @@
+{
+  "actions": [],
+  "autoname": "autoincrement",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "image",
+    "title_ar",
+    "title_en",
+    "category",
+    "sort_order",
+    "is_active",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "image",
+      "fieldtype": "Attach Image",
+      "label": "Image",
+      "reqd": 1
+    },
+    {
+      "fieldname": "title_ar",
+      "fieldtype": "Data",
+      "label": "Title (Arabic)",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "title_en",
+      "fieldtype": "Data",
+      "label": "Title (English)",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Category",
+      "options": "Food\nInterior\nEvents\nKitchen\nExterior",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "sort_order",
+      "fieldtype": "Int",
+      "label": "Sort Order"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Active",
+      "default": "1"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Gallery Image",
+  "naming_rule": "Autoincrement",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "sort_order",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

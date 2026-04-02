@@ -1,0 +1,129 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+{# ═══════ PAGE HEADER ═══════ #}
+<section class="c-page-header"
+	{% if candela.reservation_cover_image %}style="background-image:url('{{ candela.reservation_cover_image }}')"{% endif %}>
+	<div class="c-page-header__overlay"></div>
+	<div class="c-page-header__content">
+		<span class="c-section-header__label">{{ 'Prenotazione' }}</span>
+		<h1>{{ _('حجز طاولة') if lang == 'ar' else 'Reserve a Table' }}</h1>
+	</div>
+</section>
+
+{# ═══════ RESERVATION FORM ═══════ #}
+<section class="c-section c-section--ivory">
+	<div class="c-container" style="max-width:700px;">
+		<div class="c-section-header c-reveal">
+			<p class="c-section-header__desc">
+				{{ _('يسعدنا استقبالكم. يرجى تعبئة النموذج أدناه وسنقوم بتأكيد حجزكم.') if lang == 'ar' else 'We look forward to welcoming you. Please fill in the form below and we will confirm your reservation.' }}
+			</p>
+		</div>
+
+		<form class="c-form c-reveal" id="reservation-form" onsubmit="return false;">
+			<div class="c-form-row">
+				<div class="c-form-group">
+					<label class="c-form-label">{{ _('الاسم الكامل') if lang == 'ar' else 'Full Name' }} *</label>
+					<input type="text" class="c-form-input" name="customer_name" required>
+				</div>
+				<div class="c-form-group">
+					<label class="c-form-label">{{ _('رقم الهاتف') if lang == 'ar' else 'Phone Number' }} *</label>
+					<input type="tel" class="c-form-input" name="phone" required>
+				</div>
+			</div>
+
+			<div class="c-form-group">
+				<label class="c-form-label">{{ _('البريد الإلكتروني') if lang == 'ar' else 'Email' }}</label>
+				<input type="email" class="c-form-input" name="email">
+			</div>
+
+			<div class="c-form-row">
+				<div class="c-form-group">
+					<label class="c-form-label">{{ _('التاريخ') if lang == 'ar' else 'Date' }} *</label>
+					<input type="date" class="c-form-input" name="reservation_date" required>
+				</div>
+				<div class="c-form-group">
+					<label class="c-form-label">{{ _('الوقت') if lang == 'ar' else 'Time' }} *</label>
+					<input type="time" class="c-form-input" name="reservation_time" required>
+				</div>
+			</div>
+
+			<div class="c-form-row">
+				<div class="c-form-group">
+					<label class="c-form-label">{{ _('عدد الأشخاص') if lang == 'ar' else 'Number of Guests' }} *</label>
+					<select class="c-form-input" name="number_of_guests" required>
+						<option value="">{{ _('اختر') if lang == 'ar' else 'Select' }}</option>
+						{% for i in range(1, 21) %}
+						<option value="{{ i }}">{{ i }}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="c-form-group">
+					<label class="c-form-label">{{ _('المناسبة') if lang == 'ar' else 'Occasion' }}</label>
+					<select class="c-form-input" name="occasion">
+						<option value="">{{ _('اختر') if lang == 'ar' else 'Select' }}</option>
+						<option value="Birthday">{{ _('عيد ميلاد') if lang == 'ar' else 'Birthday' }}</option>
+						<option value="Anniversary">{{ _('ذكرى') if lang == 'ar' else 'Anniversary' }}</option>
+						<option value="Business">{{ _('عمل') if lang == 'ar' else 'Business' }}</option>
+						<option value="Date Night">{{ _('سهرة') if lang == 'ar' else 'Date Night' }}</option>
+						<option value="Other">{{ _('أخرى') if lang == 'ar' else 'Other' }}</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="c-form-group">
+				<label class="c-form-label">{{ _('ملاحظات خاصة') if lang == 'ar' else 'Special Requests' }}</label>
+				<textarea class="c-form-input" name="special_requests" rows="3" placeholder="{{ _('حساسية طعام، كرسي أطفال، إلخ') if lang == 'ar' else 'Allergies, high chair, etc.' }}"></textarea>
+			</div>
+
+			<button type="submit" class="c-btn c-btn--gold c-btn--lg c-btn--block" id="reservation-submit">
+				{{ _('تأكيد الحجز') if lang == 'ar' else 'Confirm Reservation' }}
+			</button>
+		</form>
+
+		{# ═══════ SUCCESS MESSAGE ═══════ #}
+		<div id="reservation-success" style="display:none;text-align:center;padding:var(--s-4xl) 0;">
+			<div style="font-size:4rem;margin-bottom:var(--s-md);">✅</div>
+			<h2 style="color:var(--c-gold);margin-bottom:var(--s-md);">
+				{{ _('تم الحجز بنجاح!') if lang == 'ar' else 'Reservation Confirmed!' }}
+			</h2>
+			<p style="color:var(--c-text-light);margin-bottom:var(--s-xl);line-height:1.8;">
+				{{ _('شكراً لك. سنقوم بتأكيد حجزك في أقرب وقت.') if lang == 'ar' else 'Thank you. We will confirm your reservation shortly.' }}
+			</p>
+			<a href="/dela" class="c-btn c-btn--outline">{{ _('العودة للرئيسية') if lang == 'ar' else 'Back to Home' }}</a>
+		</div>
+	</div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	// Set min date to today
+	var dateInput = document.querySelector('[name="reservation_date"]');
+	if (dateInput) dateInput.min = new Date().toISOString().split('T')[0];
+
+	var form = document.getElementById('reservation-form');
+	var submitBtn = document.getElementById('reservation-submit');
+
+	form.addEventListener('submit', function(e) {
+		e.preventDefault();
+		submitBtn.disabled = true;
+		submitBtn.textContent = '{{ _("جارٍ الإرسال...") if lang == "ar" else "Submitting..." }}';
+
+		var data = {};
+		new FormData(form).forEach(function(v, k) { data[k] = v; });
+
+		candela.api('candela.api.submit_reservation', data).then(function(r) {
+			form.style.display = 'none';
+			document.getElementById('reservation-success').style.display = 'block';
+		}).catch(function() {
+			submitBtn.disabled = false;
+			submitBtn.textContent = '{{ _("تأكيد الحجز") if lang == "ar" else "Confirm Reservation" }}';
+		});
+	});
+});
+</script>
+
+{%- endblock -%}

@@ -1,0 +1,269 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+{# ═══════ CINEMATIC HERO ═══════ #}
+<section class="c-hero">
+	<div class="c-hero__bg"
+		{% if candela.hero_image %}style="background-image: url('{{ candela.hero_image }}')"
+		{% else %}style="background: linear-gradient(135deg, #1A1A1A 0%, #0C0C0C 100%)"{% endif %}></div>
+	<div class="c-hero__overlay"></div>
+	<div class="c-hero__content">
+		<p class="c-hero__label">
+			{{ candela.tagline_it or "L'arte della cucina italiana" }}
+		</p>
+		<h1 class="c-hero__title">
+			{% if lang == 'ar' %}
+				{{ candela.tagline_ar or 'فن المطبخ الإيطالي الأصيل' }}
+			{% else %}
+				{{ candela.tagline_en or 'The Art of Authentic Italian Cuisine' }}
+			{% endif %}
+		</h1>
+		<p class="c-hero__subtitle">
+			{% if lang == 'ar' %}
+				اكتشف عالمًا من النكهات الإيطالية الراقية في أجواء فاخرة
+			{% else %}
+				Discover a world of refined Italian flavors in an atmosphere of timeless elegance
+			{% endif %}
+		</p>
+		<div class="c-hero__actions">
+			<a href="{{ candela.hero_cta_primary_url or '/dela/reservation' }}" class="c-btn c-btn--gold c-btn--lg">
+				{{ _('احجز طاولتك') if lang == 'ar' else _('Reserve Your Table') }}
+			</a>
+			<a href="{{ candela.hero_cta_secondary_url or '/dela/menu' }}" class="c-btn c-btn--outline-white c-btn--lg">
+				{{ _('استكشف المنيو') if lang == 'ar' else _('Explore Menu') }}
+			</a>
+		</div>
+	</div>
+	<div class="c-hero__scroll">
+		<span>{{ _('اكتشف') if lang == 'ar' else 'Discover' }}</span>
+		<div class="c-hero__scroll-line"></div>
+	</div>
+</section>
+
+{# ═══════ OUR STORY ═══════ #}
+{% if candela.show_about_section %}
+<section class="c-section c-section--ivory">
+	<div class="c-container">
+		<div class="c-split">
+			<div class="c-reveal c-reveal--left">
+				{% if candela.about_image %}
+				<img src="{{ candela.about_image }}" alt="Candela Restaurant" class="c-split__img">
+				{% else %}
+				<div style="width:100%;min-height:450px;background:linear-gradient(135deg,var(--c-charcoal),var(--c-dark));display:flex;align-items:center;justify-content:center;">
+					<span style="font-size:6rem;opacity:0.3;">🍽️</span>
+				</div>
+				{% endif %}
+			</div>
+			<div class="c-split__content c-reveal c-reveal--right">
+				<span class="c-section-header__label">{{ _('قصتنا') if lang == 'ar' else 'Our Story' }}</span>
+				<h2 style="margin-bottom: var(--s-md);">
+					{% if lang == 'ar' %}
+						{{ candela.about_title_ar or 'حكاية شغف إيطالي' }}
+					{% else %}
+						{{ candela.about_title_en or 'A Tale of Italian Passion' }}
+					{% endif %}
+				</h2>
+				<div class="c-section-header__line" style="margin: var(--s-md) 0;"></div>
+				<p style="color: var(--c-text-light); line-height: 1.9; margin-bottom: var(--s-lg); font-size: 1.02rem;">
+					{% if lang == 'ar' %}
+						{{ candela.about_text_ar or 'نقدم لكم تجربة طعام إيطالية أصيلة، حيث يلتقي الشغف بالإبداع في كل طبق نقدمه. مكوناتنا مختارة بعناية فائقة لنقدم لكم أرقى المذاقات.' }}
+					{% else %}
+						{{ candela.about_text_en or 'We offer an authentic Italian dining experience where passion meets creativity in every dish. Our ingredients are meticulously selected to bring you the finest flavors.' }}
+					{% endif %}
+				</p>
+				<a href="/dela/about" class="c-btn c-btn--outline">
+					{{ _('اقرأ المزيد') if lang == 'ar' else _('Read More') }}
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+{% endif %}
+
+{# ═══════ CHEF'S RECOMMENDATIONS ═══════ #}
+{% if candela.show_menu_highlights %}
+{%- set featured = get_featured_items(6) -%}
+{% if featured %}
+<section class="c-section c-section--white">
+	<div class="c-container">
+		<div class="c-section-header c-reveal">
+			<span class="c-section-header__label">{{ _('من مطبخنا') if lang == 'ar' else "From Our Kitchen" }}</span>
+			<h2 class="c-section-header__title">{{ _('اختيارات الشيف') if lang == 'ar' else "Chef's Recommendations" }}</h2>
+			<div class="c-section-header__line"></div>
+			<p class="c-section-header__desc">
+				{{ _('اكتشف أشهى الأطباق المختارة بعناية من طهاتنا') if lang == 'ar' else "Discover our chef's finest selections, crafted with passion" }}
+			</p>
+		</div>
+		<div class="c-grid c-grid--3 c-stagger">
+			{% for item in featured %}
+			<a href="/dela/menu" class="c-menu-card c-reveal" style="text-decoration:none;color:inherit;">
+				{% if item.image %}
+				<div class="c-menu-card__img-wrap">
+					<img src="{{ item.image }}" alt="{{ item.image_alt_text or item.item_name_en }}" class="c-menu-card__img" loading="lazy">
+					<div class="c-menu-card__badges">
+						{% if item.is_new %}<span class="c-badge c-badge--new">{{ _('جديد') if lang == 'ar' else 'New' }}</span>{% endif %}
+						{% if item.is_bestseller %}<span class="c-badge c-badge--best">{{ _('الأكثر طلباً') if lang == 'ar' else 'Popular' }}</span>{% endif %}
+					</div>
+				</div>
+				{% endif %}
+				<div class="c-menu-card__body">
+					<span class="c-menu-card__cat">{{ item.category }}</span>
+					<h3 class="c-menu-card__name">{{ item.item_name_ar if lang == 'ar' else item.item_name_en }}</h3>
+					<div class="c-menu-card__footer">
+						<span class="c-price">
+							{% if item.discounted_price %}
+							<span class="c-price--old">{{ item.price }}</span>
+							{{ item.discounted_price }}
+							{% else %}
+							{{ item.price }}
+							{% endif %}
+							<span class="c-price__currency">{{ _('ج.م') }}</span>
+						</span>
+					</div>
+				</div>
+			</a>
+			{% endfor %}
+		</div>
+		<div class="c-text-center c-mt-2xl">
+			<a href="/dela/menu" class="c-btn c-btn--dark">{{ _('عرض المنيو الكامل') if lang == 'ar' else _('View Full Menu') }}</a>
+		</div>
+	</div>
+</section>
+{% endif %}
+{% endif %}
+
+{# ═══════ PARALLAX CTA ═══════ #}
+<section class="c-parallax"
+	{% if candela.parallax_image %}style="background-image: url('{{ candela.parallax_image }}')"
+	{% else %}style="background: var(--c-charcoal)"{% endif %}>
+	<div class="c-parallax__overlay"></div>
+	<div class="c-parallax__content">
+		<div class="c-container c-text-center">
+			<div class="c-stats c-reveal">
+				<div class="c-stat">
+					<div class="c-stat__number">{{ candela.years_experience or '10' }}+</div>
+					<div class="c-stat__label">{{ _('سنوات خبرة') if lang == 'ar' else 'Years' }}</div>
+				</div>
+				<div class="c-stat">
+					<div class="c-stat__number">{{ candela.dishes_count or '120' }}+</div>
+					<div class="c-stat__label">{{ _('طبق مميز') if lang == 'ar' else 'Dishes' }}</div>
+				</div>
+				<div class="c-stat">
+					<div class="c-stat__number">{{ candela.happy_guests or '50K' }}+</div>
+					<div class="c-stat__label">{{ _('ضيف سعيد') if lang == 'ar' else 'Happy Guests' }}</div>
+				</div>
+				<div class="c-stat">
+					<div class="c-stat__number">{{ candela.chefs_count or '8' }}</div>
+					<div class="c-stat__label">{{ _('طهاة') if lang == 'ar' else 'Chefs' }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{# ═══════ TESTIMONIALS ═══════ #}
+{% if candela.show_testimonials %}
+{%- set reviews = get_approved_reviews(3) -%}
+{% if reviews %}
+<section class="c-section c-section--cream">
+	<div class="c-container">
+		<div class="c-section-header c-reveal">
+			<span class="c-section-header__label">{{ _('آراء ضيوفنا') if lang == 'ar' else 'Guest Reviews' }}</span>
+			<h2 class="c-section-header__title">{{ _('ماذا يقولون عنا') if lang == 'ar' else 'What Our Guests Say' }}</h2>
+			<div class="c-section-header__line"></div>
+		</div>
+		<div class="c-grid c-grid--3 c-stagger">
+			{% for review in reviews %}
+			<div class="c-testimonial c-reveal">
+				<div class="c-testimonial__stars">
+					{% for i in range(5) %}{{ '★' if i < (review.rating * 5)|int else '☆' }}{% endfor %}
+				</div>
+				<p class="c-testimonial__text">
+					"{{ review.review_text_ar if lang == 'ar' and review.review_text_ar else review.review_text_en or '' }}"
+				</p>
+				<p class="c-testimonial__name">— {{ review.customer_name }}</p>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endif %}
+{% endif %}
+
+{# ═══════ EVENTS ═══════ #}
+{% if candela.show_events %}
+{%- set events = get_active_events(3) -%}
+{% if events %}
+<section class="c-section c-section--white">
+	<div class="c-container">
+		<div class="c-section-header c-reveal">
+			<span class="c-section-header__label">{{ _('لا تفوتك') if lang == 'ar' else "Don't Miss" }}</span>
+			<h2 class="c-section-header__title">{{ _('الفعاليات القادمة') if lang == 'ar' else 'Upcoming Events' }}</h2>
+			<div class="c-section-header__line"></div>
+		</div>
+		<div style="display:flex;flex-direction:column;gap:var(--s-lg);" class="c-stagger">
+			{% for event in events %}
+			<div class="c-event-card c-reveal">
+				<div class="c-event-card__date">
+					<span class="c-event-card__day">{{ event.event_date.day }}</span>
+					<span class="c-event-card__month">{{ event.event_date.strftime('%b') }}</span>
+				</div>
+				<div class="c-event-card__body">
+					<h3 class="c-event-card__title">{{ event.event_name_ar if lang == 'ar' else event.event_name_en }}</h3>
+					<div class="c-event-card__meta">
+						<span>🕐 {{ event.event_time }}{% if event.end_time %} – {{ event.end_time }}{% endif %}</span>
+						{% if event.price %}<span class="c-gold">{{ event.price }} {{ _('ج.م') }}</span>{% endif %}
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		<div class="c-text-center c-mt-xl">
+			<a href="/dela/events" class="c-btn c-btn--outline">{{ _('كل الفعاليات') if lang == 'ar' else 'All Events' }}</a>
+		</div>
+	</div>
+</section>
+{% endif %}
+{% endif %}
+
+{# ═══════ RESERVATION CTA ═══════ #}
+{% if candela.show_reservation_cta and candela.enable_reservations %}
+<section class="c-section c-section--dark">
+	<div class="c-container c-text-center c-reveal">
+		<span class="c-section-header__label">{{ _('تجربة لا تُنسى') if lang == 'ar' else 'An Unforgettable Experience' }}</span>
+		<h2 style="color: var(--c-cream); margin: var(--s-md) 0 var(--s-lg);">
+			{{ _('احجز طاولتك الآن') if lang == 'ar' else 'Reserve Your Table' }}
+		</h2>
+		<p style="color: var(--c-text-muted); max-width: 500px; margin: 0 auto var(--s-2xl); font-size: 1rem; line-height: 1.8;">
+			{{ _('استمتع بأمسية إيطالية فاخرة في أجواء دافئة وأنيقة') if lang == 'ar' else 'Enjoy a luxurious Italian evening in a warm and elegant setting' }}
+		</p>
+		<a href="/dela/reservation" class="c-btn c-btn--gold c-btn--lg">
+			{{ _('احجز الآن') if lang == 'ar' else 'Book Now' }}
+		</a>
+	</div>
+</section>
+{% endif %}
+
+{# ═══════ NEWSLETTER ═══════ #}
+{% if candela.show_newsletter and candela.enable_newsletter %}
+<section class="c-section c-section--black" style="padding: var(--s-4xl) 0;">
+	<div class="c-container c-text-center c-reveal">
+		<span class="c-section-header__label">{{ _('ابقَ على اطلاع') if lang == 'ar' else 'Stay Updated' }}</span>
+		<h3 style="color: var(--c-cream); margin: var(--s-sm) 0 var(--s-md);">
+			{{ _('اشترك في نشرتنا') if lang == 'ar' else 'Subscribe to Our Newsletter' }}
+		</h3>
+		<p style="color: var(--c-text-muted); margin-bottom: var(--s-xl); font-size: 0.95rem;">
+			{{ _('احصل على آخر العروض والفعاليات') if lang == 'ar' else 'Get the latest offers, events and culinary inspirations' }}
+		</p>
+		<form class="c-newsletter-form" onsubmit="return false;">
+			<input type="email" placeholder="{{ _('بريدك الإلكتروني') if lang == 'ar' else 'Your email address' }}" required>
+			<button type="submit" class="c-btn c-btn--gold">{{ _('اشترك') if lang == 'ar' else 'Subscribe' }}</button>
+		</form>
+	</div>
+</section>
+{% endif %}
+
+{%- endblock -%}

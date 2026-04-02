@@ -1,0 +1,218 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "campaign_name",
+    "campaign_type",
+    "phase",
+    "cb_mc1",
+    "start_date",
+    "end_date",
+    "target_persona",
+    "sb_budget",
+    "budget",
+    "spent",
+    "cb_mc2",
+    "channels",
+    "sb_activities",
+    "activities",
+    "sb_content",
+    "content_calendar",
+    "sb_results",
+    "total_reach",
+    "total_engagement",
+    "cb_mc3",
+    "new_customers_acquired",
+    "revenue_attributed",
+    "roi_percentage",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CCMP-.YYYY.-.#####",
+      "default": "CCMP-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "campaign_name",
+      "fieldtype": "Data",
+      "label": "Campaign Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "campaign_type",
+      "fieldtype": "Select",
+      "label": "Type",
+      "options": "Pre-Launch\nGrand Opening\nSeasonal\nOngoing\nEvent-Specific",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "phase",
+      "fieldtype": "Select",
+      "label": "Phase",
+      "options": "Planning\nActive\nCompleted\nPaused",
+      "default": "Planning",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "cb_mc1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "start_date",
+      "fieldtype": "Date",
+      "label": "Start Date"
+    },
+    {
+      "fieldname": "end_date",
+      "fieldtype": "Date",
+      "label": "End Date"
+    },
+    {
+      "fieldname": "target_persona",
+      "fieldtype": "Link",
+      "label": "Target Persona",
+      "options": "Customer Persona"
+    },
+    {
+      "fieldname": "sb_budget",
+      "fieldtype": "Section Break",
+      "label": "Budget"
+    },
+    {
+      "fieldname": "budget",
+      "fieldtype": "Currency",
+      "label": "Budget"
+    },
+    {
+      "fieldname": "spent",
+      "fieldtype": "Currency",
+      "label": "Spent",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_mc2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "channels",
+      "fieldtype": "Small Text",
+      "label": "Channels"
+    },
+    {
+      "fieldname": "sb_activities",
+      "fieldtype": "Section Break",
+      "label": "Activities"
+    },
+    {
+      "fieldname": "activities",
+      "fieldtype": "Table",
+      "label": "Activities",
+      "options": "Campaign Activity"
+    },
+    {
+      "fieldname": "sb_content",
+      "fieldtype": "Section Break",
+      "label": "Content Calendar"
+    },
+    {
+      "fieldname": "content_calendar",
+      "fieldtype": "Table",
+      "label": "Content Calendar",
+      "options": "Content Calendar Entry"
+    },
+    {
+      "fieldname": "sb_results",
+      "fieldtype": "Section Break",
+      "label": "Results"
+    },
+    {
+      "fieldname": "total_reach",
+      "fieldtype": "Int",
+      "label": "Total Reach",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_engagement",
+      "fieldtype": "Int",
+      "label": "Total Engagement",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_mc3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "new_customers_acquired",
+      "fieldtype": "Int",
+      "label": "New Customers"
+    },
+    {
+      "fieldname": "revenue_attributed",
+      "fieldtype": "Currency",
+      "label": "Revenue Attributed"
+    },
+    {
+      "fieldname": "roi_percentage",
+      "fieldtype": "Percent",
+      "label": "ROI %",
+      "read_only": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Marketing Campaign",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "naming_rule": "By \"Naming Series\" field"
+}

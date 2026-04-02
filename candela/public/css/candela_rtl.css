@@ -1,0 +1,59 @@
+/* ═══════════════════════════════════════════════════════════════
+   Candela RTL — Arabic / Hebrew support
+   ═══════════════════════════════════════════════════════════════ */
+
+html[dir="rtl"] .candela-page {
+  font-family: var(--font-ar);
+}
+
+html[dir="rtl"] .candela-page h1,
+html[dir="rtl"] .candela-page h2,
+html[dir="rtl"] .candela-page h3,
+html[dir="rtl"] .candela-page h4 {
+  font-family: var(--font-ar);
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] .c-section-header__label,
+html[dir="rtl"] .c-hero__label,
+html[dir="rtl"] .c-menu-card__cat,
+html[dir="rtl"] .c-page-header__desc,
+html[dir="rtl"] .c-testimonial__text,
+html[dir="rtl"] .c-gallery-item__caption {
+  font-family: var(--font-ar);
+  font-style: normal;
+}
+
+html[dir="rtl"] .c-btn,
+html[dir="rtl"] .c-filter-btn,
+html[dir="rtl"] .candela-navbar__link,
+html[dir="rtl"] .c-footer__heading,
+html[dir="rtl"] .c-form-label,
+html[dir="rtl"] .c-upper,
+html[dir="rtl"] .c-stat__label,
+html[dir="rtl"] .c-testimonial__name,
+html[dir="rtl"] .c-hero__scroll {
+  letter-spacing: 0.02em;
+  font-family: var(--font-ar);
+}
+
+/* Fix WhatsApp FAB position */
+html[dir="rtl"] .candela-whatsapp-fab {
+  right: auto;
+  left: var(--s-xl);
+}
+
+/* Badge position */
+html[dir="rtl"] .c-menu-card__badges {
+  right: auto;
+  left: var(--s-md);
+}
+
+/* Footer alignment */
+html[dir="rtl"] .c-footer__about { text-align: right; }
+
+/* Navbar nav gap on mobile */
+@media (max-width: 768px) {
+  html[dir="rtl"] .c-footer-grid { text-align: center; }
+  html[dir="rtl"] .c-footer__about { text-align: center; }
+}

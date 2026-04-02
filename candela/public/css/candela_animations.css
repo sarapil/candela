@@ -1,0 +1,52 @@
+/* ═══════════════════════════════════════════════════════════════
+   Candela Animations — Scroll reveals, parallax, keyframes
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Scroll Reveal ──────────────────────────────────────────── */
+.c-reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+.c-reveal.visible { opacity: 1; transform: translateY(0); }
+.c-reveal--left { transform: translateX(-40px); }
+.c-reveal--left.visible { transform: translateX(0); }
+.c-reveal--right { transform: translateX(40px); }
+.c-reveal--right.visible { transform: translateX(0); }
+.c-reveal--scale { transform: scale(0.92); }
+.c-reveal--scale.visible { transform: scale(1); }
+.c-reveal--fade { transform: none; }
+.c-reveal--fade.visible { opacity: 1; }
+
+/* Stagger children */
+.c-stagger > .c-reveal:nth-child(1) { transition-delay: 0ms; }
+.c-stagger > .c-reveal:nth-child(2) { transition-delay: 120ms; }
+.c-stagger > .c-reveal:nth-child(3) { transition-delay: 240ms; }
+.c-stagger > .c-reveal:nth-child(4) { transition-delay: 360ms; }
+.c-stagger > .c-reveal:nth-child(5) { transition-delay: 480ms; }
+.c-stagger > .c-reveal:nth-child(6) { transition-delay: 600ms; }
+.c-stagger > .c-reveal:nth-child(7) { transition-delay: 720ms; }
+.c-stagger > .c-reveal:nth-child(8) { transition-delay: 840ms; }
+.c-stagger > .c-reveal:nth-child(9) { transition-delay: 960ms; }
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes c-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes c-fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes c-fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes c-float { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }
+@keyframes c-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+@keyframes c-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Hero entrance sequence */
+.c-hero__label { animation: c-fadeInDown 0.9s var(--ease) 0.3s both; }
+.c-hero__title { animation: c-fadeInUp 1s var(--ease) 0.5s both; }
+.c-hero__subtitle { animation: c-fadeInUp 1s var(--ease) 0.7s both; }
+.c-hero__actions { animation: c-fadeInUp 1s var(--ease) 0.9s both; }
+.c-hero__scroll { animation: c-fadeIn 1s var(--ease) 1.5s both; }
+
+/* ─── Reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .c-reveal, .c-hero__label, .c-hero__title, .c-hero__subtitle, .c-hero__actions, .c-hero__scroll {
+    animation: none !important; transition: none !important;
+    opacity: 1 !important; transform: none !important;
+  }
+}

@@ -1,0 +1,299 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+.mkt { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1.5rem) 0 3rem; }
+.mkt, .mkt * { color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+.mkt__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.6rem; margin-bottom:1.5rem; }
+.mkt__top { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:.75rem; }
+.mkt__btns { display:flex; gap:.5rem; flex-wrap:wrap; }
+.mkt__btn { padding:.5rem 1rem; border-radius:8px; font-size:.82rem; text-decoration:none; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--c-cream,#F5F0E8)!important; cursor:pointer; transition:all .2s; }
+.mkt__btn:hover { border-color:var(--c-gold,#C9A96E); }
+.mkt__btn--primary { background:var(--c-gold,#C9A96E); color:var(--c-charcoal,#1A1A1A)!important; border-color:var(--c-gold,#C9A96E); }
+
+.mkt__stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.mkt__stat { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.2rem; text-align:center; }
+.mkt__stat-val { font-family:var(--font-serif); font-size:2rem; color:var(--c-gold,#C9A96E)!important; }
+.mkt__stat-lbl { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; margin-top:.3rem; }
+
+.mkt__tabs { display:flex; gap:.5rem; margin-bottom:1.25rem; border-bottom:1px solid rgba(255,255,255,.06); padding-bottom:.75rem; flex-wrap:wrap; }
+.mkt__tab { padding:.5rem 1rem; border-radius:8px 8px 0 0; font-size:.82rem; cursor:pointer; border:none; background:transparent; color:rgba(255,255,255,.5)!important; }
+.mkt__tab--active { background:rgba(201,169,110,.12); color:var(--c-gold,#C9A96E)!important; }
+
+.mkt__card { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; overflow:hidden; margin-bottom:1.25rem; }
+.mkt__card-title { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; padding:.75rem 1rem; border-bottom:1px solid rgba(255,255,255,.06); }
+.mkt-tbl { width:100%; border-collapse:collapse; }
+.mkt-tbl th { text-align:start; padding:.5rem .75rem; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35)!important; border-bottom:1px solid rgba(255,255,255,.06); }
+.mkt-tbl td { padding:.6rem .75rem; border-bottom:1px solid rgba(255,255,255,.03); font-size:.85rem; }
+.mkt-tbl tr:hover td { background:rgba(255,255,255,.02); }
+.mkt-tbl a { color:var(--c-gold,#C9A96E)!important; text-decoration:none; }
+.mkt__badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:.68rem; font-weight:600; }
+.mkt__badge--active { background:rgba(91,179,105,.12); color:#5BB369!important; }
+.mkt__badge--completed { background:rgba(59,130,246,.12); color:#3B82F6!important; }
+.mkt__badge--draft { background:rgba(255,255,255,.06); color:rgba(255,255,255,.4)!important; }
+.mkt__badge--planned { background:rgba(201,169,110,.12); color:var(--c-gold,#C9A96E)!important; }
+.mkt__badge--high { background:rgba(212,83,75,.15); color:#D4534B!important; }
+.mkt__badge--medium { background:rgba(201,169,110,.15); color:var(--c-gold,#C9A96E)!important; }
+.mkt__badge--low { background:rgba(91,179,105,.12); color:#5BB369!important; }
+.mkt__badge--positive { background:rgba(91,179,105,.12); color:#5BB369!important; }
+.mkt__badge--negative { background:rgba(212,83,75,.12); color:#D4534B!important; }
+.mkt__badge--neutral { background:rgba(255,255,255,.06); color:rgba(255,255,255,.5)!important; }
+
+.mkt__star { color:var(--c-gold,#C9A96E)!important; }
+.mkt__panel { display:none; }
+.mkt__panel--active { display:block; }
+.mkt__empty { padding:2rem; text-align:center; color:rgba(255,255,255,.3)!important; font-style:italic; }
+.mkt__review-text { font-size:.78rem; color:rgba(255,255,255,.5)!important; max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+@media(max-width:768px){ .mkt__stats { grid-template-columns:repeat(2,1fr); } }
+</style>
+
+<div class="mkt">
+	<div class="c-container">
+		<div class="mkt__top">
+			<h1 class="mkt__title">📣 {{ _('التسويق والسمعة') if lang == 'ar' else 'Marketing & Reputation' }}</h1>
+			<div class="mkt__btns">
+				<a href="/app/marketing-campaign/new" class="mkt__btn mkt__btn--primary">+ {{ _('حملة') if lang == 'ar' else 'Campaign' }}</a>
+				<a href="/app/influencer/new" class="mkt__btn">🌟 {{ _('مؤثر') if lang == 'ar' else 'Influencer' }}</a>
+				<a href="/app/online-review/new" class="mkt__btn">⭐ {{ _('مراجعة') if lang == 'ar' else 'Review' }}</a>
+				<a href="/app/corporate-account/new" class="mkt__btn">🏢 {{ _('شركة') if lang == 'ar' else 'Corporate' }}</a>
+			</div>
+		</div>
+
+		<div class="mkt__stats">
+			<div class="mkt__stat">
+				<div class="mkt__stat-val">{{ stats.active_campaigns }}</div>
+				<div class="mkt__stat-lbl">{{ _('حملات نشطة') if lang == 'ar' else 'Active Campaigns' }}</div>
+			</div>
+			<div class="mkt__stat">
+				<div class="mkt__stat-val">{{ stats.total_influencers }}</div>
+				<div class="mkt__stat-lbl">{{ _('مؤثرين') if lang == 'ar' else 'Influencers' }}</div>
+			</div>
+			<div class="mkt__stat">
+				<div class="mkt__stat-val mkt__star">{{ "{:.1f}".format(stats.avg_rating) }} ⭐</div>
+				<div class="mkt__stat-lbl">{{ _('متوسط التقييم') if lang == 'ar' else 'Avg Rating' }}</div>
+			</div>
+			<div class="mkt__stat">
+				<div class="mkt__stat-val" style="color:#D4534B!important;">{{ stats.unresponded_reviews }}</div>
+				<div class="mkt__stat-lbl">{{ _('بدون رد') if lang == 'ar' else 'Unresponded' }}</div>
+			</div>
+		</div>
+
+		{# Tabs #}
+		<div class="mkt__tabs">
+			<button class="mkt__tab mkt__tab--active" onclick="mktTab('campaigns',this)">📣 {{ _('الحملات') if lang == 'ar' else 'Campaigns' }}</button>
+			<button class="mkt__tab" onclick="mktTab('influencers',this)">🌟 {{ _('المؤثرين') if lang == 'ar' else 'Influencers' }}</button>
+			<button class="mkt__tab" onclick="mktTab('reviews',this)">⭐ {{ _('المراجعات') if lang == 'ar' else 'Reviews' }}</button>
+			<button class="mkt__tab" onclick="mktTab('competitors',this)">🏪 {{ _('المنافسين') if lang == 'ar' else 'Competitors' }}</button>
+			<button class="mkt__tab" onclick="mktTab('personas',this)">👤 {{ _('الشخصيات') if lang == 'ar' else 'Personas' }}</button>
+			<button class="mkt__tab" onclick="mktTab('corporate',this)">🏢 {{ _('الشركات') if lang == 'ar' else 'Corporate' }}</button>
+		</div>
+
+		{# Campaigns Panel #}
+		<div id="mkt-campaigns" class="mkt__panel mkt__panel--active">
+			<div class="mkt__card">
+				{% if campaigns %}
+				<table class="mkt-tbl">
+					<thead><tr>
+						<th>{{ _('الحملة') if lang == 'ar' else 'Campaign' }}</th>
+						<th>{{ _('النوع') if lang == 'ar' else 'Type' }}</th>
+						<th>{{ _('الفترة') if lang == 'ar' else 'Period' }}</th>
+						<th>{{ _('الميزانية') if lang == 'ar' else 'Budget' }}</th>
+						<th>{{ _('الإنفاق') if lang == 'ar' else 'Spent' }}</th>
+						<th>{{ _('الوصول') if lang == 'ar' else 'Reach' }}</th>
+						<th>ROI</th>
+						<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for c in campaigns %}
+					<tr>
+						<td><a href="/app/marketing-campaign/{{ c.name }}">{{ c.campaign_name }}</a></td>
+						<td>{{ c.campaign_type or '—' }}</td>
+						<td>{{ c.start_date or '—' }} → {{ c.end_date or '—' }}</td>
+						<td>{{ "{:,.0f}".format(c.budget or 0) }}</td>
+						<td>{{ "{:,.0f}".format(c.spent or 0) }}</td>
+						<td>{{ "{:,.0f}".format(c.total_reach or 0) }}</td>
+						<td>{{ "{:.0f}%".format(c.roi_percentage or 0) }}</td>
+						<td><span class="mkt__badge mkt__badge--{{ (c.phase or 'planning')|lower }}">{{ c.phase }}</span></td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="mkt__empty">{{ _('لا توجد حملات') if lang == 'ar' else 'No campaigns yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		{# Influencers Panel #}
+		<div id="mkt-influencers" class="mkt__panel">
+			<div class="mkt__card">
+				{% if influencers %}
+				<table class="mkt-tbl">
+					<thead><tr>
+						<th>{{ _('المؤثر') if lang == 'ar' else 'Influencer' }}</th>
+						<th>{{ _('المنصة') if lang == 'ar' else 'Platform' }}</th>
+						<th>{{ _('المتابعين') if lang == 'ar' else 'Followers' }}</th>
+						<th>{{ _('التصنيف') if lang == 'ar' else 'Category' }}</th>
+						<th>{{ _('الوصول') if lang == 'ar' else 'Reach' }}</th>
+						<th>ROI</th>
+						<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for inf in influencers %}
+					<tr>
+						<td><a href="/app/influencer/{{ inf.name }}">{{ inf.influencer_name }}</a></td>
+						<td>{{ inf.platform or '—' }}</td>
+						<td>{{ "{:,.0f}".format(inf.followers_count or 0) }}</td>
+						<td>{{ inf.category or '—' }}</td>
+						<td>{{ "{:,.0f}".format(inf.total_reach or 0) }}</td>
+						<td>{{ "{:.1f}".format(inf.roi_score or 0) }}</td>
+						<td><span class="mkt__badge mkt__badge--{{ (inf.status or 'active')|lower }}">{{ inf.status }}</span></td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="mkt__empty">{{ _('لا يوجد مؤثرين') if lang == 'ar' else 'No influencers yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		{# Reviews Panel #}
+		<div id="mkt-reviews" class="mkt__panel">
+			<div class="mkt__card">
+				{% if reviews %}
+				<table class="mkt-tbl">
+					<thead><tr>
+						<th>{{ _('المنصة') if lang == 'ar' else 'Platform' }}</th>
+						<th>{{ _('المراجع') if lang == 'ar' else 'Reviewer' }}</th>
+						<th>{{ _('التقييم') if lang == 'ar' else 'Rating' }}</th>
+						<th>{{ _('المراجعة') if lang == 'ar' else 'Review' }}</th>
+						<th>{{ _('التاريخ') if lang == 'ar' else 'Date' }}</th>
+						<th>{{ _('المزاج') if lang == 'ar' else 'Sentiment' }}</th>
+						<th>{{ _('الرد') if lang == 'ar' else 'Responded' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for r in reviews %}
+					<tr>
+						<td><a href="/app/online-review/{{ r.name }}">{{ r.platform or '—' }}</a></td>
+						<td>{{ r.reviewer_name or '—' }}</td>
+						<td class="mkt__star">{{ '⭐' * (r.rating or 0)|int }}</td>
+						<td><div class="mkt__review-text">{{ r.review_text or '—' }}</div></td>
+						<td>{{ r.review_date or '—' }}</td>
+						<td><span class="mkt__badge mkt__badge--{{ (r.sentiment or 'neutral')|lower }}">{{ r.sentiment or 'Neutral' }}</span></td>
+						<td>{{ '✅' if r.response_posted else '❌' }}</td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="mkt__empty">{{ _('لا توجد مراجعات') if lang == 'ar' else 'No reviews yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		{# Competitors Panel #}
+		<div id="mkt-competitors" class="mkt__panel">
+			<div class="mkt__card">
+				{% if competitors %}
+				<table class="mkt-tbl">
+					<thead><tr>
+						<th>{{ _('المنافس') if lang == 'ar' else 'Competitor' }}</th>
+						<th>{{ _('المطبخ') if lang == 'ar' else 'Cuisine' }}</th>
+						<th>{{ _('الموقع') if lang == 'ar' else 'Location' }}</th>
+						<th>{{ _('الأسعار') if lang == 'ar' else 'Price Range' }}</th>
+						<th>{{ _('التقييم') if lang == 'ar' else 'Rating' }}</th>
+						<th>{{ _('التقييم') if lang == 'ar' else 'Rating' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for comp in competitors %}
+					<tr>
+						<td><a href="/app/competitor/{{ comp.name }}">{{ comp.competitor_name }}</a></td>
+						<td>{{ comp.cuisine or '—' }}</td>
+						<td>{{ comp.competitor_type or '—' }}</td>
+						<td>{{ comp.price_range or '—' }}</td>
+						<td class="mkt__star">{{ comp.google_rating or '—' }} ⭐</td>
+						<td>{{ comp.google_rating or '—' }} ⭐</td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="mkt__empty">{{ _('لا يوجد منافسين') if lang == 'ar' else 'No competitors tracked yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		{# Personas Panel #}
+		<div id="mkt-personas" class="mkt__panel">
+			<div class="mkt__card">
+				{% if personas %}
+				<table class="mkt-tbl">
+					<thead><tr>
+						<th>{{ _('الشخصية') if lang == 'ar' else 'Persona' }}</th>
+						<th>{{ _('العمر') if lang == 'ar' else 'Age Range' }}</th>
+						<th>{{ _('الدخل') if lang == 'ar' else 'Income' }}</th>
+						<th>{{ _('تكرار الزيارة') if lang == 'ar' else 'Visit Freq.' }}</th>
+						<th>{{ _('القنوات المفضلة') if lang == 'ar' else 'Channels' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for p in personas %}
+					<tr>
+						<td><a href="/app/customer-persona/{{ p.name }}">{{ p.persona_name_ar if lang == 'ar' else p.persona_name_en }}</a></td>
+						<td>{{ p.age_range or '—' }}</td>
+						<td>{{ p.income_level or '—' }}</td>
+						<td>{{ p.visit_pattern or '—' }}</td>
+						<td>{{ p.preferred_channels or '—' }}</td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="mkt__empty">{{ _('لا توجد شخصيات') if lang == 'ar' else 'No customer personas defined yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		{# Corporate Panel #}
+		<div id="mkt-corporate" class="mkt__panel">
+			<div class="mkt__card">
+				{% if corporate_accounts %}
+				<table class="mkt-tbl">
+					<thead><tr>
+						<th>{{ _('الشركة') if lang == 'ar' else 'Company' }}</th>
+						<th>{{ _('المسؤول') if lang == 'ar' else 'Contact' }}</th>
+						<th>{{ _('حد الائتمان') if lang == 'ar' else 'Credit Limit' }}</th>
+						<th>{{ _('الطلبات') if lang == 'ar' else 'Orders' }}</th>
+						<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for ca in corporate_accounts %}
+					<tr>
+						<td><a href="/app/corporate-account/{{ ca.name }}">{{ ca.company_name }}</a></td>
+						<td>{{ ca.contact_person or '—' }}</td>
+						<td>{{ "{:,.0f}".format(ca.credit_limit or 0) }}</td>
+						<td>{{ ca.total_orders or 0 }}</td>
+						<td><span class="mkt__badge mkt__badge--{{ (ca.status or 'active')|lower }}">{{ ca.status }}</span></td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="mkt__empty">{{ _('لا توجد حسابات شركات') if lang == 'ar' else 'No corporate accounts yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+function mktTab(panel, btn) {
+	document.querySelectorAll('.mkt__panel').forEach(p => p.classList.remove('mkt__panel--active'));
+	document.querySelectorAll('.mkt__tab').forEach(t => t.classList.remove('mkt__tab--active'));
+	document.getElementById('mkt-' + panel).classList.add('mkt__panel--active');
+	btn.classList.add('mkt__tab--active');
+}
+</script>
+{%- endblock -%}

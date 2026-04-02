@@ -1,0 +1,79 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "activity_type",
+    "description",
+    "scheduled_date",
+    "status",
+    "cost",
+    "reach",
+    "engagement",
+    "conversions"
+  ],
+  "fields": [
+    {
+      "fieldname": "activity_type",
+      "fieldtype": "Select",
+      "label": "Type",
+      "options": "Post\nAd\nEvent\nInfluencer\nPromo\nEmail Blast",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Data",
+      "label": "Description",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "scheduled_date",
+      "fieldtype": "Date",
+      "label": "Date",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Planned\nIn Progress\nCompleted\nCancelled",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cost",
+      "fieldtype": "Currency",
+      "label": "Cost",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "reach",
+      "fieldtype": "Int",
+      "label": "Reach"
+    },
+    {
+      "fieldname": "engagement",
+      "fieldtype": "Int",
+      "label": "Engagement"
+    },
+    {
+      "fieldname": "conversions",
+      "fieldtype": "Int",
+      "label": "Conversions"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Campaign Activity",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

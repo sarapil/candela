@@ -1,0 +1,199 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "asset",
+    "reported_by",
+    "reported_at",
+    "cb_mr1",
+    "issue_type",
+    "priority",
+    "status",
+    "sb_details",
+    "description",
+    "assigned_to",
+    "sb_resolution",
+    "started_at",
+    "completed_at",
+    "downtime_hours",
+    "cb_mr2",
+    "repair_cost",
+    "parts_used",
+    "resolution_notes",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CMNT-.YYYY.-.#####",
+      "default": "CMNT-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "asset",
+      "fieldtype": "Link",
+      "label": "Asset",
+      "options": "Restaurant Asset",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "reported_by",
+      "fieldtype": "Link",
+      "label": "Reported By",
+      "options": "User",
+      "default": "__user"
+    },
+    {
+      "fieldname": "reported_at",
+      "fieldtype": "Datetime",
+      "label": "Reported At",
+      "default": "Now"
+    },
+    {
+      "fieldname": "cb_mr1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "issue_type",
+      "fieldtype": "Select",
+      "label": "Issue Type",
+      "options": "Breakdown\nPreventive\nInspection",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "priority",
+      "fieldtype": "Select",
+      "label": "Priority",
+      "options": "Low\nMedium\nHigh\nCritical",
+      "default": "Medium",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Reported\nAssigned\nIn Progress\nCompleted\nClosed",
+      "default": "Reported",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "sb_details",
+      "fieldtype": "Section Break",
+      "label": "Details"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Text",
+      "label": "Description"
+    },
+    {
+      "fieldname": "assigned_to",
+      "fieldtype": "Data",
+      "label": "Assigned To (Technician)"
+    },
+    {
+      "fieldname": "sb_resolution",
+      "fieldtype": "Section Break",
+      "label": "Resolution"
+    },
+    {
+      "fieldname": "started_at",
+      "fieldtype": "Datetime",
+      "label": "Started At"
+    },
+    {
+      "fieldname": "completed_at",
+      "fieldtype": "Datetime",
+      "label": "Completed At"
+    },
+    {
+      "fieldname": "downtime_hours",
+      "fieldtype": "Float",
+      "label": "Downtime (Hours)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_mr2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "repair_cost",
+      "fieldtype": "Currency",
+      "label": "Repair Cost"
+    },
+    {
+      "fieldname": "parts_used",
+      "fieldtype": "Small Text",
+      "label": "Parts Used"
+    },
+    {
+      "fieldname": "resolution_notes",
+      "fieldtype": "Small Text",
+      "label": "Resolution Notes"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Maintenance Request",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Candela Staff"
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "autoname": "naming_series:",
+  "naming_rule": "By \"Naming Series\" field"
+}

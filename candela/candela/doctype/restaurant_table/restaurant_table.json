@@ -1,0 +1,97 @@
+{
+  "actions": [],
+  "autoname": "field:table_number",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "table_number",
+    "section",
+    "capacity",
+    "is_available",
+    "is_combinable",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "table_number",
+      "fieldtype": "Data",
+      "label": "Table Number",
+      "reqd": 1,
+      "unique": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "section",
+      "fieldtype": "Select",
+      "label": "Section",
+      "options": "Indoor\nOutdoor\nPrivate Room\nBar",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "capacity",
+      "fieldtype": "Int",
+      "label": "Capacity",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "is_available",
+      "fieldtype": "Check",
+      "label": "Available",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "is_combinable",
+      "fieldtype": "Check",
+      "label": "Can Combine",
+      "default": "0"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Restaurant Table",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

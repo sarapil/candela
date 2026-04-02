@@ -1,0 +1,98 @@
+{
+  "actions": [],
+  "autoname": "field:email",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "email",
+    "name_field",
+    "subscribed_on",
+    "is_active",
+    "source",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "reqd": 1,
+      "unique": 1,
+      "options": "Email",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "name_field",
+      "fieldtype": "Data",
+      "label": "Name"
+    },
+    {
+      "fieldname": "subscribed_on",
+      "fieldtype": "Date",
+      "label": "Subscribed On",
+      "default": "Today"
+    },
+    {
+      "fieldname": "is_active",
+      "fieldtype": "Check",
+      "label": "Active",
+      "default": "1",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "source",
+      "fieldtype": "Select",
+      "label": "Source",
+      "options": "Website\nEvent\nManual",
+      "default": "Website"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Newsletter Subscriber",
+  "naming_rule": "By fieldname",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

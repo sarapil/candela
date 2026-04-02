@@ -1,0 +1,11 @@
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M38.5714 0H15.4286C6.90714 0 0 6.90714 0 15.4286V38.5714C0 47.0929 6.90714 54 15.4286 54H38.5714C47.0929 54 54 47.0929 54 38.5714V15.4286C54 6.90714 47.0929 0 38.5714 0Z" fill="#F59E0B" fill-opacity="0.09"/>
+  <!-- Fork tines -->
+  <rect x="17" y="14" width="2" height="9" rx="1" fill="#F59E0B"/>
+  <rect x="20.5" y="14" width="2" height="9" rx="1" fill="#F59E0B"/>
+  <rect x="24" y="14" width="2" height="9" rx="1" fill="#F59E0B"/>
+  <!-- Fork base + handle -->
+  <path d="M16 22.5h11v3h-3v13a1.5 1.5 0 0 1-3 0v-13h-5z" fill="#F59E0B" opacity="0.85"/>
+  <!-- Knife blade + handle -->
+  <path d="M31 14h2c3.3 0 6 2.7 6 6v3c0 2.2-1.8 4-4 4h-1v11.5a1.5 1.5 0 0 1-3 0V14z" fill="#F59E0B" opacity="0.8"/>
+</svg>

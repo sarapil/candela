@@ -1,0 +1,224 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+.proc { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1.5rem) 0 3rem; }
+.proc, .proc * { color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+.proc__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.6rem; margin-bottom:1.5rem; }
+.proc__top { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:.75rem; }
+.proc__btns { display:flex; gap:.5rem; flex-wrap:wrap; }
+.proc__btn { padding:.5rem 1rem; border-radius:8px; font-size:.82rem; text-decoration:none; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--c-cream,#F5F0E8)!important; cursor:pointer; transition:all .2s; }
+.proc__btn:hover { border-color:var(--c-gold,#C9A96E); }
+.proc__btn--primary { background:var(--c-gold,#C9A96E); color:var(--c-charcoal,#1A1A1A)!important; border-color:var(--c-gold,#C9A96E); }
+
+.proc__stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.proc__stat { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.2rem; text-align:center; }
+.proc__stat-val { font-family:var(--font-serif); font-size:2rem; color:var(--c-gold,#C9A96E)!important; }
+.proc__stat-lbl { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; margin-top:.3rem; }
+
+.proc__tabs { display:flex; gap:.5rem; margin-bottom:1.25rem; border-bottom:1px solid rgba(255,255,255,.06); padding-bottom:.75rem; }
+.proc__tab { padding:.5rem 1rem; border-radius:8px 8px 0 0; font-size:.82rem; cursor:pointer; border:none; background:transparent; color:rgba(255,255,255,.5)!important; }
+.proc__tab--active { background:rgba(201,169,110,.12); color:var(--c-gold,#C9A96E)!important; }
+
+.proc__card { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; overflow:hidden; margin-bottom:1.25rem; }
+.proc__card-title { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; padding:.75rem 1rem; border-bottom:1px solid rgba(255,255,255,.06); }
+.proc-tbl { width:100%; border-collapse:collapse; }
+.proc-tbl th { text-align:start; padding:.5rem .75rem; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35)!important; border-bottom:1px solid rgba(255,255,255,.06); }
+.proc-tbl td { padding:.6rem .75rem; border-bottom:1px solid rgba(255,255,255,.03); font-size:.85rem; }
+.proc-tbl tr:hover td { background:rgba(255,255,255,.02); }
+.proc-tbl a { color:var(--c-gold,#C9A96E)!important; text-decoration:none; }
+
+.proc__badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:.68rem; font-weight:600; }
+.proc__badge--pending { background:rgba(201,169,110,.15); color:var(--c-gold,#C9A96E)!important; }
+.proc__badge--approved { background:rgba(91,179,105,.12); color:#5BB369!important; }
+.proc__badge--ordered { background:rgba(59,130,246,.12); color:#3B82F6!important; }
+.proc__badge--stocked { background:rgba(91,179,105,.12); color:#5BB369!important; }
+.proc__badge--rejected { background:rgba(212,83,75,.12); color:#D4534B!important; }
+.proc__badge--draft { background:rgba(255,255,255,.06); color:rgba(255,255,255,.4)!important; }
+.proc__badge--urgent { background:rgba(212,83,75,.15); color:#D4534B!important; }
+.proc__badge--high { background:rgba(201,169,110,.15); color:var(--c-gold,#C9A96E)!important; }
+
+.proc__panel { display:none; }
+.proc__panel--active { display:block; }
+.proc__empty { padding:2rem; text-align:center; color:rgba(255,255,255,.3)!important; font-style:italic; }
+
+@media(max-width:768px){
+	.proc__stats { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+
+<div class="proc">
+	<div class="c-container">
+		<div class="proc__top">
+			<h1 class="proc__title">🛒 {{ _('إدارة المشتريات') if lang == 'ar' else 'Procurement Management' }}</h1>
+			<div class="proc__btns">
+				<a href="/app/purchase-request/new" class="proc__btn proc__btn--primary">+ {{ _('طلب شراء') if lang == 'ar' else 'Purchase Request' }}</a>
+				<a href="/app/purchase-order/new" class="proc__btn">📋 {{ _('أمر شراء') if lang == 'ar' else 'Purchase Order' }}</a>
+				<a href="/app/goods-receipt-note/new" class="proc__btn">📥 {{ _('استلام بضاعة') if lang == 'ar' else 'GRN' }}</a>
+				<a href="/app/candela-supplier/new" class="proc__btn">🏪 {{ _('مورد جديد') if lang == 'ar' else 'New Supplier' }}</a>
+			</div>
+		</div>
+
+		{# Stats #}
+		<div class="proc__stats">
+			<div class="proc__stat">
+				<div class="proc__stat-val">{{ stats.pending_requests }}</div>
+				<div class="proc__stat-lbl">{{ _('طلبات معلقة') if lang == 'ar' else 'Pending Requests' }}</div>
+			</div>
+			<div class="proc__stat">
+				<div class="proc__stat-val">{{ stats.open_orders }}</div>
+				<div class="proc__stat-lbl">{{ _('أوامر مفتوحة') if lang == 'ar' else 'Open Orders' }}</div>
+			</div>
+			<div class="proc__stat">
+				<div class="proc__stat-val">{{ stats.pending_grns }}</div>
+				<div class="proc__stat-lbl">{{ _('بانتظار الاستلام') if lang == 'ar' else 'Pending GRNs' }}</div>
+			</div>
+			<div class="proc__stat">
+				<div class="proc__stat-val">{{ "{:,.0f}".format(stats.total_spend_this_month) }}</div>
+				<div class="proc__stat-lbl">{{ _('إنفاق الشهر') if lang == 'ar' else 'Month Spend' }}</div>
+			</div>
+		</div>
+
+		{# Tabs #}
+		<div class="proc__tabs">
+			<button class="proc__tab proc__tab--active" onclick="procTab('requests',this)">📝 {{ _('طلبات الشراء') if lang == 'ar' else 'Requests' }} ({{ purchase_requests|length }})</button>
+			<button class="proc__tab" onclick="procTab('orders',this)">📋 {{ _('أوامر الشراء') if lang == 'ar' else 'Orders' }} ({{ purchase_orders|length }})</button>
+			<button class="proc__tab" onclick="procTab('grns',this)">📥 {{ _('استلام البضاعة') if lang == 'ar' else 'GRNs' }} ({{ grns|length }})</button>
+			<button class="proc__tab" onclick="procTab('suppliers',this)">🏪 {{ _('الموردين') if lang == 'ar' else 'Suppliers' }} ({{ suppliers|length }})</button>
+		</div>
+
+		{# Purchase Requests Panel #}
+		<div id="panel-requests" class="proc__panel proc__panel--active">
+			<div class="proc__card">
+				{% if purchase_requests %}
+				<table class="proc-tbl">
+					<thead><tr>
+						<th>#</th>
+						<th>{{ _('التاريخ') if lang == 'ar' else 'Date' }}</th>
+						<th>{{ _('طالب الشراء') if lang == 'ar' else 'Requested By' }}</th>
+						<th>{{ _('الأولوية') if lang == 'ar' else 'Priority' }}</th>
+						<th>{{ _('التكلفة المقدرة') if lang == 'ar' else 'Est. Cost' }}</th>
+						<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for pr in purchase_requests %}
+					<tr>
+						<td><a href="/app/purchase-request/{{ pr.name }}">{{ pr.name }}</a></td>
+						<td>{{ pr.request_date or '—' }}</td>
+						<td>{{ pr.requested_by or '—' }}</td>
+						<td><span class="proc__badge proc__badge--{{ (pr.urgency or 'medium')|lower }}">{{ pr.urgency or 'Medium' }}</span></td>
+						<td>{{ "{:,.0f}".format(pr.total_estimated_cost or 0) }}</td>
+						<td><span class="proc__badge proc__badge--{{ (pr.status or 'pending')|lower }}">{{ pr.status }}</span></td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="proc__empty">{{ _('لا توجد طلبات شراء') if lang == 'ar' else 'No purchase requests yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		{# Purchase Orders Panel #}
+		<div id="panel-orders" class="proc__panel">
+			<div class="proc__card">
+				{% if purchase_orders %}
+				<table class="proc-tbl">
+					<thead><tr>
+						<th>#</th>
+						<th>{{ _('المورد') if lang == 'ar' else 'Supplier' }}</th>
+						<th>{{ _('التاريخ') if lang == 'ar' else 'Date' }}</th>
+						<th>{{ _('التسليم المتوقع') if lang == 'ar' else 'Expected' }}</th>
+						<th>{{ _('المبلغ') if lang == 'ar' else 'Amount' }}</th>
+						<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for po in purchase_orders %}
+					<tr>
+						<td><a href="/app/purchase-order/{{ po.name }}">{{ po.name }}</a></td>
+						<td>{{ po.supplier or '—' }}</td>
+						<td>{{ po.order_date or '—' }}</td>
+						<td>{{ po.expected_delivery or '—' }}</td>
+						<td>{{ "{:,.0f}".format(po.total_amount or 0) }}</td>
+						<td><span class="proc__badge proc__badge--{{ (po.status or 'draft')|lower }}">{{ po.status }}</span></td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="proc__empty">{{ _('لا توجد أوامر شراء') if lang == 'ar' else 'No purchase orders yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		{# GRNs Panel #}
+		<div id="panel-grns" class="proc__panel">
+			<div class="proc__card">
+				{% if grns %}
+				<table class="proc-tbl">
+					<thead><tr>
+						<th>#</th>
+						<th>{{ _('المورد') if lang == 'ar' else 'Supplier' }}</th>
+						<th>{{ _('التاريخ') if lang == 'ar' else 'Date' }}</th>
+						<th>{{ _('أمر الشراء') if lang == 'ar' else 'PO' }}</th>
+						<th>{{ _('التكلفة') if lang == 'ar' else 'Cost' }}</th>
+						<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for g in grns %}
+					<tr>
+						<td><a href="/app/goods-receipt-note/{{ g.name }}">{{ g.name }}</a></td>
+						<td>{{ g.supplier or '—' }}</td>
+						<td>{{ g.receipt_date or '—' }}</td>
+						<td>{% if g.purchase_order %}<a href="/app/purchase-order/{{ g.purchase_order }}">{{ g.purchase_order }}</a>{% else %}—{% endif %}</td>
+						<td>{{ "{:,.0f}".format(g.total_cost or 0) }}</td>
+						<td><span class="proc__badge proc__badge--{{ (g.status or 'pending')|lower }}">{{ g.status }}</span></td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="proc__empty">{{ _('لا توجد إيصالات استلام') if lang == 'ar' else 'No GRNs yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		{# Suppliers Panel #}
+		<div id="panel-suppliers" class="proc__panel">
+			<div class="proc__card">
+				{% if suppliers %}
+				<table class="proc-tbl">
+					<thead><tr>
+						<th>{{ _('المورد') if lang == 'ar' else 'Supplier' }}</th>
+						<th>{{ _('الهاتف') if lang == 'ar' else 'Phone' }}</th>
+						<th>{{ _('التصنيف') if lang == 'ar' else 'Category' }}</th>
+					</tr></thead>
+					<tbody>
+					{% for s in suppliers %}
+					<tr>
+						<td><a href="/app/candela-supplier/{{ s.name }}">{{ s.supplier_name }}</a></td>
+						<td>{{ s.phone or '—' }}</td>
+						<td>{{ s.category or '—' }}</td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<div class="proc__empty">{{ _('لا يوجد موردين') if lang == 'ar' else 'No suppliers yet' }}</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+function procTab(panel, btn) {
+	document.querySelectorAll('.proc__panel').forEach(p => p.classList.remove('proc__panel--active'));
+	document.querySelectorAll('.proc__tab').forEach(t => t.classList.remove('proc__tab--active'));
+	document.getElementById('panel-' + panel).classList.add('proc__panel--active');
+	btn.classList.add('proc__tab--active');
+}
+</script>
+{%- endblock -%}

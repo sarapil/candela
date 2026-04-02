@@ -1,0 +1,127 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+.shf { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1.5rem) 0 3rem; }
+.shf, .shf * { color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+.shf__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.6rem; margin-bottom:1.5rem; }
+.shf__top { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:.75rem; }
+.shf__btns { display:flex; gap:.5rem; }
+.shf__btn { padding:.5rem 1rem; border-radius:8px; font-size:.82rem; text-decoration:none; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--c-cream,#F5F0E8)!important; cursor:pointer; transition:all .2s; }
+.shf__btn:hover { border-color:var(--c-gold,#C9A96E); }
+.shf__btn--primary { background:var(--c-gold,#C9A96E); color:var(--c-charcoal,#1A1A1A)!important; border-color:var(--c-gold,#C9A96E); }
+
+.shf__stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.shf__stat { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.2rem; text-align:center; }
+.shf__stat-val { font-family:var(--font-serif); font-size:2rem; color:var(--c-gold,#C9A96E)!important; }
+.shf__stat-lbl { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; margin-top:.3rem; }
+
+.shf__active { background:linear-gradient(135deg,rgba(91,179,105,.08),rgba(91,179,105,.02)); border:1px solid rgba(91,179,105,.2); border-radius:12px; padding:1.5rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:1.5rem; }
+.shf__active-dot { width:14px; height:14px; border-radius:50%; background:#5BB369; box-shadow:0 0 12px rgba(91,179,105,.5); animation:shf-pulse 2s infinite; }
+@keyframes shf-pulse { 0%,100%{opacity:1}50%{opacity:.5} }
+.shf__active-info h3 { font-family:var(--font-serif); font-size:1.2rem; margin:0 0 .3rem; color:#5BB369!important; }
+.shf__active-info p { margin:0; font-size:.85rem; color:rgba(255,255,255,.6)!important; }
+
+.shf__card { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; overflow:hidden; margin-bottom:1.25rem; }
+.shf__card-title { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; padding:.75rem 1rem; border-bottom:1px solid rgba(255,255,255,.06); }
+.shf-tbl { width:100%; border-collapse:collapse; }
+.shf-tbl th { text-align:start; padding:.5rem .75rem; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35)!important; border-bottom:1px solid rgba(255,255,255,.06); }
+.shf-tbl td { padding:.6rem .75rem; border-bottom:1px solid rgba(255,255,255,.03); font-size:.85rem; }
+.shf-tbl tr:hover td { background:rgba(255,255,255,.02); }
+.shf-tbl a { color:var(--c-gold,#C9A96E)!important; text-decoration:none; }
+.shf__badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:.68rem; font-weight:600; }
+.shf__badge--open { background:rgba(91,179,105,.12); color:#5BB369!important; }
+.shf__badge--closed { background:rgba(255,255,255,.06); color:rgba(255,255,255,.4)!important; }
+.shf__variance { font-weight:700; }
+.shf__variance--pos { color:#5BB369!important; }
+.shf__variance--neg { color:#D4534B!important; }
+.shf__empty { padding:2rem; text-align:center; color:rgba(255,255,255,.3)!important; font-style:italic; }
+@media(max-width:768px){ .shf__stats { grid-template-columns:repeat(2,1fr); } }
+</style>
+
+<div class="shf">
+	<div class="c-container">
+		<div class="shf__top">
+			<h1 class="shf__title">💰 {{ _('إدارة الورديات') if lang == 'ar' else 'POS Shift Management' }}</h1>
+			<div class="shf__btns">
+				<a href="/app/pos-shift/new" class="shf__btn shf__btn--primary">+ {{ _('وردية جديدة') if lang == 'ar' else 'New Shift' }}</a>
+			</div>
+		</div>
+
+		<div class="shf__stats">
+			<div class="shf__stat">
+				<div class="shf__stat-val">{{ stats.shifts_today }}</div>
+				<div class="shf__stat-lbl">{{ _('ورديات اليوم') if lang == 'ar' else 'Today\'s Shifts' }}</div>
+			</div>
+			<div class="shf__stat">
+				<div class="shf__stat-val">{{ "{:,.0f}".format(stats.today_sales) }}</div>
+				<div class="shf__stat-lbl">{{ _('مبيعات اليوم') if lang == 'ar' else 'Today Sales' }}</div>
+			</div>
+			<div class="shf__stat">
+				<div class="shf__stat-val">{{ "{:,.0f}".format(stats.month_sales) }}</div>
+				<div class="shf__stat-lbl">{{ _('مبيعات الشهر') if lang == 'ar' else 'Month Sales' }}</div>
+			</div>
+			<div class="shf__stat">
+				<div class="shf__stat-val shf__variance {{ 'shf__variance--pos' if stats.total_variance >= 0 else 'shf__variance--neg' }}">{{ "{:+,.0f}".format(stats.total_variance) }}</div>
+				<div class="shf__stat-lbl">{{ _('فرق الكاش') if lang == 'ar' else 'Cash Variance' }}</div>
+			</div>
+		</div>
+
+		{# Active Shift Banner #}
+		{% if active_shift %}
+		<div class="shf__active">
+			<div class="shf__active-dot"></div>
+			<div class="shf__active-info">
+				<h3>🟢 {{ _('وردية مفتوحة الآن') if lang == 'ar' else 'Shift Currently Open' }}</h3>
+				<p>{{ active_shift.cashier or '—' }} · {{ _('افتتاح') if lang == 'ar' else 'Opened' }} {{ active_shift.opening_time or '' }} · {{ _('رصيد') if lang == 'ar' else 'Balance' }}: {{ "{:,.0f}".format(active_shift.opening_cash or 0) }} · <a href="/app/pos-shift/{{ active_shift.name }}" style="color:var(--c-gold)!important;">{{ _('عرض') if lang == 'ar' else 'View' }} →</a></p>
+			</div>
+		</div>
+		{% endif %}
+
+		{# Shifts History #}
+		<div class="shf__card">
+			<div class="shf__card-title">📋 {{ _('سجل الورديات') if lang == 'ar' else 'Shift History' }}</div>
+			{% if shifts %}
+			<table class="shf-tbl">
+				<thead><tr>
+					<th>#</th>
+					<th>{{ _('الكاشير') if lang == 'ar' else 'Cashier' }}</th>
+					<th>{{ _('التاريخ') if lang == 'ar' else 'Date' }}</th>
+					<th>{{ _('افتتاح') if lang == 'ar' else 'Open' }}</th>
+					<th>{{ _('إغلاق') if lang == 'ar' else 'Close' }}</th>
+					<th>{{ _('المبيعات') if lang == 'ar' else 'Sales' }}</th>
+					<th>{{ _('كاش') if lang == 'ar' else 'Cash' }}</th>
+					<th>{{ _('بطاقة') if lang == 'ar' else 'Card' }}</th>
+					<th>{{ _('الفرق') if lang == 'ar' else 'Variance' }}</th>
+					<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+				</tr></thead>
+				<tbody>
+				{% for s in shifts %}
+				<tr>
+					<td><a href="/app/pos-shift/{{ s.name }}">{{ s.name }}</a></td>
+					<td>{{ s.cashier or '—' }}</td>
+					<td>{{ s.shift_date or '—' }}</td>
+					<td>{{ s.opening_time or '—' }}</td>
+					<td>{{ s.closing_time or '—' }}</td>
+					<td>{{ "{:,.0f}".format(s.total_sales or 0) }}</td>
+						<td>{{ "{:,.0f}".format(s.total_cash_sales or 0) }}</td>
+						<td>{{ "{:,.0f}".format(s.total_card_sales or 0) }}</td>
+					<td>
+						{% if s.status == 'Closed' %}
+						<span class="shf__variance {{ 'shf__variance--pos' if (s.cash_variance or 0) >= 0 else 'shf__variance--neg' }}">{{ "{:+,.0f}".format(s.cash_variance or 0) }}</span>
+						{% else %}—{% endif %}
+					</td>
+					<td><span class="shf__badge shf__badge--{{ (s.status or 'open')|lower }}">{{ s.status }}</span></td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<div class="shf__empty">{{ _('لا توجد ورديات') if lang == 'ar' else 'No shifts yet' }}</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{%- endblock -%}

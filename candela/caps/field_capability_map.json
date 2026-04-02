@@ -1,0 +1,56 @@
+[
+  {
+    "doctype": "CAPS Field Capability Map",
+    "capability": "CD_view_cost_data",
+    "doctype_name": "Menu Item",
+    "field": "cost_price",
+    "behavior": "mask",
+    "description": "Hide ingredient cost price from non-authorized users",
+    "name": "CD-FCM-CD_view_cost_data-cost_price"
+  },
+  {
+    "doctype": "CAPS Field Capability Map",
+    "capability": "CD_view_cost_data",
+    "doctype_name": "Menu Item",
+    "field": "food_cost_pct",
+    "behavior": "hide",
+    "description": "Hide food cost percentage from non-authorized users",
+    "name": "CD-FCM-CD_view_cost_data-food_cost_pct"
+  },
+  {
+    "doctype": "CAPS Field Capability Map",
+    "capability": "CD_view_cost_data",
+    "doctype_name": "Purchase Order",
+    "field": "total_amount",
+    "behavior": "mask",
+    "description": "Mask purchase order total from non-authorized users",
+    "name": "CD-FCM-CD_view_cost_data-total_amount"
+  },
+  {
+    "doctype": "CAPS Field Capability Map",
+    "capability": "CD_view_cost_data",
+    "doctype_name": "Daily Closing",
+    "field": "total_expenses",
+    "behavior": "hide",
+    "description": "Hide total expenses from non-authorized users",
+    "name": "CD-FCM-CD_view_cost_data-total_expenses"
+  },
+  {
+    "doctype": "CAPS Field Capability Map",
+    "capability": "CD_view_cost_data",
+    "doctype_name": "Daily Closing",
+    "field": "net_profit",
+    "behavior": "hide",
+    "description": "Hide net profit from non-authorized users",
+    "name": "CD-FCM-CD_view_cost_data-net_profit"
+  },
+  {
+    "doctype": "CAPS Field Capability Map",
+    "capability": "CD_view_cost_data",
+    "doctype_name": "Ingredient",
+    "field": "unit_cost",
+    "behavior": "mask",
+    "description": "Mask ingredient unit cost from non-authorized users",
+    "name": "CD-FCM-CD_view_cost_data-unit_cost"
+  }
+]

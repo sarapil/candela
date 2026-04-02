@@ -1,0 +1,74 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "date",
+    "platform",
+    "content_type",
+    "caption",
+    "hashtags",
+    "image",
+    "status"
+  ],
+  "fields": [
+    {
+      "fieldname": "date",
+      "fieldtype": "Date",
+      "label": "Date",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "platform",
+      "fieldtype": "Select",
+      "label": "Platform",
+      "options": "Instagram\nFacebook\nTikTok\nWhatsApp\nEmail\nSMS",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "content_type",
+      "fieldtype": "Select",
+      "label": "Type",
+      "options": "Photo\nVideo\nStory\nReel\nCarousel\nText",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "caption",
+      "fieldtype": "Small Text",
+      "label": "Caption"
+    },
+    {
+      "fieldname": "hashtags",
+      "fieldtype": "Data",
+      "label": "Hashtags"
+    },
+    {
+      "fieldname": "image",
+      "fieldtype": "Attach Image",
+      "label": "Image"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Planned\nCreated\nPosted",
+      "in_list_view": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Content Calendar Entry",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

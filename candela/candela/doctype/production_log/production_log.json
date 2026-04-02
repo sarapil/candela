@@ -1,0 +1,211 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "order_reference_type",
+    "order_reference",
+    "menu_item",
+    "quantity",
+    "cb_pl1",
+    "kitchen_station",
+    "assigned_to",
+    "shift",
+    "sb_timing",
+    "started_at",
+    "completed_at",
+    "prep_time_minutes",
+    "cb_pl2",
+    "estimated_prep_time",
+    "time_variance_pct",
+    "quality_check",
+    "sb_waste",
+    "waste_items",
+    "total_waste_cost",
+    "notes",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CPROD-.YYYY.-.#####",
+      "default": "CPROD-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "order_reference_type",
+      "fieldtype": "Select",
+      "label": "Order Type",
+      "options": "\nOnline Order\nPOS Invoice",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "order_reference",
+      "fieldtype": "Dynamic Link",
+      "label": "Order Reference",
+      "options": "order_reference_type"
+    },
+    {
+      "fieldname": "menu_item",
+      "fieldtype": "Link",
+      "label": "Menu Item",
+      "options": "Menu Item",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "quantity",
+      "fieldtype": "Int",
+      "label": "Quantity",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cb_pl1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "kitchen_station",
+      "fieldtype": "Link",
+      "label": "Kitchen Station",
+      "options": "Kitchen Station",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "assigned_to",
+      "fieldtype": "Link",
+      "label": "Assigned Chef",
+      "options": "User"
+    },
+    {
+      "fieldname": "shift",
+      "fieldtype": "Select",
+      "label": "Shift",
+      "options": "Morning\nEvening"
+    },
+    {
+      "fieldname": "sb_timing",
+      "fieldtype": "Section Break",
+      "label": "Timing"
+    },
+    {
+      "fieldname": "started_at",
+      "fieldtype": "Datetime",
+      "label": "Started At"
+    },
+    {
+      "fieldname": "completed_at",
+      "fieldtype": "Datetime",
+      "label": "Completed At"
+    },
+    {
+      "fieldname": "prep_time_minutes",
+      "fieldtype": "Float",
+      "label": "Actual Prep Time (min)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_pl2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "estimated_prep_time",
+      "fieldtype": "Float",
+      "label": "Estimated Prep Time (min)",
+      "fetch_from": "menu_item.preparation_time_min"
+    },
+    {
+      "fieldname": "time_variance_pct",
+      "fieldtype": "Percent",
+      "label": "Time Variance %",
+      "read_only": 1
+    },
+    {
+      "fieldname": "quality_check",
+      "fieldtype": "Select",
+      "label": "Quality",
+      "options": "\nPass\nFail\nRework"
+    },
+    {
+      "fieldname": "sb_waste",
+      "fieldtype": "Section Break",
+      "label": "Waste"
+    },
+    {
+      "fieldname": "waste_items",
+      "fieldtype": "Table",
+      "label": "Waste Items",
+      "options": "Production Waste"
+    },
+    {
+      "fieldname": "total_waste_cost",
+      "fieldtype": "Currency",
+      "label": "Total Waste Cost",
+      "read_only": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Data",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Production Log",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Candela Staff"
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "autoname": "naming_series:",
+  "naming_rule": "By \"Naming Series\" field"
+}

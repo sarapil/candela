@@ -1,0 +1,103 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+{# ═══════ PAGE HEADER ═══════ #}
+<section class="c-page-header"
+	{% if candela.gallery_cover_image %}style="background-image:url('{{ candela.gallery_cover_image }}')"{% endif %}>
+	<div class="c-page-header__overlay"></div>
+	<div class="c-page-header__content">
+		<span class="c-section-header__label">{{ 'Galleria' }}</span>
+		<h1>{{ _('معرض الصور') if lang == 'ar' else 'Gallery' }}</h1>
+	</div>
+</section>
+
+{# ═══════ GALLERY GRID ═══════ #}
+<section class="c-section c-section--ivory">
+	<div class="c-container">
+		{% if images %}
+		{# ── Category Filters ── #}
+		{% set cats = images|map(attribute='category')|select('defined')|unique|list %}
+		{% if cats|length > 1 %}
+		<div class="c-filters c-reveal">
+			<button class="c-filter-btn c-filter-btn--active" data-cat="all">
+				{{ _('الكل') if lang == 'ar' else 'All' }}
+			</button>
+			{% for cat in cats %}
+			<button class="c-filter-btn" data-cat="{{ cat }}">{{ cat }}</button>
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		<div class="c-gallery-grid c-stagger">
+			{% for img in images %}
+			<div class="c-gallery-item c-reveal" data-cat="{{ img.category or '' }}"
+				onclick="openLightbox('{{ img.image }}', '{{ img.caption or '' }}')">
+				<img src="{{ img.image }}" alt="{{ img.image_alt_text or img.caption or 'Gallery image' }}" loading="lazy">
+				{% if img.caption %}
+				<div class="c-gallery-item__caption">{{ img.caption }}</div>
+				{% endif %}
+			</div>
+			{% endfor %}
+		</div>
+		{% else %}
+		<div class="c-text-center" style="padding:var(--s-4xl) 0;">
+			<p style="color:var(--c-text-light);font-size:1.1rem;">
+				{{ _('لا توجد صور بعد') if lang == 'ar' else 'No images yet' }}
+			</p>
+		</div>
+		{% endif %}
+	</div>
+</section>
+
+{# ═══════ LIGHTBOX ═══════ #}
+<div class="c-lightbox" id="lightbox">
+	<button class="c-lightbox__close" onclick="closeLightbox()">&times;</button>
+	<img class="c-lightbox__img" id="lightbox-img" src="" alt="">
+	<div class="c-lightbox__caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+function openLightbox(src, caption) {
+	var lb = document.getElementById('lightbox');
+	document.getElementById('lightbox-img').src = src;
+	document.getElementById('lightbox-caption').textContent = caption || '';
+	lb.classList.add('c-lightbox--open');
+	document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+	document.getElementById('lightbox').classList.remove('c-lightbox--open');
+	document.body.style.overflow = '';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+	// Close lightbox on backdrop click
+	document.getElementById('lightbox').addEventListener('click', function(e) {
+		if (e.target === this) closeLightbox();
+	});
+
+	// Close on escape
+	document.addEventListener('keydown', function(e) {
+		if (e.key === 'Escape') closeLightbox();
+	});
+
+	// Category filter
+	var btns = document.querySelectorAll('.c-filter-btn[data-cat]');
+	var items = document.querySelectorAll('.c-gallery-item[data-cat]');
+	btns.forEach(function(btn) {
+		btn.addEventListener('click', function() {
+			btns.forEach(function(b) { b.classList.remove('c-filter-btn--active'); });
+			btn.classList.add('c-filter-btn--active');
+			var cat = btn.getAttribute('data-cat');
+			items.forEach(function(item) {
+				item.style.display = (cat === 'all' || item.getAttribute('data-cat') === cat) ? '' : 'none';
+			});
+		});
+	});
+});
+</script>
+
+{%- endblock -%}

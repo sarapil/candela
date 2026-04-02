@@ -1,0 +1,34 @@
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+<nav class="candela-navbar" role="navigation" aria-label="Main navigation">
+	<div class="candela-navbar__inner">
+		<a href="/dela" class="candela-navbar__logo" aria-label="{{ candela.restaurant_name or 'Candela' }}">
+			<img src="/assets/candela/images/logo/logo-white.svg"
+				 alt="{{ candela.restaurant_name or 'Candela' }}"
+				 width="160" height="44">
+		</a>
+
+		<button class="candela-navbar__toggle" aria-label="Toggle navigation" aria-expanded="false">
+			<span></span><span></span><span></span>
+		</button>
+
+		<ul class="candela-navbar__nav" role="menubar">
+			<li role="none"><a href="/dela" class="candela-navbar__link" role="menuitem">{{ _('الرئيسية') if lang == 'ar' else _('Home') }}</a></li>
+			<li role="none"><a href="/dela/menu" class="candela-navbar__link" role="menuitem">{{ _('المنيو') if lang == 'ar' else _('Menu') }}</a></li>
+			<li role="none"><a href="/dela/about" class="candela-navbar__link" role="menuitem">{{ _('قصتنا') if lang == 'ar' else _('Our Story') }}</a></li>
+			<li role="none"><a href="/dela/gallery" class="candela-navbar__link" role="menuitem">{{ _('المعرض') if lang == 'ar' else _('Gallery') }}</a></li>
+			<li role="none"><a href="/dela/events" class="candela-navbar__link" role="menuitem">{{ _('الفعاليات') if lang == 'ar' else _('Events') }}</a></li>
+			<li role="none"><a href="/dela/contact" class="candela-navbar__link" role="menuitem">{{ _('تواصل معنا') if lang == 'ar' else _('Contact') }}</a></li>
+			{% if candela.enable_online_ordering %}
+			<li role="none"><a href="/dela/order" class="candela-navbar__link" role="menuitem">{{ _('اطلب أونلاين') if lang == 'ar' else _('Order Online') }}</a></li>
+			{% endif %}
+			<li role="none" class="candela-navbar__cta">
+				{% if candela.enable_reservations %}
+				<a href="/dela/reservation" class="c-btn c-btn--gold c-btn--sm">
+					{{ _('احجز طاولة') if lang == 'ar' else _('Reserve') }}
+				</a>
+				{% endif %}
+			</li>
+		</ul>
+	</div>
+</nav>

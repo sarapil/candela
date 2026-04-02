@@ -1,0 +1,128 @@
+{
+  "actions": [],
+  "autoname": "hash",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "staff_name",
+    "role",
+    "cb_staff",
+    "shift_date",
+    "start_time",
+    "end_time",
+    "sb_assignment",
+    "section",
+    "assigned_tables",
+    "cb_assign",
+    "status",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "staff_name",
+      "fieldtype": "Data",
+      "label": "Staff Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "role",
+      "fieldtype": "Select",
+      "label": "Role",
+      "options": "Waiter\nChef\nSous Chef\nHost\nCashier\nManager\nBarista\nBartender\nDishwasher\nRunner",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "cb_staff",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "shift_date",
+      "fieldtype": "Date",
+      "label": "Shift Date",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1,
+      "default": "Today"
+    },
+    {
+      "fieldname": "start_time",
+      "fieldtype": "Time",
+      "label": "Start Time",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "end_time",
+      "fieldtype": "Time",
+      "label": "End Time",
+      "reqd": 1
+    },
+    {
+      "fieldname": "sb_assignment",
+      "fieldtype": "Section Break",
+      "label": "Assignment"
+    },
+    {
+      "fieldname": "section",
+      "fieldtype": "Select",
+      "label": "Section",
+      "options": "\nIndoor\nOutdoor\nPrivate Room\nBar\nKitchen",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "assigned_tables",
+      "fieldtype": "Data",
+      "label": "Assigned Tables",
+      "description": "Comma-separated table numbers, e.g. T1, T2, T3"
+    },
+    {
+      "fieldname": "cb_assign",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Scheduled\nActive\nCompleted\nAbsent",
+      "default": "Scheduled",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Staff Shift",
+  "naming_rule": "Random",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1,
+      "read": 1, "report": 1, "role": "System Manager", "share": 1, "write": 1
+    },
+    {
+      "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1,
+      "read": 1, "report": 1, "role": "Candela Manager", "share": 1, "write": 1
+    },
+    {
+      "read": 1, "role": "Candela Staff"
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

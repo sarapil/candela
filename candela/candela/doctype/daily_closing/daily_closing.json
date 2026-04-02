@@ -1,0 +1,322 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "closing_date",
+    "prepared_by",
+    "cb_dc1",
+    "status",
+    "approved_by",
+    "sb_revenue",
+    "total_dine_in_revenue",
+    "total_delivery_revenue",
+    "total_takeaway_revenue",
+    "cb_dc2",
+    "other_income",
+    "gross_revenue",
+    "sb_collections",
+    "cash_collected",
+    "card_collected",
+    "cb_dc3",
+    "online_payments",
+    "total_collected",
+    "collection_variance",
+    "sb_expenses",
+    "cash_expenses",
+    "total_expenses",
+    "sb_cash",
+    "opening_cash",
+    "closing_cash",
+    "cb_dc4",
+    "net_cash_position",
+    "bank_deposit_amount",
+    "sb_kpis",
+    "total_orders",
+    "average_order_value",
+    "cb_dc5",
+    "food_cost_today",
+    "food_cost_percentage",
+    "covers_count",
+    "revenue_per_cover",
+    "sb_notes_dc",
+    "notes",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CDC-.YYYY.-.#####",
+      "default": "CDC-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "closing_date",
+      "fieldtype": "Date",
+      "label": "Date",
+      "reqd": 1,
+      "default": "Today",
+      "in_list_view": 1,
+      "unique": 1
+    },
+    {
+      "fieldname": "prepared_by",
+      "fieldtype": "Link",
+      "label": "Prepared By",
+      "options": "User",
+      "default": "__user"
+    },
+    {
+      "fieldname": "cb_dc1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nReviewed\nApproved\nLocked",
+      "default": "Draft",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "approved_by",
+      "fieldtype": "Link",
+      "label": "Approved By",
+      "options": "User"
+    },
+    {
+      "fieldname": "sb_revenue",
+      "fieldtype": "Section Break",
+      "label": "Revenue"
+    },
+    {
+      "fieldname": "total_dine_in_revenue",
+      "fieldtype": "Currency",
+      "label": "Dine-in Revenue",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_delivery_revenue",
+      "fieldtype": "Currency",
+      "label": "Delivery Revenue",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_takeaway_revenue",
+      "fieldtype": "Currency",
+      "label": "Takeaway Revenue",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_dc2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "other_income",
+      "fieldtype": "Currency",
+      "label": "Other Income"
+    },
+    {
+      "fieldname": "gross_revenue",
+      "fieldtype": "Currency",
+      "label": "Gross Revenue",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "sb_collections",
+      "fieldtype": "Section Break",
+      "label": "Collections"
+    },
+    {
+      "fieldname": "cash_collected",
+      "fieldtype": "Currency",
+      "label": "Cash Collected",
+      "read_only": 1
+    },
+    {
+      "fieldname": "card_collected",
+      "fieldtype": "Currency",
+      "label": "Card Collected",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_dc3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "online_payments",
+      "fieldtype": "Currency",
+      "label": "Online Payments",
+      "read_only": 1
+    },
+    {
+      "fieldname": "total_collected",
+      "fieldtype": "Currency",
+      "label": "Total Collected",
+      "read_only": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "collection_variance",
+      "fieldtype": "Currency",
+      "label": "Variance",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sb_expenses",
+      "fieldtype": "Section Break",
+      "label": "Cash Expenses"
+    },
+    {
+      "fieldname": "cash_expenses",
+      "fieldtype": "Table",
+      "label": "Expenses",
+      "options": "Daily Expense"
+    },
+    {
+      "fieldname": "total_expenses",
+      "fieldtype": "Currency",
+      "label": "Total Expenses",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sb_cash",
+      "fieldtype": "Section Break",
+      "label": "Cash Position"
+    },
+    {
+      "fieldname": "opening_cash",
+      "fieldtype": "Currency",
+      "label": "Opening Cash",
+      "read_only": 1
+    },
+    {
+      "fieldname": "closing_cash",
+      "fieldtype": "Currency",
+      "label": "Closing Cash",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_dc4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "net_cash_position",
+      "fieldtype": "Currency",
+      "label": "Net Cash Position",
+      "read_only": 1
+    },
+    {
+      "fieldname": "bank_deposit_amount",
+      "fieldtype": "Currency",
+      "label": "Bank Deposit"
+    },
+    {
+      "fieldname": "sb_kpis",
+      "fieldtype": "Section Break",
+      "label": "KPIs"
+    },
+    {
+      "fieldname": "total_orders",
+      "fieldtype": "Int",
+      "label": "Total Orders",
+      "read_only": 1
+    },
+    {
+      "fieldname": "average_order_value",
+      "fieldtype": "Currency",
+      "label": "Avg Order Value",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_dc5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "food_cost_today",
+      "fieldtype": "Currency",
+      "label": "Food Cost Today",
+      "read_only": 1
+    },
+    {
+      "fieldname": "food_cost_percentage",
+      "fieldtype": "Percent",
+      "label": "Food Cost %",
+      "read_only": 1
+    },
+    {
+      "fieldname": "covers_count",
+      "fieldtype": "Int",
+      "label": "Covers (Guests)"
+    },
+    {
+      "fieldname": "revenue_per_cover",
+      "fieldtype": "Currency",
+      "label": "Revenue/Cover",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sb_notes_dc",
+      "fieldtype": "Section Break"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Daily Closing",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "autoname": "naming_series:",
+  "naming_rule": "By \"Naming Series\" field"
+}

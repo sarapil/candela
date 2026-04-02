@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+    <linearGradient id="innerGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <linearGradient id="baseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="50%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <style>
+    @keyframes flicker {
+      0%, 100% { transform: scaleY(1) translateY(0); opacity: 1; }
+      25% { transform: scaleY(1.03) translateY(-2px); opacity: 0.95; }
+      50% { transform: scaleY(0.97) translateY(1px); opacity: 1; }
+      75% { transform: scaleY(1.02) translateY(-1px); opacity: 0.97; }
+    }
+    @keyframes innerFlicker {
+      0%, 100% { transform: scaleY(1) translateY(0); opacity: 0.9; }
+      30% { transform: scaleY(1.05) translateY(-3px); opacity: 0.85; }
+      60% { transform: scaleY(0.95) translateY(2px); opacity: 0.95; }
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+    @keyframes textFade {
+      0% { opacity: 0; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .flame-outer {
+      animation: flicker 2s ease-in-out infinite;
+      transform-origin: 256px 320px;
+    }
+    .flame-inner {
+      animation: innerFlicker 1.8s ease-in-out infinite 0.3s;
+      transform-origin: 256px 300px;
+    }
+    .glow-circle {
+      animation: glowPulse 2.5s ease-in-out infinite;
+    }
+    .brand-text {
+      animation: textFade 1.5s ease-out forwards;
+    }
+  </style>
+
+  <!-- Background glow -->
+  <circle class="glow-circle" cx="256" cy="240" r="140" fill="#F59E0B" opacity="0.15" filter="url(#glow)"/>
+
+  <!-- Candlestick base -->
+  <rect x="240" y="340" width="32" height="80" rx="4" fill="url(#baseGrad)"/>
+  <!-- Candlestick holder/dish -->
+  <ellipse cx="256" cy="340" rx="50" ry="10" fill="#92400E"/>
+  <ellipse cx="256" cy="338" rx="48" ry="8" fill="#B45309"/>
+  <!-- Candle body -->
+  <rect x="236" y="240" width="40" height="100" rx="6" fill="#FEF3C7"/>
+  <rect x="238" y="242" width="36" height="96" rx="5" fill="#FFFBEB"/>
+  <!-- Wick -->
+  <line x1="256" y1="240" x2="256" y2="220" stroke="#78350F" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Outer flame -->
+  <g class="flame-outer" filter="url(#softGlow)">
+    <path d="M256 120 C256 120, 220 180, 218 220 C216 260, 232 275, 256 275 C280 275, 296 260, 294 220 C292 180, 256 120, 256 120Z" fill="url(#flameGrad)" opacity="0.9"/>
+  </g>
+
+  <!-- Inner flame -->
+  <g class="flame-inner">
+    <path d="M256 170 C256 170, 238 205, 237 230 C236 255, 246 265, 256 265 C266 265, 276 255, 275 230 C274 205, 256 170, 256 170Z" fill="url(#innerGrad)" opacity="0.85"/>
+  </g>
+
+  <!-- Brand text "CANDELA" -->
+  <text class="brand-text" x="256" y="465" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="700" letter-spacing="10" fill="#F59E0B">CANDELA</text>
+
+  <!-- Tagline -->
+  <text class="brand-text" x="256" y="495" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="16" font-style="italic" letter-spacing="3" fill="#D97706" opacity="0.8">RISTORANTE ITALIANO</text>
+</svg>

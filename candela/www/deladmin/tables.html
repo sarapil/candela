@@ -1,0 +1,210 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+.tm { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1.5rem) 0 3rem; }
+.tm * { color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+
+.tm__header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:.75rem; }
+.tm__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.6rem; }
+.tm__legend { display:flex; gap:1rem; flex-wrap:wrap; }
+.tm__legend-item { display:flex; align-items:center; gap:.35rem; font-size:.78rem; }
+.tm__legend-dot { width:10px; height:10px; border-radius:50%; }
+.tm__legend-dot--available { background:#5BB369; }
+.tm__legend-dot--occupied { background:var(--c-gold,#C9A96E); }
+.tm__legend-dot--reserved { background:#3B82F6; }
+.tm__legend-dot--unavailable { background:rgba(255,255,255,.2); }
+
+/* Section */
+.tm__section { margin-bottom:2rem; }
+.tm__section-title { font-size:.8rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; margin-bottom:.75rem; padding-bottom:.4rem; border-bottom:1px solid rgba(255,255,255,.06); }
+
+/* Table grid */
+.tm__grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1rem; }
+.tm-table { background:var(--c-dark,#0C0C0C); border:2px solid rgba(255,255,255,.06); border-radius:12px; padding:1rem; text-align:center; cursor:pointer; transition:all .25s; position:relative; }
+.tm-table:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(0,0,0,.3); }
+.tm-table--available { border-color:rgba(91,179,105,.3); }
+.tm-table--available:hover { border-color:#5BB369; }
+.tm-table--occupied { border-color:rgba(201,169,110,.4); background:rgba(201,169,110,.05); }
+.tm-table--occupied:hover { border-color:var(--c-gold,#C9A96E); }
+.tm-table--reserved { border-color:rgba(59,130,246,.3); }
+.tm-table--reserved:hover { border-color:#3B82F6; }
+.tm-table--unavailable { border-color:rgba(255,255,255,.05); opacity:.5; }
+.tm-table__icon { font-size:2rem; margin-bottom:.4rem; }
+.tm-table__number { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.3rem; font-weight:700; margin-bottom:.25rem; }
+.tm-table__info { font-size:.72rem; color:rgba(255,255,255,.45)!important; }
+.tm-table__status { display:inline-block; font-size:.65rem; padding:2px 8px; border-radius:50px; margin-top:.4rem; letter-spacing:.05em; font-weight:600; }
+.tm-table__status--available { background:rgba(91,179,105,.15); color:#5BB369!important; }
+.tm-table__status--occupied { background:rgba(201,169,110,.15); color:var(--c-gold,#C9A96E)!important; }
+.tm-table__status--reserved { background:rgba(59,130,246,.15); color:#3B82F6!important; }
+.tm-table__status--unavailable { background:rgba(255,255,255,.08); color:rgba(255,255,255,.4)!important; }
+.tm-table__detail { font-size:.7rem; margin-top:.3rem; color:rgba(255,255,255,.5)!important; }
+
+/* Reservations sidebar */
+.tm__layout { display:grid; grid-template-columns:1fr 320px; gap:1.5rem; }
+.tm__sidebar { background:var(--c-dark,#0C0C0C); border-radius:12px; padding:1rem; height:fit-content; position:sticky; top:calc(var(--navbar-h,70px) + 1.5rem); }
+.tm__sidebar-title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.1rem; margin-bottom:.75rem; padding-bottom:.5rem; border-bottom:1px solid rgba(255,255,255,.06); }
+.tm-res { padding:.6rem; border-bottom:1px solid rgba(255,255,255,.04); }
+.tm-res__name { font-weight:600; font-size:.85rem; }
+.tm-res__info { font-size:.72rem; color:rgba(255,255,255,.45)!important; display:flex; gap:.5rem; margin-top:.15rem; }
+.tm-res__badge { font-size:.6rem; padding:1px 6px; border-radius:50px; }
+.tm-res__badge--pending { background:rgba(201,169,110,.15); color:var(--c-gold,#C9A96E)!important; }
+.tm-res__badge--confirmed { background:rgba(91,179,105,.15); color:#5BB369!important; }
+
+/* Modal */
+.tm-modal-bg { position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:9999; display:none; align-items:center; justify-content:center; backdrop-filter:blur(4px); }
+.tm-modal-bg.active { display:flex; }
+.tm-modal { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.1); border-radius:16px; width:380px; padding:1.5rem; }
+.tm-modal__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.2rem; margin-bottom:1rem; text-align:center; }
+.tm-modal__actions { display:flex; flex-direction:column; gap:.5rem; }
+.tm-modal__btn { padding:.6rem; border-radius:8px; border:1px solid rgba(255,255,255,.1); background:transparent; color:var(--c-cream,#F5F0E8)!important; font-size:.85rem; cursor:pointer; transition:all .2s; text-align:start; display:flex; align-items:center; gap:.5rem; }
+.tm-modal__btn:hover { border-color:var(--c-gold,#C9A96E); background:rgba(201,169,110,.05); }
+.tm-modal__close { margin-top:.75rem; padding:.5rem; border-radius:8px; border:none; background:rgba(255,255,255,.06); color:rgba(255,255,255,.5)!important; width:100%; cursor:pointer; font-size:.8rem; }
+
+@media(max-width:900px){
+	.tm__layout { grid-template-columns:1fr; }
+	.tm__sidebar { position:static; }
+	.tm__grid { grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); }
+}
+</style>
+
+<div class="tm">
+	<div class="c-container">
+		<div class="tm__header">
+			<h1 class="tm__title">🪑 {{ _('إدارة الطاولات') if lang == 'ar' else 'Table Management' }}</h1>
+			<div class="tm__legend">
+				<div class="tm__legend-item"><div class="tm__legend-dot tm__legend-dot--available"></div>{{ _('متاحة') if lang == 'ar' else 'Available' }}</div>
+				<div class="tm__legend-item"><div class="tm__legend-dot tm__legend-dot--occupied"></div>{{ _('مشغولة') if lang == 'ar' else 'Occupied' }}</div>
+				<div class="tm__legend-item"><div class="tm__legend-dot tm__legend-dot--reserved"></div>{{ _('محجوزة') if lang == 'ar' else 'Reserved' }}</div>
+				<div class="tm__legend-item"><div class="tm__legend-dot tm__legend-dot--unavailable"></div>{{ _('غير متاحة') if lang == 'ar' else 'Unavailable' }}</div>
+			</div>
+		</div>
+
+		<div class="tm__layout">
+			<div>
+				{% for section_name, section_tables in sections.items() %}
+				<div class="tm__section">
+					<h3 class="tm__section-title">
+						{% if section_name == 'Indoor' %}🏠 {{ _('داخلي') if lang == 'ar' else 'Indoor' }}
+						{% elif section_name == 'Outdoor' %}🌿 {{ _('خارجي') if lang == 'ar' else 'Outdoor' }}
+						{% elif section_name == 'Private Room' %}🚪 {{ _('غرفة خاصة') if lang == 'ar' else 'Private Room' }}
+						{% elif section_name == 'Bar' %}🍸 {{ _('بار') if lang == 'ar' else 'Bar' }}
+						{% else %}{{ section_name }}{% endif %}
+					</h3>
+					<div class="tm__grid">
+						{% for t in section_tables %}
+						<div class="tm-table tm-table--{{ t.status }}" onclick="TM.openTable('{{ t.name }}','{{ t.table_number }}','{{ t.status }}','{{ t.capacity }}')">
+							<div class="tm-table__icon">
+								{% if t.status == 'available' %}🟢
+								{% elif t.status == 'occupied' %}🟡
+								{% elif t.status == 'reserved' %}🔵
+								{% else %}⚫{% endif %}
+							</div>
+							<div class="tm-table__number">{{ t.table_number }}</div>
+							<div class="tm-table__info">{{ t.capacity }} 👤 · {{ t.section }}</div>
+							<span class="tm-table__status tm-table__status--{{ t.status }}">
+								{% if t.status == 'available' %}{{ _('متاحة') if lang == 'ar' else 'Available' }}
+								{% elif t.status == 'occupied' %}{{ _('مشغولة') if lang == 'ar' else 'Occupied' }}
+								{% elif t.status == 'reserved' %}{{ _('محجوزة') if lang == 'ar' else 'Reserved' }}
+								{% else %}{{ _('غير متاحة') if lang == 'ar' else 'Unavailable' }}{% endif %}
+							</span>
+							{% if t.current_order %}
+							<div class="tm-table__detail">{{ t.current_order.customer_name or '' }} · {{ t.current_order.kitchen_status }}</div>
+							{% elif t.current_reservation %}
+							<div class="tm-table__detail">{{ t.current_reservation.guest_name }} · {{ t.current_reservation.reservation_time }}</div>
+							{% endif %}
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="tm__sidebar">
+				<h3 class="tm__sidebar-title">📅 {{ _('حجوزات اليوم') if lang == 'ar' else "Today's Reservations" }}</h3>
+				{% if today_reservations %}
+				{% for r in today_reservations %}
+				<div class="tm-res">
+					<div class="tm-res__name">{{ r.guest_name }}</div>
+					<div class="tm-res__info">
+						<span>🕐 {{ r.reservation_time }}</span>
+						<span>👤 {{ r.number_of_guests }}</span>
+						{% if r.assigned_table %}<span>🪑 {{ r.assigned_table }}</span>{% endif %}
+						<span class="tm-res__badge tm-res__badge--{{ r.status|lower }}">{{ r.status }}</span>
+					</div>
+				</div>
+				{% endfor %}
+				{% else %}
+				<div style="text-align:center;padding:1rem;color:rgba(255,255,255,.3)!important;font-style:italic;">{{ _('لا توجد حجوزات اليوم') if lang == 'ar' else 'No reservations today' }}</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Table Action Modal -->
+<div class="tm-modal-bg" id="tableModal">
+	<div class="tm-modal">
+		<div class="tm-modal__title" id="tmTitle"></div>
+		<div class="tm-modal__actions" id="tmActions"></div>
+		<button class="tm-modal__close" onclick="TM.closeModal()">{{ _('إغلاق') if lang == 'ar' else 'Close' }}</button>
+	</div>
+</div>
+
+<script>
+const LANG = '{{ lang }}';
+const TM = {
+	openTable(name, number, status, capacity) {
+		document.getElementById('tmTitle').textContent = `🪑 ${LANG==='ar'?'طاولة':'Table'} ${number}`;
+		let html = '';
+		if (status === 'available') {
+			html = `
+				<button class="tm-modal__btn" onclick="TM.newOrder('${name}')">🛒 ${LANG==='ar'?'طلب جديد (POS)':'New Order (POS)'}</button>
+				<button class="tm-modal__btn" onclick="TM.markUnavailable('${name}')">🚫 ${LANG==='ar'?'تعطيل':'Mark Unavailable'}</button>
+				<a class="tm-modal__btn" href="/app/table-reservation/new?assigned_table=${name}" style="text-decoration:none;">📅 ${LANG==='ar'?'حجز':'New Reservation'}</a>`;
+		} else if (status === 'occupied') {
+			html = `
+				<a class="tm-modal__btn" href="/deladmin/pos" style="text-decoration:none;">🛒 ${LANG==='ar'?'عرض الطلب':'View Order'}</a>
+				<button class="tm-modal__btn" onclick="TM.freeTable('${name}')">✅ ${LANG==='ar'?'تفريغ الطاولة':'Free Table'}</button>`;
+		} else if (status === 'reserved') {
+			html = `
+				<button class="tm-modal__btn" onclick="TM.seatGuest('${name}')">🪑 ${LANG==='ar'?'تجلس الضيف':'Seat Guest'}</button>
+				<button class="tm-modal__btn" onclick="TM.freeTable('${name}')">❌ ${LANG==='ar'?'إلغاء الحجز':'Cancel Reservation'}</button>`;
+		} else {
+			html = `<button class="tm-modal__btn" onclick="TM.markAvailable('${name}')">✅ ${LANG==='ar'?'تفعيل':'Mark Available'}</button>`;
+		}
+		document.getElementById('tmActions').innerHTML = html;
+		document.getElementById('tableModal').classList.add('active');
+	},
+
+	closeModal() { document.getElementById('tableModal').classList.remove('active'); },
+
+	newOrder(table) {
+		window.location.href = `/deladmin/pos?table=${table}`;
+	},
+
+	async freeTable(name) {
+		await frappe.call({ method: 'candela.api.update_table_status', args: { table: name, action: 'free' } });
+		location.reload();
+	},
+
+	async seatGuest(name) {
+		await frappe.call({ method: 'candela.api.update_table_status', args: { table: name, action: 'seat' } });
+		location.reload();
+	},
+
+	async markUnavailable(name) {
+		await frappe.call({ method: 'candela.api.update_table_status', args: { table: name, action: 'unavailable' } });
+		location.reload();
+	},
+
+	async markAvailable(name) {
+		await frappe.call({ method: 'candela.api.update_table_status', args: { table: name, action: 'available' } });
+		location.reload();
+	}
+};
+</script>
+
+{%- endblock -%}

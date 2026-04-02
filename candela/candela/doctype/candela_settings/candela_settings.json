@@ -1,0 +1,1090 @@
+{
+  "actions": [],
+  "autoname": "",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "tab_branding",
+    "sb_restaurant_identity",
+    "restaurant_name",
+    "restaurant_name_ar",
+    "cb_1",
+    "tagline_ar",
+    "tagline_en",
+    "tagline_it",
+    "sb_logo_&_icons",
+    "logo_dark",
+    "logo_white",
+    "logo_gold",
+    "cb_2",
+    "logo_icon",
+    "favicon",
+    "sb_brand_colors",
+    "color_primary",
+    "color_dark",
+    "cb_3",
+    "color_green",
+    "color_accent",
+    "tab_website_content",
+    "sb_hero_section",
+    "hero_image",
+    "hero_image_mobile",
+    "hero_overlay_opacity",
+    "hero_video_url",
+    "cb_4",
+    "show_hero_logo",
+    "hero_cta_primary_text",
+    "hero_cta_primary_url",
+    "hero_cta_secondary_text",
+    "hero_cta_secondary_url",
+    "sb_about_section",
+    "about_image",
+    "about_title_ar",
+    "about_title_en",
+    "cb_5",
+    "about_text_ar",
+    "about_text_en",
+    "sb_homepage_sections",
+    "show_about_section",
+    "show_menu_highlights",
+    "show_reservation_cta",
+    "cb_6",
+    "show_testimonials",
+    "show_events",
+    "show_gallery",
+    "show_newsletter",
+    "show_instagram_feed",
+    "sb_custom_banner",
+    "custom_banner_image",
+    "custom_banner_text_ar",
+    "custom_banner_text_en",
+    "tab_contact_and_location",
+    "sb_contact_info",
+    "phone",
+    "phone_secondary",
+    "whatsapp_number",
+    "cb_7",
+    "whatsapp_default_message",
+    "email",
+    "sb_address",
+    "address_ar",
+    "address_en",
+    "cb_8",
+    "google_maps_embed",
+    "google_maps_url",
+    "latitude",
+    "longitude",
+    "sb_social_media",
+    "instagram_url",
+    "facebook_url",
+    "tiktok_url",
+    "cb_9",
+    "twitter_url",
+    "youtube_url",
+    "snapchat_url",
+    "sb_opening_hours",
+    "opening_hours",
+    "tab_features_and_ordering",
+    "sb_feature_toggles",
+    "enable_online_ordering",
+    "enable_reservations",
+    "enable_reviews",
+    "enable_newsletter",
+    "cb_10",
+    "enable_whatsapp_button",
+    "enable_delivery",
+    "enable_pickup",
+    "enable_promo_codes",
+    "sb_ordering_settings",
+    "minimum_order_amount",
+    "delivery_fee_default",
+    "estimated_delivery_min",
+    "cb_11",
+    "order_confirmation_msg",
+    "kitchen_notification_email",
+    "sb_reservation_settings",
+    "max_party_size",
+    "reservation_slot_minutes",
+    "cb_12",
+    "advance_booking_days",
+    "auto_confirm",
+    "tab_payments",
+    "sb_payment_methods",
+    "enable_cash_on_delivery",
+    "enable_paymob",
+    "enable_fawry",
+    "sb_paymob_configuration",
+    "paymob_api_key",
+    "paymob_integration_id",
+    "cb_13",
+    "paymob_iframe_id",
+    "paymob_hmac_secret",
+    "sb_fawry_configuration",
+    "fawry_merchant_code",
+    "fawry_security_key",
+    "tab_seo_and_analytics",
+    "sb_seo",
+    "meta_title",
+    "meta_description",
+    "meta_keywords",
+    "cb_14",
+    "og_image",
+    "structured_data_type",
+    "schema_price_range",
+    "sb_analytics",
+    "ga_tracking_id",
+    "meta_pixel_id",
+    "cb_15",
+    "tiktok_pixel_id",
+    "google_tag_manager_id",
+    "tab_advanced",
+    "sb_domain_&_login",
+    "candela_domain",
+    "enable_custom_login",
+    "cb_16",
+    "login_background_image",
+    "login_welcome_text_ar",
+    "login_welcome_text_en",
+    "sb_language_&_locale",
+    "default_language",
+    "enable_english",
+    "enable_italian",
+    "cb_17",
+    "currency_symbol",
+    "currency_code",
+    "sb_notifications",
+    "notify_new_reservation",
+    "notify_new_order",
+    "notify_new_review",
+    "cb_18",
+    "notification_email",
+    "whatsapp_notify_staff",
+    "sb_demo_data",
+    "demo_data_installed",
+    "demo_installed_on",
+    "sb_maintenance",
+    "maintenance_mode",
+    "maintenance_message",
+    "cb_19",
+    "custom_css",
+    "custom_js",
+    "custom_head_html"
+  ],
+  "fields": [
+    {
+      "fieldname": "tab_branding",
+      "fieldtype": "Tab Break",
+      "label": "Branding"
+    },
+    {
+      "fieldname": "sb_restaurant_identity",
+      "fieldtype": "Section Break",
+      "label": "Restaurant Identity"
+    },
+    {
+      "fieldname": "restaurant_name",
+      "fieldtype": "Data",
+      "label": "Restaurant Name",
+      "default": "Candela",
+      "reqd": 1
+    },
+    {
+      "fieldname": "restaurant_name_ar",
+      "fieldtype": "Data",
+      "label": "Restaurant Name (Arabic)",
+      "default": "كانديلا"
+    },
+    {
+      "fieldname": "cb_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "tagline_ar",
+      "fieldtype": "Data",
+      "label": "Tagline (Arabic)",
+      "default": "فن المطبخ الإيطالي الأصيل"
+    },
+    {
+      "fieldname": "tagline_en",
+      "fieldtype": "Data",
+      "label": "Tagline (English)",
+      "default": "The Art of Authentic Italian Cuisine"
+    },
+    {
+      "fieldname": "tagline_it",
+      "fieldtype": "Data",
+      "label": "Tagline (Italian)",
+      "default": "L'arte della cucina italiana"
+    },
+    {
+      "fieldname": "sb_logo_&_icons",
+      "fieldtype": "Section Break",
+      "label": "Logo & Icons"
+    },
+    {
+      "fieldname": "logo_dark",
+      "fieldtype": "Attach Image",
+      "label": "Logo (Dark - for light backgrounds)"
+    },
+    {
+      "fieldname": "logo_white",
+      "fieldtype": "Attach Image",
+      "label": "Logo (White - for dark backgrounds)"
+    },
+    {
+      "fieldname": "logo_gold",
+      "fieldtype": "Attach Image",
+      "label": "Logo (Gold)"
+    },
+    {
+      "fieldname": "cb_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "logo_icon",
+      "fieldtype": "Attach Image",
+      "label": "Logo Icon (circular)"
+    },
+    {
+      "fieldname": "favicon",
+      "fieldtype": "Attach Image",
+      "label": "Favicon"
+    },
+    {
+      "fieldname": "sb_brand_colors",
+      "fieldtype": "Section Break",
+      "label": "Brand Colors"
+    },
+    {
+      "fieldname": "color_primary",
+      "fieldtype": "Color",
+      "label": "Primary Color (Amber)",
+      "default": "#E8A521"
+    },
+    {
+      "fieldname": "color_dark",
+      "fieldtype": "Color",
+      "label": "Dark Color",
+      "default": "#2A2A2A"
+    },
+    {
+      "fieldname": "cb_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "color_green",
+      "fieldtype": "Color",
+      "label": "Green Color",
+      "default": "#5BB369"
+    },
+    {
+      "fieldname": "color_accent",
+      "fieldtype": "Color",
+      "label": "Accent Color",
+      "default": "#EEC621"
+    },
+    {
+      "fieldname": "tab_website_content",
+      "fieldtype": "Tab Break",
+      "label": "Website Content"
+    },
+    {
+      "fieldname": "sb_hero_section",
+      "fieldtype": "Section Break",
+      "label": "Hero Section"
+    },
+    {
+      "fieldname": "hero_image",
+      "fieldtype": "Attach Image",
+      "label": "Hero Background Image"
+    },
+    {
+      "fieldname": "hero_image_mobile",
+      "fieldtype": "Attach Image",
+      "label": "Hero Image (Mobile)"
+    },
+    {
+      "fieldname": "hero_overlay_opacity",
+      "fieldtype": "Percent",
+      "label": "Hero Overlay Opacity",
+      "default": "70"
+    },
+    {
+      "fieldname": "hero_video_url",
+      "fieldtype": "Data",
+      "label": "Hero Video URL"
+    },
+    {
+      "fieldname": "cb_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "show_hero_logo",
+      "fieldtype": "Check",
+      "label": "Show Animated Logo in Hero",
+      "default": "1"
+    },
+    {
+      "fieldname": "hero_cta_primary_text",
+      "fieldtype": "Data",
+      "label": "Primary CTA Text",
+      "default": "احجز طاولة"
+    },
+    {
+      "fieldname": "hero_cta_primary_url",
+      "fieldtype": "Data",
+      "label": "Primary CTA URL",
+      "default": "/dela/reservation"
+    },
+    {
+      "fieldname": "hero_cta_secondary_text",
+      "fieldtype": "Data",
+      "label": "Secondary CTA Text",
+      "default": "استكشف المنيو"
+    },
+    {
+      "fieldname": "hero_cta_secondary_url",
+      "fieldtype": "Data",
+      "label": "Secondary CTA URL",
+      "default": "/dela/menu"
+    },
+    {
+      "fieldname": "sb_about_section",
+      "fieldtype": "Section Break",
+      "label": "About Section"
+    },
+    {
+      "fieldname": "about_image",
+      "fieldtype": "Attach Image",
+      "label": "About Image"
+    },
+    {
+      "fieldname": "about_title_ar",
+      "fieldtype": "Data",
+      "label": "About Title (Arabic)",
+      "default": "قصتنا"
+    },
+    {
+      "fieldname": "about_title_en",
+      "fieldtype": "Data",
+      "label": "About Title (English)",
+      "default": "Our Story"
+    },
+    {
+      "fieldname": "cb_5",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "about_text_ar",
+      "fieldtype": "Text Editor",
+      "label": "About Text (Arabic)"
+    },
+    {
+      "fieldname": "about_text_en",
+      "fieldtype": "Text Editor",
+      "label": "About Text (English)"
+    },
+    {
+      "fieldname": "sb_homepage_sections",
+      "fieldtype": "Section Break",
+      "label": "Homepage Sections"
+    },
+    {
+      "fieldname": "show_about_section",
+      "fieldtype": "Check",
+      "label": "Show About Section",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_menu_highlights",
+      "fieldtype": "Check",
+      "label": "Show Menu Highlights",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_reservation_cta",
+      "fieldtype": "Check",
+      "label": "Show Reservation CTA",
+      "default": "1"
+    },
+    {
+      "fieldname": "cb_6",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "show_testimonials",
+      "fieldtype": "Check",
+      "label": "Show Testimonials",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_events",
+      "fieldtype": "Check",
+      "label": "Show Events",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_gallery",
+      "fieldtype": "Check",
+      "label": "Show Gallery",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_newsletter",
+      "fieldtype": "Check",
+      "label": "Show Newsletter",
+      "default": "1"
+    },
+    {
+      "fieldname": "show_instagram_feed",
+      "fieldtype": "Check",
+      "label": "Show Instagram Feed",
+      "default": "0"
+    },
+    {
+      "fieldname": "sb_custom_banner",
+      "fieldtype": "Section Break",
+      "label": "Custom Banner"
+    },
+    {
+      "fieldname": "custom_banner_image",
+      "fieldtype": "Attach Image",
+      "label": "Banner Image"
+    },
+    {
+      "fieldname": "custom_banner_text_ar",
+      "fieldtype": "Data",
+      "label": "Banner Text (Arabic)"
+    },
+    {
+      "fieldname": "custom_banner_text_en",
+      "fieldtype": "Data",
+      "label": "Banner Text (English)"
+    },
+    {
+      "fieldname": "tab_contact_and_location",
+      "fieldtype": "Tab Break",
+      "label": "Contact & Location"
+    },
+    {
+      "fieldname": "sb_contact_info",
+      "fieldtype": "Section Break",
+      "label": "Contact Info"
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone"
+    },
+    {
+      "fieldname": "phone_secondary",
+      "fieldtype": "Data",
+      "label": "Secondary Phone"
+    },
+    {
+      "fieldname": "whatsapp_number",
+      "fieldtype": "Data",
+      "label": "WhatsApp Number"
+    },
+    {
+      "fieldname": "cb_7",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "whatsapp_default_message",
+      "fieldtype": "Data",
+      "label": "WhatsApp Default Message"
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "sb_address",
+      "fieldtype": "Section Break",
+      "label": "Address"
+    },
+    {
+      "fieldname": "address_ar",
+      "fieldtype": "Small Text",
+      "label": "Address (Arabic)"
+    },
+    {
+      "fieldname": "address_en",
+      "fieldtype": "Small Text",
+      "label": "Address (English)"
+    },
+    {
+      "fieldname": "cb_8",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "google_maps_embed",
+      "fieldtype": "Code",
+      "label": "Google Maps Embed Code",
+      "options": "HTML"
+    },
+    {
+      "fieldname": "google_maps_url",
+      "fieldtype": "Data",
+      "label": "Google Maps URL"
+    },
+    {
+      "fieldname": "latitude",
+      "fieldtype": "Float",
+      "label": "Latitude"
+    },
+    {
+      "fieldname": "longitude",
+      "fieldtype": "Float",
+      "label": "Longitude"
+    },
+    {
+      "fieldname": "sb_social_media",
+      "fieldtype": "Section Break",
+      "label": "Social Media"
+    },
+    {
+      "fieldname": "instagram_url",
+      "fieldtype": "Data",
+      "label": "Instagram"
+    },
+    {
+      "fieldname": "facebook_url",
+      "fieldtype": "Data",
+      "label": "Facebook"
+    },
+    {
+      "fieldname": "tiktok_url",
+      "fieldtype": "Data",
+      "label": "TikTok"
+    },
+    {
+      "fieldname": "cb_9",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "twitter_url",
+      "fieldtype": "Data",
+      "label": "Twitter / X"
+    },
+    {
+      "fieldname": "youtube_url",
+      "fieldtype": "Data",
+      "label": "YouTube"
+    },
+    {
+      "fieldname": "snapchat_url",
+      "fieldtype": "Data",
+      "label": "Snapchat"
+    },
+    {
+      "fieldname": "sb_opening_hours",
+      "fieldtype": "Section Break",
+      "label": "Opening Hours"
+    },
+    {
+      "fieldname": "opening_hours",
+      "fieldtype": "Table",
+      "label": "Opening Hours",
+      "options": "Opening Hours"
+    },
+    {
+      "fieldname": "tab_features_and_ordering",
+      "fieldtype": "Tab Break",
+      "label": "Features & Ordering"
+    },
+    {
+      "fieldname": "sb_feature_toggles",
+      "fieldtype": "Section Break",
+      "label": "Feature Toggles"
+    },
+    {
+      "fieldname": "enable_online_ordering",
+      "fieldtype": "Check",
+      "label": "Enable Online Ordering",
+      "default": "0"
+    },
+    {
+      "fieldname": "enable_reservations",
+      "fieldtype": "Check",
+      "label": "Enable Reservations",
+      "default": "1"
+    },
+    {
+      "fieldname": "enable_reviews",
+      "fieldtype": "Check",
+      "label": "Enable Reviews",
+      "default": "1"
+    },
+    {
+      "fieldname": "enable_newsletter",
+      "fieldtype": "Check",
+      "label": "Enable Newsletter",
+      "default": "1"
+    },
+    {
+      "fieldname": "cb_10",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "enable_whatsapp_button",
+      "fieldtype": "Check",
+      "label": "Enable WhatsApp Button",
+      "default": "1"
+    },
+    {
+      "fieldname": "enable_delivery",
+      "fieldtype": "Check",
+      "label": "Enable Delivery",
+      "default": "0"
+    },
+    {
+      "fieldname": "enable_pickup",
+      "fieldtype": "Check",
+      "label": "Enable Pickup",
+      "default": "1"
+    },
+    {
+      "fieldname": "enable_promo_codes",
+      "fieldtype": "Check",
+      "label": "Enable Promo Codes",
+      "default": "0"
+    },
+    {
+      "fieldname": "sb_ordering_settings",
+      "fieldtype": "Section Break",
+      "label": "Ordering Settings"
+    },
+    {
+      "fieldname": "minimum_order_amount",
+      "fieldtype": "Currency",
+      "label": "Minimum Order Amount"
+    },
+    {
+      "fieldname": "delivery_fee_default",
+      "fieldtype": "Currency",
+      "label": "Default Delivery Fee"
+    },
+    {
+      "fieldname": "estimated_delivery_min",
+      "fieldtype": "Int",
+      "label": "Estimated Delivery (minutes)"
+    },
+    {
+      "fieldname": "cb_11",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "order_confirmation_msg",
+      "fieldtype": "Small Text",
+      "label": "Order Confirmation Message"
+    },
+    {
+      "fieldname": "kitchen_notification_email",
+      "fieldtype": "Data",
+      "label": "Kitchen Notification Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "sb_reservation_settings",
+      "fieldtype": "Section Break",
+      "label": "Reservation Settings"
+    },
+    {
+      "fieldname": "max_party_size",
+      "fieldtype": "Int",
+      "label": "Max Party Size",
+      "default": "20"
+    },
+    {
+      "fieldname": "reservation_slot_minutes",
+      "fieldtype": "Int",
+      "label": "Slot Duration (minutes)",
+      "default": "30"
+    },
+    {
+      "fieldname": "cb_12",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "advance_booking_days",
+      "fieldtype": "Int",
+      "label": "Advance Booking (days)",
+      "default": "30"
+    },
+    {
+      "fieldname": "auto_confirm",
+      "fieldtype": "Check",
+      "label": "Auto-Confirm Reservations",
+      "default": "0"
+    },
+    {
+      "fieldname": "tab_payments",
+      "fieldtype": "Tab Break",
+      "label": "Payments"
+    },
+    {
+      "fieldname": "sb_payment_methods",
+      "fieldtype": "Section Break",
+      "label": "Payment Methods"
+    },
+    {
+      "fieldname": "enable_cash_on_delivery",
+      "fieldtype": "Check",
+      "label": "Cash on Delivery",
+      "default": "1"
+    },
+    {
+      "fieldname": "enable_paymob",
+      "fieldtype": "Check",
+      "label": "Enable Paymob",
+      "default": "0"
+    },
+    {
+      "fieldname": "enable_fawry",
+      "fieldtype": "Check",
+      "label": "Enable Fawry",
+      "default": "0"
+    },
+    {
+      "fieldname": "sb_paymob_configuration",
+      "fieldtype": "Section Break",
+      "label": "Paymob Configuration"
+    },
+    {
+      "fieldname": "paymob_api_key",
+      "fieldtype": "Password",
+      "label": "Paymob API Key",
+      "depends_on": "enable_paymob"
+    },
+    {
+      "fieldname": "paymob_integration_id",
+      "fieldtype": "Data",
+      "label": "Paymob Integration ID",
+      "depends_on": "enable_paymob"
+    },
+    {
+      "fieldname": "cb_13",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "paymob_iframe_id",
+      "fieldtype": "Data",
+      "label": "Paymob iFrame ID",
+      "depends_on": "enable_paymob"
+    },
+    {
+      "fieldname": "paymob_hmac_secret",
+      "fieldtype": "Password",
+      "label": "Paymob HMAC Secret",
+      "depends_on": "enable_paymob"
+    },
+    {
+      "fieldname": "sb_fawry_configuration",
+      "fieldtype": "Section Break",
+      "label": "Fawry Configuration"
+    },
+    {
+      "fieldname": "fawry_merchant_code",
+      "fieldtype": "Data",
+      "label": "Fawry Merchant Code",
+      "depends_on": "enable_fawry"
+    },
+    {
+      "fieldname": "fawry_security_key",
+      "fieldtype": "Password",
+      "label": "Fawry Security Key",
+      "depends_on": "enable_fawry"
+    },
+    {
+      "fieldname": "tab_seo_and_analytics",
+      "fieldtype": "Tab Break",
+      "label": "SEO & Analytics"
+    },
+    {
+      "fieldname": "sb_seo",
+      "fieldtype": "Section Break",
+      "label": "SEO"
+    },
+    {
+      "fieldname": "meta_title",
+      "fieldtype": "Data",
+      "label": "Meta Title"
+    },
+    {
+      "fieldname": "meta_description",
+      "fieldtype": "Small Text",
+      "label": "Meta Description"
+    },
+    {
+      "fieldname": "meta_keywords",
+      "fieldtype": "Data",
+      "label": "Meta Keywords"
+    },
+    {
+      "fieldname": "cb_14",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "og_image",
+      "fieldtype": "Attach Image",
+      "label": "OG Image (1200×630)"
+    },
+    {
+      "fieldname": "structured_data_type",
+      "fieldtype": "Select",
+      "label": "Schema Type",
+      "options": "\nRestaurant\nCafeOrCoffeeShop"
+    },
+    {
+      "fieldname": "schema_price_range",
+      "fieldtype": "Data",
+      "label": "Price Range",
+      "default": "$$"
+    },
+    {
+      "fieldname": "sb_analytics",
+      "fieldtype": "Section Break",
+      "label": "Analytics"
+    },
+    {
+      "fieldname": "ga_tracking_id",
+      "fieldtype": "Data",
+      "label": "Google Analytics 4 ID"
+    },
+    {
+      "fieldname": "meta_pixel_id",
+      "fieldtype": "Data",
+      "label": "Meta Pixel ID"
+    },
+    {
+      "fieldname": "cb_15",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "tiktok_pixel_id",
+      "fieldtype": "Data",
+      "label": "TikTok Pixel ID"
+    },
+    {
+      "fieldname": "google_tag_manager_id",
+      "fieldtype": "Data",
+      "label": "GTM Container ID"
+    },
+    {
+      "fieldname": "tab_advanced",
+      "fieldtype": "Tab Break",
+      "label": "Advanced"
+    },
+    {
+      "fieldname": "sb_domain_&_login",
+      "fieldtype": "Section Break",
+      "label": "Domain & Login"
+    },
+    {
+      "fieldname": "candela_domain",
+      "fieldtype": "Data",
+      "label": "Candela Domain",
+      "description": "Domain for custom login (e.g. candela.restaurant). Leave empty to disable custom login."
+    },
+    {
+      "fieldname": "enable_custom_login",
+      "fieldtype": "Check",
+      "label": "Enable Custom Login",
+      "default": "1"
+    },
+    {
+      "fieldname": "cb_16",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "login_background_image",
+      "fieldtype": "Attach Image",
+      "label": "Login Background Image"
+    },
+    {
+      "fieldname": "login_welcome_text_ar",
+      "fieldtype": "Data",
+      "label": "Login Welcome (Arabic)",
+      "default": "مرحباً بك في كانديلا"
+    },
+    {
+      "fieldname": "login_welcome_text_en",
+      "fieldtype": "Data",
+      "label": "Login Welcome (English)",
+      "default": "Welcome to Candela"
+    },
+    {
+      "fieldname": "sb_language_&_locale",
+      "fieldtype": "Section Break",
+      "label": "Language & Locale"
+    },
+    {
+      "fieldname": "default_language",
+      "fieldtype": "Select",
+      "label": "Default Language",
+      "options": "ar\nen\nit",
+      "default": "ar"
+    },
+    {
+      "fieldname": "enable_english",
+      "fieldtype": "Check",
+      "label": "Enable English",
+      "default": "1"
+    },
+    {
+      "fieldname": "enable_italian",
+      "fieldtype": "Check",
+      "label": "Enable Italian",
+      "default": "0"
+    },
+    {
+      "fieldname": "cb_17",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "currency_symbol",
+      "fieldtype": "Data",
+      "label": "Currency Symbol",
+      "default": "ج.م"
+    },
+    {
+      "fieldname": "currency_code",
+      "fieldtype": "Data",
+      "label": "Currency Code",
+      "default": "EGP"
+    },
+    {
+      "fieldname": "sb_notifications",
+      "fieldtype": "Section Break",
+      "label": "Notifications"
+    },
+    {
+      "fieldname": "notify_new_reservation",
+      "fieldtype": "Check",
+      "label": "Notify New Reservation",
+      "default": "1"
+    },
+    {
+      "fieldname": "notify_new_order",
+      "fieldtype": "Check",
+      "label": "Notify New Order",
+      "default": "1"
+    },
+    {
+      "fieldname": "notify_new_review",
+      "fieldtype": "Check",
+      "label": "Notify New Review",
+      "default": "1"
+    },
+    {
+      "fieldname": "cb_18",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "notification_email",
+      "fieldtype": "Data",
+      "label": "Notification Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "whatsapp_notify_staff",
+      "fieldtype": "Check",
+      "label": "WhatsApp Notify Staff",
+      "default": "0"
+    },
+    {
+      "fieldname": "sb_demo_data",
+      "fieldtype": "Section Break",
+      "label": "Demo Data"
+    },
+    {
+      "fieldname": "demo_data_installed",
+      "fieldtype": "Check",
+      "label": "Demo Data Installed",
+      "read_only": 1,
+      "default": "0"
+    },
+    {
+      "fieldname": "demo_installed_on",
+      "fieldtype": "Datetime",
+      "label": "Demo Installed On",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sb_maintenance",
+      "fieldtype": "Section Break",
+      "label": "Maintenance"
+    },
+    {
+      "fieldname": "maintenance_mode",
+      "fieldtype": "Check",
+      "label": "Maintenance Mode",
+      "default": "0"
+    },
+    {
+      "fieldname": "maintenance_message",
+      "fieldtype": "Small Text",
+      "label": "Maintenance Message"
+    },
+    {
+      "fieldname": "cb_19",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "custom_css",
+      "fieldtype": "Code",
+      "label": "Custom CSS",
+      "options": "CSS"
+    },
+    {
+      "fieldname": "custom_js",
+      "fieldtype": "Code",
+      "label": "Custom JS",
+      "options": "JS"
+    },
+    {
+      "fieldname": "custom_head_html",
+      "fieldtype": "Code",
+      "label": "Custom Head HTML",
+      "options": "HTML"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 1,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Candela Settings",
+  "naming_rule": "",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "System Manager"
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Candela Manager"
+    },
+    {
+      "read": 1,
+      "role": "Candela Staff"
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "description": "Central configuration for Candela Restaurant website and operations."
+}

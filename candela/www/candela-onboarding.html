@@ -1,0 +1,12 @@
+{%- extends "templates/web.html" -%}
+{%- block title -%}Candela Onboarding{%- endblock -%}
+{%- block page_content -%}
+<div id="candela-onboarding-root" style="min-height:80vh"></div>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		if (window.candela && window.candela.onboarding) {
+			window.candela.onboarding.startGeneral('#candela-onboarding-root');
+		}
+	});
+</script>
+{%- endblock -%}

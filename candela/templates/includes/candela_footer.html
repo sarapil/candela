@@ -1,0 +1,79 @@
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+<footer class="candela-footer">
+	<div class="c-container">
+		<div class="c-footer-grid">
+			{# Brand Column #}
+			<div>
+				<div class="c-footer__logo">
+					<img src="/assets/candela/images/logo/logo-white.svg"
+						 alt="{{ candela.restaurant_name or 'Candela' }}" width="160" height="40">
+				</div>
+				<p class="c-footer__about">
+					{% if lang == 'ar' %}
+						{{ candela.tagline_ar or 'فن المطبخ الإيطالي الأصيل — تجربة طعام فاخرة في قلب المدينة' }}
+					{% else %}
+						{{ candela.tagline_en or 'The Art of Authentic Italian Cuisine — A luxury dining experience in the heart of the city' }}
+					{% endif %}
+				</p>
+				<div class="c-footer__social">
+					{% if candela.instagram_url %}<a href="{{ candela.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">📷</a>{% endif %}
+					{% if candela.facebook_url %}<a href="{{ candela.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">📘</a>{% endif %}
+					{% if candela.tiktok_url %}<a href="{{ candela.tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>{% endif %}
+					{% if candela.twitter_url %}<a href="{{ candela.twitter_url }}" target="_blank" rel="noopener" aria-label="Twitter">🐦</a>{% endif %}
+				</div>
+			</div>
+
+			{# Navigation #}
+			<div>
+				<h4 class="c-footer__heading">{{ _('روابط') if lang == 'ar' else _('Links') }}</h4>
+				<ul class="c-footer__links">
+					<li><a href="/dela/menu">{{ _('المنيو') if lang == 'ar' else _('Menu') }}</a></li>
+					<li><a href="/dela/reservation">{{ _('الحجز') if lang == 'ar' else _('Reservations') }}</a></li>
+					<li><a href="/dela/events">{{ _('الفعاليات') if lang == 'ar' else _('Events') }}</a></li>
+					<li><a href="/dela/gallery">{{ _('المعرض') if lang == 'ar' else _('Gallery') }}</a></li>
+					<li><a href="/dela/about">{{ _('قصتنا') if lang == 'ar' else _('Our Story') }}</a></li>
+				</ul>
+			</div>
+
+			{# Contact #}
+			<div>
+				<h4 class="c-footer__heading">{{ _('تواصل') if lang == 'ar' else _('Contact') }}</h4>
+				<ul class="c-footer__links">
+					{% if candela.phone %}<li><a href="tel:{{ candela.phone }}">📞 {{ candela.phone }}</a></li>{% endif %}
+					{% if candela.email %}<li><a href="mailto:{{ candela.email }}">✉️ {{ candela.email }}</a></li>{% endif %}
+					{% if candela.whatsapp_number %}<li><a href="https://wa.me/{{ candela.whatsapp_number }}" target="_blank">💬 WhatsApp</a></li>{% endif %}
+					{% if candela.address_ar or candela.address_en %}
+					<li style="margin-top: var(--s-sm);">📍 {{ candela.address_ar if lang == 'ar' else candela.address_en }}</li>
+					{% endif %}
+				</ul>
+			</div>
+
+			{# Hours #}
+			<div>
+				<h4 class="c-footer__heading">{{ _('ساعات العمل') if lang == 'ar' else _('Hours') }}</h4>
+				{%- set hours = get_opening_hours_display() -%}
+				{% if hours %}
+				<div class="c-hours">
+					{% for h in hours %}
+					<div class="c-hours__row">
+						<span class="c-hours__day">{{ h.day_ar if lang == 'ar' else h.day }}</span>
+						{% if h.is_closed %}
+						<span class="c-hours__closed">{{ _('مغلق') if lang == 'ar' else _('Closed') }}</span>
+						{% else %}
+						<span class="c-hours__time">{{ h.open_time }} - {{ h.close_time }}</span>
+						{% endif %}
+					</div>
+					{% endfor %}
+				</div>
+				{% endif %}
+			</div>
+		</div>
+
+		{# Bottom bar #}
+		<div class="c-footer__bottom">
+			<span>© {{ frappe.utils.now_datetime().year }} {{ candela.restaurant_name or 'Candela' }}. {{ _('جميع الحقوق محفوظة') if lang == 'ar' else _('All rights reserved.') }}</span>
+			<span>{{ _('صنع بـ ❤️ بواسطة') if lang == 'ar' else _('Crafted by') }} <a href="https://arkanlabs.com" target="_blank" style="color: var(--c-gold);">Arkan Labs</a></span>
+		</div>
+	</div>
+</footer>

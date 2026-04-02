@@ -1,0 +1,19 @@
+{
+ "name": "Menu Item Popularity",
+ "doctype": "Report",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Candela",
+ "is_standard": "Yes",
+ "report_type": "Script Report",
+ "ref_doctype": "Menu Item",
+ "disabled": 0,
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Candela Manager"
+  }
+ ]
+}

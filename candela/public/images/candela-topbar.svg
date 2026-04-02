@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28">
+  <defs>
+    <linearGradient id="tg" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+  </defs>
+  <!-- Candle -->
+  <rect x="12" y="15" width="4" height="8" rx="1" fill="#FEF3C7"/>
+  <!-- Flame -->
+  <path d="M14 4 C14 4 10.5 9 10.5 12.5 C10.5 15 12 16.5 14 16.5 C16 16.5 17.5 15 17.5 12.5 C17.5 9 14 4 14 4Z" fill="url(#tg)"/>
+  <path d="M14 8 C14 8 12.5 10.5 12.5 12 C12.5 13.5 13.2 14.5 14 14.5 C14.8 14.5 15.5 13.5 15.5 12 C15.5 10.5 14 8 14 8Z" fill="#FDE68A"/>
+  <!-- Base -->
+  <ellipse cx="14" cy="23" rx="5" ry="1.5" fill="#B45309"/>
+</svg>

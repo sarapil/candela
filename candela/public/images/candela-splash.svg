@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="sg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity=".25"/>
+      <stop offset="100%" stop-color="#1C1917" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <!-- Background glow -->
+  <circle cx="256" cy="256" r="256" fill="#1C1917"/>
+  <circle cx="256" cy="256" r="200" fill="url(#sg)">
+    <animate attributeName="r" values="180;200;180" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values=".6;1;.6" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Candle body -->
+  <rect x="230" y="260" width="52" height="120" rx="8" fill="#292524"/>
+  <rect x="234" y="264" width="44" height="112" rx="6" fill="#44403C"/>
+  <!-- Drip -->
+  <ellipse cx="268" cy="290" rx="6" ry="14" fill="#FEF3C7" opacity=".4">
+    <animate attributeName="ry" values="10;16;10" dur="4s" repeatCount="indefinite"/>
+  </ellipse>
+  <!-- Wick -->
+  <line x1="256" y1="260" x2="256" y2="230" stroke="#57534E" stroke-width="3" stroke-linecap="round"/>
+  <!-- Flame outer -->
+  <path d="M256 140 C240 180 225 215 256 230 C287 215 272 180 256 140Z" fill="#FBBF24" opacity=".7">
+    <animate attributeName="d" values="M256 140 C240 180 225 215 256 230 C287 215 272 180 256 140Z;M256 135 C238 178 222 218 256 232 C290 218 274 178 256 135Z;M256 140 C240 180 225 215 256 230 C287 215 272 180 256 140Z" dur="2s" repeatCount="indefinite"/>
+  </path>
+  <!-- Flame inner -->
+  <path d="M256 170 C248 195 242 215 256 222 C270 215 264 195 256 170Z" fill="#FEF3C7">
+    <animate attributeName="d" values="M256 170 C248 195 242 215 256 222 C270 215 264 195 256 170Z;M256 168 C247 193 240 217 256 224 C272 217 265 193 256 168Z;M256 170 C248 195 242 215 256 222 C270 215 264 195 256 170Z" dur="1.5s" repeatCount="indefinite"/>
+  </path>
+  <!-- Glow ring -->
+  <circle cx="256" cy="200" r="60" fill="none" stroke="#F59E0B" stroke-width="1" opacity=".3">
+    <animate attributeName="r" values="55;65;55" dur="2.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values=".2;.4;.2" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <!-- Text -->
+  <text x="256" y="430" text-anchor="middle" font-family="Georgia,serif" font-size="48" font-weight="bold" fill="url(#fg)">Candela</text>
+  <text x="256" y="458" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" fill="#A8A29E" letter-spacing="4">RESTAURANT</text>
+</svg>

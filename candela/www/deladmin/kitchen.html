@@ -1,0 +1,207 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+.kds { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1rem) 1rem 2rem; }
+.kds * { color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+.kds__header { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; flex-wrap:wrap; gap:.75rem; }
+.kds__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.5rem; }
+.kds__controls { display:flex; gap:.5rem; align-items:center; }
+.kds__refresh { padding:.5rem 1rem; border-radius:8px; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--c-cream,#F5F0E8)!important; cursor:pointer; font-size:.85rem; transition:all .2s; }
+.kds__refresh:hover { border-color:var(--c-gold,#C9A96E); }
+.kds__auto { font-size:.75rem; color:rgba(255,255,255,.4)!important; }
+.kds__sound { width:32px; height:32px; border-radius:50%; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--c-cream)!important; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; }
+
+/* Columns */
+.kds__board { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; align-items:start; }
+.kds__col { background:var(--c-dark,#0C0C0C); border-radius:12px; overflow:hidden; min-height:60vh; }
+.kds__col-header { padding:.75rem 1rem; font-weight:700; font-size:.85rem; letter-spacing:.08em; text-transform:uppercase; border-bottom:1px solid rgba(255,255,255,.06); display:flex; justify-content:space-between; align-items:center; }
+.kds__col-count { background:rgba(255,255,255,.1); font-size:.7rem; padding:2px 8px; border-radius:50px; }
+.kds__col--pending .kds__col-header { background:rgba(201,169,110,.12); }
+.kds__col--preparing .kds__col-header { background:rgba(59,130,246,.12); }
+.kds__col--ready .kds__col-header { background:rgba(91,179,105,.12); }
+.kds__col-body { padding:.5rem; display:flex; flex-direction:column; gap:.5rem; }
+
+/* Ticket */
+.kds-ticket { background:var(--c-charcoal,#1A1A1A); border:1px solid rgba(255,255,255,.06); border-radius:10px; padding:.75rem; transition:all .2s; }
+.kds-ticket:hover { border-color:rgba(255,255,255,.15); }
+.kds-ticket__header { display:flex; justify-content:space-between; align-items:center; margin-bottom:.5rem; }
+.kds-ticket__id { font-weight:700; font-size:.82rem; }
+.kds-ticket__type { font-size:.65rem; padding:2px 6px; border-radius:4px; letter-spacing:.05em; }
+.kds-ticket__type--pos { background:rgba(201,169,110,.15); color:var(--c-gold,#C9A96E)!important; }
+.kds-ticket__type--online { background:rgba(59,130,246,.15); color:#3B82F6!important; }
+.kds-ticket__table { font-size:.72rem; color:rgba(255,255,255,.5)!important; }
+.kds-ticket__time { font-size:.68rem; color:rgba(255,255,255,.35)!important; margin-top:.15rem; }
+.kds-ticket__time--urgent { color:#D4534B!important; font-weight:700; }
+.kds-ticket__items { margin:.5rem 0; }
+.kds-ticket__item { font-size:.82rem; padding:.2rem 0; display:flex; gap:.4rem; }
+.kds-ticket__item-qty { font-weight:700; color:var(--c-gold,#C9A96E)!important; min-width:22px; }
+.kds-ticket__item-note { font-size:.7rem; color:rgba(255,255,255,.4)!important; font-style:italic; padding-inline-start:22px; }
+.kds-ticket__actions { display:flex; gap:.4rem; margin-top:.5rem; }
+.kds-ticket__btn { flex:1; padding:.4rem; border-radius:6px; border:none; font-size:.75rem; font-weight:600; cursor:pointer; transition:all .15s; }
+.kds-ticket__btn--next { background:var(--c-gold,#C9A96E); color:var(--c-charcoal,#1A1A1A)!important; }
+.kds-ticket__btn--next:hover { background:#D4B97A; }
+.kds-ticket__btn--done { background:#5BB369; color:#fff!important; }
+.kds-ticket__btn--done:hover { background:#4DA35A; }
+.kds-ticket__btn--recall { background:transparent; border:1px solid rgba(255,255,255,.15); color:var(--c-cream,#F5F0E8)!important; }
+
+.kds__empty { text-align:center; padding:2rem; color:rgba(255,255,255,.25)!important; font-size:.85rem; font-style:italic; }
+
+/* Timer color coding */
+.kds-ticket[data-elapsed-min] { border-inline-start:3px solid transparent; }
+.kds-ticket--normal { border-inline-start-color:var(--c-gold,#C9A96E); }
+.kds-ticket--warn { border-inline-start-color:#F59E0B; }
+.kds-ticket--urgent { border-inline-start-color:#D4534B; animation:kds-pulse 1.5s infinite; }
+@keyframes kds-pulse { 0%,100%{opacity:1}50%{opacity:.7} }
+
+@media(max-width:900px){
+	.kds__board { grid-template-columns:1fr; }
+	.kds__col { min-height:auto; }
+}
+</style>
+
+<div class="kds" id="kdsApp">
+	<div class="kds__header">
+		<h1 class="kds__title">🔥 {{ _('شاشة المطبخ') if lang == 'ar' else 'Kitchen Display' }}</h1>
+		<div class="kds__controls">
+			<span class="kds__auto" id="kdsTimer">{{ _('تحديث تلقائي كل 15 ثانية') if lang == 'ar' else 'Auto-refresh every 15s' }}</span>
+			<button class="kds__refresh" onclick="KDS.load()">🔄 {{ _('تحديث') if lang == 'ar' else 'Refresh' }}</button>
+			<button class="kds__sound" id="kdsSound" onclick="KDS.toggleSound()" title="Toggle sound">🔔</button>
+		</div>
+	</div>
+	<div class="kds__board">
+		<div class="kds__col kds__col--pending">
+			<div class="kds__col-header">
+				<span>🟡 {{ _('جديد') if lang == 'ar' else 'New' }}</span>
+				<span class="kds__col-count" id="countPending">0</span>
+			</div>
+			<div class="kds__col-body" id="colPending"></div>
+		</div>
+		<div class="kds__col kds__col--preparing">
+			<div class="kds__col-header">
+				<span>🔵 {{ _('قيد التحضير') if lang == 'ar' else 'Preparing' }}</span>
+				<span class="kds__col-count" id="countPreparing">0</span>
+			</div>
+			<div class="kds__col-body" id="colPreparing"></div>
+		</div>
+		<div class="kds__col kds__col--ready">
+			<div class="kds__col-header">
+				<span>🟢 {{ _('جاهز') if lang == 'ar' else 'Ready' }}</span>
+				<span class="kds__col-count" id="countReady">0</span>
+			</div>
+			<div class="kds__col-body" id="colReady"></div>
+		</div>
+	</div>
+</div>
+
+<script>
+const LANG = '{{ lang }}';
+const KDS = {
+	soundEnabled: true,
+	prevPendingCount: 0,
+	refreshInterval: null,
+
+	init() {
+		this.load();
+		this.refreshInterval = setInterval(() => this.load(), 15000);
+		// Listen for realtime events
+		if (frappe && frappe.realtime) {
+			frappe.realtime.on('pos_invoice_updated', () => this.load());
+			frappe.realtime.on('new_kitchen_order', () => { this.load(); this.playSound(); });
+		}
+	},
+
+	async load() {
+		try {
+			const r = await frappe.call({ method: 'candela.api.get_kitchen_orders' });
+			if (r && r.message) this.render(r.message);
+		} catch(e) { console.error('KDS load error:', e); }
+	},
+
+	render(data) {
+		const now = new Date();
+		['Pending','Preparing','Ready'].forEach(status => {
+			const key = status.toLowerCase();
+			const orders = data[key] || [];
+			const col = document.getElementById('col' + status.charAt(0).toUpperCase() + status.slice(1));
+			const count = document.getElementById('count' + status.charAt(0).toUpperCase() + status.slice(1));
+			count.textContent = orders.length;
+
+			if (!orders.length) {
+				col.innerHTML = `<div class="kds__empty">${LANG==='ar'?'لا توجد طلبات':'No orders'}</div>`;
+				return;
+			}
+
+			col.innerHTML = orders.map(o => {
+				const created = new Date(o.creation);
+				const mins = Math.floor((now - created) / 60000);
+				const urgency = mins > 20 ? 'urgent' : mins > 10 ? 'warn' : 'normal';
+				const source = o.source === 'POS' ? 'pos' : 'online';
+				const itemsHtml = (o.items || []).map(i =>
+					`<div class="kds-ticket__item"><span class="kds-ticket__item-qty">${i.quantity}×</span><span>${i.item_name||i.menu_item}</span></div>` +
+					(i.special_instructions ? `<div class="kds-ticket__item-note">📝 ${i.special_instructions}</div>` : '')
+				).join('');
+
+				let btns = '';
+				if (status === 'Pending') btns = `<button class="kds-ticket__btn kds-ticket__btn--next" onclick="KDS.updateStatus('${o.name}','${o.source}','Preparing')">▶ ${LANG==='ar'?'بدء التحضير':'Start'}</button>`;
+				else if (status === 'Preparing') btns = `<button class="kds-ticket__btn kds-ticket__btn--done" onclick="KDS.updateStatus('${o.name}','${o.source}','Ready')">✓ ${LANG==='ar'?'جاهز':'Ready'}</button>`;
+				else btns = `<button class="kds-ticket__btn kds-ticket__btn--done" onclick="KDS.updateStatus('${o.name}','${o.source}','Served')">🍽️ ${LANG==='ar'?'تم التقديم':'Served'}</button><button class="kds-ticket__btn kds-ticket__btn--recall" onclick="KDS.updateStatus('${o.name}','${o.source}','Preparing')">↩ ${LANG==='ar'?'إرجاع':'Recall'}</button>`;
+
+				return `
+				<div class="kds-ticket kds-ticket--${urgency}" data-elapsed-min="${mins}">
+					<div class="kds-ticket__header">
+						<div>
+							<span class="kds-ticket__id">#${o.name.slice(-6)}</span>
+							<span class="kds-ticket__type kds-ticket__type--${source}">${source.toUpperCase()}</span>
+						</div>
+						<span class="kds-ticket__time ${urgency==='urgent'?'kds-ticket__time--urgent':''}">${mins} ${LANG==='ar'?'د':'m'}</span>
+					</div>
+					${o.table ? `<div class="kds-ticket__table">🪑 ${o.table} · ${o.order_type||''}</div>` : `<div class="kds-ticket__table">${o.order_type||''}</div>`}
+					<div class="kds-ticket__items">${itemsHtml}</div>
+					<div class="kds-ticket__actions">${btns}</div>
+				</div>`;
+			}).join('');
+		});
+
+		// Sound alert for new orders
+		const newPending = (data.pending || []).length;
+		if (newPending > this.prevPendingCount && this.prevPendingCount >= 0) this.playSound();
+		this.prevPendingCount = newPending;
+	},
+
+	async updateStatus(name, source, newStatus) {
+		try {
+			await frappe.call({
+				method: 'candela.api.update_kitchen_status',
+				args: { order_name: name, source: source, new_status: newStatus }
+			});
+			this.load();
+		} catch(e) { console.error('Update error:', e); }
+	},
+
+	playSound() {
+		if (!this.soundEnabled) return;
+		try {
+			const ctx = new (window.AudioContext || window.webkitAudioContext)();
+			const osc = ctx.createOscillator();
+			const gain = ctx.createGain();
+			osc.connect(gain); gain.connect(ctx.destination);
+			osc.type = 'sine'; osc.frequency.value = 800;
+			gain.gain.value = 0.3;
+			osc.start(); osc.stop(ctx.currentTime + 0.2);
+			setTimeout(() => { const o2 = ctx.createOscillator(); o2.connect(gain); o2.type='sine'; o2.frequency.value=1000; o2.start(); o2.stop(ctx.currentTime+0.15); }, 250);
+		} catch(e) {}
+	},
+
+	toggleSound() {
+		this.soundEnabled = !this.soundEnabled;
+		document.getElementById('kdsSound').textContent = this.soundEnabled ? '🔔' : '🔕';
+	}
+};
+
+document.addEventListener('DOMContentLoaded', () => KDS.init());
+</script>
+
+{%- endblock -%}

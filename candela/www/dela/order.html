@@ -1,0 +1,284 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+{# ═══════ PAGE HEADER ═══════ #}
+<section class="c-page-header"
+	{% if candela.order_cover_image %}style="background-image:url('{{ candela.order_cover_image }}')"{% endif %}>
+	<div class="c-page-header__overlay"></div>
+	<div class="c-page-header__content">
+		<span class="c-section-header__label">{{ _('اطلب أونلاين') if lang == 'ar' else 'Order Online' }}</span>
+		<h1>{{ _('اطلب الآن') if lang == 'ar' else 'Order Now' }}</h1>
+	</div>
+</section>
+
+{# ═══════ MENU + CART ═══════ #}
+<section class="c-section c-section--ivory">
+	<div class="c-container">
+		{# ── Category Filters ── #}
+		<div class="c-filters c-reveal">
+			<button class="c-filter-btn c-filter-btn--active" data-category="all">
+				{{ _('الكل') if lang == 'ar' else 'All' }}
+			</button>
+			{% for cat in categories %}
+			<button class="c-filter-btn" data-category="{{ cat.name }}">
+				{{ cat.category_name_ar if lang == 'ar' else cat.category_name_en }}
+			</button>
+			{% endfor %}
+		</div>
+
+		<div style="display:grid;grid-template-columns:1fr 360px;gap:var(--s-2xl);align-items:start;">
+			{# ── Items Grid ── #}
+			<div class="c-grid c-grid--2 c-stagger" id="order-grid">
+				{% for item in items %}
+				{% if item.available_for_delivery %}
+				<div class="c-menu-card c-reveal" data-category="{{ item.category }}" data-name="{{ item.name }}"
+					data-price="{{ item.discounted_price or item.price }}"
+					data-item-name="{{ item.item_name_ar if lang == 'ar' else item.item_name_en }}">
+					{% if item.image %}
+					<div class="c-menu-card__img-wrap">
+						<img src="{{ item.image }}" alt="{{ item.item_name_en }}" class="c-menu-card__img" loading="lazy">
+					</div>
+					{% endif %}
+					<div class="c-menu-card__body">
+						<h3 class="c-menu-card__name">
+							{{ item.item_name_ar if lang == 'ar' else item.item_name_en }}
+						</h3>
+						<div class="c-menu-card__footer">
+							<span class="c-price">
+								{% if item.discounted_price %}
+								<span class="c-price--old">{{ item.price }}</span>
+								{{ item.discounted_price }}
+								{% else %}
+								{{ item.price }}
+								{% endif %}
+								<span class="c-price__currency">{{ _('ج.م') }}</span>
+							</span>
+							<button class="c-btn c-btn--gold" style="padding:0.4rem 1rem;font-size:0.85rem;"
+								onclick="addToCart(this.closest('.c-menu-card'))">
+								{{ _('أضف') if lang == 'ar' else 'Add' }}
+							</button>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+				{% endfor %}
+			</div>
+
+			{# ── Cart Sidebar ── #}
+			<div id="cart-panel" style="position:sticky;top:100px;background:var(--c-white);border-radius:var(--r-lg);box-shadow:0 4px 30px rgba(0,0,0,0.08);padding:var(--s-xl);">
+				<h3 style="font-family:var(--f-heading);font-size:1.2rem;color:var(--c-dark);margin-bottom:var(--s-md);display:flex;align-items:center;gap:var(--s-xs);">
+					🛒 {{ _('سلة الطلبات') if lang == 'ar' else 'Your Order' }}
+					<span id="cart-count" style="background:var(--c-gold);color:var(--c-dark);font-size:0.7rem;border-radius:50%;width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-family:var(--f-body);">0</span>
+				</h3>
+				<div id="cart-items" style="max-height:300px;overflow-y:auto;margin-bottom:var(--s-md);"></div>
+				<div id="cart-empty" style="text-align:center;padding:var(--s-xl) 0;color:var(--c-text-muted);font-size:0.9rem;">
+					{{ _('سلتك فارغة') if lang == 'ar' else 'Your cart is empty' }}
+				</div>
+
+				<div id="cart-summary" style="display:none;border-top:1px solid var(--c-border);padding-top:var(--s-md);">
+					<div style="display:flex;justify-content:space-between;margin-bottom:var(--s-xs);">
+						<span style="color:var(--c-text-light);">{{ _('المجموع') if lang == 'ar' else 'Subtotal' }}</span>
+						<span id="cart-subtotal" style="color:var(--c-dark);font-weight:600;">0</span>
+					</div>
+					<div style="display:flex;justify-content:space-between;margin-bottom:var(--s-md);">
+						<span style="color:var(--c-text-light);">{{ _('التوصيل') if lang == 'ar' else 'Delivery' }}</span>
+						<span id="cart-delivery" style="color:var(--c-dark);">{{ candela.delivery_fee or 0 }} {{ _('ج.م') }}</span>
+					</div>
+					<div style="display:flex;justify-content:space-between;font-size:1.15rem;font-weight:700;color:var(--c-gold);padding-top:var(--s-sm);border-top:2px solid var(--c-gold);">
+						<span>{{ _('الإجمالي') if lang == 'ar' else 'Total' }}</span>
+						<span id="cart-total">0</span>
+					</div>
+				</div>
+
+				<button id="checkout-btn" class="c-btn c-btn--gold c-btn--block" style="margin-top:var(--s-md);display:none;"
+					onclick="showCheckout()">
+					{{ _('إتمام الطلب') if lang == 'ar' else 'Checkout' }}
+				</button>
+			</div>
+		</div>
+	</div>
+</section>
+
+{# ═══════ CHECKOUT MODAL ═══════ #}
+<div id="checkout-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7);overflow-y:auto;">
+	<div style="max-width:600px;margin:5vh auto;background:var(--c-white);border-radius:var(--r-lg);padding:var(--s-2xl);">
+		<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--s-xl);">
+			<h2 style="font-family:var(--f-heading);color:var(--c-dark);">{{ _('إتمام الطلب') if lang == 'ar' else 'Checkout' }}</h2>
+			<button onclick="closeCheckout()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--c-text-muted);">&times;</button>
+		</div>
+		<form id="checkout-form" onsubmit="return false;">
+			<div class="c-form-row">
+				<div class="c-form-group">
+					<label class="c-form-label">{{ _('الاسم') if lang == 'ar' else 'Name' }} *</label>
+					<input type="text" class="c-form-input" name="customer_name" required>
+				</div>
+				<div class="c-form-group">
+					<label class="c-form-label">{{ _('الهاتف') if lang == 'ar' else 'Phone' }} *</label>
+					<input type="tel" class="c-form-input" name="phone" required>
+				</div>
+			</div>
+			<div class="c-form-group">
+				<label class="c-form-label">{{ _('نوع الطلب') if lang == 'ar' else 'Order Type' }} *</label>
+				<select class="c-form-input" name="order_type" required onchange="toggleDeliveryFields(this.value)">
+					<option value="Delivery">{{ _('توصيل') if lang == 'ar' else 'Delivery' }}</option>
+					<option value="Pickup">{{ _('استلام من المطعم') if lang == 'ar' else 'Pickup' }}</option>
+				</select>
+			</div>
+			<div id="delivery-fields">
+				<div class="c-form-group">
+					<label class="c-form-label">{{ _('عنوان التوصيل') if lang == 'ar' else 'Delivery Address' }} *</label>
+					<textarea class="c-form-input" name="delivery_address" rows="2"></textarea>
+				</div>
+			</div>
+			<div class="c-form-group">
+				<label class="c-form-label">{{ _('ملاحظات') if lang == 'ar' else 'Notes' }}</label>
+				<textarea class="c-form-input" name="notes" rows="2"></textarea>
+			</div>
+			<div class="c-form-group">
+				<label class="c-form-label">{{ _('كود خصم') if lang == 'ar' else 'Promo Code' }}</label>
+				<div style="display:flex;gap:var(--s-sm);">
+					<input type="text" class="c-form-input" name="promo_code" id="promo-input" style="flex:1;">
+					<button type="button" class="c-btn c-btn--outline" onclick="applyPromo()">{{ _('تطبيق') if lang == 'ar' else 'Apply' }}</button>
+				</div>
+				<small id="promo-msg" style="display:none;margin-top:4px;"></small>
+			</div>
+			<button type="submit" class="c-btn c-btn--gold c-btn--lg c-btn--block" id="place-order-btn">
+				{{ _('تأكيد الطلب') if lang == 'ar' else 'Place Order' }}
+			</button>
+		</form>
+	</div>
+</div>
+
+<script>
+var cart = [];
+var deliveryFee = {{ candela.delivery_fee or 0 }};
+var promoDiscount = 0;
+
+function addToCart(card) {
+	var name = card.getAttribute('data-name');
+	var price = parseFloat(card.getAttribute('data-price'));
+	var itemName = card.getAttribute('data-item-name');
+	var existing = cart.find(function(i) { return i.name === name; });
+	if (existing) { existing.qty++; } else { cart.push({ name: name, itemName: itemName, price: price, qty: 1 }); }
+	renderCart();
+	candela.toast('{{ _("تمت الإضافة") if lang == "ar" else "Added" }}', 'success');
+}
+
+function removeFromCart(name) {
+	cart = cart.filter(function(i) { return i.name !== name; });
+	renderCart();
+}
+
+function updateQty(name, delta) {
+	var item = cart.find(function(i) { return i.name === name; });
+	if (item) { item.qty += delta; if (item.qty <= 0) removeFromCart(name); else renderCart(); }
+}
+
+function renderCart() {
+	var container = document.getElementById('cart-items');
+	var empty = document.getElementById('cart-empty');
+	var summary = document.getElementById('cart-summary');
+	var btn = document.getElementById('checkout-btn');
+	var count = document.getElementById('cart-count');
+
+	if (cart.length === 0) {
+		container.innerHTML = '';
+		empty.style.display = 'block';
+		summary.style.display = 'none';
+		btn.style.display = 'none';
+		count.textContent = '0';
+		return;
+	}
+
+	empty.style.display = 'none';
+	summary.style.display = 'block';
+	btn.style.display = 'block';
+	count.textContent = cart.reduce(function(s, i) { return s + i.qty; }, 0);
+
+	var html = '';
+	var subtotal = 0;
+	cart.forEach(function(item) {
+		var total = item.price * item.qty;
+		subtotal += total;
+		html += '<div style="display:flex;justify-content:space-between;align-items:center;padding:var(--s-sm) 0;border-bottom:1px solid var(--c-border);">' +
+			'<div style="flex:1;"><strong style="color:var(--c-dark);font-size:0.9rem;">' + item.itemName + '</strong>' +
+			'<div style="display:flex;align-items:center;gap:var(--s-xs);margin-top:4px;">' +
+			'<button onclick="updateQty(\'' + item.name + '\', -1)" style="border:1px solid var(--c-border);background:none;width:24px;height:24px;border-radius:4px;cursor:pointer;">−</button>' +
+			'<span style="font-size:0.85rem;">' + item.qty + '</span>' +
+			'<button onclick="updateQty(\'' + item.name + '\', 1)" style="border:1px solid var(--c-border);background:none;width:24px;height:24px;border-radius:4px;cursor:pointer;">+</button></div></div>' +
+			'<div style="text-align:right;"><span style="color:var(--c-gold);font-weight:600;">' + total.toFixed(0) + '</span>' +
+			'<button onclick="removeFromCart(\'' + item.name + '\')" style="display:block;background:none;border:none;color:#c0392b;font-size:0.75rem;cursor:pointer;margin-top:2px;">{{ _("حذف") if lang == "ar" else "Remove" }}</button></div></div>';
+	});
+	container.innerHTML = html;
+	document.getElementById('cart-subtotal').textContent = subtotal.toFixed(0) + ' {{ _("ج.م") }}';
+	var totalVal = subtotal + deliveryFee - promoDiscount;
+	document.getElementById('cart-total').textContent = totalVal.toFixed(0) + ' {{ _("ج.م") }}';
+}
+
+function showCheckout() { document.getElementById('checkout-modal').style.display = 'block'; document.body.style.overflow = 'hidden'; }
+function closeCheckout() { document.getElementById('checkout-modal').style.display = 'none'; document.body.style.overflow = ''; }
+
+function toggleDeliveryFields(val) {
+	document.getElementById('delivery-fields').style.display = val === 'Delivery' ? 'block' : 'none';
+}
+
+function applyPromo() {
+	var code = document.getElementById('promo-input').value.trim();
+	if (!code) return;
+	candela.api('candela.api.validate_promo_code', { code: code }).then(function(r) {
+		if (r.message && r.message.valid) {
+			promoDiscount = r.message.discount_amount || 0;
+			document.getElementById('promo-msg').style.display = 'block';
+			document.getElementById('promo-msg').style.color = '#27ae60';
+			document.getElementById('promo-msg').textContent = '{{ _("تم تطبيق الخصم!") if lang == "ar" else "Discount applied!" }}';
+			renderCart();
+		}
+	});
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+	// Category filter
+	var btns = document.querySelectorAll('.c-filter-btn[data-category]');
+	var cards = document.querySelectorAll('#order-grid .c-menu-card');
+	btns.forEach(function(btn) {
+		btn.addEventListener('click', function() {
+			btns.forEach(function(b) { b.classList.remove('c-filter-btn--active'); });
+			btn.classList.add('c-filter-btn--active');
+			var cat = btn.getAttribute('data-category');
+			cards.forEach(function(card) {
+				card.style.display = (cat === 'all' || card.getAttribute('data-category') === cat) ? '' : 'none';
+			});
+		});
+	});
+
+	// Submit order
+	document.getElementById('checkout-form').addEventListener('submit', function(e) {
+		e.preventDefault();
+		var btn = document.getElementById('place-order-btn');
+		btn.disabled = true;
+
+		var fd = new FormData(this);
+		var data = {};
+		fd.forEach(function(v, k) { data[k] = v; });
+		data.items = JSON.stringify(cart.map(function(i) { return { item: i.name, qty: i.qty }; }));
+		if (promoDiscount > 0) data.promo_code = document.getElementById('promo-input').value;
+
+		candela.api('candela.api.submit_order', data).then(function(r) {
+			closeCheckout();
+			var orderId = r.message && r.message.order_id;
+			if (orderId) {
+				window.location.href = '/dela/order_tracking?id=' + orderId;
+			} else {
+				candela.toast('{{ _("تم الطلب بنجاح!") if lang == "ar" else "Order placed!" }}', 'success');
+				cart = [];
+				renderCart();
+			}
+		}).catch(function() { btn.disabled = false; });
+	});
+});
+</script>
+
+{%- endblock -%}

@@ -1,0 +1,84 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "visit_date",
+    "purpose",
+    "items_offered",
+    "post_url",
+    "post_date",
+    "engagement",
+    "estimated_reach",
+    "cost",
+    "status"
+  ],
+  "fields": [
+    {
+      "fieldname": "visit_date",
+      "fieldtype": "Date",
+      "label": "Visit Date",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "purpose",
+      "fieldtype": "Data",
+      "label": "Purpose",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "items_offered",
+      "fieldtype": "Small Text",
+      "label": "Items Offered"
+    },
+    {
+      "fieldname": "post_url",
+      "fieldtype": "Data",
+      "label": "Post URL"
+    },
+    {
+      "fieldname": "post_date",
+      "fieldtype": "Date",
+      "label": "Post Date"
+    },
+    {
+      "fieldname": "engagement",
+      "fieldtype": "Int",
+      "label": "Engagement (likes+comments)",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "estimated_reach",
+      "fieldtype": "Int",
+      "label": "Estimated Reach"
+    },
+    {
+      "fieldname": "cost",
+      "fieldtype": "Currency",
+      "label": "Cost",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Invited\nConfirmed\nVisited\nPosted\nPaid",
+      "in_list_view": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Influencer Visit",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

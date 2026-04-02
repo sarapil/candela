@@ -1,0 +1,6 @@
+{%- extends "templates/web.html" -%}
+{%- block title -%}About Candela Restaurant{%- endblock -%}
+{%- block page_content -%}
+<div id="candela-about-root" style="min-height:80vh"></div>
+<script src="/assets/candela/js/candela_about.js?v={{ frappe.utils.now() }}"></script>
+{%- endblock -%}

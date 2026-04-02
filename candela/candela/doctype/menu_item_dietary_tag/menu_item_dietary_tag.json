@@ -1,0 +1,35 @@
+{
+  "actions": [],
+  "autoname": "",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "dietary_tag"
+  ],
+  "fields": [
+    {
+      "fieldname": "dietary_tag",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Dietary Tag",
+      "options": "Vegetarian\nVegan\nGluten-Free\nSpicy\nContains Nuts\nDairy-Free\nHalal",
+      "reqd": 1
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Menu Item Dietary Tag",
+  "naming_rule": "",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

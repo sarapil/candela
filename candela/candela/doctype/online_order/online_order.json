@@ -1,0 +1,279 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "customer_name",
+    "phone",
+    "email",
+    "sb_order_type",
+    "order_type",
+    "order_channel",
+    "sb_delivery_details",
+    "delivery_address",
+    "delivery_zone",
+    "delivery_fee",
+    "delivery_notes",
+    "sb_items",
+    "items",
+    "sb_pricing",
+    "subtotal",
+    "discount_amount",
+    "promo_code",
+    "cb_137854788928576",
+    "total",
+    "sb_payment",
+    "payment_method",
+    "payment_status",
+    "payment_reference",
+    "sb_status",
+    "status",
+    "estimated_time",
+    "actual_delivery_time",
+    "sb_tracking",
+    "tracking_token",
+    "internal_notes",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CORD-.YYYY.-.#####",
+      "default": "CORD-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "customer_name",
+      "fieldtype": "Data",
+      "label": "Customer Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone",
+      "reqd": 1
+    },
+    {
+      "fieldname": "email",
+      "fieldtype": "Data",
+      "label": "Email",
+      "options": "Email"
+    },
+    {
+      "fieldname": "sb_order_type",
+      "fieldtype": "Section Break",
+      "label": "Order Type"
+    },
+    {
+      "fieldname": "order_type",
+      "fieldtype": "Select",
+      "label": "Order Type",
+      "options": "Delivery\nPickup",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "order_channel",
+      "fieldtype": "Select",
+      "label": "Order Channel",
+      "options": "Web\nPhone\nWhatsApp\nTalabat\nInstashop\nQR Table\nWalk-in\nCatering",
+      "default": "Web",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "sb_delivery_details",
+      "fieldtype": "Section Break",
+      "label": "Delivery Details"
+    },
+    {
+      "fieldname": "delivery_address",
+      "fieldtype": "Small Text",
+      "label": "Delivery Address",
+      "depends_on": "eval:doc.order_type=='Delivery'",
+      "mandatory_depends_on": "eval:doc.order_type=='Delivery'"
+    },
+    {
+      "fieldname": "delivery_zone",
+      "fieldtype": "Link",
+      "label": "Delivery Zone",
+      "options": "Delivery Zone",
+      "depends_on": "eval:doc.order_type=='Delivery'"
+    },
+    {
+      "fieldname": "delivery_fee",
+      "fieldtype": "Currency",
+      "label": "Delivery Fee"
+    },
+    {
+      "fieldname": "delivery_notes",
+      "fieldtype": "Small Text",
+      "label": "Delivery Notes"
+    },
+    {
+      "fieldname": "sb_items",
+      "fieldtype": "Section Break",
+      "label": "Items"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Order Items",
+      "options": "Order Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "sb_pricing",
+      "fieldtype": "Section Break",
+      "label": "Pricing"
+    },
+    {
+      "fieldname": "subtotal",
+      "fieldtype": "Currency",
+      "label": "Subtotal",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "discount_amount",
+      "fieldtype": "Currency",
+      "label": "Discount"
+    },
+    {
+      "fieldname": "promo_code",
+      "fieldtype": "Link",
+      "label": "Promo Code",
+      "options": "Promo Code"
+    },
+    {
+      "fieldname": "cb_137854788928576",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "total",
+      "fieldtype": "Currency",
+      "label": "Total",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "sb_payment",
+      "fieldtype": "Section Break",
+      "label": "Payment"
+    },
+    {
+      "fieldname": "payment_method",
+      "fieldtype": "Select",
+      "label": "Payment Method",
+      "options": "Cash on Delivery\nPaymob\nFawry",
+      "default": "Cash on Delivery"
+    },
+    {
+      "fieldname": "payment_status",
+      "fieldtype": "Select",
+      "label": "Payment Status",
+      "options": "Pending\nPaid\nFailed\nRefunded",
+      "default": "Pending"
+    },
+    {
+      "fieldname": "payment_reference",
+      "fieldtype": "Data",
+      "label": "Payment Reference"
+    },
+    {
+      "fieldname": "sb_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Pending\nConfirmed\nPreparing\nReady\nOut for Delivery\nDelivered\nCancelled",
+      "default": "Pending",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "estimated_time",
+      "fieldtype": "Int",
+      "label": "Estimated Time (min)"
+    },
+    {
+      "fieldname": "actual_delivery_time",
+      "fieldtype": "Datetime",
+      "label": "Actual Delivery Time"
+    },
+    {
+      "fieldname": "sb_tracking",
+      "fieldtype": "Section Break",
+      "label": "Tracking"
+    },
+    {
+      "fieldname": "tracking_token",
+      "fieldtype": "Data",
+      "label": "Tracking Token",
+      "unique": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "internal_notes",
+      "fieldtype": "Small Text",
+      "label": "Internal Notes"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Online Order",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

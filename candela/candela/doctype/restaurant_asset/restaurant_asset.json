@@ -1,0 +1,195 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "asset_name",
+    "asset_code",
+    "category",
+    "cb_ra1",
+    "brand_model",
+    "serial_number",
+    "location",
+    "status",
+    "sb_purchase",
+    "purchase_date",
+    "purchase_cost",
+    "warranty_until",
+    "cb_ra2",
+    "useful_life_years",
+    "current_value",
+    "sb_maintenance",
+    "maintenance_interval_days",
+    "next_maintenance_date",
+    "notes",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CAST-.YYYY.-.#####",
+      "default": "CAST-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "asset_name",
+      "fieldtype": "Data",
+      "label": "Asset Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "asset_code",
+      "fieldtype": "Data",
+      "label": "Asset Code",
+      "unique": 1
+    },
+    {
+      "fieldname": "category",
+      "fieldtype": "Select",
+      "label": "Category",
+      "options": "Kitchen Equipment\nRefrigeration\nFurniture\nHVAC\nPOS Hardware\nLighting\nPlumbing\nOther",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "cb_ra1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "brand_model",
+      "fieldtype": "Data",
+      "label": "Brand / Model"
+    },
+    {
+      "fieldname": "serial_number",
+      "fieldtype": "Data",
+      "label": "Serial Number"
+    },
+    {
+      "fieldname": "location",
+      "fieldtype": "Select",
+      "label": "Location",
+      "options": "Kitchen\nBar\nDining\nStorage\nOffice",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Active\nUnder Maintenance\nDecommissioned",
+      "default": "Active",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "sb_purchase",
+      "fieldtype": "Section Break",
+      "label": "Purchase & Warranty"
+    },
+    {
+      "fieldname": "purchase_date",
+      "fieldtype": "Date",
+      "label": "Purchase Date"
+    },
+    {
+      "fieldname": "purchase_cost",
+      "fieldtype": "Currency",
+      "label": "Purchase Cost"
+    },
+    {
+      "fieldname": "warranty_until",
+      "fieldtype": "Date",
+      "label": "Warranty Until"
+    },
+    {
+      "fieldname": "cb_ra2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "useful_life_years",
+      "fieldtype": "Int",
+      "label": "Useful Life (Years)"
+    },
+    {
+      "fieldname": "current_value",
+      "fieldtype": "Currency",
+      "label": "Current Value",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sb_maintenance",
+      "fieldtype": "Section Break",
+      "label": "Maintenance"
+    },
+    {
+      "fieldname": "maintenance_interval_days",
+      "fieldtype": "Int",
+      "label": "Maint. Interval (Days)",
+      "default": "90"
+    },
+    {
+      "fieldname": "next_maintenance_date",
+      "fieldtype": "Date",
+      "label": "Next Maintenance"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Restaurant Asset",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "naming_rule": "By \"Naming Series\" field"
+}

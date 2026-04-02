@@ -1,0 +1,7 @@
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M38.5714 0H15.4286C6.90714 0 0 6.90714 0 15.4286V38.5714C0 47.0929 6.90714 54 15.4286 54H38.5714C47.0929 54 54 47.0929 54 38.5714V15.4286C54 6.90714 47.0929 0 38.5714 0Z" fill="#F59E0B" fill-opacity="0.09"/>
+  <!-- Wrench handle (diagonal bar) -->
+  <rect x="11" y="25" width="20" height="4" rx="2" transform="rotate(-45 27 27)" fill="#F59E0B" opacity="0.85"/>
+  <!-- Wrench head -->
+  <circle cx="32" cy="21" r="6.5" fill="#F59E0B"/>
+</svg>

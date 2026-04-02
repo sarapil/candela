@@ -1,0 +1,187 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "platform",
+    "reviewer_name",
+    "review_date",
+    "rating",
+    "cb_or1",
+    "sentiment",
+    "review_url",
+    "sb_content",
+    "review_text",
+    "sb_response",
+    "response_text",
+    "responded_by",
+    "responded_at",
+    "response_posted",
+    "sb_action",
+    "requires_action",
+    "action_taken",
+    "resolved",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CREV-.YYYY.-.#####",
+      "default": "CREV-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "platform",
+      "fieldtype": "Select",
+      "label": "Platform",
+      "options": "Google Maps\nFacebook\nTripAdvisor\nInstagram\nTalabat\nInstashop",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "reviewer_name",
+      "fieldtype": "Data",
+      "label": "Reviewer Name",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "review_date",
+      "fieldtype": "Date",
+      "label": "Review Date",
+      "default": "Today",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "rating",
+      "fieldtype": "Rating",
+      "label": "Rating",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cb_or1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "sentiment",
+      "fieldtype": "Select",
+      "label": "Sentiment",
+      "options": "Positive\nNeutral\nNegative\nCritical",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "review_url",
+      "fieldtype": "Data",
+      "label": "Review URL"
+    },
+    {
+      "fieldname": "sb_content",
+      "fieldtype": "Section Break",
+      "label": "Content"
+    },
+    {
+      "fieldname": "review_text",
+      "fieldtype": "Text",
+      "label": "Review Text"
+    },
+    {
+      "fieldname": "sb_response",
+      "fieldtype": "Section Break",
+      "label": "Response"
+    },
+    {
+      "fieldname": "response_text",
+      "fieldtype": "Text",
+      "label": "Response Text"
+    },
+    {
+      "fieldname": "responded_by",
+      "fieldtype": "Link",
+      "label": "Responded By",
+      "options": "User"
+    },
+    {
+      "fieldname": "responded_at",
+      "fieldtype": "Datetime",
+      "label": "Responded At"
+    },
+    {
+      "fieldname": "response_posted",
+      "fieldtype": "Check",
+      "label": "Response Posted"
+    },
+    {
+      "fieldname": "sb_action",
+      "fieldtype": "Section Break",
+      "label": "Action"
+    },
+    {
+      "fieldname": "requires_action",
+      "fieldtype": "Check",
+      "label": "Requires Action"
+    },
+    {
+      "fieldname": "action_taken",
+      "fieldtype": "Small Text",
+      "label": "Action Taken"
+    },
+    {
+      "fieldname": "resolved",
+      "fieldtype": "Check",
+      "label": "Resolved"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Online Review",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "naming_rule": "By \"Naming Series\" field"
+}

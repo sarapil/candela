@@ -1,0 +1,212 @@
+[
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_view_dashboard",
+    "capability_name": "CD_view_dashboard",
+    "label": "View Dashboard",
+    "label_ar": "عرض لوحة المعلومات",
+    "category": "Module",
+    "app": "candela",
+    "description": "Access Candela admin dashboard and analytics"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_menu",
+    "capability_name": "CD_manage_menu",
+    "label": "Manage Menu",
+    "label_ar": "إدارة المنيو",
+    "category": "Module",
+    "app": "candela",
+    "description": "Create, edit, and delete menu items and categories"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_reservations",
+    "capability_name": "CD_manage_reservations",
+    "label": "Manage Reservations",
+    "label_ar": "إدارة الحجوزات",
+    "category": "Module",
+    "app": "candela",
+    "description": "View and manage table reservations"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_orders",
+    "capability_name": "CD_manage_orders",
+    "label": "Manage Orders",
+    "label_ar": "إدارة الطلبات",
+    "category": "Module",
+    "app": "candela",
+    "description": "View and manage online orders"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_operate_pos",
+    "capability_name": "CD_operate_pos",
+    "label": "Operate POS",
+    "label_ar": "تشغيل نقطة البيع",
+    "category": "Action",
+    "app": "candela",
+    "description": "Create POS invoices and manage POS shifts"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_kitchen",
+    "capability_name": "CD_manage_kitchen",
+    "label": "Manage Kitchen",
+    "label_ar": "إدارة المطبخ",
+    "category": "Module",
+    "app": "candela",
+    "description": "View kitchen display, update order status, manage stations"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_tables",
+    "capability_name": "CD_manage_tables",
+    "label": "Manage Tables",
+    "label_ar": "إدارة الطاولات",
+    "category": "Module",
+    "app": "candela",
+    "description": "View and update table availability and sections"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_procurement",
+    "capability_name": "CD_manage_procurement",
+    "label": "Manage Procurement",
+    "label_ar": "إدارة المشتريات",
+    "category": "Module",
+    "app": "candela",
+    "description": "Create purchase requests, orders, and receive goods"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_approve_purchase",
+    "capability_name": "CD_approve_purchase",
+    "label": "Approve Purchases",
+    "label_ar": "الموافقة على المشتريات",
+    "category": "Action",
+    "app": "candela",
+    "description": "Approve purchase requests and purchase orders"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_stock",
+    "capability_name": "CD_manage_stock",
+    "label": "Manage Stock",
+    "label_ar": "إدارة المخزون",
+    "category": "Module",
+    "app": "candela",
+    "description": "View stock levels, transfers, reconciliation"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_production",
+    "capability_name": "CD_manage_production",
+    "label": "Manage Production",
+    "label_ar": "إدارة الإنتاج",
+    "category": "Module",
+    "app": "candela",
+    "description": "Create production logs and track waste"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_marketing",
+    "capability_name": "CD_manage_marketing",
+    "label": "Manage Marketing",
+    "label_ar": "إدارة التسويق",
+    "category": "Module",
+    "app": "candela",
+    "description": "Campaigns, influencers, content calendar, reviews"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_assets",
+    "capability_name": "CD_manage_assets",
+    "label": "Manage Assets",
+    "label_ar": "إدارة الأصول",
+    "category": "Module",
+    "app": "candela",
+    "description": "Restaurant assets and maintenance requests"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_staff",
+    "capability_name": "CD_manage_staff",
+    "label": "Manage Staff",
+    "label_ar": "إدارة الموظفين",
+    "category": "Module",
+    "app": "candela",
+    "description": "Staff profiles, shifts, and scheduling"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_view_reports",
+    "capability_name": "CD_view_reports",
+    "label": "View Reports",
+    "label_ar": "عرض التقارير",
+    "category": "Report",
+    "app": "candela",
+    "description": "Access sales, food cost, and operations reports"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_export_reports",
+    "capability_name": "CD_export_reports",
+    "label": "Export Reports",
+    "label_ar": "تصدير التقارير",
+    "category": "Report",
+    "app": "candela",
+    "description": "Download and export report data"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_settings",
+    "capability_name": "CD_manage_settings",
+    "label": "Manage Settings",
+    "label_ar": "إدارة الإعدادات",
+    "category": "Module",
+    "app": "candela",
+    "description": "Configure Candela app settings"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_view_cost_data",
+    "capability_name": "CD_view_cost_data",
+    "label": "View Cost Data",
+    "label_ar": "عرض بيانات التكلفة",
+    "category": "Field",
+    "app": "candela",
+    "description": "View cost prices, food cost percentages, and financial data"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_daily_closing",
+    "capability_name": "CD_daily_closing",
+    "label": "Daily Closing",
+    "label_ar": "الإقفال اليومي",
+    "category": "Action",
+    "app": "candela",
+    "description": "Generate and review daily closing reports"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_reviews",
+    "capability_name": "CD_manage_reviews",
+    "label": "Manage Reviews",
+    "label_ar": "إدارة المراجعات",
+    "category": "Action",
+    "app": "candela",
+    "description": "Approve or reject customer reviews"
+  },
+  {
+    "doctype": "CAPS Capability",
+    "name": "CD_manage_website",
+    "capability_name": "CD_manage_website",
+    "label": "Manage Website",
+    "label_ar": "إدارة الموقع",
+    "category": "Module",
+    "app": "candela",
+    "description": "Manage gallery, events, newsletter, and website content"
+  }
+]

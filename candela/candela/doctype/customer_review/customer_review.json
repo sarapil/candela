@@ -1,0 +1,127 @@
+{
+  "actions": [],
+  "autoname": "autoincrement",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "customer_name",
+    "rating",
+    "review_text_ar",
+    "review_text_en",
+    "visit_date",
+    "sb_moderation",
+    "is_approved",
+    "is_featured",
+    "source",
+    "customer_photo",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "customer_name",
+      "fieldtype": "Data",
+      "label": "Customer Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "rating",
+      "fieldtype": "Rating",
+      "label": "Rating",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "review_text_ar",
+      "fieldtype": "Small Text",
+      "label": "Review (Arabic)"
+    },
+    {
+      "fieldname": "review_text_en",
+      "fieldtype": "Small Text",
+      "label": "Review (English)"
+    },
+    {
+      "fieldname": "visit_date",
+      "fieldtype": "Date",
+      "label": "Visit Date"
+    },
+    {
+      "fieldname": "sb_moderation",
+      "fieldtype": "Section Break",
+      "label": "Moderation"
+    },
+    {
+      "fieldname": "is_approved",
+      "fieldtype": "Check",
+      "label": "Approved",
+      "default": "0",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "is_featured",
+      "fieldtype": "Check",
+      "label": "Featured"
+    },
+    {
+      "fieldname": "source",
+      "fieldtype": "Select",
+      "label": "Source",
+      "options": "Website\nGoogle\nInstagram\nTripAdvisor",
+      "default": "Website"
+    },
+    {
+      "fieldname": "customer_photo",
+      "fieldtype": "Attach Image",
+      "label": "Customer Photo"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Customer Review",
+  "naming_rule": "Autoincrement",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

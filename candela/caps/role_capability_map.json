@@ -1,0 +1,99 @@
+[
+  {
+    "doctype": "CAPS Role Capability Map",
+    "role": "Candela Manager",
+    "capabilities": [
+      "CD_view_dashboard",
+      "CD_manage_menu",
+      "CD_manage_reservations",
+      "CD_manage_orders",
+      "CD_operate_pos",
+      "CD_manage_kitchen",
+      "CD_manage_tables",
+      "CD_manage_procurement",
+      "CD_approve_purchase",
+      "CD_manage_stock",
+      "CD_manage_production",
+      "CD_manage_marketing",
+      "CD_manage_assets",
+      "CD_manage_staff",
+      "CD_view_reports",
+      "CD_export_reports",
+      "CD_manage_settings",
+      "CD_view_cost_data",
+      "CD_daily_closing",
+      "CD_manage_reviews",
+      "CD_manage_website"
+    ],
+    "name": "CD-RCM-Candela-Manager"
+  },
+  {
+    "doctype": "CAPS Role Capability Map",
+    "role": "Candela Staff",
+    "capabilities": [
+      "CD_view_dashboard",
+      "CD_manage_reservations",
+      "CD_manage_orders",
+      "CD_manage_tables",
+      "CD_manage_kitchen"
+    ],
+    "name": "CD-RCM-Candela-Staff"
+  },
+  {
+    "doctype": "CAPS Role Capability Map",
+    "role": "Candela Chef",
+    "capabilities": [
+      "CD_manage_kitchen",
+      "CD_manage_production",
+      "CD_manage_menu",
+      "CD_manage_stock",
+      "CD_view_dashboard"
+    ],
+    "name": "CD-RCM-Candela-Chef"
+  },
+  {
+    "doctype": "CAPS Role Capability Map",
+    "role": "Candela Cashier",
+    "capabilities": [
+      "CD_operate_pos",
+      "CD_manage_orders",
+      "CD_daily_closing",
+      "CD_view_dashboard"
+    ],
+    "name": "CD-RCM-Candela-Cashier"
+  },
+  {
+    "doctype": "CAPS Role Capability Map",
+    "role": "Candela Waiter",
+    "capabilities": [
+      "CD_manage_reservations",
+      "CD_manage_tables",
+      "CD_manage_orders",
+      "CD_view_dashboard"
+    ],
+    "name": "CD-RCM-Candela-Waiter"
+  },
+  {
+    "doctype": "CAPS Role Capability Map",
+    "role": "Candela Procurement",
+    "capabilities": [
+      "CD_manage_procurement",
+      "CD_manage_stock",
+      "CD_view_dashboard",
+      "CD_view_cost_data"
+    ],
+    "name": "CD-RCM-Candela-Procurement"
+  },
+  {
+    "doctype": "CAPS Role Capability Map",
+    "role": "Candela Marketing",
+    "capabilities": [
+      "CD_manage_marketing",
+      "CD_manage_reviews",
+      "CD_manage_website",
+      "CD_view_dashboard",
+      "CD_view_reports"
+    ],
+    "name": "CD-RCM-Candela-Marketing"
+  }
+]

@@ -1,0 +1,86 @@
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+{%- set dir = candela_dir|default('rtl') -%}
+<!DOCTYPE html>
+<html lang="{{ lang }}" dir="{{ dir }}">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{# Title & SEO #}
+	<title>{{ title or candela.restaurant_name or 'Candela' }}{% if page_title %} — {{ page_title }}{% endif %}</title>
+	<meta name="description" content="{{ description or candela.meta_description or 'Candela — The Art of Authentic Italian Cuisine' }}">
+	{% if candela.meta_keywords %}<meta name="keywords" content="{{ candela.meta_keywords }}">{% endif %}
+
+	{# Open Graph #}
+	<meta property="og:title" content="{{ title or candela.restaurant_name or 'Candela' }}">
+	<meta property="og:description" content="{{ description or candela.meta_description or '' }}">
+	{% if candela.og_image %}<meta property="og:image" content="{{ candela.og_image }}">{% endif %}
+	<meta property="og:type" content="website">
+
+	{# Favicon #}
+	{% if candela.favicon %}
+	<link rel="icon" href="{{ candela.favicon }}" type="image/x-icon">
+	{% else %}
+	<link rel="icon" href="/assets/candela/images/logo/flame.svg" type="image/svg+xml">
+	{% endif %}
+
+	{# Fonts — Luxury serif + accent + body #}
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+	{# CSRF Token #}
+	<meta name="csrf_token" content="{{ frappe.session.csrf_token }}">
+
+	{# Only load candela CSS — isolate from other apps #}
+	{% for css in web_include_css or [] %}
+	{% if '/candela/' in css %}
+	<link rel="stylesheet" href="{{ css }}">
+	{% endif %}
+	{% endfor %}
+
+	{# Custom CSS from settings #}
+	{% if candela.custom_css %}
+	<style>{{ candela.custom_css }}</style>
+	{% endif %}
+
+	{# Analytics #}
+	{% if candela.ga_tracking_id %}
+	<script async src="https://www.googletagmanager.com/gtag/js?id={{ candela.ga_tracking_id }}"></script>
+	<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','{{ candela.ga_tracking_id }}');</script>
+	{% endif %}
+</head>
+<body class="candela-page">
+
+	{# Navbar #}
+	{% include "templates/includes/candela_navbar.html" %}
+
+	{# Page Content #}
+	<main class="candela-main">
+		{% block page_content %}{% endblock %}
+	</main>
+
+	{# Footer #}
+	{% include "templates/includes/candela_footer.html" %}
+
+	{# WhatsApp FAB #}
+	{% if candela.enable_whatsapp_button and candela.whatsapp_number %}
+	<a href="https://wa.me/{{ candela.whatsapp_number }}{% if candela.whatsapp_default_message %}?text={{ candela.whatsapp_default_message|urlencode }}{% endif %}"
+	   class="candela-whatsapp-fab" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+	{% endif %}
+
+	{# Only load candela JS #}
+	{% for js in web_include_js or [] %}
+	{% if '/candela/' in js %}
+	<script src="{{ js }}"></script>
+	{% endif %}
+	{% endfor %}
+
+	{% if candela.custom_js %}
+	<script>{{ candela.custom_js }}</script>
+	{% endif %}
+
+	{% block page_script %}{% endblock %}
+</body>
+</html>

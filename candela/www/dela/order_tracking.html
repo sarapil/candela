@@ -1,0 +1,142 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+{# ═══════ PAGE HEADER ═══════ #}
+<section class="c-page-header" style="min-height:30vh;">
+	<div class="c-page-header__overlay"></div>
+	<div class="c-page-header__content">
+		<span class="c-section-header__label">{{ _('تتبع طلبك') if lang == 'ar' else 'Track Your Order' }}</span>
+		<h1>{{ _('حالة الطلب') if lang == 'ar' else 'Order Status' }}</h1>
+	</div>
+</section>
+
+{# ═══════ TRACKER ═══════ #}
+<section class="c-section c-section--ivory">
+	<div class="c-container" style="max-width:700px;">
+
+		{# ── Lookup Form ── #}
+		<div id="order-lookup" class="c-reveal">
+			<div class="c-section-header">
+				<p class="c-section-header__desc">
+					{{ _('أدخل رقم الطلب لمتابعة حالته') if lang == 'ar' else 'Enter your order ID to track its status' }}
+				</p>
+			</div>
+			<form onsubmit="return false;" style="display:flex;gap:var(--s-sm);max-width:500px;margin:0 auto;">
+				<input type="text" class="c-form-input" id="order-id-input" placeholder="{{ _('رقم الطلب') if lang == 'ar' else 'Order ID' }}" value="{{ frappe.form_dict.get('id', '') }}">
+				<button class="c-btn c-btn--gold" onclick="trackOrder()">{{ _('تتبع') if lang == 'ar' else 'Track' }}</button>
+			</form>
+		</div>
+
+		{# ── Order Details ── #}
+		<div id="order-details" style="display:none;margin-top:var(--s-2xl);">
+			<div style="background:var(--c-white);border-radius:var(--r-lg);padding:var(--s-2xl);box-shadow:0 4px 30px rgba(0,0,0,0.06);">
+				{# Status Badge #}
+				<div style="text-align:center;margin-bottom:var(--s-xl);">
+					<div id="order-icon" style="font-size:4rem;margin-bottom:var(--s-sm);">📦</div>
+					<h2 id="order-status-text" style="color:var(--c-gold);margin-bottom:var(--s-xs);"></h2>
+					<p id="order-id-display" style="color:var(--c-text-muted);font-size:0.9rem;"></p>
+				</div>
+
+				{# Progress Steps #}
+				<div id="order-progress" style="display:flex;justify-content:space-between;margin-bottom:var(--s-2xl);position:relative;">
+					<div style="position:absolute;top:18px;left:10%;right:10%;height:2px;background:var(--c-border);z-index:0;"></div>
+					<div style="position:absolute;top:18px;left:10%;height:2px;background:var(--c-gold);z-index:1;transition:width 0.5s;" id="progress-bar"></div>
+				</div>
+
+				{# Order Items #}
+				<div id="order-items-list" style="margin-bottom:var(--s-xl);"></div>
+
+				{# Order Info #}
+				<div id="order-info" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-md);font-size:0.9rem;padding-top:var(--s-md);border-top:1px solid var(--c-border);"></div>
+			</div>
+		</div>
+
+		{# ── Error ── #}
+		<div id="order-error" style="display:none;text-align:center;padding:var(--s-2xl) 0;margin-top:var(--s-xl);">
+			<div style="font-size:3rem;margin-bottom:var(--s-md);">😞</div>
+			<p style="color:var(--c-text-light);">{{ _('لم يتم العثور على الطلب') if lang == 'ar' else 'Order not found' }}</p>
+		</div>
+	</div>
+</section>
+
+<script>
+var statuses = ['Pending', 'Confirmed', 'Preparing', 'Ready', 'Out for Delivery', 'Delivered'];
+var statusIcons = { 'Pending': '⏳', 'Confirmed': '✅', 'Preparing': '👨‍🍳', 'Ready': '🍽️', 'Out for Delivery': '🚗', 'Delivered': '🎉', 'Cancelled': '❌' };
+var statusLabels = {
+	{% if lang == 'ar' %}
+	'Pending':'بانتظار التأكيد','Confirmed':'تم التأكيد','Preparing':'جارٍ التحضير','Ready':'جاهز','Out for Delivery':'في الطريق','Delivered':'تم التوصيل','Cancelled':'ملغي'
+	{% else %}
+	'Pending':'Pending','Confirmed':'Confirmed','Preparing':'Preparing','Ready':'Ready','Out for Delivery':'Out for Delivery','Delivered':'Delivered','Cancelled':'Cancelled'
+	{% endif %}
+};
+
+function trackOrder() {
+	var orderId = document.getElementById('order-id-input').value.trim();
+	if (!orderId) return;
+
+	document.getElementById('order-error').style.display = 'none';
+	document.getElementById('order-details').style.display = 'none';
+
+	candela.api('candela.api.get_order_status', { order_id: orderId }).then(function(r) {
+		var order = r.message;
+		if (!order) { document.getElementById('order-error').style.display = 'block'; return; }
+
+		document.getElementById('order-icon').textContent = statusIcons[order.status] || '📦';
+		document.getElementById('order-status-text').textContent = statusLabels[order.status] || order.status;
+		document.getElementById('order-id-display').textContent = '#' + orderId;
+
+		// Progress bar
+		var idx = statuses.indexOf(order.status);
+		var pct = idx >= 0 ? ((idx / (statuses.length - 1)) * 80 + 10) : 0;
+		document.getElementById('progress-bar').style.width = pct + '%';
+
+		// Render progress steps
+		var progressHtml = '';
+		statuses.forEach(function(s, i) {
+			var done = i <= idx;
+			progressHtml += '<div style="text-align:center;z-index:2;position:relative;">' +
+				'<div style="width:36px;height:36px;border-radius:50%;margin:0 auto var(--s-xs);display:flex;align-items:center;justify-content:center;font-size:0.8rem;' +
+				(done ? 'background:var(--c-gold);color:var(--c-dark);' : 'background:var(--c-cream);color:var(--c-text-muted);border:2px solid var(--c-border);') + '">' +
+				(done ? '✓' : (i + 1)) + '</div>' +
+				'<span style="font-size:0.7rem;color:' + (done ? 'var(--c-gold)' : 'var(--c-text-muted)') + ';">' + (statusLabels[s] || s) + '</span></div>';
+		});
+		document.getElementById('order-progress').innerHTML =
+			'<div style="position:absolute;top:18px;left:10%;right:10%;height:2px;background:var(--c-border);z-index:0;"></div>' +
+			'<div style="position:absolute;top:18px;left:10%;height:2px;background:var(--c-gold);z-index:1;width:' + pct + '%;transition:width 0.5s;"></div>' +
+			progressHtml;
+
+		// Items
+		var itemsHtml = '';
+		if (order.items && order.items.length) {
+			order.items.forEach(function(item) {
+				itemsHtml += '<div style="display:flex;justify-content:space-between;padding:var(--s-sm) 0;border-bottom:1px solid var(--c-border);">' +
+					'<span>' + item.item_name + ' × ' + item.qty + '</span>' +
+					'<span style="color:var(--c-gold);font-weight:600;">' + item.amount + ' {{ _("ج.م") }}</span></div>';
+			});
+		}
+		document.getElementById('order-items-list').innerHTML = itemsHtml;
+
+		// Info
+		document.getElementById('order-info').innerHTML =
+			'<div><span style="color:var(--c-text-muted);">{{ _("النوع") if lang == "ar" else "Type" }}</span><br><strong>' + (order.order_type || '') + '</strong></div>' +
+			'<div><span style="color:var(--c-text-muted);">{{ _("الإجمالي") if lang == "ar" else "Total" }}</span><br><strong style="color:var(--c-gold);">' + (order.total || 0) + ' {{ _("ج.م") }}</strong></div>';
+
+		document.getElementById('order-details').style.display = 'block';
+	}).catch(function() {
+		document.getElementById('order-error').style.display = 'block';
+	});
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+	var urlId = new URLSearchParams(window.location.search).get('id');
+	if (urlId) {
+		document.getElementById('order-id-input').value = urlId;
+		trackOrder();
+	}
+});
+</script>
+
+{%- endblock -%}

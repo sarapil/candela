@@ -1,0 +1,155 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+.wh { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1.5rem) 0 3rem; }
+.wh, .wh * { color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+.wh__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.6rem; margin-bottom:1.5rem; }
+.wh__top { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:.75rem; }
+.wh__btns { display:flex; gap:.5rem; flex-wrap:wrap; }
+.wh__btn { padding:.5rem 1rem; border-radius:8px; font-size:.82rem; text-decoration:none; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--c-cream,#F5F0E8)!important; cursor:pointer; transition:all .2s; }
+.wh__btn:hover { border-color:var(--c-gold,#C9A96E); }
+.wh__btn--primary { background:var(--c-gold,#C9A96E); color:var(--c-charcoal,#1A1A1A)!important; border-color:var(--c-gold,#C9A96E); }
+
+.wh__stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.wh__stat { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.2rem; text-align:center; }
+.wh__stat-val { font-family:var(--font-serif); font-size:2rem; color:var(--c-gold,#C9A96E)!important; }
+.wh__stat-lbl { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; margin-top:.3rem; }
+
+.wh__grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.25rem; margin-bottom:2rem; }
+.wh__wcard { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.5rem; transition:all .3s; }
+.wh__wcard:hover { border-color:rgba(201,169,110,.3); transform:translateY(-2px); }
+.wh__wcard-name { font-family:var(--font-serif); font-size:1.15rem; margin-bottom:.3rem; }
+.wh__wcard-type { font-size:.72rem; color:rgba(255,255,255,.4)!important; text-transform:uppercase; letter-spacing:.08em; }
+.wh__wcard-stock { font-size:1.8rem; font-family:var(--font-serif); color:var(--c-gold,#C9A96E)!important; margin:.75rem 0 .3rem; }
+.wh__wcard-label { font-size:.72rem; color:rgba(255,255,255,.35)!important; }
+.wh__wcard-loc { font-size:.8rem; color:rgba(255,255,255,.5)!important; margin-top:.5rem; }
+
+.wh__card { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; overflow:hidden; margin-bottom:1.25rem; }
+.wh__card-title { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; padding:.75rem 1rem; border-bottom:1px solid rgba(255,255,255,.06); }
+.wh-tbl { width:100%; border-collapse:collapse; }
+.wh-tbl th { text-align:start; padding:.5rem .75rem; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35)!important; border-bottom:1px solid rgba(255,255,255,.06); }
+.wh-tbl td { padding:.6rem .75rem; border-bottom:1px solid rgba(255,255,255,.03); font-size:.85rem; }
+.wh-tbl tr:hover td { background:rgba(255,255,255,.02); }
+.wh-tbl a { color:var(--c-gold,#C9A96E)!important; text-decoration:none; }
+.wh__badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:.68rem; font-weight:600; }
+.wh__badge--draft { background:rgba(255,255,255,.06); color:rgba(255,255,255,.4)!important; }
+.wh__badge--completed { background:rgba(91,179,105,.12); color:#5BB369!important; }
+.wh__badge--in-transit { background:rgba(59,130,246,.12); color:#3B82F6!important; }
+.wh__empty { padding:2rem; text-align:center; color:rgba(255,255,255,.3)!important; font-style:italic; }
+@media(max-width:768px){ .wh__stats { grid-template-columns:repeat(2,1fr); } }
+</style>
+
+<div class="wh">
+	<div class="c-container">
+		<div class="wh__top">
+			<h1 class="wh__title">🏭 {{ _('المستودعات والتحويلات') if lang == 'ar' else 'Warehouses & Transfers' }}</h1>
+			<div class="wh__btns">
+				<a href="/app/candela-warehouse/new" class="wh__btn wh__btn--primary">+ {{ _('مستودع جديد') if lang == 'ar' else 'New Warehouse' }}</a>
+				<a href="/app/stock-transfer/new" class="wh__btn">🔄 {{ _('تحويل مخزون') if lang == 'ar' else 'Stock Transfer' }}</a>
+				<a href="/app/stock-reconciliation/new" class="wh__btn">📊 {{ _('جرد مخزون') if lang == 'ar' else 'Reconciliation' }}</a>
+			</div>
+		</div>
+
+		<div class="wh__stats">
+			<div class="wh__stat">
+				<div class="wh__stat-val">{{ stats.total_warehouses }}</div>
+				<div class="wh__stat-lbl">{{ _('إجمالي المستودعات') if lang == 'ar' else 'Total Warehouses' }}</div>
+			</div>
+			<div class="wh__stat">
+				<div class="wh__stat-val">{{ stats.active_warehouses }}</div>
+				<div class="wh__stat-lbl">{{ _('مستودعات نشطة') if lang == 'ar' else 'Active' }}</div>
+			</div>
+			<div class="wh__stat">
+				<div class="wh__stat-val">{{ stats.pending_transfers }}</div>
+				<div class="wh__stat-lbl">{{ _('تحويلات معلقة') if lang == 'ar' else 'Pending Transfers' }}</div>
+			</div>
+			<div class="wh__stat">
+				<div class="wh__stat-val">{{ stats.pending_reconciliations }}</div>
+				<div class="wh__stat-lbl">{{ _('جرد معلق') if lang == 'ar' else 'Pending Recon.' }}</div>
+			</div>
+		</div>
+
+		{# Warehouse Cards #}
+		{% if warehouses %}
+		<div class="wh__grid">
+			{% for w in warehouses %}
+			<a href="/app/candela-warehouse/{{ w.name }}" class="wh__wcard" style="text-decoration:none;">
+				<div class="wh__wcard-name">{{ w.warehouse_name }}</div>
+				<div class="wh__wcard-type">{{ w.warehouse_type or 'General' }}</div>
+				<div class="wh__wcard-stock">{{ "{:,.0f}".format(warehouse_stock.get(w.name, 0)) }}</div>
+				<div class="wh__wcard-label">{{ _('إجمالي الحركات') if lang == 'ar' else 'Net Stock Entries' }}</div>
+					{% if w.manager %}<div class="wh__wcard-loc">👤 {{ w.manager }}</div>{% endif %}
+			</a>
+			{% endfor %}
+		</div>
+		{% else %}
+		<div class="wh__card"><div class="wh__empty">{{ _('لا توجد مستودعات') if lang == 'ar' else 'No warehouses configured yet' }}</div></div>
+		{% endif %}
+
+		{# Recent Transfers #}
+		<div class="wh__card">
+			<div class="wh__card-title">🔄 {{ _('آخر التحويلات') if lang == 'ar' else 'Recent Transfers' }}</div>
+			{% if transfers %}
+			<table class="wh-tbl">
+				<thead><tr>
+					<th>#</th>
+					<th>{{ _('التاريخ') if lang == 'ar' else 'Date' }}</th>
+					<th>{{ _('من') if lang == 'ar' else 'From' }}</th>
+					<th>{{ _('إلى') if lang == 'ar' else 'To' }}</th>
+					<th>{{ _('بواسطة') if lang == 'ar' else 'By' }}</th>
+					<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+				</tr></thead>
+				<tbody>
+				{% for t in transfers %}
+				<tr>
+					<td><a href="/app/stock-transfer/{{ t.name }}">{{ t.name }}</a></td>
+					<td>{{ t.transfer_date or '—' }}</td>
+					<td>{{ t.from_warehouse or '—' }}</td>
+					<td>{{ t.to_warehouse or '—' }}</td>
+					<td>{{ t.transferred_by or '—' }}</td>
+					<td><span class="wh__badge wh__badge--{{ (t.status or 'draft')|lower|replace(' ','-') }}">{{ t.status }}</span></td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<div class="wh__empty">{{ _('لا توجد تحويلات') if lang == 'ar' else 'No transfers yet' }}</div>
+			{% endif %}
+		</div>
+
+		{# Reconciliations #}
+		<div class="wh__card">
+			<div class="wh__card-title">📊 {{ _('عمليات الجرد') if lang == 'ar' else 'Stock Reconciliations' }}</div>
+			{% if reconciliations %}
+			<table class="wh-tbl">
+				<thead><tr>
+					<th>#</th>
+					<th>{{ _('التاريخ') if lang == 'ar' else 'Date' }}</th>
+					<th>{{ _('المستودع') if lang == 'ar' else 'Warehouse' }}</th>
+					<th>{{ _('فرق التكلفة') if lang == 'ar' else 'Variance Cost' }}</th>
+					<th>{{ _('بواسطة') if lang == 'ar' else 'By' }}</th>
+					<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+				</tr></thead>
+				<tbody>
+				{% for r in reconciliations %}
+				<tr>
+					<td><a href="/app/stock-reconciliation/{{ r.name }}">{{ r.name }}</a></td>
+					<td>{{ r.reconciliation_date or '—' }}</td>
+					<td>{{ r.warehouse or '—' }}</td>
+					<td>{{ "{:,.0f}".format(r.total_variance_cost or 0) }}</td>
+						<td>{{ r.counted_by or '—' }}</td>
+					<td><span class="wh__badge wh__badge--{{ (r.status or 'draft')|lower }}">{{ r.status }}</span></td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<div class="wh__empty">{{ _('لا توجد عمليات جرد') if lang == 'ar' else 'No reconciliations yet' }}</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{%- endblock -%}

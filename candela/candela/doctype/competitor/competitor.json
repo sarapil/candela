@@ -1,0 +1,146 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "competitor_name",
+    "location",
+    "competitor_type",
+    "cb_comp1",
+    "cuisine",
+    "price_range",
+    "google_rating",
+    "last_checked",
+    "sb_analysis",
+    "menu_highlights",
+    "strengths",
+    "cb_comp2",
+    "weaknesses",
+    "our_advantage",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "competitor_name",
+      "fieldtype": "Data",
+      "label": "Competitor Name",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "location",
+      "fieldtype": "Data",
+      "label": "Location",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "competitor_type",
+      "fieldtype": "Select",
+      "label": "Type",
+      "options": "Direct\nIndirect\nChain",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "cb_comp1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "cuisine",
+      "fieldtype": "Data",
+      "label": "Cuisine"
+    },
+    {
+      "fieldname": "price_range",
+      "fieldtype": "Select",
+      "label": "Price Range",
+      "options": "$\n$$\n$$$"
+    },
+    {
+      "fieldname": "google_rating",
+      "fieldtype": "Float",
+      "label": "Google Rating"
+    },
+    {
+      "fieldname": "last_checked",
+      "fieldtype": "Date",
+      "label": "Last Checked"
+    },
+    {
+      "fieldname": "sb_analysis",
+      "fieldtype": "Section Break",
+      "label": "Analysis"
+    },
+    {
+      "fieldname": "menu_highlights",
+      "fieldtype": "Small Text",
+      "label": "Menu Highlights"
+    },
+    {
+      "fieldname": "strengths",
+      "fieldtype": "Small Text",
+      "label": "Strengths"
+    },
+    {
+      "fieldname": "cb_comp2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "weaknesses",
+      "fieldtype": "Small Text",
+      "label": "Weaknesses"
+    },
+    {
+      "fieldname": "our_advantage",
+      "fieldtype": "Small Text",
+      "label": "Our Advantage"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Competitor",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "autoname": "field:competitor_name",
+  "naming_rule": "By fieldname"
+}

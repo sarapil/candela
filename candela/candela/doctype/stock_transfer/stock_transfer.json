@@ -1,0 +1,165 @@
+{
+  "actions": [],
+  "creation": "2026-03-19 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "from_warehouse",
+    "to_warehouse",
+    "transfer_date",
+    "cb_st1",
+    "transferred_by",
+    "reason",
+    "status",
+    "sb_items",
+    "items",
+    "sb_recv",
+    "received_by",
+    "received_at",
+    "notes"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "CSTX-.YYYY.-.#####",
+      "default": "CSTX-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "from_warehouse",
+      "fieldtype": "Link",
+      "label": "From Warehouse",
+      "options": "Candela Warehouse",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "to_warehouse",
+      "fieldtype": "Link",
+      "label": "To Warehouse",
+      "options": "Candela Warehouse",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "transfer_date",
+      "fieldtype": "Datetime",
+      "label": "Transfer Date",
+      "reqd": 1,
+      "default": "Now",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "cb_st1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "transferred_by",
+      "fieldtype": "Link",
+      "label": "Transferred By",
+      "options": "User",
+      "default": "__user"
+    },
+    {
+      "fieldname": "reason",
+      "fieldtype": "Select",
+      "label": "Reason",
+      "options": "Daily Prep\nEvent Prep\nRestock\nEmergency",
+      "default": "Daily Prep"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nSubmitted\nReceived\nCancelled",
+      "default": "Draft",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "sb_items",
+      "fieldtype": "Section Break",
+      "label": "Items"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Transfer Items",
+      "options": "Stock Transfer Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "sb_recv",
+      "fieldtype": "Section Break",
+      "label": "Receipt"
+    },
+    {
+      "fieldname": "received_by",
+      "fieldtype": "Link",
+      "label": "Received By",
+      "options": "User"
+    },
+    {
+      "fieldname": "received_at",
+      "fieldtype": "Datetime",
+      "label": "Received At"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "Stock Transfer",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Candela Manager",
+      "share": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "read": 1,
+      "write": 1,
+      "role": "Candela Staff"
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1,
+  "autoname": "naming_series:",
+  "naming_rule": "By \"Naming Series\" field"
+}

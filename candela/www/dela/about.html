@@ -1,0 +1,165 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set candela = candela or get_candela_settings() -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+{# ═══════ PAGE HEADER ═══════ #}
+<section class="c-page-header"
+	{% if candela.about_cover_image %}style="background-image:url('{{ candela.about_cover_image }}')"{% endif %}>
+	<div class="c-page-header__overlay"></div>
+	<div class="c-page-header__content">
+		<span class="c-section-header__label">{{ 'La Nostra Storia' }}</span>
+		<h1>{{ _('قصتنا') if lang == 'ar' else 'Our Story' }}</h1>
+	</div>
+</section>
+
+{# ═══════ FOUNDING STORY ═══════ #}
+<section class="c-section c-section--ivory">
+	<div class="c-container">
+		<div class="c-split">
+			<div class="c-reveal c-reveal--left">
+				{% if candela.about_image %}
+				<img src="{{ candela.about_image }}" alt="Candela Story" class="c-split__img">
+				{% else %}
+				<div style="width:100%;min-height:500px;background:linear-gradient(135deg,var(--c-charcoal),var(--c-dark));display:flex;align-items:center;justify-content:center;">
+					<span style="font-size:6rem;opacity:0.3;">🕯️</span>
+				</div>
+				{% endif %}
+			</div>
+			<div class="c-split__content c-reveal c-reveal--right">
+				<span class="c-section-header__label">{{ _('البداية') if lang == 'ar' else 'The Beginning' }}</span>
+				<h2 style="margin-bottom:var(--s-md);">
+					{% if lang == 'ar' %}
+						{{ candela.about_title_ar or 'شغف يمتد عبر الأجيال' }}
+					{% else %}
+						{{ candela.about_title_en or 'A Passion Spanning Generations' }}
+					{% endif %}
+				</h2>
+				<div class="c-section-header__line" style="margin:var(--s-md) 0;"></div>
+				<p style="color:var(--c-text-light);line-height:1.9;font-size:1.02rem;">
+					{% if lang == 'ar' %}
+						{{ candela.about_text_ar or 'مطعم كانديلا هو رحلة حب بين الثقافة الإيطالية وفن الطهي الأصيل. بدأت قصتنا من شغف حقيقي بتقديم أفضل تجربة إيطالية في قلب المدينة، حيث يلتقي الإبداع بالتقاليد في كل طبق نقدمه.' }}
+					{% else %}
+						{{ candela.about_text_en or 'Candela is a love story between Italian culture and the art of authentic cuisine. Our journey began with a genuine passion for bringing the finest Italian experience to the heart of the city, where creativity meets tradition in every dish we serve.' }}
+					{% endif %}
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+{# ═══════ PHILOSOPHY / VALUES ═══════ #}
+<section class="c-section c-section--white">
+	<div class="c-container">
+		<div class="c-section-header c-reveal">
+			<span class="c-section-header__label">{{ _('فلسفتنا') if lang == 'ar' else 'Our Philosophy' }}</span>
+			<h2 class="c-section-header__title">{{ _('ما يميزنا') if lang == 'ar' else 'What Sets Us Apart' }}</h2>
+			<div class="c-section-header__line"></div>
+		</div>
+		<div class="c-grid c-grid--3 c-stagger">
+			<div class="c-reveal" style="text-align:center;padding:var(--s-xl);">
+				<div style="font-size:3rem;margin-bottom:var(--s-md);">🍅</div>
+				<h3 style="font-family:var(--f-heading);font-size:1.25rem;margin-bottom:var(--s-sm);color:var(--c-dark);">
+					{{ _('مكونات طازجة') if lang == 'ar' else 'Fresh Ingredients' }}
+				</h3>
+				<p style="color:var(--c-text-light);line-height:1.8;font-size:0.95rem;">
+					{{ _('نستخدم أجود المكونات المحلية والمستوردة من إيطاليا لضمان أعلى جودة') if lang == 'ar' else 'We source the finest local and imported Italian ingredients for the highest quality' }}
+				</p>
+			</div>
+			<div class="c-reveal" style="text-align:center;padding:var(--s-xl);">
+				<div style="font-size:3rem;margin-bottom:var(--s-md);">👨‍🍳</div>
+				<h3 style="font-family:var(--f-heading);font-size:1.25rem;margin-bottom:var(--s-sm);color:var(--c-dark);">
+					{{ _('طهاة محترفون') if lang == 'ar' else 'Master Chefs' }}
+				</h3>
+				<p style="color:var(--c-text-light);line-height:1.8;font-size:0.95rem;">
+					{{ _('فريقنا من الطهاة المحترفين يجلبون خبرة سنوات من المطابخ الإيطالية العريقة') if lang == 'ar' else 'Our team of expert chefs bring years of experience from renowned Italian kitchens' }}
+				</p>
+			</div>
+			<div class="c-reveal" style="text-align:center;padding:var(--s-xl);">
+				<div style="font-size:3rem;margin-bottom:var(--s-md);">✨</div>
+				<h3 style="font-family:var(--f-heading);font-size:1.25rem;margin-bottom:var(--s-sm);color:var(--c-dark);">
+					{{ _('أجواء فاخرة') if lang == 'ar' else 'Elegant Ambience' }}
+				</h3>
+				<p style="color:var(--c-text-light);line-height:1.8;font-size:0.95rem;">
+					{{ _('تصميم داخلي أنيق يوفر أجواءً مثالية لكل مناسبة خاصة') if lang == 'ar' else 'Elegant interior design providing the perfect atmosphere for every special occasion' }}
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+{# ═══════ STATS PARALLAX ═══════ #}
+<section class="c-parallax"
+	{% if candela.parallax_image %}style="background-image:url('{{ candela.parallax_image }}')"{% endif %}>
+	<div class="c-parallax__overlay"></div>
+	<div class="c-parallax__content">
+		<div class="c-container c-text-center">
+			<div class="c-stats c-reveal">
+				<div class="c-stat">
+					<div class="c-stat__number">{{ candela.years_experience or '10' }}+</div>
+					<div class="c-stat__label">{{ _('سنوات خبرة') if lang == 'ar' else 'Years Experience' }}</div>
+				</div>
+				<div class="c-stat">
+					<div class="c-stat__number">{{ candela.dishes_count or '120' }}+</div>
+					<div class="c-stat__label">{{ _('طبق مميز') if lang == 'ar' else 'Signature Dishes' }}</div>
+				</div>
+				<div class="c-stat">
+					<div class="c-stat__number">{{ candela.happy_guests or '50K' }}+</div>
+					<div class="c-stat__label">{{ _('ضيف سعيد') if lang == 'ar' else 'Happy Guests' }}</div>
+				</div>
+				<div class="c-stat">
+					<div class="c-stat__number">{{ candela.chefs_count or '8' }}</div>
+					<div class="c-stat__label">{{ _('طاهٍ محترف') if lang == 'ar' else 'Expert Chefs' }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+{# ═══════ OPENING HOURS ═══════ #}
+<section class="c-section c-section--cream">
+	<div class="c-container" style="max-width:600px;">
+		<div class="c-section-header c-reveal">
+			<span class="c-section-header__label">{{ _('مرحباً بكم') if lang == 'ar' else 'Welcome' }}</span>
+			<h2 class="c-section-header__title">{{ _('ساعات العمل') if lang == 'ar' else 'Opening Hours' }}</h2>
+			<div class="c-section-header__line"></div>
+		</div>
+		<div class="c-hours c-reveal">
+			{% for row in hours %}
+			<div class="c-hours__row">
+				<span class="c-hours__day">{{ row.day_ar if lang == 'ar' else row.day }}</span>
+				<span class="c-hours__dots"></span>
+				<span class="c-hours__time">
+					{% if row.is_closed %}
+						{{ _('مغلق') if lang == 'ar' else 'Closed' }}
+					{% else %}
+						{{ row.open_time }} – {{ row.close_time }}
+					{% endif %}
+				</span>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+
+{# ═══════ CTA ═══════ #}
+{% if candela.enable_reservations %}
+<section class="c-section c-section--dark">
+	<div class="c-container c-text-center c-reveal">
+		<h3 style="color:var(--c-cream);margin-bottom:var(--s-lg);">
+			{{ _('استمتع بتجربة كانديلا') if lang == 'ar' else 'Experience Candela' }}
+		</h3>
+		<div style="display:flex;gap:var(--s-md);justify-content:center;flex-wrap:wrap;">
+			<a href="/dela/reservation" class="c-btn c-btn--gold c-btn--lg">
+				{{ _('احجز طاولتك') if lang == 'ar' else 'Reserve a Table' }}
+			</a>
+			<a href="/dela/menu" class="c-btn c-btn--outline-white c-btn--lg">
+				{{ _('المنيو') if lang == 'ar' else 'View Menu' }}
+			</a>
+		</div>
+	</div>
+</section>
+{% endif %}
+
+{%- endblock -%}

@@ -1,0 +1,278 @@
+{
+  "actions": [],
+  "autoname": "naming_series:",
+  "creation": "2026-03-19 10:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series",
+    "sb_customer",
+    "customer_name",
+    "phone",
+    "cb_cust",
+    "order_type",
+    "order_channel",
+    "restaurant_table",
+    "waiter",
+    "sb_items",
+    "items",
+    "sb_totals",
+    "subtotal",
+    "tax_rate",
+    "tax_amount",
+    "cb_totals",
+    "discount_amount",
+    "discount_percentage",
+    "grand_total",
+    "sb_payment",
+    "payment_method",
+    "cash_received",
+    "cb_pay",
+    "change_amount",
+    "payment_reference",
+    "sb_status",
+    "status",
+    "kitchen_status",
+    "cb_status",
+    "pos_session_id",
+    "cashier",
+    "sb_notes",
+    "notes",
+    "is_demo_data"
+  ],
+  "fields": [
+    {
+      "fieldname": "naming_series",
+      "fieldtype": "Select",
+      "label": "Series",
+      "options": "POS-.YYYY.-.#####",
+      "default": "POS-.YYYY.-.#####",
+      "hidden": 1
+    },
+    {
+      "fieldname": "sb_customer",
+      "fieldtype": "Section Break",
+      "label": "Customer & Table"
+    },
+    {
+      "fieldname": "customer_name",
+      "fieldtype": "Data",
+      "label": "Customer Name",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "phone",
+      "fieldtype": "Data",
+      "label": "Phone"
+    },
+    {
+      "fieldname": "cb_cust",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "order_type",
+      "fieldtype": "Select",
+      "label": "Order Type",
+      "options": "Dine-in\nTakeaway",
+      "default": "Dine-in",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "order_channel",
+      "fieldtype": "Select",
+      "label": "Order Channel",
+      "options": "Dine-in\nTakeaway\nDelivery\nPhone\nWhatsApp\nQR Table\nCatering",
+      "default": "Dine-in",
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "restaurant_table",
+      "fieldtype": "Link",
+      "label": "Table",
+      "options": "Restaurant Table",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "waiter",
+      "fieldtype": "Data",
+      "label": "Waiter"
+    },
+    {
+      "fieldname": "sb_items",
+      "fieldtype": "Section Break",
+      "label": "Items"
+    },
+    {
+      "fieldname": "items",
+      "fieldtype": "Table",
+      "label": "Items",
+      "options": "POS Invoice Item",
+      "reqd": 1
+    },
+    {
+      "fieldname": "sb_totals",
+      "fieldtype": "Section Break",
+      "label": "Totals"
+    },
+    {
+      "fieldname": "subtotal",
+      "fieldtype": "Currency",
+      "label": "Subtotal",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tax_rate",
+      "fieldtype": "Percent",
+      "label": "Tax Rate (%)",
+      "default": "0"
+    },
+    {
+      "fieldname": "tax_amount",
+      "fieldtype": "Currency",
+      "label": "Tax Amount",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cb_totals",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "discount_amount",
+      "fieldtype": "Currency",
+      "label": "Discount Amount"
+    },
+    {
+      "fieldname": "discount_percentage",
+      "fieldtype": "Percent",
+      "label": "Discount %"
+    },
+    {
+      "fieldname": "grand_total",
+      "fieldtype": "Currency",
+      "label": "Grand Total",
+      "read_only": 1,
+      "in_list_view": 1,
+      "bold": 1
+    },
+    {
+      "fieldname": "sb_payment",
+      "fieldtype": "Section Break",
+      "label": "Payment"
+    },
+    {
+      "fieldname": "payment_method",
+      "fieldtype": "Select",
+      "label": "Payment Method",
+      "options": "Cash\nCard\nMixed\nUnpaid",
+      "default": "Cash",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "cash_received",
+      "fieldtype": "Currency",
+      "label": "Cash Received"
+    },
+    {
+      "fieldname": "cb_pay",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "change_amount",
+      "fieldtype": "Currency",
+      "label": "Change",
+      "read_only": 1
+    },
+    {
+      "fieldname": "payment_reference",
+      "fieldtype": "Data",
+      "label": "Payment Reference"
+    },
+    {
+      "fieldname": "sb_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nPaid\nCancelled",
+      "default": "Draft",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "kitchen_status",
+      "fieldtype": "Select",
+      "label": "Kitchen Status",
+      "options": "Pending\nPreparing\nReady\nServed",
+      "default": "Pending",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "cb_status",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "pos_session_id",
+      "fieldtype": "Data",
+      "label": "POS Session",
+      "read_only": 1
+    },
+    {
+      "fieldname": "cashier",
+      "fieldtype": "Data",
+      "label": "Cashier",
+      "read_only": 1
+    },
+    {
+      "fieldname": "sb_notes",
+      "fieldtype": "Section Break",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "notes",
+      "fieldtype": "Small Text",
+      "label": "Notes"
+    },
+    {
+      "fieldname": "is_demo_data",
+      "fieldtype": "Check",
+      "label": "Demo Data",
+      "hidden": 1,
+      "default": "0"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "issingle": 0,
+  "istable": 0,
+  "links": [],
+  "modified": "2026-03-19 10:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Candela",
+  "name": "POS Invoice",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1,
+      "read": 1, "report": 1, "role": "System Manager", "share": 1, "write": 1
+    },
+    {
+      "create": 1, "delete": 1, "email": 1, "export": 1, "print": 1,
+      "read": 1, "report": 1, "role": "Candela Manager", "share": 1, "write": 1
+    },
+    {
+      "create": 1, "read": 1, "write": 1, "role": "Candela Staff"
+    }
+  ],
+  "sort_field": "creation",
+  "sort_order": "DESC",
+  "states": [],
+  "track_changes": 1
+}

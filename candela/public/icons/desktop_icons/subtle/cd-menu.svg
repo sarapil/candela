@@ -1,0 +1,7 @@
+<svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M38.5714 0H15.4286C6.90714 0 0 6.90714 0 15.4286V38.5714C0 47.0929 6.90714 54 15.4286 54H38.5714C47.0929 54 54 47.0929 54 38.5714V15.4286C54 6.90714 47.0929 0 38.5714 0Z" fill="#F59E0B" fill-opacity="0.09"/>
+  <!-- Left page -->
+  <path d="M15 17a2 2 0 0 1 2-2h9.5v24H17a2 2 0 0 1-2-2V17z" fill="#F59E0B" opacity="0.7"/>
+  <!-- Right page -->
+  <path d="M27.5 15H37a2 2 0 0 1 2 2v20a2 2 0 0 1-2 2h-9.5V15z" fill="#F59E0B"/>
+</svg>

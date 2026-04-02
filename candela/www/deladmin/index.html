@@ -1,0 +1,357 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+/* ─── Admin Dashboard ─────────────────────────────── */
+.cd-admin { padding: calc(var(--navbar-h, 70px) + 3rem) 0 4rem; min-height: 100vh; background: var(--c-charcoal, #1A1A1A); }
+.cd-admin, .cd-admin * { color: var(--c-cream, #F5F0E8); }
+
+.cd-admin__header { margin-bottom: 2.5rem; }
+.cd-admin__title {
+	font-family: var(--font-serif, 'Playfair Display', serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
+	color: var(--c-cream, #F5F0E8) !important; margin-bottom: 0.4rem;
+}
+.cd-admin__subtitle { color: rgba(255,255,255,0.5) !important; font-size: 0.95rem; }
+
+/* Stats Row */
+.cd-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-bottom: 2.5rem; }
+.cd-stat {
+	background: var(--c-dark, #0C0C0C); border: 1px solid rgba(255,255,255,0.06);
+	border-radius: 12px; padding: 1.5rem; position: relative; overflow: hidden;
+	transition: all 0.3s ease;
+}
+.cd-stat:hover { border-color: rgba(201,169,110,0.3); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+.cd-stat__icon { font-size: 2rem; margin-bottom: 0.75rem; }
+.cd-stat__value {
+	font-family: var(--font-serif, 'Playfair Display', serif); font-size: 2.4rem;
+	color: var(--c-gold, #C9A96E) !important; line-height: 1; margin-bottom: 0.3rem;
+}
+.cd-stat__label { font-size: 0.78rem; color: rgba(255,255,255,0.45) !important; letter-spacing: 0.1em; text-transform: uppercase; }
+.cd-stat__glow { position: absolute; top: 0; right: 0; width: 60px; height: 60px; border-radius: 0 12px 0 60px; opacity: 0.08; }
+
+/* Quick Actions Grid */
+.cd-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 2.5rem; }
+.cd-action {
+	background: var(--c-dark, #0C0C0C); border: 1px solid rgba(255,255,255,0.06);
+	border-radius: 12px; padding: 1.75rem; text-decoration: none !important;
+	transition: all 0.3s ease; display: flex; flex-direction: column; gap: 0.5rem;
+}
+.cd-action:hover {
+	border-color: var(--c-gold, #C9A96E); transform: translateY(-3px);
+	box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(201,169,110,0.15);
+}
+.cd-action__icon { font-size: 2.2rem; margin-bottom: 0.4rem; }
+.cd-action__title { font-family: var(--font-serif, 'Playfair Display', serif); font-size: 1.2rem; color: var(--c-cream, #F5F0E8) !important; }
+.cd-action__desc { font-size: 0.85rem; color: rgba(255,255,255,0.45) !important; line-height: 1.6; }
+.cd-action__go {
+	display: inline-flex; align-items: center; gap: 4px; margin-top: auto; padding-top: 0.75rem;
+	font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-gold, #C9A96E) !important;
+}
+
+/* Recent Sections */
+.cd-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+.cd-sec__header {
+	display: flex; justify-content: space-between; align-items: center;
+	margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.cd-sec__title { font-family: var(--font-serif, 'Playfair Display', serif); font-size: 1.25rem; color: var(--c-cream, #F5F0E8) !important; }
+.cd-sec__link { font-size: 0.73rem; color: var(--c-gold, #C9A96E) !important; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+
+/* Table */
+.cd-tbl { width: 100%; border-collapse: collapse; }
+.cd-tbl th {
+	text-align: start; padding: 0.5rem 0.75rem; font-size: 0.68rem;
+	letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.4) !important;
+	border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.cd-tbl td { padding: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.88rem; color: var(--c-cream, #F5F0E8) !important; }
+.cd-tbl tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* Badges */
+.cd-badge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.05em; }
+.cd-badge--pending { background: rgba(201,169,110,0.15); color: var(--c-gold, #C9A96E) !important; }
+.cd-badge--active { background: rgba(91,179,105,0.15); color: #5BB369 !important; }
+.cd-badge--done { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5) !important; }
+
+/* Quick Links Bottom */
+.cd-quick-links { display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; }
+.cd-quick-links a {
+	display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.6rem 1.25rem;
+	border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; font-size: 0.82rem;
+	color: var(--c-cream, #F5F0E8) !important; text-decoration: none; transition: all 0.3s ease;
+	background: transparent;
+}
+.cd-quick-links a:hover { border-color: var(--c-gold, #C9A96E); color: var(--c-gold, #C9A96E) !important; }
+
+.cd-empty { color: rgba(255,255,255,0.35) !important; padding: 1.5rem 0; text-align: center; font-style: italic; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+	.cd-stats { grid-template-columns: repeat(2, 1fr); }
+	.cd-actions { grid-template-columns: repeat(2, 1fr); }
+	.cd-two-col { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+	.cd-stats { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+	.cd-actions { grid-template-columns: 1fr; }
+	.cd-stat { padding: 1.1rem; }
+	.cd-stat__value { font-size: 1.8rem; }
+	.cd-quick-links a { font-size: 0.75rem; padding: 0.5rem 1rem; }
+}
+</style>
+
+<div class="cd-admin">
+	<div class="c-container">
+
+		{# ═══════ Header ═══════ #}
+		<div class="cd-admin__header">
+			<h1 class="cd-admin__title">
+				{% if lang == 'ar' %}مرحباً 👋{% else %}Welcome 👋{% endif %}
+			</h1>
+			<p class="cd-admin__subtitle">
+				{{ _('لوحة إدارة كانديلا — إدارة مطعمك بسهولة') if lang == 'ar' else 'Candela Dashboard — Manage your restaurant with ease' }}
+			</p>
+		</div>
+
+		{# ═══════ Stats Cards ═══════ #}
+		<div class="cd-stats">
+			<div class="cd-stat">
+				<div class="cd-stat__glow" style="background: var(--c-gold, #C9A96E);"></div>
+				<div class="cd-stat__icon">📅</div>
+				<div class="cd-stat__value">{{ stats.pending_reservations }}</div>
+				<div class="cd-stat__label">{{ _('حجوزات معلقة') if lang == 'ar' else 'Pending Reservations' }}</div>
+			</div>
+			<div class="cd-stat">
+				<div class="cd-stat__glow" style="background: #5BB369;"></div>
+				<div class="cd-stat__icon">🛵</div>
+				<div class="cd-stat__value">{{ stats.active_orders }}</div>
+				<div class="cd-stat__label">{{ _('طلبات نشطة') if lang == 'ar' else 'Active Orders' }}</div>
+			</div>
+			<div class="cd-stat">
+				<div class="cd-stat__glow" style="background: #8B5E3C;"></div>
+				<div class="cd-stat__icon">🍽️</div>
+				<div class="cd-stat__value">{{ stats.menu_items }}</div>
+				<div class="cd-stat__label">{{ _('أطباق متاحة') if lang == 'ar' else 'Menu Items' }}</div>
+			</div>
+			<div class="cd-stat">
+				<div class="cd-stat__glow" style="background: #D4534B;"></div>
+				<div class="cd-stat__icon">⭐</div>
+				<div class="cd-stat__value">{{ stats.unapproved_reviews }}</div>
+				<div class="cd-stat__label">{{ _('مراجعات بانتظار الموافقة') if lang == 'ar' else 'Pending Reviews' }}</div>
+			</div>
+		</div>
+
+		{# ═══════ Quick Actions ═══════ #}
+		<div class="cd-actions">
+			<a href="/deladmin/pos" class="cd-action">
+				<div class="cd-action__icon">💰</div>
+				<div class="cd-action__title">{{ _('نقطة البيع') if lang == 'ar' else 'POS Terminal' }}</div>
+				<div class="cd-action__desc">{{ _('نظام نقطة البيع — الدفع والطلبات المباشرة') if lang == 'ar' else 'Point of Sale — process dine-in and takeaway orders' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+			<a href="/deladmin/kitchen" class="cd-action">
+				<div class="cd-action__icon">👨‍🍳</div>
+				<div class="cd-action__title">{{ _('شاشة المطبخ') if lang == 'ar' else 'Kitchen Display' }}</div>
+				<div class="cd-action__desc">{{ _('شاشة تتبع الطلبات في المطبخ بنظام كانبان') if lang == 'ar' else 'Real-time kitchen order tracking with Kanban board' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+			<a href="/deladmin/tables" class="cd-action">
+				<div class="cd-action__icon">🪑</div>
+				<div class="cd-action__title">{{ _('خريطة الطاولات') if lang == 'ar' else 'Table Map' }}</div>
+				<div class="cd-action__desc">{{ _('إدارة حالة الطاولات وتعيين الجلوس') if lang == 'ar' else 'Manage table status and seating assignments' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+			<a href="/app/table-reservation?status=Pending" class="cd-action">
+				<div class="cd-action__icon">📋</div>
+				<div class="cd-action__title">{{ _('الحجوزات') if lang == 'ar' else 'Reservations' }}</div>
+				<div class="cd-action__desc">{{ _('عرض وإدارة حجوزات الطاولات ومتابعة الحضور') if lang == 'ar' else 'View and manage table reservations, track attendance' }}</div>
+				<div class="cd-action__go">{{ _('إدارة') if lang == 'ar' else 'Manage' }} →</div>
+			</a>
+			<a href="/app/online-order" class="cd-action">
+				<div class="cd-action__icon">🛒</div>
+				<div class="cd-action__title">{{ _('الطلبات أونلاين') if lang == 'ar' else 'Online Orders' }}</div>
+				<div class="cd-action__desc">{{ _('متابعة الطلبات وتحديث الحالات وإدارة التوصيل') if lang == 'ar' else 'Track orders, update statuses and manage delivery' }}</div>
+				<div class="cd-action__go">{{ _('إدارة') if lang == 'ar' else 'Manage' }} →</div>
+			</a>
+			<a href="/deladmin/reports" class="cd-action">
+				<div class="cd-action__icon">📊</div>
+				<div class="cd-action__title">{{ _('التقارير') if lang == 'ar' else 'Reports' }}</div>
+				<div class="cd-action__desc">{{ _('تحليلات المبيعات والإيرادات والأداء') if lang == 'ar' else 'Sales analytics, revenue and performance reports' }}</div>
+				<div class="cd-action__go">{{ _('عرض') if lang == 'ar' else 'View' }} →</div>
+			</a>
+			<a href="/deladmin/inventory" class="cd-action">
+				<div class="cd-action__icon">📦</div>
+				<div class="cd-action__title">{{ _('المخزون') if lang == 'ar' else 'Inventory' }}</div>
+				<div class="cd-action__desc">{{ _('تتبع المكونات والمخزون وتنبيهات النقص') if lang == 'ar' else 'Track ingredients, stock levels and low-stock alerts' }}</div>
+				<div class="cd-action__go">{{ _('إدارة') if lang == 'ar' else 'Manage' }} →</div>
+			</a>
+			<a href="/deladmin/staff" class="cd-action">
+				<div class="cd-action__icon">👥</div>
+				<div class="cd-action__title">{{ _('الموظفين') if lang == 'ar' else 'Staff' }}</div>
+				<div class="cd-action__desc">{{ _('إدارة ورديات الموظفين وتعيين الأقسام') if lang == 'ar' else 'Manage staff shifts and section assignments' }}</div>
+				<div class="cd-action__go">{{ _('إدارة') if lang == 'ar' else 'Manage' }} →</div>
+			</a>
+			<a href="/app/menu-item" class="cd-action">
+				<div class="cd-action__icon">🍕</div>
+				<div class="cd-action__title">{{ _('المنيو') if lang == 'ar' else 'Menu Items' }}</div>
+				<div class="cd-action__desc">{{ _('إضافة وتعديل الأطباق والأسعار والتصنيفات') if lang == 'ar' else 'Add and edit dishes, prices, and categories' }}</div>
+				<div class="cd-action__go">{{ _('إدارة') if lang == 'ar' else 'Manage' }} →</div>
+			</a>
+			<a href="/app/customer-review?is_approved=0" class="cd-action">
+				<div class="cd-action__icon">💬</div>
+				<div class="cd-action__title">{{ _('المراجعات') if lang == 'ar' else 'Reviews' }}</div>
+				<div class="cd-action__desc">{{ _('مراجعة وموافقة على تعليقات وتقييمات العملاء') if lang == 'ar' else 'Review and approve customer feedback and ratings' }}</div>
+				<div class="cd-action__go">{{ _('مراجعة') if lang == 'ar' else 'Review' }} →</div>
+			</a>
+			<a href="/app/restaurant-event" class="cd-action">
+				<div class="cd-action__icon">🎉</div>
+				<div class="cd-action__title">{{ _('الفعاليات') if lang == 'ar' else 'Events' }}</div>
+				<div class="cd-action__desc">{{ _('إنشاء وإدارة الفعاليات والأمسيات الخاصة') if lang == 'ar' else 'Create and manage events and special evenings' }}</div>
+				<div class="cd-action__go">{{ _('إدارة') if lang == 'ar' else 'Manage' }} →</div>
+			</a>
+			<a href="/app/candela-settings" class="cd-action">
+				<div class="cd-action__icon">⚙️</div>
+				<div class="cd-action__title">{{ _('الإعدادات') if lang == 'ar' else 'Settings' }}</div>
+				<div class="cd-action__desc">{{ _('إعدادات الموقع والهوية البصرية ومعلومات التواصل') if lang == 'ar' else 'Site settings, branding, and contact information' }}</div>
+				<div class="cd-action__go">{{ _('تعديل') if lang == 'ar' else 'Edit' }} →</div>
+			</a>
+		</div>
+
+		{# ═══════ Operations Quick Actions ═══════ #}
+		<h3 style="font-family:var(--font-serif,'Playfair Display',serif);font-size:1.3rem;margin-bottom:1.25rem;color:var(--c-cream)!important;">
+			{{ _('🏗️ العمليات والحوكمة') if lang == 'ar' else '🏗️ Operations & Governance' }}
+		</h3>
+		<div class="cd-actions" style="margin-bottom:2.5rem;">
+			<a href="/deladmin/procurement" class="cd-action">
+				<div class="cd-action__icon">🛒</div>
+				<div class="cd-action__title">{{ _('المشتريات') if lang == 'ar' else 'Procurement' }}</div>
+				<div class="cd-action__desc">{{ _('طلبات الشراء، أوامر الشراء، استلام البضاعة') if lang == 'ar' else 'Purchase requests, orders & goods receipt' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+			<a href="/deladmin/warehouses" class="cd-action">
+				<div class="cd-action__icon">🏭</div>
+				<div class="cd-action__title">{{ _('المستودعات') if lang == 'ar' else 'Warehouses' }}</div>
+				<div class="cd-action__desc">{{ _('إدارة المستودعات والتحويلات والجرد') if lang == 'ar' else 'Warehouse management, transfers & reconciliation' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+			<a href="/deladmin/production" class="cd-action">
+				<div class="cd-action__icon">👨‍🍳</div>
+				<div class="cd-action__title">{{ _('الإنتاج') if lang == 'ar' else 'Production' }}</div>
+				<div class="cd-action__desc">{{ _('محطات المطبخ، سجلات الإنتاج، الهدر') if lang == 'ar' else 'Kitchen stations, production logs & waste tracking' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+			<a href="/deladmin/shifts" class="cd-action">
+				<div class="cd-action__icon">💰</div>
+				<div class="cd-action__title">{{ _('الورديات') if lang == 'ar' else 'POS Shifts' }}</div>
+				<div class="cd-action__desc">{{ _('إدارة فتح وإغلاق ورديات نقطة البيع') if lang == 'ar' else 'POS shift open/close & cash reconciliation' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+			<a href="/deladmin/closing" class="cd-action">
+				<div class="cd-action__icon">📊</div>
+				<div class="cd-action__title">{{ _('الإقفال اليومي') if lang == 'ar' else 'Daily Closing' }}</div>
+				<div class="cd-action__desc">{{ _('الإقفال المالي اليومي والتحليل') if lang == 'ar' else 'Daily financial closing & KPI analysis' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+			<a href="/deladmin/assets" class="cd-action">
+				<div class="cd-action__icon">🔧</div>
+				<div class="cd-action__title">{{ _('الأصول') if lang == 'ar' else 'Assets' }}</div>
+				<div class="cd-action__desc">{{ _('أصول المطعم والصيانة الوقائية') if lang == 'ar' else 'Restaurant assets & preventive maintenance' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+			<a href="/deladmin/marketing" class="cd-action">
+				<div class="cd-action__icon">📣</div>
+				<div class="cd-action__title">{{ _('التسويق') if lang == 'ar' else 'Marketing' }}</div>
+				<div class="cd-action__desc">{{ _('حملات، مؤثرين، مراجعات، منافسين') if lang == 'ar' else 'Campaigns, influencers, reviews & competitors' }}</div>
+				<div class="cd-action__go">{{ _('فتح') if lang == 'ar' else 'Open' }} →</div>
+			</a>
+		</div>
+
+		{# ═══════ Recent Activity ═══════ #}
+		<div class="cd-two-col">
+			{# ── Recent Reservations ── #}
+			<div>
+				<div class="cd-sec__header">
+					<h3 class="cd-sec__title">{{ _('آخر الحجوزات') if lang == 'ar' else 'Recent Reservations' }}</h3>
+					<a href="/app/table-reservation" class="cd-sec__link">{{ _('عرض الكل') if lang == 'ar' else 'View All' }} →</a>
+				</div>
+				{% if recent_reservations %}
+				<table class="cd-tbl">
+					<thead><tr>
+						<th>{{ _('الاسم') if lang == 'ar' else 'Name' }}</th>
+						<th>{{ _('التاريخ') if lang == 'ar' else 'Date' }}</th>
+						<th>{{ _('أشخاص') if lang == 'ar' else 'Guests' }}</th>
+						<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+					</tr></thead>
+					<tbody>
+						{% for r in recent_reservations %}
+						<tr>
+							<td>{{ r.guest_name or r.customer_name or '—' }}</td>
+							<td>{{ r.reservation_date }}</td>
+							<td>{{ r.number_of_guests }}</td>
+							<td>
+								{% if r.status == 'Pending' %}<span class="cd-badge cd-badge--pending">{{ _('معلق') if lang == 'ar' else 'Pending' }}</span>
+								{% elif r.status == 'Confirmed' %}<span class="cd-badge cd-badge--active">{{ _('مؤكد') if lang == 'ar' else 'Confirmed' }}</span>
+								{% else %}<span class="cd-badge cd-badge--done">{{ r.status }}</span>{% endif %}
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<p class="cd-empty">{{ _('لا توجد حجوزات حديثة') if lang == 'ar' else 'No recent reservations' }}</p>
+				{% endif %}
+			</div>
+
+			{# ── Recent Orders ── #}
+			<div>
+				<div class="cd-sec__header">
+					<h3 class="cd-sec__title">{{ _('آخر الطلبات') if lang == 'ar' else 'Recent Orders' }}</h3>
+					<a href="/app/online-order" class="cd-sec__link">{{ _('عرض الكل') if lang == 'ar' else 'View All' }} →</a>
+				</div>
+				{% if recent_orders %}
+				<table class="cd-tbl">
+					<thead><tr>
+						<th>{{ _('رقم') if lang == 'ar' else 'ID' }}</th>
+						<th>{{ _('العميل') if lang == 'ar' else 'Customer' }}</th>
+						<th>{{ _('الإجمالي') if lang == 'ar' else 'Total' }}</th>
+						<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+					</tr></thead>
+					<tbody>
+						{% for o in recent_orders %}
+						<tr>
+							<td><a href="/app/online-order/{{ o.name }}" style="color:var(--c-gold, #C9A96E) !important;">#{{ o.name[-6:] }}</a></td>
+							<td>{{ o.customer_name or '—' }}</td>
+							<td style="color:var(--c-gold, #C9A96E) !important;">{{ o.total_amount or 0 }} {{ _('ج.م') if lang == 'ar' else 'EGP' }}</td>
+							<td>
+								{% if o.status in ['Pending', 'Confirmed'] %}<span class="cd-badge cd-badge--pending">{{ o.status }}</span>
+								{% elif o.status in ['Preparing', 'Ready', 'Out for Delivery'] %}<span class="cd-badge cd-badge--active">{{ o.status }}</span>
+								{% else %}<span class="cd-badge cd-badge--done">{{ o.status }}</span>{% endif %}
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				{% else %}
+				<p class="cd-empty">{{ _('لا توجد طلبات حديثة') if lang == 'ar' else 'No recent orders' }}</p>
+				{% endif %}
+			</div>
+		</div>
+
+		{# ═══════ Quick Links ═══════ #}
+		<div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 2rem;">
+			<div class="cd-quick-links">
+				<a href="/dela" target="_blank">🌐 {{ _('عرض الموقع') if lang == 'ar' else 'View Website' }}</a>
+				<a href="/app/menu-category">📂 {{ _('التصنيفات') if lang == 'ar' else 'Categories' }}</a>
+				<a href="/app/gallery-image">🖼️ {{ _('معرض الصور') if lang == 'ar' else 'Gallery' }}</a>
+				<a href="/app/promo-code">🏷️ {{ _('أكواد الخصم') if lang == 'ar' else 'Promo Codes' }}</a>
+				<a href="/app/delivery-zone">🚗 {{ _('مناطق التوصيل') if lang == 'ar' else 'Delivery Zones' }}</a>
+				<a href="/app/newsletter-subscriber">📧 {{ _('المشتركين') if lang == 'ar' else 'Subscribers' }}</a>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+{%- endblock -%}

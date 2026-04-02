@@ -1,0 +1,6 @@
+<frozen site>:101: RuntimeWarning: Unexpected value in sys.prefix, expected /workspace/development/frappe-bench/env, got /workspace/development/frappe-bench/sites/../env
+<frozen site>:101: RuntimeWarning: Unexpected value in sys.exec_prefix, expected /workspace/development/frappe-bench/env, got /workspace/development/frappe-bench/sites/../env
+Inserted Candela at position 56 (after CAPS)
+Layout saved with 57 items
+Caches cleared
+Verification - Candela in layout: True

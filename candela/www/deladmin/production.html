@@ -1,0 +1,126 @@
+{%- extends "templates/candela_base.html" -%}
+
+{%- block page_content -%}
+{%- set lang = candela_lang|default('ar') -%}
+
+<style>
+.prod { min-height:100vh; background:var(--c-charcoal,#1A1A1A); padding:calc(var(--navbar-h,70px) + 1.5rem) 0 3rem; }
+.prod, .prod * { color:var(--c-cream,#F5F0E8); box-sizing:border-box; }
+.prod__title { font-family:var(--font-serif,'Playfair Display',serif); font-size:1.6rem; margin-bottom:1.5rem; }
+.prod__top { display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:.75rem; }
+.prod__btns { display:flex; gap:.5rem; flex-wrap:wrap; }
+.prod__btn { padding:.5rem 1rem; border-radius:8px; font-size:.82rem; text-decoration:none; border:1px solid rgba(255,255,255,.15); background:transparent; color:var(--c-cream,#F5F0E8)!important; cursor:pointer; transition:all .2s; }
+.prod__btn:hover { border-color:var(--c-gold,#C9A96E); }
+.prod__btn--primary { background:var(--c-gold,#C9A96E); color:var(--c-charcoal,#1A1A1A)!important; border-color:var(--c-gold,#C9A96E); }
+
+.prod__stats { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; margin-bottom:1.5rem; }
+.prod__stat { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.2rem; text-align:center; }
+.prod__stat-val { font-family:var(--font-serif); font-size:2rem; color:var(--c-gold,#C9A96E)!important; }
+.prod__stat-lbl { font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; margin-top:.3rem; }
+
+.prod__grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1rem; margin-bottom:2rem; }
+.prod__scard { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; padding:1.3rem; transition:all .3s; position:relative; }
+.prod__scard:hover { border-color:rgba(201,169,110,.3); }
+.prod__scard-dot { position:absolute; top:1rem; right:1rem; width:10px; height:10px; border-radius:50%; }
+.prod__scard-dot--active { background:#5BB369; box-shadow:0 0 8px rgba(91,179,105,.4); }
+.prod__scard-dot--inactive { background:rgba(255,255,255,.15); }
+.prod__scard-name { font-family:var(--font-serif); font-size:1.1rem; margin-bottom:.2rem; }
+.prod__scard-type { font-size:.72rem; color:rgba(255,255,255,.4)!important; text-transform:uppercase; letter-spacing:.08em; }
+.prod__scard-chef { font-size:.82rem; margin-top:.5rem; color:rgba(255,255,255,.6)!important; }
+.prod__scard-cap { font-size:.72rem; color:rgba(255,255,255,.35)!important; margin-top:.3rem; }
+
+.prod__card { background:var(--c-dark,#0C0C0C); border:1px solid rgba(255,255,255,.06); border-radius:12px; overflow:hidden; margin-bottom:1.25rem; }
+.prod__card-title { font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.4)!important; padding:.75rem 1rem; border-bottom:1px solid rgba(255,255,255,.06); }
+.prod-tbl { width:100%; border-collapse:collapse; }
+.prod-tbl th { text-align:start; padding:.5rem .75rem; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.35)!important; border-bottom:1px solid rgba(255,255,255,.06); }
+.prod-tbl td { padding:.6rem .75rem; border-bottom:1px solid rgba(255,255,255,.03); font-size:.85rem; }
+.prod-tbl tr:hover td { background:rgba(255,255,255,.02); }
+.prod-tbl a { color:var(--c-gold,#C9A96E)!important; text-decoration:none; }
+.prod__badge { display:inline-block; padding:2px 8px; border-radius:4px; font-size:.68rem; font-weight:600; }
+.prod__badge--in-progress { background:rgba(59,130,246,.12); color:#3B82F6!important; }
+.prod__badge--completed { background:rgba(91,179,105,.12); color:#5BB369!important; }
+.prod__badge--cancelled { background:rgba(212,83,75,.12); color:#D4534B!important; }
+.prod__badge--draft { background:rgba(255,255,255,.06); color:rgba(255,255,255,.4)!important; }
+.prod__empty { padding:2rem; text-align:center; color:rgba(255,255,255,.3)!important; font-style:italic; }
+.prod__waste { color:#D4534B!important; font-weight:600; }
+@media(max-width:768px){ .prod__stats { grid-template-columns:repeat(2,1fr); } }
+</style>
+
+<div class="prod">
+	<div class="c-container">
+		<div class="prod__top">
+			<h1 class="prod__title">👨‍🍳 {{ _('تتبع الإنتاج') if lang == 'ar' else 'Production Tracking' }}</h1>
+			<div class="prod__btns">
+				<a href="/app/production-log/new" class="prod__btn prod__btn--primary">+ {{ _('سجل إنتاج') if lang == 'ar' else 'Production Log' }}</a>
+				<a href="/app/kitchen-station/new" class="prod__btn">🏗️ {{ _('محطة جديدة') if lang == 'ar' else 'New Station' }}</a>
+			</div>
+		</div>
+
+		<div class="prod__stats">
+			<div class="prod__stat">
+				<div class="prod__stat-val">{{ stats.active_stations }}/{{ stats.total_stations }}</div>
+				<div class="prod__stat-lbl">{{ _('محطات نشطة') if lang == 'ar' else 'Active Stations' }}</div>
+			</div>
+			<div class="prod__stat">
+				<div class="prod__stat-val">{{ stats.today_logs }}</div>
+				<div class="prod__stat-lbl">{{ _('سجلات اليوم') if lang == 'ar' else 'Today\'s Logs' }}</div>
+			</div>
+			<div class="prod__stat">
+				<div class="prod__stat-val">{{ stats.month_produced }}</div>
+				<div class="prod__stat-lbl">{{ _('إنتاج الشهر') if lang == 'ar' else 'Month Production' }}</div>
+			</div>
+			<div class="prod__stat">
+				<div class="prod__stat-val prod__waste">{{ "{:,.0f}".format(stats.month_waste_cost) }}</div>
+				<div class="prod__stat-lbl">{{ _('هدر الشهر') if lang == 'ar' else 'Month Waste Cost' }}</div>
+			</div>
+		</div>
+
+		{# Kitchen Stations Grid #}
+		{% if stations %}
+		<div class="prod__grid">
+			{% for s in stations %}
+			<a href="/app/kitchen-station/{{ s.name }}" class="prod__scard" style="text-decoration:none;">
+				<div class="prod__scard-dot {{ 'prod__scard-dot--active' if s.is_active else 'prod__scard-dot--inactive' }}"></div>
+				<div class="prod__scard-name">{{ s.station_name }}</div>
+				<div class="prod__scard-type">{{ s.station_type or 'General' }}</div>
+					<div class="prod__scard-type">{{ s.station_type }}</div>
+			</a>
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		{# Production Logs #}
+		<div class="prod__card">
+			<div class="prod__card-title">📋 {{ _('سجلات الإنتاج الأخيرة') if lang == 'ar' else 'Recent Production Logs' }}</div>
+			{% if production_logs %}
+			<table class="prod-tbl">
+				<thead><tr>
+					<th>#</th>
+					<th>{{ _('الطبق') if lang == 'ar' else 'Item' }}</th>
+					<th>{{ _('المحطة') if lang == 'ar' else 'Station' }}</th>
+					<th>{{ _('الشيف') if lang == 'ar' else 'Chef' }}</th>
+					<th>{{ _('الكمية') if lang == 'ar' else 'Qty' }}</th>
+					<th>{{ _('الهدر') if lang == 'ar' else 'Waste' }}</th>
+					<th>{{ _('الحالة') if lang == 'ar' else 'Status' }}</th>
+				</tr></thead>
+				<tbody>
+				{% for log in production_logs %}
+				<tr>
+					<td><a href="/app/production-log/{{ log.name }}">{{ log.name }}</a></td>
+				<td>{{ log.menu_item or '—' }}</td>
+					<td>{{ log.kitchen_station or '—' }}</td>
+					<td>{{ log.assigned_to or '—' }}</td>
+						<td>{{ log.quantity or 0 }}</td>
+						<td>{% if log.total_waste_cost %}<span class="prod__waste">{{ "{:,.0f}".format(log.total_waste_cost) }}</span>{% else %}—{% endif %}</td>
+					<td><span class="prod__badge prod__badge--{{ (log.quality_check or 'pending')|lower|replace(' ','-') }}">{{ log.quality_check or 'Pending' }}</span></td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<div class="prod__empty">{{ _('لا توجد سجلات إنتاج') if lang == 'ar' else 'No production logs yet' }}</div>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{%- endblock -%}
