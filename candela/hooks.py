@@ -254,3 +254,13 @@ user_data_fields = [
 	},
 ]
 
+# CAPS Integration — Capability-Based Access Control
+# ------------------------------------------------------------
+caps_capabilities = [
+    {"name": "CD_manage_projects", "category": "Module", "description": "Manage Candela projects"},
+    {"name": "CD_manage_tasks", "category": "Module", "description": "Manage tasks and milestones"},
+    {"name": "CD_manage_resources", "category": "Module", "description": "Manage team resources"},
+    {"name": "CD_manage_timelines", "category": "Module", "description": "Manage project timelines"},
+    {"name": "CD_view_reports", "category": "Report", "description": "View project reports"},
+    {"name": "CD_admin_settings", "category": "Module", "description": "Configure Candela settings"},
+]
