@@ -110,6 +110,8 @@ jinja = {
 # ─── Installation ─────────────────────────────────────────────────────
 after_install = "candela.install.after_install"
 
+after_migrate = ["candela.candela.seed.seed_data"]
+
 # ─── Guest Methods (public API — no login required) ──────────────────
 guest_methods = [
 	"candela.api.get_menu",

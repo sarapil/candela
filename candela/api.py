@@ -303,6 +303,8 @@ def create_pos_invoice(order_type, items, status="Draft", kitchen_status="Pendin
                        restaurant_table=None, customer_name=None, phone=None,
                        payment_method=None, cash_received=0, notes=None):
 	"""Create a POS invoice from the POS terminal."""
+	frappe.only_for(["Candela Manager", "System Manager"])
+
 	import json
 	if isinstance(items, str):
 		items = json.loads(items)
@@ -376,6 +378,8 @@ def create_pos_invoice(order_type, items, status="Draft", kitchen_status="Pendin
 @frappe.whitelist()
 def get_kitchen_orders():
 	"""Get all active orders for the kitchen display, grouped by status."""
+	frappe.only_for(["Candela User", "Candela Manager", "System Manager"])
+
 	result = {"pending": [], "preparing": [], "ready": []}
 
 	# POS Invoice orders
@@ -431,6 +435,8 @@ def get_kitchen_orders():
 @frappe.whitelist()
 def update_kitchen_status(order_name, source, new_status):
 	"""Update the kitchen status of a POS or Online order."""
+	frappe.only_for(["Candela Manager", "System Manager"])
+
 	if source == "POS":
 		if not frappe.db.exists("POS Invoice", order_name):
 			frappe.throw(_("POS Invoice {0} not found").format(order_name))
@@ -475,6 +481,8 @@ def update_table_status(table, action):
 
 	Actions: free, unavailable, available, seat
 	"""
+	frappe.only_for(["Candela Manager", "System Manager"])
+
 	if not frappe.db.exists("Restaurant Table", table):
 		frappe.throw(_("Table {0} not found").format(table))
 

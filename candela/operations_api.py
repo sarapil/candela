@@ -15,6 +15,8 @@ from frappe.utils import today, now_datetime, flt, cint, add_days, getdate
 @frappe.whitelist()
 def create_purchase_request(items, urgency="Normal", supplier=None, notes=None):
     """Create a purchase request from admin panel."""
+    frappe.only_for(["Candela Manager", "System Manager"])
+
     import json
     if isinstance(items, str):
         items = json.loads(items)
@@ -38,6 +40,8 @@ def create_purchase_request(items, urgency="Normal", supplier=None, notes=None):
 @frappe.whitelist()
 def approve_purchase_request(name):
     """Approve a purchase request."""
+    frappe.only_for(["Candela Manager", "System Manager"])
+
     pr = frappe.get_doc("Purchase Request", name)
     pr.status = "Approved"
     pr.approved_by = frappe.session.user
@@ -50,6 +54,8 @@ def approve_purchase_request(name):
 @frappe.whitelist()
 def receive_grn(name):
     """Mark GRN as Stocked — triggers auto-stock addition via governance hooks."""
+    frappe.only_for(["Candela Manager", "System Manager"])
+
     grn = frappe.get_doc("Goods Receipt Note", name)
     grn.status = "Stocked"
     grn.save(ignore_permissions=True)
@@ -64,6 +70,8 @@ def receive_grn(name):
 @frappe.whitelist()
 def get_stock_levels(category=None, low_stock_only=0):
     """Get current stock levels with optional filters."""
+    frappe.only_for(["Candela User", "Candela Manager", "System Manager"])
+
     filters = {"is_active": 1}
     if category:
         filters["category"] = category
@@ -82,6 +90,8 @@ def get_stock_levels(category=None, low_stock_only=0):
 @frappe.whitelist()
 def do_stock_transfer(from_warehouse, to_warehouse, items, reason="Daily Prep"):
     """Create and submit a stock transfer."""
+    frappe.only_for(["Candela Manager", "System Manager"])
+
     import json
     if isinstance(items, str):
         items = json.loads(items)
@@ -104,6 +114,8 @@ def do_stock_transfer(from_warehouse, to_warehouse, items, reason="Daily Prep"):
 @frappe.whitelist()
 def start_reconciliation(warehouse=None):
     """Create a reconciliation document pre-populated with all active ingredients."""
+    frappe.only_for(["Candela Manager", "System Manager"])
+
     rec = frappe.new_doc("Stock Reconciliation")
     if warehouse:
         rec.warehouse = warehouse
@@ -129,6 +141,8 @@ def start_reconciliation(warehouse=None):
 @frappe.whitelist()
 def open_pos_shift(opening_cash=0, shift_type="Full Day"):
     """Open a new POS shift."""
+    frappe.only_for(["Candela User", "Candela Manager", "System Manager"])
+
     # Check if there's an open shift
     open_shift = frappe.db.exists("POS Shift", {
         "cashier": frappe.session.user,
@@ -149,6 +163,8 @@ def open_pos_shift(opening_cash=0, shift_type="Full Day"):
 @frappe.whitelist()
 def close_pos_shift(shift_name, closing_cash=0):
     """Close a POS shift and calculate totals."""
+    frappe.only_for(["Candela Manager", "System Manager"])
+
     shift = frappe.get_doc("POS Shift", shift_name)
     if shift.status != "Open":
         frappe.throw(_("Shift is not open"))
@@ -193,6 +209,8 @@ def close_pos_shift(shift_name, closing_cash=0):
 def create_production_log(menu_item, quantity, order_type=None, order_ref=None,
                           station=None, shift=None):
     """Create a production log entry when kitchen starts preparing."""
+    frappe.only_for(["Candela Manager", "System Manager"])
+
     log = frappe.new_doc("Production Log")
     log.menu_item = menu_item
     log.quantity = cint(quantity)
@@ -210,6 +228,8 @@ def create_production_log(menu_item, quantity, order_type=None, order_ref=None,
 @frappe.whitelist()
 def complete_production_log(name, quality="Pass", waste_items=None):
     """Mark production as complete, optionally record waste."""
+    frappe.only_for(["Candela Manager", "System Manager"])
+
     import json
     log = frappe.get_doc("Production Log", name)
     log.completed_at = now_datetime()
@@ -237,6 +257,8 @@ def complete_production_log(name, quality="Pass", waste_items=None):
 @frappe.whitelist()
 def generate_daily_closing(closing_date=None):
     """Generate or refresh a daily closing report."""
+    frappe.only_for(["Candela Manager", "System Manager"])
+
     closing_date = closing_date or today()
 
     existing = frappe.db.get_value("Daily Closing", {"closing_date": closing_date})
@@ -304,6 +326,8 @@ def generate_daily_closing(closing_date=None):
 @frappe.whitelist()
 def get_operations_dashboard():
     """Get comprehensive dashboard data for operations overview."""
+    frappe.only_for(["Candela User", "Candela Manager", "System Manager"])
+
     from frappe.utils import add_days
 
     date = today()
@@ -388,6 +412,8 @@ def get_operations_dashboard():
 @frappe.whitelist()
 def get_food_cost_report(from_date=None, to_date=None):
     """Food cost variance report."""
+    frappe.only_for(["Candela User", "Candela Manager", "System Manager"])
+
     from_date = from_date or add_days(today(), -30)
     to_date = to_date or today()
 

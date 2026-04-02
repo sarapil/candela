@@ -11,7 +11,8 @@ from frappe.utils import today, add_days, add_months
 @frappe.whitelist()
 def load_demo_data():
 	"""Install demo menu items, reviews, events, and gallery images."""
-	frappe.only_for(["System Manager", "Candela Manager"])
+	frappe.only_for(["Candela User", "Candela Manager", "System Manager"])
+
 
 	settings = frappe.get_doc("Candela Settings")
 	if settings.demo_data_installed:
@@ -99,7 +100,8 @@ def load_demo_data():
 @frappe.whitelist()
 def purge_demo_data():
 	"""Remove all demo data (records with is_demo_data=1)."""
-	frappe.only_for(["System Manager", "Candela Manager"])
+	frappe.only_for(["Candela Manager", "System Manager"])
+
 
 	settings = frappe.get_doc("Candela Settings")
 	if not settings.demo_data_installed:
