@@ -12,7 +12,15 @@ def after_install():
 	create_default_settings()
 	create_default_categories()
 	create_default_tables()
-	inject_desktop_icon()
+	# ── Desktop Icon injection (Frappe v16 /desk) ──
+	from candela.desktop_utils import inject_app_desktop_icon
+	inject_app_desktop_icon(
+	    app="candela",
+	    label="Candela",
+	    route="/desk/candela",
+	    logo_url="/assets/candela/images/candela-logo.svg",
+	    bg_color="#F59E0B",
+	)
 	frappe.db.commit()
 	frappe.msgprint("✅ Candela Restaurant app installed successfully!")
 
@@ -163,77 +171,3 @@ def create_default_tables():
 			tbl.insert(ignore_permissions=True)
 
 	frappe.logger().info("Created default restaurant tables")
-
-
-def inject_desktop_icon():
-	"""Add Candela icon to every user's Desktop Layout (Frappe v16)."""
-	try:
-		# Check if Desktop Icon doctype exists (Frappe v16+)
-		if not frappe.db.exists("DocType", "Desktop Icon"):
-			frappe.logger().info("Desktop Icon DocType not found — skipping icon injection")
-			return
-
-		icon_name = "Candela"
-		if frappe.db.exists("Desktop Icon", {"label": icon_name, "icon_type": "App"}):
-			frappe.logger().info(f"Desktop Icon '{icon_name}' already exists")
-			return
-
-		icon = frappe.new_doc("Desktop Icon")
-		icon.label = "Candela"
-		icon.icon_type = "App"
-		icon.app = "candela"
-		icon.link = "/desk/candela"
-		icon.link_type = "External"
-		icon.logo_url = "/assets/candela/images/candela-logo.svg"
-		icon.bg_color = "amber"
-		icon.standard = 1
-		icon.insert(ignore_permissions=True)
-		frappe.logger().info(f"✅ Injected Desktop Icon: {icon_name}")
-
-		# Also inject into existing Desktop Layouts
-		_inject_into_desktop_layouts()
-
-	except Exception as e:
-		frappe.logger().warning(f"Desktop Icon injection skipped: {e}")
-
-
-def _inject_into_desktop_layouts():
-	"""Add Candela to all saved Desktop Layout records so the icon is visible."""
-	import json as _json
-
-	if not frappe.db.exists("DocType", "Desktop Layout"):
-		return
-
-	candela_entry = {
-		"label": "Candela",
-		"bg_color": "blue",
-		"link": "/desk/candela",
-		"link_type": "External",
-		"app": "candela",
-		"icon_type": "App",
-		"parent_icon": None,
-		"icon": None,
-		"link_to": None,
-		"idx": 0,
-		"standard": 1,
-		"logo_url": "/assets/candela/images/candela-logo.svg",
-		"hidden": 0,
-		"name": "Candela",
-		"restrict_removal": 0,
-		"icon_image": None,
-	}
-
-	for layout in frappe.get_all("Desktop Layout", fields=["name", "layout"]):
-		try:
-			data = _json.loads(layout.layout or "[]")
-			if any(item.get("label") == "Candela" for item in data):
-				continue
-			data.append(candela_entry)
-			frappe.db.set_value("Desktop Layout", layout.name, "layout", _json.dumps(data))
-		except Exception:
-			pass
-
-	frappe.db.commit()
-	frappe.cache.delete_key("desktop_icons")
-	frappe.cache.delete_key("bootinfo")
-	frappe.logger().info("✅ Injected Candela into Desktop Layouts")
