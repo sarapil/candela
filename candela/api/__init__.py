@@ -6,6 +6,7 @@
 import frappe
 from frappe import _
 from frappe.utils import today, now_datetime, cint, flt
+from candela.utils.rate_limiter import check_rate_limit
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -73,6 +74,7 @@ def submit_reservation(guest_name, phone, reservation_date, reservation_time,
                        number_of_guests, email=None, occasion=None,
                        seating_preference=None, special_requests=None):
 	"""Create a new table reservation from the website."""
+	check_rate_limit("reservation", limit=5, window=60)
 	settings = frappe.get_cached_doc("Candela Settings")
 	if not settings.enable_reservations:
 		frappe.throw(_("Reservations are currently disabled"))
@@ -116,6 +118,7 @@ def submit_reservation(guest_name, phone, reservation_date, reservation_time,
 @frappe.whitelist(allow_guest=True)
 def subscribe_newsletter(email, name=None):
 	"""Subscribe an email to the newsletter."""
+	check_rate_limit("newsletter", limit=3, window=60)
 	settings = frappe.get_cached_doc("Candela Settings")
 	if not settings.enable_newsletter:
 		frappe.throw(_("Newsletter is currently disabled"))
@@ -141,6 +144,7 @@ def subscribe_newsletter(email, name=None):
 def submit_review(customer_name, rating, review_text_ar=None,
                   review_text_en=None, visit_date=None):
 	"""Submit a customer review (requires approval)."""
+	check_rate_limit("review", limit=3, window=60)
 	settings = frappe.get_cached_doc("Candela Settings")
 	if not settings.enable_reviews:
 		frappe.throw(_("Reviews are currently disabled"))
@@ -172,6 +176,7 @@ def submit_order(customer_name, phone, order_type, items,
                  delivery_notes=None, payment_method="Cash on Delivery",
                  promo_code=None):
 	"""Submit a new online order from the website."""
+	check_rate_limit("order", limit=10, window=60)
 	import json
 	settings = frappe.get_cached_doc("Candela Settings")
 	if not settings.enable_online_ordering:

@@ -1,0 +1,12 @@
+{
+  "app": "candela",
+  "name": "Candela",
+  "icon": "flame",
+  "color": "#F39C12",
+  "languages": [
+    "en",
+    "ar"
+  ],
+  "default_language": "en",
+  "fallback_language": "en"
+}
