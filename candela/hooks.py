@@ -11,7 +11,7 @@ app_color = "#F59E0B"
 app_logo_url = "/assets/candela/images/candela-logo.svg"
 
 # ─── Required Apps ───────────────────────────────────────────────────
-required_apps = ["frappe", "caps", "frappe_visual"]
+required_apps = ["frappe", "caps", "frappe_visual", "arkan_help"]
 
 # ─── App Launcher ────────────────────────────────────────────────────
 add_to_apps_screen = [
@@ -211,6 +211,7 @@ notification_config = "candela.notifications.get_notification_config"
 
 # ─── Fixtures ─────────────────────────────────────────────────────────
 fixtures = [
+    {"dt": "Workspace", "filters": [["module", "like", "Candela%"]]},
 	{
 		"dt": "Role",
 		"filters": [["name", "in", [

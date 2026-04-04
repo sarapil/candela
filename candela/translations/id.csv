@@ -1,0 +1,1255 @@
+source_text,source_text
+Our Menu,Our Menu
+Discover our selection of authentic Italian dishes,Discover our selection of authentic Italian dishes
+All,All
+About Us,About Us
+🕯️ Welcome to Candela!,🕯️ Welcome to Candela!
+Candela is your complete restaurant management platform. Let's walk through everything it can do!,Candela is your complete restaurant management platform. Let's walk through everything it can do!
+Menu,Menu
+Create and manage your full menu with categories items ingredients dietary tags and pricing,Create and manage your full menu with categories items ingredients dietary tags and pricing
+Orders,Orders
+Take orders via POS terminal or online website — both flow into the same kitchen queue,Take orders via POS terminal or online website — both flow into the same kitchen queue
+Reservations,Reservations
+Customers book tables online — you manage availability and send confirmations,Customers book tables online — you manage availability and send confirmations
+Kitchen,Kitchen
+Real-time kitchen display shows incoming orders organized by station,Real-time kitchen display shows incoming orders organized by station
+Inventory,Inventory
+Track ingredients create purchase requests receive goods do stock counts,Track ingredients create purchase requests receive goods do stock counts
+Reports,Reports
+Sales analysis food cost reports reservation analytics staff performance,Sales analysis food cost reports reservation analytics staff performance
+DocType Relationships,DocType Relationships
+Here's how all the data in Candela connects together:,Here's how all the data in Candela connects together:
+Core Workflow,Core Workflow
+The typical flow from customer to cash register:,The typical flow from customer to cash register:
+Customer makes a reservation or places an order online,Customer makes a reservation or places an order online
+Order appears in kitchen display organized by station,Order appears in kitchen display organized by station
+Chef prepares food marks production log with ingredients used,Chef prepares food marks production log with ingredients used
+Stock is automatically deducted from inventory,Stock is automatically deducted from inventory
+Cashier creates POS invoice and processes payment,Cashier creates POS invoice and processes payment
+Manager reviews daily closing report,Manager reviews daily closing report
+Your Permissions,Your Permissions
+Candela uses role-based access control with CAPS (Capability Access Permission System):,Candela uses role-based access control with CAPS (Capability Access Permission System):
+Role,Role
+Can Access,Can Access
+Manager,Manager
+Everything — settings reports approvals staff management,Everything — settings reports approvals staff management
+Chef,Chef
+Kitchen display production logs recipes ingredient stock levels,Kitchen display production logs recipes ingredient stock levels
+Waiter,Waiter
+Table map POS reservations customer notes,Table map POS reservations customer notes
+Cashier,Cashier
+POS terminal shift management daily expenses,POS terminal shift management daily expenses
+Procurement,Procurement
+Purchase requests/orders suppliers goods receipt inventory,Purchase requests/orders suppliers goods receipt inventory
+Marketing,Marketing
+Campaigns promo codes reviews newsletter events,Campaigns promo codes reviews newsletter events
+Getting Help,Getting Help
+You can always access help from anywhere in Candela:,You can always access help from anywhere in Candela:
+Form Help,Form Help
+Click the ❓ button on any form's toolbar to see context-specific guidance,Click the ❓ button on any form's toolbar to see context-specific guidance
+Onboarding,Onboarding
+Visit /candela-onboarding anytime to review this guide,Visit /candela-onboarding anytime to review this guide
+About Page,About Page
+Visit /candela-about for the full app showcase with diagrams,Visit /candela-about for the full app showcase with diagrams
+Start Using Candela,Start Using Candela
+← Previous,← Previous
+Next →,Next →
+User Management,User Management
+Search users...,Search users...
+Select a user from the list,Select a user from the list
+Candela Roles,Candela Roles
+Active Capabilities,Active Capabilities
+Permission Map,Permission Map
+No CAPS capabilities assigned,No CAPS capabilities assigned
+CAPS not available,CAPS not available
+Removed {0},Removed {0}
+Added {0},Added {0}
+Error updating role: {0},Error updating role: {0}
+❓ Help,❓ Help
+Help: {0},Help: {0}
+No help available for this topic yet.,No help available for this topic yet.
+Candela Onboarding,Candela Onboarding
+{0} Guide,{0} Guide
+About Candela Restaurant,About Candela Restaurant
+User Management — Candela,User Management — Candela
+Login required,Login required
+Not permitted,Not permitted
+Manager Dashboard,Manager Dashboard
+Staff Management,Staff Management
+Daily Closing,Daily Closing
+Procurement Approvals,Procurement Approvals
+Kitchen Display,Kitchen Display
+Production Logging,Production Logging
+Stock Alerts,Stock Alerts
+Table Map,Table Map
+POS Terminal,POS Terminal
+POS Shift,POS Shift
+Daily Expenses,Daily Expenses
+Purchase Flow,Purchase Flow
+Suppliers,Suppliers
+Warehouses,Warehouses
+Campaigns,Campaigns
+Promo Codes,Promo Codes
+Reviews,Reviews
+Candela Settings,Candela Settings
+Opening Hours,Opening Hours
+Menu Items,Menu Items
+Pricing,Pricing
+Status Flow,Status Flow
+Online Orders,Online Orders
+Kitchen Integration,Kitchen Integration
+POS Invoices,POS Invoices
+Stock Entries,Stock Entries
+Kitchen Stations,Kitchen Stations
+A story of authentic Italian passion in the heart of Cairo,A story of authentic Italian passion in the heart of Cairo
+Our Story,Our Story
+Our Values,Our Values
+Fresh Ingredients,Fresh Ingredients
+We select the finest fresh ingredients daily to ensure the highest quality,We select the finest fresh ingredients daily to ensure the highest quality
+Expert Chefs,Expert Chefs
+A team of expert chefs with experience in authentic Italian cuisine,A team of expert chefs with experience in authentic Italian cuisine
+Made with Love,Made with Love
+Every dish is prepared with passion and meticulous care,Every dish is prepared with passion and meticulous care
+Opening Hours,Opening Hours
+Gallery,Gallery
+Glimpses of our ambiance and dishes,Glimpses of our ambiance and dishes
+Food,Food
+Interior,Interior
+Events,Events
+Kitchen,Kitchen
+Exterior,Exterior
+Reserve a Table,Reserve a Table
+Book your table and enjoy an unforgettable dining experience,Book your table and enjoy an unforgettable dining experience
+Full Name,Full Name
+Phone Number,Phone Number
+Email,Email
+Date,Date
+Time,Time
+Number of Guests,Number of Guests
+Occasion,Occasion
+Birthday,Birthday
+Anniversary,Anniversary
+Business,Business
+Date Night,Date Night
+Other,Other
+Seating Preference,Seating Preference
+No Preference,No Preference
+Indoor,Indoor
+Outdoor,Outdoor
+Private Room,Private Room
+Bar,Bar
+Special Requests,Special Requests
+Confirm Reservation,Confirm Reservation
+Reservation Confirmed!,Reservation Confirmed!
+We will contact you shortly to confirm your reservation.,We will contact you shortly to confirm your reservation.
+Back to Home,Back to Home
+Discover our upcoming events and reserve your spot,Discover our upcoming events and reserve your spot
+Book Now,Book Now
+No upcoming events at the moment. Stay tuned!,No upcoming events at the moment. Stay tuned!
+Order Online,Order Online
+Choose your favorite dishes for delivery or pickup,Choose your favorite dishes for delivery or pickup
+Online ordering is not available yet,Online ordering is not available yet
+Contact us directly to place an order,Contact us directly to place an order
+Delivery,Delivery
+Pickup,Pickup
+Your Order,Your Order
+Your cart is empty,Your cart is empty
+Delivery Zone,Delivery Zone
+Select zone,Select zone
+Promo Code,Promo Code
+Enter code,Enter code
+Apply,Apply
+Subtotal,Subtotal
+Delivery Fee,Delivery Fee
+Discount,Discount
+Total,Total
+Name,Name
+Phone,Phone
+Delivery Address,Delivery Address
+Notes (optional),Notes (optional)
+Place Order,Place Order
+Order Placed!,Order Placed!
+Track Order,Track Order
+Track Your Order,Track Your Order
+Tracking Token,Tracking Token
+Enter your tracking token,Enter your tracking token
+Track,Track
+Pending,Pending
+Confirmed,Confirmed
+Preparing,Preparing
+Ready,Ready
+Out for Delivery,Out for Delivery
+Delivered,Delivered
+Order Details,Order Details
+Order Not Found,Order Not Found
+Please check your tracking token and try again.,Please check your tracking token and try again.
+Contact Us,Contact Us
+We would love to hear from you,We would love to hear from you
+Contact Information,Contact Information
+Address,Address
+WhatsApp,WhatsApp
+View Full Menu,View Full Menu
+Featured Menu,Featured Menu
+What Our Guests Say,What Our Guests Say
+Upcoming Events,Upcoming Events
+Subscribe to Newsletter,Subscribe to Newsletter
+Enter your email,Enter your email
+Subscribe,Subscribe
+Home,Home
+Menu,Menu
+About,About
+Contact,Contact
+Reservation,Reservation
+New,New
+Bestseller,Bestseller
+View Website,View Website
+Candela Admin Dashboard,Candela Admin Dashboard
+Pending Reservations,Pending Reservations
+Active Orders,Active Orders
+Menu Items,Menu Items
+Pending Reviews,Pending Reviews
+Reservations,Reservations
+Manage table reservations,Manage table reservations
+Orders,Orders
+Manage online orders,Manage online orders
+Manage menu items,Manage menu items
+Reviews,Reviews
+Approve customer reviews,Approve customer reviews
+Manage events,Manage events
+Settings,Settings
+Candela settings,Candela settings
+Saturday,Saturday
+Sunday,Sunday
+Monday,Monday
+Tuesday,Tuesday
+Wednesday,Wednesday
+Thursday,Thursday
+Friday,Friday
+Closed,Closed
+EGP,EGP
+person,person
+people,people
+Optional,Optional
+Enter your name,Enter your name
+Any special requests...,Any special requests...
+Submitting...,Submitting...
+An error occurred. Please try again.,An error occurred. Please try again.
+added,added
+Discount applied,Discount applied
+Invalid code,Invalid code
+Please enter name and phone,Please enter name and phone
+Please enter delivery address,Please enter delivery address
+No menu items available yet.,No menu items available yet.
+No gallery images yet.,No gallery images yet.
+For inquiries contact us,For inquiries contact us
+Quick Links,Quick Links
+Follow Us,Follow Us
+All Rights Reserved,All Rights Reserved
+Made with ❤️ by Arkan Labs,Made with ❤️ by Arkan Labs
+{0} demo records removed,{0} demo records removed
+Auto-generated from low stock alert,Auto-generated from low stock alert
+Below minimum stock: {0} {1},Below minimum stock: {0} {1}
+Demo data is already installed.,Demo data is already installed.
+⚠️ Food cost {0}% exceeds target {1}%,⚠️ Food cost {0}% exceeds target {1}%
+Invalid promo code,Invalid promo code
+Invoice must contain at least one item,Invoice must contain at least one item
+⚠️ Low stock: {0} — needed {1} {2} available {3},⚠️ Low stock: {0} — needed {1} {2} available {3}
+Maximum party size is {0},Maximum party size is {0}
+Menu item not found,Menu item not found
+Newsletter is currently disabled,Newsletter is currently disabled
+No demo data to remove.,No demo data to remove.
+Not specified,Not specified
+Online Order {0} not found,Online Order {0} not found
+Online ordering is currently disabled,Online ordering is currently disabled
+Order must contain at least one item,Order must contain at least one item
+Order not found,Order not found
+Order placed successfully!,Order placed successfully!
+POS Invoice {0} not found,POS Invoice {0} not found
+📝 Price change logged: {0} → {1} ({2}%),📝 Price change logged: {0} → {1} ({2}%)
+Promo code applied!,Promo code applied!
+Reservations are currently disabled,Reservations are currently disabled
+Reservation submitted successfully!,Reservation submitted successfully!
+Reviews are currently disabled,Reviews are currently disabled
+Scheduled preventive maintenance for {0},Scheduled preventive maintenance for {0}
+Shift is not open,Shift is not open
+Successfully subscribed!,Successfully subscribed!
+Table {0} not found,Table {0} not found
+Thank you for your review! It will be published after approval.,Thank you for your review! It will be published after approval.
+This promo code has expired,This promo code has expired
+This promo code has reached its usage limit,This promo code has reached its usage limit
+This promo code is no longer active,This promo code is no longer active
+This promo code is not yet valid,This promo code is not yet valid
+You already have an open shift: {0}. Close it first.,You already have an open shift: {0}. Close it first.
+You are already subscribed!,You are already subscribed!
+Procurement,Procurement
+Warehouses,Warehouses
+Production,Production
+Shifts,Shifts
+Daily Closing,Daily Closing
+Assets,Assets
+Marketing,Marketing
+Inventory,Inventory
+Staff,Staff
+Reports,Reports
+Kitchen Display,Kitchen Display
+Table Management,Table Management
+POS Terminal,POS Terminal
+Admin Dashboard,Admin Dashboard
+Purchase Request,Purchase Request
+Purchase Order,Purchase Order
+Goods Receipt Note,Goods Receipt Note
+Candela Supplier,Candela Supplier
+Candela Warehouse,Candela Warehouse
+Stock Transfer,Stock Transfer
+Stock Reconciliation,Stock Reconciliation
+Kitchen Station,Kitchen Station
+Production Log,Production Log
+Production Waste,Production Waste
+POS Shift,POS Shift
+Daily Expense,Daily Expense
+Price Change Log,Price Change Log
+Restaurant Asset,Restaurant Asset
+Maintenance Request,Maintenance Request
+Customer Persona,Customer Persona
+Service Mode,Service Mode
+Influencer,Influencer
+Influencer Visit,Influencer Visit
+Corporate Account,Corporate Account
+Corporate Lunch Package,Corporate Lunch Package
+Marketing Campaign,Marketing Campaign
+Campaign Activity,Campaign Activity
+Content Calendar Entry,Content Calendar Entry
+Online Review,Online Review
+Cafe Amenity,Cafe Amenity
+Competitor,Competitor
+Staff Member,Staff Member
+Chef Profile,Chef Profile
+Restaurant Section,Restaurant Section
+Restaurant Event,Restaurant Event
+Gift Card,Gift Card
+Private Dining Package,Private Dining Package
+Gallery Image,Gallery Image
+Newsletter Subscriber,Newsletter Subscriber
+Stock Entry,Stock Entry
+Menu Category,Menu Category
+Menu Item,Menu Item
+Table Reservation,Table Reservation
+Online Order,Online Order
+POS Invoice,POS Invoice
+Customer Review,Customer Review
+Restaurant Table,Restaurant Table
+Candela Settings,Candela Settings
+Delivery Zone,Delivery Zone
+Promo Code,Promo Code
+Ingredient,Ingredient
+Order Item,Order Item
+Opening Hours,Opening Hours
+Recipe Item,Recipe Item
+Reconciliation Item,Reconciliation Item
+GRN Item,GRN Item
+Purchase Request Item,Purchase Request Item
+Purchase Order Item,Purchase Order Item
+Stock Transfer Item,Stock Transfer Item
+POS Invoice Item,POS Invoice Item
+Staff Shift,Staff Shift
+Candela Manager,Candela Manager
+Candela Staff,Candela Staff
+Candela Chef,Candela Chef
+Candela Cashier,Candela Cashier
+Candela Waiter,Candela Waiter
+Candela Procurement,Candela Procurement
+Candela Marketing,Candela Marketing
+Open Shift,Open Shift
+Close Shift,Close Shift
+Create Invoice,Create Invoice
+Approve,Approve
+Reject,Reject
+Submit,Submit
+Cancel,Cancel
+Delete,Delete
+Edit,Edit
+Save,Save
+Print,Print
+Export,Export
+Import,Import
+Filter,Filter
+Search,Search
+Refresh,Refresh
+Loading,Loading
+No data,No data
+Error,Error
+Success,Success
+Warning,Warning
+Active,Active
+Inactive,Inactive
+Draft,Draft
+Approved,Approved
+Rejected,Rejected
+Completed,Completed
+Cancelled,Cancelled
+In Progress,In Progress
+Overdue,Overdue
+Urgent,Urgent
+High,High
+Medium,Medium
+Low,Low
+Today,Today
+Yesterday,Yesterday
+This Week,This Week
+This Month,This Month
+Last Month,Last Month
+Total Sales,Total Sales
+Total Orders,Total Orders
+Total Revenue,Total Revenue
+Average Order Value,Average Order Value
+Food Cost Percentage,Food Cost Percentage
+Net Profit,Net Profit
+Gross Profit,Gross Profit
+Expenses,Expenses
+Revenue,Revenue
+Quantity,Quantity
+Unit,Unit
+Rate,Rate
+Amount,Amount
+Tax,Tax
+Grand Total,Grand Total
+Status,Status
+Date,Date
+Time,Time
+Description,Description
+Category,Category
+Priority,Priority
+Assigned To,Assigned To
+Created By,Created By
+Modified By,Modified By
+Creation,Creation
+Last Modified,Last Modified
+Candela Restaurant,Candela Restaurant
+Italian Café & Restaurant,Italian Café & Restaurant
+Arkan Labs,Arkan Labs
+View Dashboard,View Dashboard
+Manage Menu,Manage Menu
+Manage Reservations,Manage Reservations
+Manage Orders,Manage Orders
+Operate POS,Operate POS
+Manage Kitchen,Manage Kitchen
+Manage Tables,Manage Tables
+Manage Procurement,Manage Procurement
+Approve Purchases,Approve Purchases
+Manage Stock,Manage Stock
+Manage Production,Manage Production
+Manage Marketing,Manage Marketing
+Manage Assets,Manage Assets
+Manage Staff,Manage Staff
+View Reports,View Reports
+Export Reports,Export Reports
+Manage Settings,Manage Settings
+View Cost Data,View Cost Data
+Manage Reviews,Manage Reviews
+Manage Website,Manage Website
+@Handle,@Handle
+"A complete restaurant operations platform covering menu management, table reservations, online ordering, POS, kitchen display, procurement, inventory, production tracking, staff management, marketing campaigns, and a stunning customer-facing website.","A complete restaurant operations platform covering menu management, table reservations, online ordering, POS, kitchen display, procurement, inventory, production tracking, staff management, marketing campaigns, and a stunning customer-facing website."
+About Image,About Image
+About Section,About Section
+About Text (Arabic),About Text (Arabic)
+About Text (English),About Text (English)
+About Title (Arabic),About Title (Arabic)
+About Title (English),About Title (English)
+Abu Dhabi,Abu Dhabi
+Active Days,Active Days
+Actual Delivery Time,Actual Delivery Time
+Actual Prep Time (min),Actual Prep Time (min)
+Ad,Ad
+Add Staff,Add Staff
+Address (Arabic),Address (Arabic)
+Address (English),Address (English)
+Adjusted,Adjusted
+Adjustment,Adjustment
+Advance Booking (days),Advance Booking (days)
+Age Range,Age Range
+Ajman,Ajman
+All rights reserved.,All rights reserved.
+Ambiance Settings,Ambiance Settings
+Amenity Name (Arabic),Amenity Name (Arabic)
+Analysis,Analysis
+Approved Date,Approved Date
+"As a manager, your home is the Admin Dashboard at /deladmin. Here you see today's reservations, order count, revenue, and alerts.","As a manager, your home is the Admin Dashboard at /deladmin. Here you see today's reservations, order count, revenue, and alerts."
+Asset Code,Asset Code
+Assigned Chef,Assigned Chef
+Assigned Table,Assigned Table
+Assigned Tables,Assigned Tables
+Assigned To (Technician),Assigned To (Technician)
+"At end of day, visit /deladmin/closing to reconcile POS totals, record expenses, and generate the daily report.","At end of day, visit /deladmin/closing to reconcile POS totals, record expenses, and generate the daily report."
+Audit,Audit
+Audit Notes,Audit Notes
+Audited,Audited
+Audited By,Audited By
+Auto-Confirm Reservations,Auto-Confirm Reservations
+Available for Delivery,Available for Delivery
+Avatar,Avatar
+Avg Order Value,Avg Order Value
+Bakery,Bakery
+Bank Deposit,Bank Deposit
+Banner Text (Arabic),Banner Text (Arabic)
+Banner Text (English),Banner Text (English)
+Barista,Barista
+Bartender,Bartender
+Behavior,Behavior
+Beverages,Beverages
+Blog,Blog
+Booking Link,Booking Link
+"Booking patterns, no-show rates, peak hours, table utilization.","Booking patterns, no-show rates, peak hours, table utilization."
+Brand / Model,Brand / Model
+Brand Colors,Brand Colors
+Branding,Branding
+Bright,Bright
+Build Your Menu,Build Your Menu
+Burnt,Burnt
+CAST-.YYYY.-.#####,CAST-.YYYY.-.#####
+CCA-.YYYY.-.#####,CCA-.YYYY.-.#####
+CCMP-.YYYY.-.#####,CCMP-.YYYY.-.#####
+CDC-.YYYY.-.#####,CDC-.YYYY.-.#####
+CGRN-.YYYY.-.#####,CGRN-.YYYY.-.#####
+CMNT-.YYYY.-.#####,CMNT-.YYYY.-.#####
+CORD-.YYYY.-.#####,CORD-.YYYY.-.#####
+CPR-.YYYY.-.#####,CPR-.YYYY.-.#####
+CPROD-.YYYY.-.#####,CPROD-.YYYY.-.#####
+CREC-.YYYY.-.#####,CREC-.YYYY.-.#####
+CREV-.YYYY.-.#####,CREV-.YYYY.-.#####
+CSHIFT-.YYYY.-.#####,CSHIFT-.YYYY.-.#####
+CSTX-.YYYY.-.#####,CSTX-.YYYY.-.#####
+CafeOrCoffeeShop,CafeOrCoffeeShop
+Café & Coffee Shop,Café & Coffee Shop
+Calories,Calories
+Campaign management and activity tracking,Campaign management and activity tracking
+"Campaigns, promo codes, reviews, newsletter, events","Campaigns, promo codes, reviews, newsletter, events"
+Can Combine,Can Combine
+Candela,Candela
+Candela Domain,Candela Domain
+Candela adapts to different food service businesses:,Candela adapts to different food service businesses:
+Candela connects with the Arkan Lab ecosystem:,Candela connects with the Arkan Lab ecosystem:
+"Candela is organized into 8 functional modules, each with dedicated DocTypes and workflows:","Candela is organized into 8 functional modules, each with dedicated DocTypes and workflows:"
+Candela uses CAPS for fine-grained permissions with 21 capabilities across 6 bundles:,Candela uses CAPS for fine-grained permissions with 21 capabilities across 6 bundles:
+Card Collected,Card Collected
+Cash Collected,Cash Collected
+Cash Expenses,Cash Expenses
+Cash Position,Cash Position
+Cash Received,Cash Received
+Cash Variance,Cash Variance
+Cash on Delivery,Cash on Delivery
+Category Name (Arabic),Category Name (Arabic)
+Category Name (English),Category Name (English)
+Category Name (Italian),Category Name (Italian)
+Catering,Catering
+Celebrity,Celebrity
+Central configuration for Candela Restaurant website and operations.,Central configuration for Candela Restaurant website and operations.
+Chain,Chain
+Change %,Change %
+Changed At,Changed At
+Changed By,Changed By
+Channels,Channels
+Check today's reservations. Greet customers by name and seat them at their reserved table.,Check today's reservations. Greet customers by name and seat them at their reserved table.
+Chef / Kitchen Staff,Chef / Kitchen Staff
+"Chef prepares food, marks production log with ingredients used","Chef prepares food, marks production log with ingredients used"
+Cleaning,Cleaning
+Close Time,Close Time
+Closing Cash,Closing Cash
+Closing Time,Closing Time
+Cold Line,Cold Line
+Cold Storage,Cold Storage
+Collections,Collections
+"Comma-separated table numbers, e.g. T1, T2, T3","Comma-separated table numbers, e.g. T1, T2, T3"
+Company TRN,Company TRN
+Configure Operations,Configure Operations
+Configure Settings,Configure Settings
+Confirmation Method,Confirmation Method
+Confirmation Sent,Confirmation Sent
+Contact & Location,Contact & Location
+Contact your administrator for role-specific training.,Contact your administrator for role-specific training.
+Contains Nuts,Contains Nuts
+Content Tone,Content Tone
+Corporate Catering,Corporate Catering
+"Corporate lunch packages, bulk ordering, recurring meal plans, dietary accommodation tracking, invoice consolidation","Corporate lunch packages, bulk ordering, recurring meal plans, dietary accommodation tracking, invoice consolidation"
+Cost per Unit,Cost per Unit
+"Cost per dish, ingredient price trends, waste percentage, profit margins per menu category.","Cost per dish, ingredient price trends, waste percentage, profit margins per menu category."
+Cost/Unit,Cost/Unit
+Counted By,Counted By
+Counted Qty,Counted Qty
+Counting,Counting
+Covers (Guests),Covers (Guests)
+Crafted by,Crafted by
+"Create and manage your full menu with categories, items, ingredients, dietary tags, and pricing","Create and manage your full menu with categories, items, ingredients, dietary tags, and pricing"
+"Create marketing campaigns with activities, budgets, and ROI tracking.","Create marketing campaigns with activities, budgets, and ROI tracking."
+"Create menu categories, add items with ingredients, pricing, and photos","Create menu categories, add items with ingredients, pricing, and photos"
+"Create orders at /deladmin/pos. Select items, apply promos, and send to kitchen.","Create orders at /deladmin/pos. Select items, apply promos, and send to kitchen."
+"Create users and assign roles: Manager, Chef, Waiter, Cashier, Procurement","Create users and assign roles: Manager, Chef, Waiter, Cashier, Procurement"
+Credit 15 Days,Credit 15 Days
+Credit 30 Days,Credit 30 Days
+Credit 7 Days,Credit 7 Days
+Cuisine,Cuisine
+Currency Code,Currency Code
+Currency Symbol,Currency Symbol
+Current Bookings,Current Bookings
+Current Value,Current Value
+"Current stock levels, reorder alerts, consumption rate, shelf life tracking.","Current stock levels, reorder alerts, consumption rate, shelf life tracking."
+Custom Banner,Custom Banner
+Custom Head HTML,Custom Head HTML
+Custom JS,Custom JS
+Customer & Table,Customer & Table
+Customer Facing,Customer Facing
+Customer Insights,Customer Insights
+Customer Name in Arabic,Customer Name in Arabic
+Customer Photo,Customer Photo
+Customer Website,Customer Website
+Customer preferences and notes,Customer preferences and notes
+Customer reviews and ratings,Customer reviews and ratings
+Customer website with real-time order tracking and delivery zones,Customer website with real-time order tracking and delivery zones
+Daily Orders Summary,Daily Orders Summary
+Daily Prep,Daily Prep
+Daily closing reconciliation,Daily closing reconciliation
+Daily expense recording,Daily expense recording
+Dairy,Dairy
+Dairy-Free,Dairy-Free
+Data-Driven Restaurant Management,Data-Driven Restaurant Management
+Decision Factors,Decision Factors
+Decommissioned,Decommissioned
+Default Delivery Fee,Default Delivery Fee
+Default Language,Default Language
+"Define your floor plan with table numbers, capacities, and zones","Define your floor plan with table numbers, capacities, and zones"
+Delivery Included,Delivery Included
+Delivery Revenue,Delivery Revenue
+Delivery Time,Delivery Time
+Delivery-First Kitchen,Delivery-First Kitchen
+Demo,Demo
+Demo Data,Demo Data
+Demo Data Installed,Demo Data Installed
+Demo Data Removed,Demo Data Removed
+Demo Installed On,Demo Installed On
+"Demo data installed: {0} menu items, {1} reviews, {2} events","Demo data installed: {0} menu items, {1} reviews, {2} events"
+Demographics,Demographics
+Description (Arabic),Description (Arabic)
+Description (English),Description (English)
+Dessert,Dessert
+Dietary Tag,Dietary Tag
+Dietary Tags,Dietary Tags
+Dim,Dim
+Dine-in,Dine-in
+Dine-in Revenue,Dine-in Revenue
+Dining,Dining
+Direct,Direct
+Discount Value,Discount Value
+Discounted Price,Discounted Price
+Dishwasher,Dishwasher
+Disputed,Disputed
+Domain & Login,Domain & Login
+Domain for custom login (e.g. candela.restaurant). Leave empty to disable custom login.,Domain for custom login (e.g. candela.restaurant). Leave empty to disable custom login.
+Downtime (Hours),Downtime (Hours)
+Dry Goods,Dry Goods
+Dry Storage,Dry Storage
+Dubai,Dubai
+ERP,ERP
+"Each menu item belongs to a category and can have: price, description, dietary tags (vegan, gluten-free, etc.), ingredients with quantities, preparation time, and a photo.","Each menu item belongs to a category and can have: price, description, dietary tags (vegan, gluten-free, etc.), ingredients with quantities, preparation time, and a photo."
+Each team member sees exactly what they need:,Each team member sees exactly what they need:
+Email Blast,Email Blast
+Emergency,Emergency
+Enable Custom Login,Enable Custom Login
+Enable Delivery,Enable Delivery
+Enable English,Enable English
+Enable Fawry,Enable Fawry
+Enable Italian,Enable Italian
+Enable Newsletter,Enable Newsletter
+Enable Online Ordering,Enable Online Ordering
+Enable Paymob,Enable Paymob
+Enable Pickup,Enable Pickup
+Enable Promo Codes,Enable Promo Codes
+Enable Reservations,Enable Reservations
+Enable Reviews,Enable Reviews
+Enable WhatsApp Button,Enable WhatsApp Button
+Engagement (likes+comments),Engagement (likes+comments)
+Estimated Delivery (minutes),Estimated Delivery (minutes)
+Estimated Minutes,Estimated Minutes
+Estimated Prep Time (min),Estimated Prep Time (min)
+Estimated Reach,Estimated Reach
+Estimated Time (min),Estimated Time (min)
+Event & Banquet Hall,Event & Banquet Hall
+Event Name (Arabic),Event Name (Arabic)
+Event Name (English),Event Name (English)
+Event Prep,Event Prep
+"Event booking with custom menus, large-scale production planning, temporary staff scheduling, venue asset management","Event booking with custom menus, large-scale production planning, temporary staff scheduling, venue asset management"
+Event-Specific,Event-Specific
+Every operation in Candela follows a clear workflow — from customer order to kitchen production to payment:,Every operation in Candela follows a clear workflow — from customer order to kitchen production to payment:
+"Everything — settings, reports, approvals, staff management","Everything — settings, reports, approvals, staff management"
+Expected Cash,Expected Cash
+Explore Menu,Explore Menu
+Favicon,Favicon
+Fawry Configuration,Fawry Configuration
+Fawry Merchant Code,Fawry Merchant Code
+Fawry Security Key,Fawry Security Key
+Featured Categories,Featured Categories
+Features & Ordering,Features & Ordering
+Field-level restrictions mask cost data from non-authorized roles. All permission changes are audited.,Field-level restrictions mask cost data from non-authorized roles. All permission changes are audited.
+Fine Dining Restaurant,Fine Dining Restaurant
+Flags,Flags
+Follow these steps to get your restaurant running on Candela:,Follow these steps to get your restaurant running on Candela:
+Followers,Followers
+Food Cost %,Food Cost %
+Food Cost (per serving),Food Cost (per serving)
+Food Cost Report,Food Cost Report
+Food Cost Today,Food Cost Today
+Food Costing,Food Costing
+Frappe Support,Frappe Support
+Fruits,Fruits
+Fujairah,Fujairah
+"Full dashboard with sales, reservations, and alerts","Full dashboard with sales, reservations, and alerts"
+"Full menu management with categories, dietary tags, ingredients, and pricing","Full menu management with categories, dietary tags, ingredients, and pricing"
+Furniture,Furniture
+GRN Items,GRN Items
+GTM Container ID,GTM Container ID
+"Generate promo codes with discount %, max uses, and expiry dates.","Generate promo codes with discount %, max uses, and expiry dates."
+Gluten-Free,Gluten-Free
+Go Live!,Go Live!
+Goods Receipt,Goods Receipt
+Goods receipt and quality checks,Goods receipt and quality checks
+Google Analytics 4 ID,Google Analytics 4 ID
+Google Maps Embed Code,Google Maps Embed Code
+Google Maps URL,Google Maps URL
+Google Rating,Google Rating
+Grains & Pasta,Grains & Pasta
+Grand Opening,Grand Opening
+Green Color,Green Color
+Grill,Grill
+Gross Revenue,Gross Revenue
+Guests,Guests
+HVAC,HVAC
+Halal,Halal
+Hashtags,Hashtags
+Hero Background Image,Hero Background Image
+Hero Image (Mobile),Hero Image (Mobile)
+Hero Overlay Opacity,Hero Overlay Opacity
+Hero Section,Hero Section
+Hero Video URL,Hero Video URL
+Homepage Sections,Homepage Sections
+Hot,Hot
+Hot Line,Hot Line
+Hotel Restaurant,Hotel Restaurant
+How Candela's 55 DocTypes connect to each other — from Menu Items to POS Invoices to Stock Entries:,How Candela's 55 DocTypes connect to each other — from Menu Items to POS Invoices to Stock Entries:
+Icon (Lucide name),Icon (Lucide name)
+Icon Emoji,Icon Emoji
+Image Alt Text,Image Alt Text
+Income Level,Income Level
+Indirect,Indirect
+Ingredient Name,Ingredient Name
+Ingredient Name (AR),Ingredient Name (AR)
+Ingredient Name (EN),Ingredient Name (EN)
+Inspected,Inspected
+Inspection Date,Inspection Date
+Inspection Notes,Inspection Notes
+Inspection Status,Inspection Status
+Install Demo Data,Install Demo Data
+Installing demo data...,Installing demo data...
+Instashop,Instashop
+Internal,Internal
+Inventory Status,Inventory Status
+Inventory levels and reorder points,Inventory levels and reorder points
+Invoice creation and payment,Invoice creation and payment
+Is Exempt,Is Exempt
+Is Zero Rated,Is Zero Rated
+Italian Café & Restaurant Management,Italian Café & Restaurant Management
+Item Name (Arabic),Item Name (Arabic)
+Item Name (English),Item Name (English)
+Item Name (Italian),Item Name (Italian)
+Items Offered,Items Offered
+KPIs,KPIs
+Kitchen Display System with order queue,Kitchen Display System with order queue
+Kitchen Equipment,Kitchen Equipment
+Kitchen Notification Email,Kitchen Notification Email
+Kitchen Queue,Kitchen Queue
+Kitchen Status,Kitchen Status
+"Kitchen display, production logs, recipes, ingredient stock levels","Kitchen display, production logs, recipes, ingredient stock levels"
+Language & Locale,Language & Locale
+Last Purchase,Last Purchase
+Lighting,Lighting
+Lively,Lively
+Location Notes,Location Notes
+Locked,Locked
+Log out,Log out
+Log what you produce at /deladmin/production. Record waste and ingredient usage.,Log what you produce at /deladmin/production. Record waste and ingredient usage.
+Login Background Image,Login Background Image
+Login Welcome (Arabic),Login Welcome (Arabic)
+Login Welcome (English),Login Welcome (English)
+Logo & Icons,Logo & Icons
+Logo (Dark - for light backgrounds),Logo (Dark - for light backgrounds)
+Logo (Gold),Logo (Gold)
+Logo (White - for dark backgrounds),Logo (White - for dark backgrounds)
+Logo Icon (circular),Logo Icon (circular)
+MAT-STE-.YYYY.-,MAT-STE-.YYYY.-
+Maint. Interval (Days),Maint. Interval (Days)
+Maintenance Message,Maintenance Message
+Maintenance Mode,Maintenance Mode
+"Manage shifts at /deladmin/staff. Assign roles, set schedules, and track attendance.","Manage shifts at /deladmin/staff. Assign roles, set schedules, and track attendance."
+Manage storage locations at /deladmin/warehouses. Transfer stock between them as needed.,Manage storage locations at /deladmin/warehouses. Transfer stock between them as needed.
+Manage suppliers in the Candela Supplier doctype. Track pricing and delivery reliability.,Manage suppliers in the Candela Supplier doctype. Track pricing and delivery reliability.
+Marketing Channels,Marketing Channels
+Max Capacity,Max Capacity
+Max Party Size,Max Party Size
+Max Uses,Max Uses
+Measurement Error,Measurement Error
+Meat,Meat
+Meat & Poultry,Meat & Poultry
+Medium-High,Medium-High
+Menu & Dining,Menu & Dining
+Menu Highlights,Menu Highlights
+Menu Item Dietary Tag,Menu Item Dietary Tag
+Menu Item Popularity,Menu Item Popularity
+Menu Management,Menu Management
+Menu Preferences,Menu Preferences
+Meta Keywords,Meta Keywords
+Meta Pixel ID,Meta Pixel ID
+Mild,Mild
+Min Orders,Min Orders
+Minimum Order,Minimum Order
+Minimum Order Amount,Minimum Order Amount
+Minimum Stock (Alert),Minimum Stock (Alert)
+Mode Name (Arabic),Mode Name (Arabic)
+Mode Name (English),Mode Name (English)
+Moderate,Moderate
+Moderation,Moderation
+Module Access,Module Access
+Monitor customer reviews. Respond to feedback and track satisfaction trends.,Monitor customer reviews. Respond to feedback and track satisfaction trends.
+Monthly Invoice,Monthly Invoice
+Morning,Morning
+Music Playlist URL,Music Playlist URL
+Must-Have Features,Must-Have Features
+N,N
+Net Cash Position,Net Cash Position
+New Price,New Price
+New order #{0},New order #{0}
+New reservation from {0},New reservation from {0}
+New review from {0},New review from {0}
+Newsletter subscriber management,Newsletter subscriber management
+Next Maintenance,Next Maintenance
+No-Show,No-Show
+Noise,Noise
+Noise Level,Noise Level
+Normal,Normal
+Notification Email,Notification Email
+Notify New Order,Notify New Order
+Notify New Reservation,Notify New Reservation
+Notify New Review,Notify New Review
+OG Image (1200×630),OG Image (1200×630)
+Occupation,Occupation
+Offer Types,Offer Types
+Oils & Sauces,Oils & Sauces
+Old Price,Old Price
+Ongoing,Ongoing
+Online Ordering,Online Ordering
+"Online ordering focus, delivery zone management, driver tracking, promo codes, customer acquisition campaigns","Online ordering focus, delivery zone management, driver tracking, promo codes, customer acquisition campaigns"
+Open Candela Settings,Open Candela Settings
+Open Time,Open Time
+"Open your first POS shift, take your first reservation, and start serving!","Open your first POS shift, take your first reservation, and start serving!"
+Open your shift at /deladmin/pos with a starting cash amount. Close it at end of shift.,Open your shift at /deladmin/pos with a starting cash amount. Close it at end of shift.
+Opening Cash,Opening Cash
+Order Channel,Order Channel
+Order Confirmation Message,Order Confirmation Message
+Order Date,Order Date
+Order Items,Order Items
+Order Reference,Order Reference
+"Order appears in kitchen display, organized by station","Order appears in kitchen display, organized by station"
+Ordering Settings,Ordering Settings
+Orders Count,Orders Count
+"Orders from the customer website arrive here. Each has items, delivery address, payment status, and real-time tracking status.","Orders from the customer website arrive here. Each has items, delivery address, payment status, and real-time tracking status."
+Other Income,Other Income
+Our Advantage,Our Advantage
+Over-prep,Over-prep
+PCL-.YYYY.-.#####,PCL-.YYYY.-.#####
+POS Hardware,POS Hardware
+POS Session,POS Session
+POS System,POS System
+POS invoices are created from the POS terminal. They link to a POS Shift and deduct stock automatically on creation.,POS invoices are created from the POS terminal. They link to a POS Shift and deduct stock automatically on creation.
+POS shift open/close,POS shift open/close
+POS terminal for order taking,POS terminal for order taking
+"POS terminal, shift management, daily expenses","POS terminal, shift management, daily expenses"
+POS-.YYYY.-.#####,POS-.YYYY.-.#####
+PUR-ORD-.YYYY.-,PUR-ORD-.YYYY.-
+Package Description,Package Description
+Package Name,Package Name
+Package Name (Arabic),Package Name (Arabic)
+Pain Points,Pain Points
+Parts Used,Parts Used
+Pasta,Pasta
+Payment Status,Payment Status
+Paymob,Paymob
+Paymob API Key,Paymob API Key
+Paymob Configuration,Paymob Configuration
+Paymob HMAC Secret,Paymob HMAC Secret
+Paymob Integration ID,Paymob Integration ID
+Paymob iFrame ID,Paymob iFrame ID
+Pending → Confirmed → Seated → Completed. No-shows are marked automatically after 30 minutes.,Pending → Confirmed → Seated → Completed. No-shows are marked automatically after 30 minutes.
+Permit Number,Permit Number
+Persona Name (Arabic),Persona Name (Arabic)
+Persona Name (English),Persona Name (English)
+Pizza,Pizza
+Plumbing,Plumbing
+Point of sale with shift management and daily closing reconciliation,Point of sale with shift management and daily closing reconciliation
+Post Date,Post Date
+Post URL,Post URL
+Posted,Posted
+Power,Power
+Power Outlets,Power Outlets
+Pre-Launch,Pre-Launch
+Preferences,Preferences
+Preferred Categories,Preferred Categories
+Preferred Channels,Preferred Channels
+Preferred Payment,Preferred Payment
+Prep,Prep
+Prep Time (minutes),Prep Time (minutes)
+Prepaid,Prepaid
+Price (EGP),Price (EGP)
+Price Change Reason,Price Change Reason
+Price Range,Price Range
+Price Sensitivity,Price Sensitivity
+Price/Person,Price/Person
+Primary CTA Text,Primary CTA Text
+Primary CTA URL,Primary CTA URL
+Primary Color (Amber),Primary Color (Amber)
+Procurement Officer,Procurement Officer
+Procurement approval and cost reports,Procurement approval and cost reports
+Produce,Produce
+Production logging and waste tracking,Production logging and waste tracking
+Promo,Promo
+Promo code creation and analytics,Promo code creation and analytics
+Public Pages,Public Pages
+Purchase & Warranty,Purchase & Warranty
+Purchase Cost,Purchase Cost
+Purchase Request → Purchase Order → Goods Receipt Note → Stock Entry. All linked automatically.,Purchase Request → Purchase Order → Goods Receipt Note → Stock Entry. All linked automatically.
+Purchase requests from kitchen,Purchase requests from kitchen
+"Purchase requests, orders, goods receipt, supplier management","Purchase requests, orders, goods receipt, supplier management"
+"Purchase requests/orders, suppliers, goods receipt, inventory","Purchase requests/orders, suppliers, goods receipt, inventory"
+QR Table,QR Table
+Qty per Serving,Qty per Serving
+Qty to Transfer,Qty to Transfer
+"Quick service POS, loyalty programs, pastry production tracking, morning shift management, takeaway orders","Quick service POS, loyalty programs, pastry production tracking, morning shift management, takeaway orders"
+Quiet,Quiet
+ROI %,ROI %
+ROI (Reach per EGP),ROI (Reach per EGP)
+Ras Al Khaimah,Ras Al Khaimah
+Reach,Reach
+Read More,Read More
+Ready to light the flame?,Ready to light the flame?
+Real-time kitchen station management and production logging,Real-time kitchen station management and production logging
+"Real-time revenue by hour, day, week. Top-selling items. Payment method breakdown.","Real-time revenue by hour, day, week. Top-selling items. Payment method breakdown."
+Receipt Date,Receipt Date
+Receipt?,Receipt?
+Received,Received
+Received By,Received By
+Recipe & Ingredients,Recipe & Ingredients
+Recipe Items,Recipe Items
+Recipe ingredient lists,Recipe ingredient lists
+Reconciliation Items,Reconciliation Items
+Record petty cash expenses during your shift for accurate daily closing.,Record petty cash expenses during your shift for accurate daily closing.
+Recoverable Reverse Charge (Percentage),Recoverable Reverse Charge (Percentage)
+Recoverable Standard Rated Expenses (AED),Recoverable Standard Rated Expenses (AED)
+Reference / Invoice #,Reference / Invoice #
+Reference Document,Reference Document
+Refrigeration,Refrigeration
+Rejection Reason,Rejection Reason
+Remove Demo Data,Remove Demo Data
+Removing demo data...,Removing demo data...
+Reported At,Reported At
+Reported By,Reported By
+Request Items,Request Items
+Requires Action,Requires Action
+Reservation Analytics,Reservation Analytics
+Reservation Settings,Reservation Settings
+Reservation list for the day,Reservation list for the day
+"Reservations come from the website or can be created manually. Each reservation has: guest name, date/time, party size, table assignment, and special notes.","Reservations come from the website or can be created manually. Each reservation has: guest name, date/time, party size, table assignment, and special notes."
+Reserve,Reserve
+Reserve Your Table,Reserve Your Table
+Response Posted,Response Posted
+Response Text,Response Text
+Restaurant,Restaurant
+Restaurant Identity,Restaurant Identity
+Restaurant Manager,Restaurant Manager
+Restaurant Name,Restaurant Name
+Restaurant Name (Arabic),Restaurant Name (Arabic)
+Restock,Restock
+Revenue Attributed,Revenue Attributed
+Revenue/Cover,Revenue/Cover
+Reverse Charge Applicable,Reverse Charge Applicable
+Review (Arabic),Review (Arabic)
+Review (English),Review (English)
+Review URL,Review URL
+Review and approve purchase requests from the kitchen. Monitor supplier performance and costs.,Review and approve purchase requests from the kitchen. Monitor supplier performance and costs.
+"Review sentiment, order frequency, popular delivery zones, promo code usage.","Review sentiment, order frequency, popular delivery zones, promo code usage."
+Reviewed,Reviewed
+Rework,Rework
+"Room-charge integration, banquet event management, multi-outlet operations, corporate account billing","Room-charge integration, banquet event management, multi-outlet operations, corporate account billing"
+Runner,Runner
+SEO,SEO
+SEO & Analytics,SEO & Analytics
+Sales Dashboard,Sales Dashboard
+"Sales analysis, food cost reports, reservation analytics, staff performance","Sales analysis, food cost reports, reservation analytics, staff performance"
+"Sales reports, food cost analysis, inventory tracking, marketing ROI","Sales reports, food cost analysis, inventory tracking, marketing ROI"
+Schema Type,Schema Type
+Seafood,Seafood
+Seated,Seated
+Seating,Seating
+Secondary CTA Text,Secondary CTA Text
+Secondary CTA URL,Secondary CTA URL
+Secondary Phone,Secondary Phone
+Security,Security
+"See all tables at /deladmin/tables. Green = available, amber = occupied, red = reserved.","See all tables at /deladmin/tables. Green = available, amber = occupied, red = reserved."
+Serial Number,Serial Number
+Served,Served
+Set Up Tables,Set Up Tables
+Set opening and closing times for each day. These are displayed on the website and used to validate reservation time slots.,Set opening and closing times for each day. These are displayed on the website and used to validate reservation time slots.
+"Set restaurant name, address, opening hours, and currency in Candela Settings","Set restaurant name, address, opening hours, and currency in Candela Settings"
+"Set up warehouses, suppliers, kitchen stations, and delivery zones","Set up warehouses, suppliers, kitchen stations, and delivery zones"
+Sharjah,Sharjah
+Shift,Shift
+Shift Date,Shift Date
+"Shift coverage, POS sales per cashier, kitchen throughput, overtime tracking.","Shift coverage, POS sales per cashier, kitchen throughput, overtime tracking."
+Shift reconciliation,Shift reconciliation
+Show About Section,Show About Section
+Show Animated Logo in Hero,Show Animated Logo in Hero
+Show Events,Show Events
+Show Gallery,Show Gallery
+Show Instagram Feed,Show Instagram Feed
+Show Menu Highlights,Show Menu Highlights
+Show Newsletter,Show Newsletter
+Show Reservation CTA,Show Reservation CTA
+Show Testimonials,Show Testimonials
+Show on Homepage,Show on Homepage
+Show on Website,Show on Website
+Silent,Silent
+Slot Duration (minutes),Slot Duration (minutes)
+Slug,Slug
+Sous Chef,Sous Chef
+Special Instructions,Special Instructions
+Spice Level,Spice Level
+Spices & Herbs,Spices & Herbs
+Spicy,Spicy
+Spoilage,Spoilage
+Staff Name,Staff Name
+Staff Performance,Staff Performance
+Staff Requirements,Staff Requirements
+Staff schedule and shift management,Staff schedule and shift management
+Started At,Started At
+Station Name,Station Name
+Station Name (Arabic),Station Name (Arabic)
+"Stations organize your kitchen (e.g., Grill, Pasta, Dessert). Orders are routed to the correct station based on item configuration.","Stations organize your kitchen (e.g., Grill, Pasta, Dessert). Orders are routed to the correct station based on item configuration."
+Stock Deduction,Stock Deduction
+"Stock entries track all inventory movements: receipts from suppliers, production consumption, transfers between warehouses, and adjustments.","Stock entries track all inventory movements: receipts from suppliers, production consumption, transfers between warehouses, and adjustments."
+Stock level alerts for key ingredients,Stock level alerts for key ingredients
+Stocked,Stocked
+Storage,Storage
+Strengths,Strengths
+Submitted,Submitted
+Subscribed On,Subscribed On
+Subscribed Package,Subscribed Package
+Supplier Name (Arabic),Supplier Name (Arabic)
+Supplier Name in Arabic,Supplier Name in Arabic
+Supplier management and ordering,Supplier management and ordering
+Supplies,Supplies
+System Health,System Health
+System Qty,System Qty
+Table Number,Table Number
+"Table map, POS, reservations, customer notes","Table map, POS, reservations, customer notes"
+"Table reservations, multi-course menu management, wine pairing notes, premium customer experience tracking, event hosting","Table reservations, multi-course menu management, wine pairing notes, premium customer experience tracking, event hosting"
+"Table status map — available, occupied, reserved","Table status map — available, occupied, reserved"
+Tagline (Arabic),Tagline (Arabic)
+Tagline (English),Tagline (English)
+Tagline (Italian),Tagline (Italian)
+Takeaway,Takeaway
+Takeaway Revenue,Takeaway Revenue
+Talabat,Talabat
+Target Food Cost %,Target Food Cost %
+Target Persona,Target Persona
+Tax Amount,Tax Amount
+Tax Code,Tax Code
+Tax Rate (%),Tax Rate (%)
+Tax Refund provided to Tourists (AED),Tax Refund provided to Tourists (AED)
+"The daily closing report summarizes: total POS sales, online order revenue, cash collected, expenses, and discrepancies. Auto-generated or created manually.","The daily closing report summarizes: total POS sales, online order revenue, cash collected, expenses, and discrepancies. Auto-generated or created manually."
+Theft,Theft
+"This is where you configure your restaurant's basic information: name, address, phone, opening hours, currency, and brand colors. Changes here affect the public website and all internal screens.","This is where you configure your restaurant's basic information: name, address, phone, opening hours, currency, and brand colors. Changes here affect the public website and all internal screens."
+"This will add demo menu items, gallery photos, events, and reviews. Continue?","This will add demo menu items, gallery photos, events, and reviews. Continue?"
+This will permanently delete ALL demo data. Your real data will NOT be affected. Continue?,This will permanently delete ALL demo data. Your real data will NOT be affected. Continue?
+TikTok Pixel ID,TikTok Pixel ID
+Time Variance %,Time Variance %
+Title (Arabic),Title (Arabic)
+Title (English),Title (English)
+Total Card Sales,Total Card Sales
+Total Cash Sales,Total Cash Sales
+Total Collected,Total Collected
+Total Discounts,Total Discounts
+Total Expenses,Total Expenses
+Total Refunds,Total Refunds
+Total Variance Cost,Total Variance Cost
+Total Wallet Sales,Total Wallet Sales
+Total Waste Cost,Total Waste Cost
+Totals & Approval,Totals & Approval
+"Track ingredients, create purchase requests, receive goods, do stock counts","Track ingredients, create purchase requests, receive goods, do stock counts"
+Tracking,Tracking
+Transfer Items,Transfer Items
+Transferred By,Transferred By
+Twitter / X,Twitter / X
+UI,UI
+Umm Al Quwain,Umm Al Quwain
+Unit Cost,Unit Cost
+Urgency,Urgency
+Useful Life (Years),Useful Life (Years)
+User Settings,User Settings
+Utilities,Utilities
+VAT Details,VAT Details
+VAT Emirate,VAT Emirate
+Valid Until,Valid Until
+Variance Cost,Variance Cost
+Variance Reason,Variance Reason
+Vegan,Vegan
+Vegetables,Vegetables
+View on Website,View on Website
+Visit Date,Visit Date
+Visit Pattern,Visit Pattern
+Visits,Visits
+Visits & Campaigns,Visits & Campaigns
+Waiter / Front Staff,Waiter / Front Staff
+Warehouse,Warehouse
+Warehouse Name (Arabic),Warehouse Name (Arabic)
+Warm,Warm
+Warning: '{0}' has no recipe. Add ingredients in the Recipe tab for proper cost tracking.,Warning: '{0}' has no recipe. Add ingredients in the Recipe tab for proper cost tracking.
+Warranty Until,Warranty Until
+Waste,Waste
+Waste Items,Waste Items
+Wasted Qty,Wasted Qty
+Weaknesses,Weaknesses
+Web,Web
+Website Content,Website Content
+Weekly Invoice,Weekly Invoice
+WhatsApp Default Message,WhatsApp Default Message
+WhatsApp Notify Staff,WhatsApp Notify Staff
+WhatsApp Number,WhatsApp Number
+"When confirmed, orders are sent to the kitchen display. Ingredients are deducted from stock automatically.","When confirmed, orders are sent to the kitchen display. Ingredients are deducted from stock automatically."
+"When ingredients run low, create a purchase request directly from the kitchen.","When ingredients run low, create a purchase request directly from the kitchen."
+WiFi Password,WiFi Password
+WiFi SSID,WiFi SSID
+WiFi Speed (Mbps),WiFi Speed (Mbps)
+Y,Y
+Your workspace is /deladmin/kitchen. Orders appear in real-time organized by station.,Your workspace is /deladmin/kitchen. Orders appear in real-time organized by station.
+Zone,Zone
+Zone Name,Zone Name
+bag,bag
+bottle,bottle
+box,box
+can,can
+g,g
+it,it
+kg,kg
+liter,liter
+ml,ml
+piece,piece
+ℹ️ No specific guide,ℹ️ No specific guide
+⚙️ Candela Settings,⚙️ Candela Settings
+⚠️ '{0}' has no recipe — stock deduction skipped. Add a recipe to enable automatic inventory tracking.,⚠️ '{0}' has no recipe — stock deduction skipped. Add a recipe to enable automatic inventory tracking.
+"⚠️ Low stock: {0} — needed {1} {2}, available {3}","⚠️ Low stock: {0} — needed {1} {2}, available {3}"
+⚠️ Stock consumption should reference an order or production log for audit trail.,⚠️ Stock consumption should reference an order or production log for audit trail.
+⚡ Business Workflows,⚡ Business Workflows
+⚡ Core Workflow,⚡ Core Workflow
+⚡ Kitchen Integration,⚡ Kitchen Integration
+❓ Getting Help,❓ Getting Help
+⭐ Reviews,⭐ Reviews
+🍽️ Menu Items,🍽️ Menu Items
+🍽️ Table Map,🍽️ Table Map
+🎫 Promo Codes,🎫 Promo Codes
+🏢 Industry Adaptations,🏢 Industry Adaptations
+🏭 Suppliers,🏭 Suppliers
+👥 Staff Management,👥 Staff Management
+👥 Stakeholder Perspectives,👥 Stakeholder Perspectives
+👨‍🍳 Kitchen Display,👨‍🍳 Kitchen Display
+👨‍🍳 Kitchen Stations,👨‍🍳 Kitchen Stations
+💰 Daily Closing,💰 Daily Closing
+💰 POS Invoices,💰 POS Invoices
+💰 POS Shift,💰 POS Shift
+💰 POS Terminal,💰 POS Terminal
+📅 Reservations,📅 Reservations
+📊 Daily Closing,📊 Daily Closing
+📊 Manager Dashboard,📊 Manager Dashboard
+📊 Pricing,📊 Pricing
+📊 Reports & Analytics,📊 Reports & Analytics
+📋 Purchase Flow,📋 Purchase Flow
+📐 Module Architecture,📐 Module Architecture
+📝 Production Logging,📝 Production Logging
+📢 Campaigns,📢 Campaigns
+📦 Procurement Approvals,📦 Procurement Approvals
+📦 Stock Alerts,📦 Stock Alerts
+📦 Stock Entries,📦 Stock Entries
+📦 Warehouses,📦 Warehouses
+📱 Online Orders,📱 Online Orders
+🔄 Status Flow,🔄 Status Flow
+🔌 Integrations,🔌 Integrations
+🔐 Your Permissions,🔐 Your Permissions
+🔗 Entity Relationship Diagram,🔗 Entity Relationship Diagram
+🕐 Opening Hours,🕐 Opening Hours
+🕯️ Candela Restaurant,🕯️ Candela Restaurant
+🗂️ DocType Relationships,🗂️ DocType Relationships
+🚀 Getting Started,🚀 Getting Started
+🛡️ Security & Permissions,🛡️ Security & Permissions
+🧾 Daily Expenses,🧾 Daily Expenses
+"A complete restaurant operations platform covering menu management, table reservations, online ordering, POS, kitchen display, procurement, inventory, production tracking, staff management, marketing campaigns, and a stunning customer-facing website.","A complete restaurant operations platform covering menu management, table reservations, online ordering, POS, kitchen display, procurement, inventory, production tracking, staff management, marketing campaigns, and a stunning customer-facing website."
+"As a manager, your home is the Admin Dashboard at /deladmin. Here you see today's reservations, order count, revenue, and alerts.","As a manager, your home is the Admin Dashboard at /deladmin. Here you see today's reservations, order count, revenue, and alerts."
+"At end of day, visit /deladmin/closing to reconcile POS totals, record expenses, and generate the daily report.","At end of day, visit /deladmin/closing to reconcile POS totals, record expenses, and generate the daily report."
+"Booking patterns, no-show rates, peak hours, table utilization.","Booking patterns, no-show rates, peak hours, table utilization."
+"Campaigns, promo codes, reviews, newsletter, events","Campaigns, promo codes, reviews, newsletter, events"
+"Candela is organized into 8 functional modules, each with dedicated DocTypes and workflows:","Candela is organized into 8 functional modules, each with dedicated DocTypes and workflows:"
+"Chef prepares food, marks production log with ingredients used","Chef prepares food, marks production log with ingredients used"
+"Comma-separated table numbers, e.g. T1, T2, T3","Comma-separated table numbers, e.g. T1, T2, T3"
+"Corporate lunch packages, bulk ordering, recurring meal plans, dietary accommodation tracking, invoice consolidation","Corporate lunch packages, bulk ordering, recurring meal plans, dietary accommodation tracking, invoice consolidation"
+"Cost per dish, ingredient price trends, waste percentage, profit margins per menu category.","Cost per dish, ingredient price trends, waste percentage, profit margins per menu category."
+"Create and manage your full menu with categories, items, ingredients, dietary tags, and pricing","Create and manage your full menu with categories, items, ingredients, dietary tags, and pricing"
+"Create marketing campaigns with activities, budgets, and ROI tracking.","Create marketing campaigns with activities, budgets, and ROI tracking."
+"Create menu categories, add items with ingredients, pricing, and photos","Create menu categories, add items with ingredients, pricing, and photos"
+"Create orders at /deladmin/pos. Select items, apply promos, and send to kitchen.","Create orders at /deladmin/pos. Select items, apply promos, and send to kitchen."
+"Create users and assign roles: Manager, Chef, Waiter, Cashier, Procurement","Create users and assign roles: Manager, Chef, Waiter, Cashier, Procurement"
+"Current stock levels, reorder alerts, consumption rate, shelf life tracking.","Current stock levels, reorder alerts, consumption rate, shelf life tracking."
+"Define your floor plan with table numbers, capacities, and zones","Define your floor plan with table numbers, capacities, and zones"
+"Demo data installed: {0} menu items, {1} reviews, {2} events","Demo data installed: {0} menu items, {1} reviews, {2} events"
+"Each menu item belongs to a category and can have: price, description, dietary tags (vegan, gluten-free, etc.), ingredients with quantities, preparation time, and a photo.","Each menu item belongs to a category and can have: price, description, dietary tags (vegan, gluten-free, etc.), ingredients with quantities, preparation time, and a photo."
+"Event booking with custom menus, large-scale production planning, temporary staff scheduling, venue asset management","Event booking with custom menus, large-scale production planning, temporary staff scheduling, venue asset management"
+"Everything — settings, reports, approvals, staff management","Everything — settings, reports, approvals, staff management"
+"Full dashboard with sales, reservations, and alerts","Full dashboard with sales, reservations, and alerts"
+"Full menu management with categories, dietary tags, ingredients, and pricing","Full menu management with categories, dietary tags, ingredients, and pricing"
+"Generate promo codes with discount %, max uses, and expiry dates.","Generate promo codes with discount %, max uses, and expiry dates."
+"Kitchen display, production logs, recipes, ingredient stock levels","Kitchen display, production logs, recipes, ingredient stock levels"
+"Manage shifts at /deladmin/staff. Assign roles, set schedules, and track attendance.","Manage shifts at /deladmin/staff. Assign roles, set schedules, and track attendance."
+"Online ordering focus, delivery zone management, driver tracking, promo codes, customer acquisition campaigns","Online ordering focus, delivery zone management, driver tracking, promo codes, customer acquisition campaigns"
+"Open your first POS shift, take your first reservation, and start serving!","Open your first POS shift, take your first reservation, and start serving!"
+"Order appears in kitchen display, organized by station","Order appears in kitchen display, organized by station"
+"Orders from the customer website arrive here. Each has items, delivery address, payment status, and real-time tracking status.","Orders from the customer website arrive here. Each has items, delivery address, payment status, and real-time tracking status."
+"POS terminal, shift management, daily expenses","POS terminal, shift management, daily expenses"
+"Purchase requests, orders, goods receipt, supplier management","Purchase requests, orders, goods receipt, supplier management"
+"Purchase requests/orders, suppliers, goods receipt, inventory","Purchase requests/orders, suppliers, goods receipt, inventory"
+"Quick service POS, loyalty programs, pastry production tracking, morning shift management, takeaway orders","Quick service POS, loyalty programs, pastry production tracking, morning shift management, takeaway orders"
+"Real-time revenue by hour, day, week. Top-selling items. Payment method breakdown.","Real-time revenue by hour, day, week. Top-selling items. Payment method breakdown."
+"Reservations come from the website or can be created manually. Each reservation has: guest name, date/time, party size, table assignment, and special notes.","Reservations come from the website or can be created manually. Each reservation has: guest name, date/time, party size, table assignment, and special notes."
+"Review sentiment, order frequency, popular delivery zones, promo code usage.","Review sentiment, order frequency, popular delivery zones, promo code usage."
+"Room-charge integration, banquet event management, multi-outlet operations, corporate account billing","Room-charge integration, banquet event management, multi-outlet operations, corporate account billing"
+"Sales analysis, food cost reports, reservation analytics, staff performance","Sales analysis, food cost reports, reservation analytics, staff performance"
+"Sales reports, food cost analysis, inventory tracking, marketing ROI","Sales reports, food cost analysis, inventory tracking, marketing ROI"
+"See all tables at /deladmin/tables. Green = available, amber = occupied, red = reserved.","See all tables at /deladmin/tables. Green = available, amber = occupied, red = reserved."
+"Set restaurant name, address, opening hours, and currency in Candela Settings","Set restaurant name, address, opening hours, and currency in Candela Settings"
+"Set up warehouses, suppliers, kitchen stations, and delivery zones","Set up warehouses, suppliers, kitchen stations, and delivery zones"
+"Shift coverage, POS sales per cashier, kitchen throughput, overtime tracking.","Shift coverage, POS sales per cashier, kitchen throughput, overtime tracking."
+"Stations organize your kitchen (e.g., Grill, Pasta, Dessert). Orders are routed to the correct station based on item configuration.","Stations organize your kitchen (e.g., Grill, Pasta, Dessert). Orders are routed to the correct station based on item configuration."
+"Stock entries track all inventory movements: receipts from suppliers, production consumption, transfers between warehouses, and adjustments.","Stock entries track all inventory movements: receipts from suppliers, production consumption, transfers between warehouses, and adjustments."
+"Table map, POS, reservations, customer notes","Table map, POS, reservations, customer notes"
+"Table reservations, multi-course menu management, wine pairing notes, premium customer experience tracking, event hosting","Table reservations, multi-course menu management, wine pairing notes, premium customer experience tracking, event hosting"
+"Table status map — available, occupied, reserved","Table status map — available, occupied, reserved"
+"The daily closing report summarizes: total POS sales, online order revenue, cash collected, expenses, and discrepancies. Auto-generated or created manually.","The daily closing report summarizes: total POS sales, online order revenue, cash collected, expenses, and discrepancies. Auto-generated or created manually."
+"This is where you configure your restaurant's basic information: name, address, phone, opening hours, currency, and brand colors. Changes here affect the public website and all internal screens.","This is where you configure your restaurant's basic information: name, address, phone, opening hours, currency, and brand colors. Changes here affect the public website and all internal screens."
+"This will add demo menu items, gallery photos, events, and reviews. Continue?","This will add demo menu items, gallery photos, events, and reviews. Continue?"
+"Track ingredients, create purchase requests, receive goods, do stock counts","Track ingredients, create purchase requests, receive goods, do stock counts"
+"When confirmed, orders are sent to the kitchen display. Ingredients are deducted from stock automatically.","When confirmed, orders are sent to the kitchen display. Ingredients are deducted from stock automatically."
+"When ingredients run low, create a purchase request directly from the kitchen.","When ingredients run low, create a purchase request directly from the kitchen."
+"⚠️ Low stock: {0} — needed {1} {2}, available {3}","⚠️ Low stock: {0} — needed {1} {2}, available {3}"
+Candle,Candle
+Price changes are logged automatically. You can view the price history in the Price History tab.,Price changes are logged automatically. You can view the price history in the Price History tab.
+Price changes are logged automatically. You can view the price history in the Price Change Log doctype.,Price changes are logged automatically. You can view the price history in the Price Change Log doctype.
