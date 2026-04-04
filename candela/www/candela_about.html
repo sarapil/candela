@@ -1,0 +1,80 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("About Candela Restaurant") }}{% endblock %}
+
+{% block page_content %}
+<div id="candela-about-container" data-page="candela-about"></div>
+
+<style>
+  :root { --cn-primary: #F59E0B; --cn-primary-dark: #D97706; --cn-gradient: linear-gradient(135deg, #F59E0B, #D97706); }
+  #candela-about-container { min-height: 80vh; padding: 24px 0; }
+  .cn-about-hero { text-align: center; padding: 60px 20px; }
+  .cn-about-hero img { width: 160px; height: 160px; margin-bottom: 24px; }
+  .cn-about-hero h1 { font-size: 2.5rem; font-weight: 800; background: var(--cn-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; }
+  .cn-about-hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; margin: 0 auto 32px; }
+  .cn-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; padding: 40px 20px; max-width: 1100px; margin: 0 auto; }
+  .cn-feature-card { padding: 28px; border-radius: 16px; background: var(--card-bg); border: 1px solid var(--border-color); transition: transform 0.2s, box-shadow 0.2s; }
+  .cn-feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(99, 102, 241, 0.12); }
+  .cn-feature-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--text-color); margin-bottom: 8px; }
+  .cn-feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+  .cn-stat-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 20px; background: rgba(99, 102, 241, 0.08); color: var(--cn-primary); font-weight: 600; font-size: 0.9rem; }
+  .cn-stats-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin: 32px 0; }
+  .cn-footer { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 0.85rem; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.getElementById('candela-about-container');
+  container.innerHTML = `
+    <div class="cn-about-hero">
+      <img src="/assets/candela/images/candela-logo.svg" alt="Candela Restaurant" onerror="this.style.display='none'">
+      <h1>${__("Candela Restaurant")}</h1>
+      <p>${__("Italian Café & Restaurant Website + Operations Backend — Menu, Orders, Kitchen, Reservations, Delivery, Loyalty, Website.")}</p>
+      <div class="cn-stats-row">
+        <span class="cn-stat-badge">🍝 ${__("Menu Management")}</span>
+        <span class="cn-stat-badge">📝 ${__("Orders & POS")}</span>
+        <span class="cn-stat-badge">👨‍🍳 ${__("Kitchen Display")}</span>
+        <span class="cn-stat-badge">🚗 ${__("Delivery")}</span>
+      </div>
+    </div>
+    <div class="cn-features">
+      <div class="cn-feature-card">
+        <h3>🍝 ${__("Menu Management")}</h3>
+        <p>${__("Visual menu builder with categories, modifiers, pricing tiers, allergen tags, nutritional info, and seasonal specials.")}</p>
+      </div>
+      <div class="cn-feature-card">
+        <h3>📝 ${__("Orders & POS")}</h3>
+        <p>${__("Table-side ordering, takeaway, dine-in POS integration, split bills, group orders, and tip management.")}</p>
+      </div>
+      <div class="cn-feature-card">
+        <h3>👨‍🍳 ${__("Kitchen Display System")}</h3>
+        <p>${__("Real-time order routing to kitchen stations, preparation timers, priority queues, and order status tracking.")}</p>
+      </div>
+      <div class="cn-feature-card">
+        <h3>📅 ${__("Reservations")}</h3>
+        <p>${__("Online reservation system with table management, waitlist, walk-in handling, and SMS/WhatsApp confirmations.")}</p>
+      </div>
+      <div class="cn-feature-card">
+        <h3>🚗 ${__("Delivery Management")}</h3>
+        <p>${__("Delivery zone setup, driver assignment, real-time tracking, delivery time estimates, and third-party integration.")}</p>
+      </div>
+      <div class="cn-feature-card">
+        <h3>⭐ ${__("Loyalty Program")}</h3>
+        <p>${__("Points-based rewards, tier levels, birthday specials, referral bonuses, and customer engagement campaigns.")}</p>
+      </div>
+      <div class="cn-feature-card">
+        <h3>🌐 ${__("Website Builder")}</h3>
+        <p>${__("Beautiful restaurant website with menu display, online ordering, gallery, reviews, and reservation widget.")}</p>
+      </div>
+      <div class="cn-feature-card">
+        <h3>📊 ${__("Analytics")}</h3>
+        <p>${__("Sales reports, popular items, peak hours, customer behavior, inventory usage, and profit margins.")}</p>
+      </div>
+    </div>
+    <div class="cn-footer">
+      <p>${__("Built by")} <strong>Arkan Lab</strong> &bull; ${__("Powered by")} <strong>Frappe + ERPNext</strong></p>
+    </div>
+  `;
+});
+</script>
+{% endblock %}

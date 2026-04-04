@@ -1,5 +1,13 @@
 # Candela Restaurant <img src="candela/public/images/candela-logo.svg" width="40" align="center"/>
 
+<p align="center">
+  <a href="https://github.com/ArkanLab/candela/actions/workflows/ci.yml"><img src="https://github.com/ArkanLab/candela/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+  <a href="https://github.com/ArkanLab/candela/actions/workflows/linters.yml"><img src="https://github.com/ArkanLab/candela/actions/workflows/linters.yml/badge.svg" alt="Linters"></a>
+  <img src="https://img.shields.io/badge/Frappe-v16-blue" alt="Frappe v16">
+  <img src="https://img.shields.io/badge/License-MIT-yellow" alt="MIT License">
+  <img src="https://img.shields.io/badge/i18n-Arabic%20%2B%2011%20languages-brightgreen" alt="Multilingual">
+</p>
+
 > 🕯️ تطبيق إدارة مطعم ومقهى إيطالي متكامل مبني على Frappe v16
 > 🕯️ Complete Italian Café & Restaurant management app built on Frappe v16
 

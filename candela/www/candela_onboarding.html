@@ -1,0 +1,58 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Candela Restaurant Onboarding") }}{% endblock %}
+
+{% block page_content %}
+<div id="candela-onboarding-container" data-page="candela-onboarding"></div>
+
+<style>
+  #candela-onboarding-container { min-height: 80vh; padding: 24px 0; }
+  .cn-onboard-hero { text-align: center; padding: 60px 20px; }
+  .cn-onboard-hero h1 { font-size: 2rem; font-weight: 700; color: var(--text-color); margin-bottom: 16px; }
+  .cn-onboard-hero p { color: var(--text-muted); font-size: 1.1rem; max-width: 500px; margin: 0 auto 32px; }
+  .cn-onboard-steps { max-width: 700px; margin: 0 auto; padding: 0 20px; }
+  .cn-step { display: flex; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--border-color); }
+  .cn-step-num { width: 40px; height: 40px; border-radius: 50%; background: rgba(245, 158, 11, 0.1); color: #F59E0B; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+  .cn-step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
+  .cn-step p { font-size: 0.9rem; color: var(--text-muted); }
+  .cn-onboard-footer { text-align: center; padding: 40px 20px; }
+  .cn-onboard-footer a { display: inline-block; padding: 12px 32px; border-radius: 8px; background: #F59E0B; color: white; text-decoration: none; font-weight: 600; transition: opacity 0.2s; }
+  .cn-onboard-footer a:hover { opacity: 0.9; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.getElementById('candela-onboarding-container');
+  const steps = [
+    { title: __("Restaurant Setup"), desc: __("Configure your restaurant details — name, locations, operating hours, table layout.") },
+    { title: __("Menu Creation"), desc: __("Build your menu with categories, items, pricing, photos, and modifier groups.") },
+    { title: __("Table Management"), desc: __("Set up floor plans, table numbers, seating capacity, and reservation rules.") },
+    { title: __("POS Configuration"), desc: __("Configure point-of-sale terminals, payment methods, tax rules, and receipt templates.") },
+    { title: __("Kitchen Setup"), desc: __("Define kitchen stations, preparation areas, and order routing rules.") },
+    { title: __("Delivery Zones"), desc: __("Set up delivery areas, minimum orders, delivery fees, and estimated times.") },
+    { title: __("Website & Online Ordering"), desc: __("Customize your restaurant website and enable online ordering.") },
+    { title: __("Loyalty & Marketing"), desc: __("Create your loyalty program tiers and customer engagement campaigns.") }
+  ];
+  container.innerHTML = `
+    <div class="cn-onboard-hero">
+      <h1>🚀 ${__("Get Started with Candela Restaurant")}</h1>
+      <p>${__("Follow these steps to set up and start using Candela Restaurant.")}</p>
+    </div>
+    <div class="cn-onboard-steps">
+      ${steps.map((s, i) => `
+        <div class="cn-step">
+          <div class="cn-step-num">${i + 1}</div>
+          <div>
+            <h3>${s.title}</h3>
+            <p>${s.desc}</p>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="cn-onboard-footer">
+      <a href="/app">${__("Go to Dashboard →")}</a>
+    </div>
+  `;
+});
+</script>
+{% endblock %}
