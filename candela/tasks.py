@@ -1,4 +1,6 @@
-# Copyright (c) 2026, Arkan Labs and contributors
+# Copyright (c) 2024, Moataz M Hassan (Arkan Lab)
+# Developer Website: https://arkan.it.com
+# License: MIT
 # For license information, please see license.txt
 
 """Candela scheduled tasks."""
@@ -133,4 +135,3 @@ def auto_populate_daily_closing():
 	dc.total_orders = int(pos.get("cnt") or 0) + int(online.get("cnt") or 0)
 	dc.insert(ignore_permissions=True)
 	frappe.db.commit()
-

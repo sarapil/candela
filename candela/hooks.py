@@ -1,3 +1,8 @@
+# Copyright (c) 2024, Moataz M Hassan (Arkan Lab)
+# Developer Website: https://arkan.it.com
+# License: MIT
+# For license information, please see license.txt
+
 """Candela – Italian Café & Restaurant · Frappe v16 App Hooks"""
 
 app_name = "candela"
@@ -32,6 +37,7 @@ app_include_css = [
 app_include_js = [
 	"/assets/candela/js/candela_workspace.js",
 	"/assets/candela/js/candela_onboarding.js",
+    "/assets/candela/js/fv_integration.js",
 ]
 
 # Public website assets

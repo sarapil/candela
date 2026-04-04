@@ -1,4 +1,6 @@
-# Copyright (c) 2026, Arkan Labs and contributors
+# Copyright (c) 2024, Moataz M Hassan (Arkan Lab)
+# Developer Website: https://arkan.it.com
+# License: MIT
 # For license information, please see license.txt
 
 import frappe
@@ -20,4 +22,3 @@ class MaintenanceRequest(Document):
 			asset.next_maintenance_date = add_days(frappe.utils.today(), interval)
 			asset.status = "Active"
 			asset.save(ignore_permissions=True)
-

@@ -1,4 +1,6 @@
-# Copyright (c) 2026, Arkan Labs and contributors
+# Copyright (c) 2024, Moataz M Hassan (Arkan Lab)
+# Developer Website: https://arkan.it.com
+# License: MIT
 # For license information, please see license.txt
 
 from frappe.utils import flt
@@ -12,4 +14,3 @@ class MarketingCampaign(Document):
 		self.total_engagement = sum(flt(a.engagement) for a in (self.activities or []))
 		if self.spent and self.spent > 0 and self.revenue_attributed:
 			self.roi_percentage = ((flt(self.revenue_attributed) - self.spent) / self.spent) * 100
-

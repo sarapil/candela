@@ -1,3 +1,8 @@
+# Copyright (c) 2024, Moataz M Hassan (Arkan Lab)
+# Developer Website: https://arkan.it.com
+# License: MIT
+# For license information, please see license.txt
+
 """
 Candela Operations API — authenticated endpoints for back-office operations.
 Supplements the main api.py with procurement, inventory, POS shift, and reporting endpoints.
