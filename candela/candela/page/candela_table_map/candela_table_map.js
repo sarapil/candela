@@ -55,6 +55,23 @@ class CandelaTableMap {
 		this.page.add_inner_button(__("Fullscreen"), () => this.toggle_fullscreen());
 
 		this.page.add_action_item(__("Toggle Live Mode"), () => this.toggle_auto_refresh());
+
+		// XR integration — VR restaurant walkthrough + AR table layout
+		frappe.base_base?.xr_mixin?.attach(this, {
+			get_engine: () => this.engine,
+			get_spatial_data: () => this.getXRPanels(),
+			vr_options: { startPosition: [0, 1.7, 5] },
+			ar_options: { scale: 0.1, shadowPlane: true },
+		});
+	}
+
+	getXRPanels() {
+		if (!this.current_branch) return [];
+		const total = this.page.main.find(".stat-total").text();
+		const occ = this.page.main.find(".stat-occupied").text();
+		return [
+			{ content: `<h3>${this.current_branch}</h3><p>${__("Tables")}: ${total} | ${__("Occupied")}: ${occ}</p>`, position: [0, 2.2, -3], billboard: true },
+		];
 	}
 
 	render_layout() {
