@@ -16,7 +16,39 @@ app_color = "#F59E0B"
 app_logo_url = "/assets/candela/images/candela-logo.svg"
 
 # ─── Required Apps ───────────────────────────────────────────────────
-required_apps = ["frappe", "caps", "frappe_visual", "arkan_help"]
+required_apps = ["frappe", "caps", "frappe_visual", "arkan_help", "base_base"]
+
+# ---------------------------------------------------------------------------
+# Feature Registry (Open Core) — consumed by base_base.utils.feature_gating
+# ---------------------------------------------------------------------------
+app_feature_registry = {
+    # FREE TIER — Core restaurant
+    "menu_management": "free",
+    "order_management": "free",
+    "table_management": "free",
+    "kitchen_display": "free",
+    "basic_pos": "free",
+    "basic_reports": "free",
+    "staff_management": "free",
+    "inventory_basic": "free",
+    "receipt_printing": "free",
+    "daily_summary": "free",
+    # PREMIUM TIER — Advanced restaurant
+    "ai_menu_optimization": "premium",
+    "advanced_analytics": "premium",
+    "multi_branch": "premium",
+    "online_ordering": "premium",
+    "delivery_management": "premium",
+    "loyalty_program": "premium",
+    "reservation_system": "premium",
+    "ingredient_tracking": "premium",
+    "waste_management": "premium",
+    "supplier_portal": "premium",
+    "custom_dashboards": "premium",
+    "api_bulk_operations": "premium",
+    "white_labeling": "premium",
+    "priority_support": "premium",
+}
 
 # ─── App Launcher ────────────────────────────────────────────────────
 add_to_apps_screen = [

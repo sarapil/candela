@@ -1,0 +1,36 @@
+# CODEOWNERS — مالكو الكود
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# These owners will be automatically requested for review when a PR
+# modifies files matching the patterns.
+# سيتم طلب مراجعة هؤلاء المالكين تلقائياً عند تعديل ملفات مطابقة.
+
+# ─── Default Owner — المالك الافتراضي ─────────────────────────────────────────
+*                           @sarapil/candela-maintainers
+
+# ─── Core Configuration — الإعدادات الأساسية ──────────────────────────────────
+candela/hooks.py       @sarapil/candela-maintainers
+candela/install.py     @sarapil/candela-maintainers
+candela/seed.py        @sarapil/candela-maintainers
+pyproject.toml              @sarapil/candela-maintainers
+setup.cfg                   @sarapil/candela-maintainers
+
+# ─── API Layer — طبقة الواجهة البرمجية ────────────────────────────────────────
+candela/api/           @sarapil/candela-maintainers
+
+# ─── Security & Permissions — الأمان والصلاحيات ───────────────────────────────
+candela/caps/          @sarapil/candela-maintainers
+SECURITY.md                 @sarapil/candela-maintainers
+
+# ─── CI/CD — خط الأنابيب ─────────────────────────────────────────────────────
+.github/workflows/          @sarapil/candela-maintainers
+
+# ─── Frontend — الواجهة الأمامية ──────────────────────────────────────────────
+candela/public/        @sarapil/candela-maintainers
+
+# ─── Translations — الترجمات ──────────────────────────────────────────────────
+candela/translations/  @sarapil/candela-maintainers
+
+# ─── Documentation — التوثيق ──────────────────────────────────────────────────
+candela/help/          @sarapil/candela-maintainers
+*.md                        @sarapil/candela-maintainers
