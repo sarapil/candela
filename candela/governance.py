@@ -9,12 +9,11 @@ Candela Governance Rules Engine
 5 critical business rules that cannot be bypassed.
 Enforced via DocType hooks and server scripts.
 
-القواعد الخمس الحاكمة:
-1. لا بيع بدون خصم مخزون — No sale without stock deduction
-2. لا صرف بدون وصفة — No dispensing without recipe
-3. لا تعديل سعر بدون سجل — No price change without log
-4. لا دفع بدون مستند — No payment without document
-5. كل حركة لها أثر محاسبي — Every movement has accounting impact
+1. No sale without stock deduction
+2. No dispensing without recipe
+3. No price change without log
+4. No payment without document
+5. Every movement has accounting impact
 """
 
 import frappe
@@ -22,7 +21,7 @@ from frappe import _
 from frappe.utils import flt, now
 
 
-# ─── Rule 1: لا بيع بدون خصم مخزون ───
+# ─── Rule 1: No sale without stock deduction ───
 def enforce_stock_deduction_on_sale(doc, method):
     """Every confirmed order MUST trigger stock deduction via recipe."""
     if doc.doctype == "Online Order" and doc.status == "Confirmed":
@@ -38,7 +37,7 @@ def enforce_stock_deduction_on_sale(doc, method):
                 )
 
 
-# ─── Rule 2: لا صرف بدون وصفة ───
+# ─── Rule 2: No dispensing without recipe ───
 def enforce_recipe_on_dispensing(doc, method):
     """No ingredient dispensing from warehouse without a recipe reference."""
     if doc.entry_type == "Consumption":
@@ -49,7 +48,7 @@ def enforce_recipe_on_dispensing(doc, method):
             )
 
 
-# ─── Rule 3: لا تعديل سعر بدون سجل ───
+# ─── Rule 3: No price change without log ───
 def log_price_change(doc, method):
     """Every price change must be logged with old/new values and user."""
     if doc.has_value_changed("price"):
@@ -77,11 +76,11 @@ def log_price_change(doc, method):
             )
 
 
-# ─── Rule 4: لا دفع بدون مستند ───
+# ─── Rule 4: No payment without document ───
 # (Enforced by POS Shift — every payment is tied to a POS Invoice)
 
 
-# ─── Rule 5: كل حركة لها أثر محاسبي ───
+# ─── Rule 5: Every movement has accounting impact ───
 def ensure_accounting_impact(doc, method):
     """Log a note that accounting impact should be tracked."""
     # In a full ERPNext integration, this would create GL entries.
