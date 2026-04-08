@@ -8,7 +8,7 @@
     // App branding registration
     const APP_CONFIG = {
         name: "candela",
-        title: __("Candela Restaurant"),
+        title: "Candela Restaurant",
         color: "#F59E0B",
         module: "Candela",
     };
