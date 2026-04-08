@@ -1,0 +1,13 @@
+{
+	"name": "CD Online Order Ticket",
+	"doctype": "Print Format",
+	"doc_type": "Online Order",
+	"module": "Candela",
+	"print_format_type": "Jinja",
+	"standard": "Yes",
+	"custom_format": 1,
+	"default_print_language": "en",
+	"disabled": 0,
+	"show_section_headings": 0,
+	"align_labels_right": 0
+}

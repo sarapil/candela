@@ -1,0 +1,131 @@
+{# Copyright (c) 2026, Arkan Lab — https://arkan.it.com
+   License: MIT #}
+
+<style>
+	.cd-res { font-family: 'Segoe UI', Arial, sans-serif; color: #333; font-size: 10pt; max-width: 600px; margin: 0 auto; }
+	.cd-res-hdr { border-bottom: 3px solid #F59E0B; padding-bottom: 12px; margin-bottom: 14px; }
+	.cd-res-title { font-size: 16pt; font-weight: 700; color: #F59E0B; margin: 0; }
+	.cd-res-ar { font-size: 12pt; color: #D97706; direction: rtl; margin: 2px 0 0; }
+	.cd-res-label { color: #7f8c8d; font-size: 7pt; text-transform: uppercase; letter-spacing: 0.5px; }
+	.cd-res-value { font-size: 10pt; font-weight: 500; }
+	.cd-res-grid { display: table; width: 100%; }
+	.cd-res-row { display: table-row; }
+	.cd-res-cell { display: table-cell; padding: 6px 8px; vertical-align: top; }
+	.cd-res-badge { display: inline-block; padding: 4px 14px; border-radius: 20px; font-size: 9pt; font-weight: 600; color: #fff; }
+	.cd-res-badge-confirmed { background: #059669; }
+	.cd-res-badge-pending { background: #D97706; }
+	.cd-res-badge-cancelled { background: #dc2626; }
+	.cd-res-highlight { border: 2px solid #F59E0B; border-radius: 10px; padding: 16px; background: #FFFBEB; text-align: center; margin: 14px 0; }
+	.cd-res-section { margin: 12px 0; }
+	.cd-res-section-title { font-size: 10pt; font-weight: 600; color: #F59E0B; border-bottom: 1px solid #FDE68A; padding-bottom: 3px; margin-bottom: 6px; }
+	.cd-res-footer { margin-top: 20px; border-top: 1px solid #FDE68A; padding-top: 8px; font-size: 7.5pt; color: #95a5a6; text-align: center; }
+</style>
+
+<div class="cd-res">
+	{% set status_class = {'Confirmed': 'confirmed', 'Pending': 'pending', 'Cancelled': 'cancelled'} %}
+
+	<!-- Header -->
+	<div class="cd-res-hdr">
+		<div style="display: table; width: 100%;">
+			<div style="display: table-cell; width: 65%; vertical-align: middle;">
+				<p class="cd-res-title">🕯️ RESERVATION CONFIRMATION</p>
+				<p class="cd-res-ar">تأكيد الحجز</p>
+			</div>
+			<div style="display: table-cell; text-align: right; vertical-align: middle;">
+				<span class="cd-res-badge cd-res-badge-{{ status_class.get(doc.status, 'pending') }}">{{ doc.status or 'Pending' }}</span>
+				<br><span style="font-size: 9pt; color: #F59E0B; font-weight: 600;">{{ doc.name }}</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- Reservation Highlight -->
+	<div class="cd-res-highlight">
+		<div style="display: table; width: 100%;">
+			<div style="display: table-cell; width: 33%; text-align: center;">
+				<div class="cd-res-label">Date / التاريخ</div>
+				<div style="font-size: 14pt; font-weight: 700; color: #B45309;">{{ frappe.format_date(doc.reservation_date) }}</div>
+			</div>
+			<div style="display: table-cell; width: 34%; text-align: center;">
+				<div class="cd-res-label">Time / الوقت</div>
+				<div style="font-size: 14pt; font-weight: 700; color: #F59E0B;">{{ doc.reservation_time or '-' }}</div>
+			</div>
+			<div style="display: table-cell; width: 33%; text-align: center;">
+				<div class="cd-res-label">Guests / الضيوف</div>
+				<div style="font-size: 14pt; font-weight: 700; color: #B45309;">{{ doc.number_of_guests or '-' }}</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Guest Details -->
+	<div class="cd-res-section">
+		<div class="cd-res-section-title">👤 Guest Details — بيانات الضيف</div>
+		<div class="cd-res-grid">
+			<div class="cd-res-row">
+				<div class="cd-res-cell" style="width: 50%;">
+					<div class="cd-res-label">Name / الاسم</div>
+					<div class="cd-res-value" style="font-weight: 700;">{{ doc.guest_name or '-' }}</div>
+				</div>
+				<div class="cd-res-cell" style="width: 50%;">
+					<div class="cd-res-label">Phone / الهاتف</div>
+					<div class="cd-res-value">{{ doc.phone or '-' }}</div>
+				</div>
+			</div>
+			<div class="cd-res-row">
+				<div class="cd-res-cell" style="width: 50%;">
+					<div class="cd-res-label">Email / البريد</div>
+					<div class="cd-res-value">{{ doc.email or '-' }}</div>
+				</div>
+				<div class="cd-res-cell" style="width: 50%;">
+					<div class="cd-res-label">Source / المصدر</div>
+					<div class="cd-res-value">{{ doc.source or '-' }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Reservation Details -->
+	<div class="cd-res-section">
+		<div class="cd-res-section-title">🍽️ Reservation Details — تفاصيل الحجز</div>
+		<div class="cd-res-grid">
+			<div class="cd-res-row">
+				<div class="cd-res-cell" style="width: 33%;">
+					<div class="cd-res-label">Occasion / المناسبة</div>
+					<div class="cd-res-value">{{ doc.occasion or 'General' }}</div>
+				</div>
+				<div class="cd-res-cell" style="width: 33%;">
+					<div class="cd-res-label">Seating / الجلوس</div>
+					<div class="cd-res-value">{{ doc.seating_preference or '-' }}</div>
+				</div>
+				<div class="cd-res-cell" style="width: 34%;">
+					<div class="cd-res-label">Table / الطاولة</div>
+					<div class="cd-res-value" style="font-weight:700;">{{ doc.assigned_table or 'TBD' }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Special Requests -->
+	{% if doc.special_requests %}
+	<div class="cd-res-section">
+		<div class="cd-res-section-title">📝 Special Requests — طلبات خاصة</div>
+		<div style="padding: 8px; background: #FEF3C7; border-radius: 6px; font-size: 9pt; line-height: 1.5;">
+			{{ doc.special_requests }}
+		</div>
+	</div>
+	{% endif %}
+
+	<!-- Cancellation Notice -->
+	<div style="border: 1px solid #FDE68A; border-radius: 6px; padding: 10px; background: #FFFBEB; margin-top: 14px;">
+		<p style="font-size: 8pt; font-weight: 600; color: #B45309; margin: 0;">Cancellation Policy / سياسة الإلغاء:</p>
+		<p style="font-size: 8pt; color: #78716C; margin: 4px 0 0;">
+			Please inform us at least 2 hours before your reservation time for any changes or cancellations.
+			/ يرجى إبلاغنا قبل ساعتين على الأقل من موعد الحجز لأي تغييرات أو إلغاءات.
+		</p>
+	</div>
+
+	<!-- Footer -->
+	<div class="cd-res-footer">
+		<p style="font-size: 10pt; margin: 2px 0;">We look forward to hosting you! / نتطلع لاستضافتكم 🕯️</p>
+		<p>{{ doc.name }} | {{ frappe.format_date(doc.reservation_date) }}</p>
+	</div>
+</div>
