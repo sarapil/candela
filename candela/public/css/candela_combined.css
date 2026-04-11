@@ -1,0 +1,123 @@
+/* candela — Combined CSS (reduces HTTP requests) */
+/* Auto-generated from 2 individual files */
+
+/* === candela-variables.css === */
+/* Copyright (c) 2024, Moataz M Hassan (Arkan Lab)
+   Developer Website: https://arkan.it.com
+   License: MIT
+   For license information, please see license.txt */
+
+/*
+ * Candela — Brand CSS Variables
+ * App Color: #F59E0B (Amber)
+ * Prefix: --cd-*
+ *
+ * Usage: var(--cd-primary) throughout all Candela CSS
+ */
+
+:root {
+  /* ── Primary Palette ── */
+  --cd-primary:          #F59E0B;
+  --cd-primary-light:    #FBBF24;
+  --cd-primary-lighter:  #FDE68A;
+  --cd-primary-lightest: #FEF3C7;
+  --cd-primary-dark:     #D97706;
+  --cd-primary-darker:   #B45309;
+  --cd-primary-darkest:  #92400E;
+
+  /* ── Semantic Colors ── */
+  --cd-success:          #059669;
+  --cd-success-light:    #10B981;
+  --cd-warning:          #F59E0B;
+  --cd-warning-light:    #FBBF24;
+  --cd-danger:           #DC2626;
+  --cd-danger-light:     #EF4444;
+  --cd-info:             #2563EB;
+  --cd-info-light:       #3B82F6;
+
+  /* ── Neutral Palette ── */
+  --cd-bg-primary:       #FFFBEB;
+  --cd-bg-secondary:     #FEF3C7;
+  --cd-bg-surface:       #FFFFFF;
+  --cd-bg-muted:         #F5F5F4;
+  --cd-bg-dark:          #1C1917;
+  --cd-bg-dark-card:     #292524;
+  --cd-bg-dark-surface:  #44403C;
+
+  /* ── Text Colors ── */
+  --cd-text-primary:     #1C1917;
+  --cd-text-secondary:   #57534E;
+  --cd-text-muted:       #A8A29E;
+  --cd-text-on-primary:  #FFFFFF;
+  --cd-text-on-dark:     #F5F5F4;
+
+  /* ── Border & Shadow ── */
+  --cd-border:           #E7E5E4;
+  --cd-border-light:     #F5F5F4;
+  --cd-shadow-sm:        0 1px 2px rgba(0,0,0,0.05);
+  --cd-shadow-md:        0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
+  --cd-shadow-lg:        0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+  --cd-shadow-glow:      0 0 20px rgba(245,158,11,0.3);
+
+  /* ── Typography ── */
+  --cd-font-display:     'Georgia', 'Times New Roman', serif;
+  --cd-font-body:        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --cd-font-mono:        'SFMono-Regular', Menlo, monospace;
+
+  /* ── Spacing (multiplier system) ── */
+  --cd-space-unit:       4px;
+  --cd-radius-sm:        6px;
+  --cd-radius-md:        12px;
+  --cd-radius-lg:        16px;
+  --cd-radius-xl:        24px;
+  --cd-radius-full:      9999px;
+
+  /* ── Transition ── */
+  --cd-transition-fast:  150ms ease;
+  --cd-transition:       250ms ease;
+  --cd-transition-slow:  400ms ease;
+
+  /* ── Z-Index Layers ── */
+  --cd-z-dropdown:       100;
+  --cd-z-modal:          200;
+  --cd-z-toast:          300;
+  --cd-z-tooltip:        400;
+}
+
+/* ── Dark Mode Overrides ── */
+[data-theme="dark"],
+.dark,
+body.dark {
+  --cd-bg-primary:       #1C1917;
+  --cd-bg-secondary:     #292524;
+  --cd-bg-surface:       #292524;
+  --cd-bg-muted:         #44403C;
+  --cd-text-primary:     #F5F5F4;
+  --cd-text-secondary:   #D6D3D1;
+  --cd-text-muted:       #A8A29E;
+  --cd-border:           #44403C;
+  --cd-border-light:     #57534E;
+  --cd-shadow-sm:        0 1px 2px rgba(0,0,0,0.3);
+  --cd-shadow-md:        0 4px 6px -1px rgba(0,0,0,0.4);
+  --cd-shadow-lg:        0 10px 15px -3px rgba(0,0,0,0.5);
+}
+
+/* ── RTL Considerations ── */
+[dir="rtl"] {
+  --cd-text-align: right;
+}
+[dir="ltr"] {
+  --cd-text-align: left;
+}
+
+
+/* === candela_desk.css === */
+/* Copyright (c) 2024, Moataz M Hassan (Arkan Lab)
+   Developer Website: https://arkan.it.com
+   License: MIT
+   For license information, please see license.txt */
+
+/* Candela Desk Admin — Minimal styles */
+.module-icon[data-name="candela"] { color: var(--c-gold, #C9A96E); }
+
+

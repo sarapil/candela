@@ -62,15 +62,8 @@ add_to_apps_screen = [
 
 # ─── Includes ────────────────────────────────────────────────────────
 # Desk (admin) assets
-app_include_css = [
-	"/assets/candela/css/candela-variables.css",
-	"/assets/candela/css/candela_desk.css",
-]
-app_include_js = [
-	"/assets/candela/js/candela_workspace.js",
-	"/assets/candela/js/candela_onboarding.js",
-    "/assets/candela/js/fv_integration.js",
-]
+app_include_css = ["/assets/candela/css/candela_combined.css"]
+app_include_js = ["/assets/candela/js/candela_combined.js"]
 
 # Public website assets
 web_include_css = [
