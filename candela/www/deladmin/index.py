@@ -41,7 +41,7 @@ def get_context(context):
     try:
         context.recent_reservations = frappe.get_all(
             "Table Reservation",
-            fields=["guest_name", "customer_name", "reservation_date", "number_of_guests", "status"],
+            fields=["guest_name", "reservation_date", "number_of_guests", "status"],
             order_by="creation desc",
             limit_page_length=5,
         )
@@ -52,7 +52,7 @@ def get_context(context):
     try:
         context.recent_orders = frappe.get_all(
             "Online Order",
-            fields=["name", "customer_name", "total_amount", "status"],
+            fields=["name", "customer_name", "total", "status"],
             order_by="creation desc",
             limit_page_length=5,
         )
