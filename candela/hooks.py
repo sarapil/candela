@@ -62,8 +62,8 @@ add_to_apps_screen = [
 
 # ─── Includes ────────────────────────────────────────────────────────
 # Desk (admin) assets
-# MEGA: app_include_css = ["/assets/candela/css/candela_combined.css"]
-# MEGA: app_include_js = ["/assets/candela/js/candela_combined.js"]
+app_include_css = ["/assets/candela/css/candela_combined.css"]
+app_include_js = ["/assets/candela/js/candela_combined.js"]
 
 # Public website assets
 web_include_css = [
