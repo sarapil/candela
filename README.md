@@ -185,3 +185,10 @@ bench migrate
 ## 📄 License
 
 MIT — Free for commercial and personal use.
+
+## Contact
+
+For support and inquiries:
+- Phone: +201508268982
+- WhatsApp: https://wa.me/201508268982
+
